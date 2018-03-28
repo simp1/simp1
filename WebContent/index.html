@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WSV HS-OG</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="style.css" rel="stylesheet">
+</head>
+<body> 
+ 	<header>
+    	<!-- Navigationsleiste -->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+           <span class="navbar-toggler-icon"></span>
+           </button>
+           <div class="collapse navbar-collapse" id="navbarCollapse">
+              <ul class="navbar-nav mr-auto">
+                 <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                 </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                 </li>
+                 <li class="nav-item">
+                    <a class="nav-link " href="#">Anderer Link</a>
+                 </li>
+              </ul>
+              <form class="form-inline mt-2 mt-md-0">
+                 <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+           </div>
+        </nav>	
+    </header>
+    <div class="container" id="headertext">
+         <div class="row">
+	        <div class="col-sm-3">
+	        </div>
+            <!-- Login -->
+            <div class="col-sm-6">
+            	<h1 id="inhalt">Werkzeugverwaltung</h1>
+            	<p id="klein">Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationstool</p>
+            	
+            </div>
+            <div class="col-sm-3">
+         	</div>
+         </div>
+    </div>
+    <div class="container">
+         <div class="row">
+	        <div class="col-sm-3">
+	        </div>
+            <!-- Login -->
+            <div class="col-sm-6">
+               <div class="text-center mb-4">
+                  <h1 id="inhalt">Login</h1>
+               </div>
+               <label for="inputText">Benutzername:</label>
+               <div class="form-label-group">
+                  <input type="text" id="inputName" class="form-control" placeholder="Benutzername" required autofocus>
+               </div>
+               <label for="inputText">Passwort:</label>
+               <div class="form-label-group">
+                  <input type="password" id="inputPassword" class="form-control" placeholder="Passwort" required>
+               </div>
+               <div class="checkbox mb-3">
+               </div>
+               <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="login_function()">Login</button>
+            </div>
+            <div class="col-sm-3">
+         	</div>
+         </div>
+    </div> 
+    <br><br>
+    <!-- Sections -->
+    <div class="album py-5 bg-light">
+        <div class="container">
+           <h1 id="inhalt">Inhalt</h1>
+           <div class="row">
+              <div class="col-md-4">
+                 <div class="card mb-4 box-shadow">
+                     <div class="card-body">
+                       <p class="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
+                          At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                       </p>
+                       <div class="d-flex justify-content-between align-items-center">
+                          <a class="btn btn-danger" href="#">Jenson Button</a>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+              <div class="col-md-4">
+                 <div class="card mb-4 box-shadow">
+                    <div class="card-body">
+                       <p class="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+                          Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                       </p>
+                       <div class="d-flex justify-content-between align-items-center">
+                          <a class="btn btn-info" href="#">Jenson Button</a>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+              <div class="col-md-4">
+                 <div class="card mb-4 box-shadow">
+                    <div class="card-body">
+                       <p class="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
+                          At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                       </p>
+                       <div class="d-flex justify-content-between align-items-center">
+                          <a class="btn btn-success" href="#">Jenson Button</a>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+     <!-- Weitere Sections -->
+     <div class="album py-5 bg-light">
+        <div class="container">
+           <h1 id="inhalt">Inhalt 2</h1>
+           <div class="row">
+              <div class="col-md-6">
+                 <div class="card mb-6 box-shadow">
+                    <div class="card-body">
+                       <p class="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
+                          At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                       </p>
+                       <div class="d-flex justify-content-between align-items-center">
+                          <a class="btn btn-danger" href="#">Jenson Button</a>
+                        </div>
+                    </div>
+                 </div>
+              </div>
+              <div class="col-md-6">
+                 <div class="card mb-6 box-shadow">
+                    <div class="card-body">
+                       <p class="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+                          Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                       </p>
+                       <div class="d-flex justify-content-between align-items-center">
+                          <a class="btn btn-info" href="#">Jenson Button</a>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+    </div> 
+    <footer class="container py-5">
+        <div class="row">
+           <div class="col-6 col-md">
+              <h5>Features</h5>
+              <ul class="list-unstyled text-small">
+                 <li><a class="text-muted" href="#">Inhalt</a></li>
+                 <li><a class="text-muted" href="#">Inhalt</a></li>
+                 <li><a class="text-muted" href="#">Inhalt</a></li>
+                 <li><a class="text-muted" href="#">Inhalt</a></li>
+              
+              </ul>
+           </div>
+           <div class="col-6 col-md">
+              <h5>Habs gemerkt</h5>
+              <ul class="list-unstyled text-small">
+                 <li><a class="text-muted" href="#">Inhalt</a></li>
+                 <li><a class="text-muted" href="#">Inhalt</a></li>
+                 <li><a class="text-muted" href="#">Inhalt</a></li>
+                 <li><a class="text-muted" href="#">Inhalt</a></li>
+              </ul>
+           </div>
+           <div class="col-6 col-md">
+              <h5>Resources</h5>
+              <ul class="list-unstyled text-small">
+                 <li><a class="text-muted" href="#">Inhalt</a></li>
+                 <li><a class="text-muted" href="#">Inhalt</a></li>
+                 <li><a class="text-muted" href="#">Inhalt</a></li>
+                 <li><a class="text-muted" href="#">Inhalt</a></li>
+              </ul>
+           </div>
+           <div class="col-6 col-md">
+              <h5>About</h5>
+              <ul class="list-unstyled text-small">
+                 <li><a class="text-muted" href="#">Inhalt</a></li>
+                 <li><a class="text-muted" href="#">Inhalt</a></li>
+                 <li><a class="text-muted" href="#">Inhalt</a></li>
+                 <li><a class="text-muted" href="#">Inhalt</a></li>
+              </ul>
+           </div>
+        </div>
+     </footer>
+	<script>
+		//Login Function
+		function login_function() {
+			var uid= document.getElementById('inputName').value;
+			var pid= document.getElementById('inputPassword').value;
+			
+			if(pid && uid){
+				$.ajax({
+					type: "GET",
+					url: "http://localhost/workspace/swimp/WebContent/Includes/login.inc.php?jsoncallback=?",
+					data: {
+						"username": uid,
+						"password": pid
+					},
+					dataType:"JSONp",
+					timeout: 5000,
+					success: function(data){
+						if(data!="error"){
+							var str = data.split(":");
+							Cookies.set('name', uid);
+							Cookies.set('token', str[0]);
+							Cookies.set('token_login', str[1]);
+							document.location.href = "http://localhost/workspace/swimp/WebContent/startseite.html";
+						}
+					},
+					error: function (request, error) {
+				        console.log(arguments);
+				        alert(" Can't do because: " + error);
+				    }
+				});
+			}else{
+				if(pid){
+					alert("Geben Sie bitte den Benutzername ein.");
+				}else if(uid){
+					alert("Geben Sie bitte das Passwort ein.");
+				}else{
+					alert("Bitte anmelden.");
+				}
+			}
+		}
+	</script>
+	<!-- Bei Enter-Drücken für ganze Seite wird login_function aufgerufen -->
+      <script type="text/javascript">
+         $(document).keypress(function (e) {
+             if (e.which == 13 || event.keyCode == 13) {
+                 //alert('enter key is pressed');
+                 login_function();
+             }
+         });
+      </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+-- phpMyAdmin SQL Dump
+-- version 4.7.9
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Erstellungszeit: 23. Mrz 2018 um 12:44
+-- Server-Version: 10.1.31-MariaDB
+-- PHP-Version: 7.2.3
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Datenbank: `project`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `benutzer`
+--
+
+CREATE TABLE `benutzer` (
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `admin` tinyint(4) NOT NULL,
+  `rights` int(11) NOT NULL,
+  `superadmin` int(11) NOT NULL,
+  `entfernt` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `benutzer`
+--
+
+INSERT INTO `benutzer` (`username`, `password`, `admin`, `rights`, `superadmin`, `entfernt`) VALUES
+('admin', 'A94A8FE5CCB19BA61C4C0873D391E987982FBBD3', 1, 1, 1, 0),
+('adminb', '82ab84c9a03ace51218f8f3eff340c8e65feb6ea', 1, 1, 0, 1),
+('asdasd', '331a4f44a6a875b2ce139ae0c9ce5bb5e1ec0d97', 1, 1, 0, 1),
+('Daniel', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1, 1, 0, 0),
+('sad', 'f10e2821bbbea527ea02200352313bc059445190', 0, 0, 0, 1),
+('test', 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3', 1, 1, 0, 1),
+('Test0', '356a192b7913b04c54574d18c28d46e6395428ab', 0, 0, 0, 0),
+('Test1', '356a192b7913b04c54574d18c28d46e6395428ab', 0, 1, 0, 0),
+('Test10', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 0, 0, 0, 1),
+('Test4', 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3', 1, 1, 0, 1),
+('testacc', '17ba0791499db908433b80f37c5fbc89b870084b', 1, 1, 0, 1),
+('testss', 'c6b77501af2051430fdce1659e8a9582ccba40ca', 0, 1, 0, 1),
+('Trtl', '930a0029225aa4c28b8ef095b679285eaae27078', 1, 1, 0, 1),
+('Trtls', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 0, 0, 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `tokens`
+--
+
+CREATE TABLE `tokens` (
+  `id` int(255) NOT NULL,
+  `timestamp` int(11) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `token_login` varchar(255) NOT NULL,
+  `lastip` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `tokens`
+--
+
+INSERT INTO `tokens` (`id`, `timestamp`, `token`, `token_login`, `lastip`, `username`) VALUES
+(1, 1521633386, '1bacf814380ce284f1f6af1a5c417e392a210903', '9027baf6144c234474100a781afb30290128f0a6', '0', 'test'),
+(2, 1521805225, '09c56731245f006ef23e407ee5df854feae7508e', '9027baf6144c234474100a781afb30290128f0a6', '0', 'admin'),
+(3, 1521805401, 'b42a71dda1ac2e68fe33489838fc05533ca838ff', '9027baf6144c234474100a781afb30290128f0a6', '0', 'Daniel');
+
+--
+-- Indizes der exportierten Tabellen
+--
+
+--
+-- Indizes für die Tabelle `benutzer`
+--
+ALTER TABLE `benutzer`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indizes für die Tabelle `tokens`
+--
+ALTER TABLE `tokens`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT für exportierte Tabellen
+--
+
+--
+-- AUTO_INCREMENT für Tabelle `tokens`
+--
+ALTER TABLE `tokens`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

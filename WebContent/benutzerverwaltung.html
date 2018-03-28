@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WSV HS-OG</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    
+    <!-- Custom styles for this template -->
+    
+    <link href="light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body> 	
+   <div class="wrapper">
+
+<!-- SeitenleisteStart+Farbe in data-color -->
+    <div class="sidebar" data-color="#555">
+    	<div class="sidebar-wrapper">
+        
+			<ul class="nav flex-column mb-2">
+
+
+				 <li class="nav-item">
+                <a class="nav-link" href="#" id="einstellungen">
+                  <span data-feather="file"></span>
+                  Eigenschaften
+                </a>
+              </li>
+               <li class="nav-item" id="superadminverwaltung" onClick="usermanagement()" style="display:none;">
+                <a class="nav-link" href="#">
+                  <span data-feather="file"  ></span>
+                  Benutzerverwaltung
+                </a>
+              </li>
+              
+              <li class="nav-item" id="adminverwaltung" onClick="usermanagementadmin()" style="display:none;">
+                <a class="nav-link" href="#">
+                  <span data-feather="file"></span>
+                  Benutzerverwaltung
+                </a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file"></span>
+                  Element1
+                </a>
+              </li>
+               <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file"></span>
+                  Element2
+                </a>
+              </li>
+               <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file"></span>
+                  Element3
+                </a>
+              </li>
+               <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file"></span>
+                  Element4
+                </a>
+              </li>
+              
+            </ul>
+			
+	
+            <!-- NavEnde -->
+            
+            
+            
+    	</div>
+    </div>
+	<!-- Seitenleiste Ende -->
+	
+	
+
+      		<!--Hier beginnt der Hauptteil rechts neben Leiste -->
+            <div class="main-panel">
+            <div  id="abstandbutton">
+				<a class="btn btn-success" onClick="createUser()" href="#">Neuer Benutzer erstellen</a>
+				<a class="btn btn-success" onClick="recreateUser()" href="#">Benutzer wiederherstellen</a>
+				<a class="btn btn-success" onClick="location.reload()" id="btn_reload_function" style="display:none;" href="#">Zurück</a>
+				
+			</div>
+			
+			<div id="editcreate" style="display:none;">
+				<div class="col-sm-4">
+				   <label>Benutzer:</label><br><label id="editUserLabel"> </label><br>
+				   <label for="inputTextEdit">Passwort:</label>
+	               <div class="form-label-group">
+	                  <input type="text" id="inputPassEdit" class="form-control" placeholder="Passwort" required>
+	               </div>
+	               <label for="inputTextEdit">Adminrechte(0 = keine,1 = admin):</label>
+	               <div class="form-label-group">
+	                  <input type="number" id="inputAdminEdit" class="form-control" min="0" max="1" value="0" required>
+	               </div>
+	               <label for="inputText">Leserechte(0 = keine,1 = read):</label>
+	               <div class="form-label-group">
+	                  <input type="number" id="inputReadEdit" class="form-control" min="0" max="1" value="0" required>
+	               </div>
+	               <br>
+	               <input type="hidden" id="usrid" value="">
+	               <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="editfinalUser()">Editieren</button>
+				   <br>
+				</div>
+			</div>
+			<div id="usrcreate" style="display:none;">
+				<div class="col-sm-4">
+				   <label for="inputText">Benutzername:</label>
+	               <div class="form-label-group">
+	                  <input type="text" id="inputName" class="form-control" placeholder="Benutzername" required autofocus>
+	               </div>
+	               <label for="inputText">Passwort:</label>
+	               <div class="form-label-group">
+	                  <input type="text" id="inputPass" class="form-control" placeholder="Passwort" required>
+	               </div>
+	               <label for="inputText">Adminrechte(0 = keine,1 = admin):</label>
+	               <div class="form-label-group">
+	                  <input type="number" id="inputAdmin" class="form-control" min="0" max="1" value="0" required>
+	               </div>
+	               <label for="inputText">Leserechte(0 = keine,1 = read):</label>
+	               <div class="form-label-group">
+	                  <input type="number" id="inputRead" class="form-control" min="0" max="1" value="0" required>
+	               </div>
+	               <br>
+	               <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="insertUser()">Erstellen</button>
+				   <br>
+				</div>
+			</div>
+			
+			
+			
+             <div id="tab_div">
+				 </div> 
+         
+            
+            </div>
+        
+
+
+
+
+        
+
+</div>
+
+	
+       
+    
+	 
+ 
+			
+			<script>
+				var uid=Cookies.get("name");
+				var tok1=Cookies.get("token");
+				var tok2=Cookies.get("token_login");
+				$.ajax({
+					type: "GET",
+					url: "http://localhost/workspace/swimp/WebContent/Includes/checktoken.inc.php?jsoncallback=?",
+					data: {
+						"username": uid,
+						"token": tok1,
+						"token_login": tok2
+					},
+					dataType:"JSONp",
+					timeout: 5000,
+					success: function(data){
+						$.ajax({
+							type: "GET",
+							url: "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/userinterface.inc.php?jsoncallback=?",
+							data: {
+								"username": uid
+							},
+							dataType:"JSONp",
+							timeout: 5000,
+							success: function(data){
+								$('#tab_div').html(data);
+							},
+							error: function (request, error) {
+						        console.log(arguments);
+						        alert(" Can't do because: " + error);
+						    }
+						});
+					},
+					error: function (request, error) {
+				        console.log(arguments);
+				        alert(" Can't do because: " + error);
+				        document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+				    }
+				});
+			</script>
+			<!-- editieren Funktion hinter einem Button in der Tabelle -->
+			<script>
+				//editieren Button Aktion
+				function editieren(id){
+					if(id!= "admin"){
+						document.getElementById('editcreate').style.display = "block";
+						document.getElementById('editUserLabel').innerHTML =id;
+						document.getElementById('usrid').value =id;
+					}else{
+						alert("Superadmin darf nicht bearbeitet werden!")
+					}
+				}
+				//enterfenen Button Aktion
+				function entfernen(id){
+					if(id!= "admin"){
+						var uid=id;
+						var uuid = Cookies.get("name");
+						var tok1=Cookies.get("token");
+						var tok2=Cookies.get("token_login");
+						$.ajax({
+							type: "GET",
+							url: "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/deluser.inc.php?jsoncallback=?",
+							data: {
+								"username": uid,
+								"username_token": uuid,
+								"token": tok1,
+								"token_login": tok2								
+							},
+							dataType:"JSONp",
+							timeout: 5000,
+							success: function(data){
+								if(data=="success"){
+									location.reload();
+								}else if(data=="exist"){
+									alert("Benutzer existiert bereits!");
+								}else if(data=="token"){
+									alert("Login ungültig");
+									document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+								}else{
+									alert("keine Rechte!");
+								}
+							},
+							error: function (request, error) {
+						        console.log(arguments);
+						        alert(" Can't do because: " + error);
+						    }
+						});
+					}else{
+						alert("Superadmin darf nicht bearbeitet werden!")
+					}
+				}
+			</script>
+			
+			<script> 
+				//bearbeitet den User
+				function editfinalUser(){
+					var uid=document.getElementById('usrid').value;
+					var pid=document.getElementById('inputPassEdit').value;
+					var aid=document.getElementById('inputAdminEdit').value;
+					var rid=document.getElementById('inputReadEdit').value;
+					var uuid = Cookies.get("name");
+					var tok1=Cookies.get("token");
+					var tok2=Cookies.get("token_login");
+					$.ajax({
+						type: "GET",
+						url: "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/edituser.inc.php?jsoncallback=?",
+						data: {
+							"username": uid,
+							"username_token": uuid,
+							"token": tok1,
+							"token_login": tok2,
+							"password": pid,
+							"admin": aid,
+							"rights": rid
+						},
+						dataType:"JSONp",
+						timeout: 5000,
+						success: function(data){
+							if(data=="success"){
+								location.reload();
+							}else if(data=="exist"){
+								alert("Benutzer existiert bereits!");
+							}else if(data=="token"){
+								alert("Login ungültig");
+								document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+							}else{
+								alert("keine Rechte!");
+							}
+						},
+						error: function (request, error) {
+					        console.log(arguments);
+					        alert(" Can't do because: " + error);
+					    }
+					});
+				}
+				//prüft einen Benutzer
+				function createUser(){
+					var uid=Cookies.get("name");
+					var tok1=Cookies.get("token");
+					var tok2=Cookies.get("token_login");
+					$.ajax({
+						type: "GET",
+						url: "http://localhost/workspace/swimp/WebContent/Includes/checktoken.inc.php?jsoncallback=?",
+						data: {
+							"username": uid,
+							"token": tok1,
+							"token_login": tok2
+						},
+						dataType:"JSONp",
+						timeout: 5000,
+						success: function(data){
+							document.getElementById('usrcreate').style.display = "block";
+						},
+						error: function (request, error) {
+					        console.log(arguments);
+					        alert(" Can't do because: " + error);
+					        document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+					    }
+					});	
+				}
+				//Fügt den Benutzer ein
+				function insertUser(){
+					var uid=document.getElementById('inputName').value;
+					var pid=document.getElementById('inputPass').value;
+					var aid=document.getElementById('inputAdmin').value;
+					var rid=document.getElementById('inputRead').value;
+					var uuid = Cookies.get("name");
+					var tok1=Cookies.get("token");
+					var tok2=Cookies.get("token_login");
+					$.ajax({
+						type: "GET",
+						url: "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/createuser.inc.php?jsoncallback=?",
+						data: {
+							"username": uid,
+							"username_token": uuid,
+							"token": tok1,
+							"token_login": tok2,
+							"password": pid,
+							"admin": aid,
+							"rights": rid
+						},
+						dataType:"JSONp",
+						timeout: 5000,
+						success: function(data){
+							if(data=="success"){
+								location.reload();
+							}else if(data=="doppelt"){
+								alert("Benutzer existiert bereits!");
+							}else if(data=="token"){
+								alert("Login ungültig");
+								document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+							}else{
+								alert("keine Rechte!");
+							}
+						},
+						error: function (request, error) {
+					        console.log(arguments);
+					        alert(" Can't do because: " + error);
+					    }
+					});
+				}
+				// zeigt gelöschte Nutzer
+				function recreateUser(){
+					var uid=Cookies.get("name");
+					var tok1=Cookies.get("token");
+					var tok2=Cookies.get("token_login");
+					$.ajax({
+						type: "GET",
+						url: "http://localhost/workspace/swimp/WebContent/Includes/checktoken.inc.php?jsoncallback=?",
+						data: {
+							"username": uid,
+							"token": tok1,
+							"token_login": tok2
+						},
+						dataType:"JSONp",
+						timeout: 5000,
+						success: function(data){
+							$.ajax({
+								type: "GET",
+								url: "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/recreateuser.inc.php?jsoncallback=?",
+								data: {
+									"username": uid
+								},
+								dataType:"JSONp",
+								timeout: 5000,
+								success: function(data){
+									$('#tab_div').html(data);
+									document.getElementById('btn_reload_function').style.display = "block";
+								},
+								error: function (request, error) {
+							        console.log(arguments);
+							        alert(" Can't do because: " + error);
+							    }
+							});
+						},
+						error: function (request, error) {
+					        console.log(arguments);
+					        alert(" Can't do because: " + error);
+					        document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+					    }
+					});
+				}
+				//Stellt gelöschte Nutzer wieder her
+				function recreate(id){
+					var uid=id;
+					var uuid = Cookies.get("name");
+					var tok1=Cookies.get("token");
+					var tok2=Cookies.get("token_login");
+					$.ajax({
+						type: "GET",
+						url: "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/activateuser.inc.php?jsoncallback=?",
+						data: {
+							"username": uid,
+							"username_token": uuid,
+							"token": tok1,
+							"token_login": tok2								
+						},
+						dataType:"JSONp",
+						timeout: 5000,
+						success: function(data){
+							if(data=="success"){
+								location.reload();
+							}else if(data=="exist"){
+								alert("Benutzer existiert bereits!");
+							}else if(data=="token"){
+								alert("Login ungültig");
+								document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+							}else{
+								alert("keine Rechte!");
+							}
+						},
+						error: function (request, error) {
+					        console.log(arguments);
+					        alert(" Can't do because: " + error);
+					    }
+					});
+				}
+				// Keine Rechte warnung
+				function norights(){
+					alert("Sie haben keine Befugnisse diese Aktion auszuführen.");
+				}
+			</script>
+				<script>
+		var uid=Cookies.get("name");
+		var tok1=Cookies.get("token");
+		var tok2=Cookies.get("token_login");
+		$.ajax({
+			type: "GET",
+			url: "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/adminverwaltung.inc.php?jsoncallback=?",
+			data: {
+				"username": uid,
+				"token": tok1,
+				"token_login": tok2
+			},
+			dataType:"JSONp",
+			timeout: 5000,
+			success: function(data){
+				if(data=="sadmin"){
+					document.getElementById('superadminverwaltung').style.display = "block";
+				}else if(data=="admin"){
+					document.getElementById('adminverwaltung').style.display = "block";
+				}else if(data=="noadmin"){
+					
+				}else{
+					alert("Login ungültig");
+					document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+				}
+			},
+			error: function (request, error) {
+		        console.log(arguments);
+		        alert(" Can't do because: " + error);
+		        document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+		    }
+		});
+		function usermanagement(){
+			document.location.href = "http://localhost/workspace/swimp/WebContent/benutzerverwaltung.html";
+		}
+		function usermanagementadmin(){
+			document.location.href = "http://localhost/workspace/swimp/WebContent/benutzerverwaltungadmin.html";
+		}
+	</script>
+	
+</body>
+</html>
