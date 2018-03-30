@@ -30,6 +30,12 @@
                   Eigenschaften
                 </a>
               </li>
+                <li class="nav-item">
+                <a class="nav-link" href="http://localhost/workspace/swimp/WebContent/index.html">
+                  <span data-feather="file"></span>
+                  Home
+                </a>
+              </li>
                <li class="nav-item" id="superadminverwaltung" onClick="usermanagement()" style="display:none;">
                 <a class="nav-link" href="#">
                   <span data-feather="file"  ></span>
@@ -62,13 +68,6 @@
                   Element3
                 </a>
               </li>
-               <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file"></span>
-                  Element4
-                </a>
-              </li>
-              
             </ul>
 			
 	
@@ -85,11 +84,13 @@
       		<!--Hier beginnt der Hauptteil rechts neben Leiste -->
             <div class="main-panel">
             <div  id="abstandbutton">
-				<a class="btn btn-success" onClick="createUser()" href="#">Neuer Benutzer erstellen</a>
-				<a class="btn btn-success" onClick="recreateUser()" href="#">Benutzer wiederherstellen</a>
-				<a class="btn btn-success" onClick="location.reload()"  href="#">Zurück</a>
-				<!--<a class="btn btn-success" onClick="location.reload()" id="btn_reload_function" style="display:none;" href="#">Zurück</a>-->
+				 <div class="col-md-12 text-right">
+				<a class="btn btn-success .navbar-right" id="b1" onClick="createUser()" href="#">Neuer Benutzer erstellen</a>
+			
+				<a class="btn btn-success .navbar-right" id="b1" onClick="recreateUser()" href="#">Benutzer wiederherstellen</a>
 				
+				<a class="btn btn-success .navbar-right" id="b2" onClick="location.reload()"  href="#">Zurück</a>
+		</div>
 			</div>
 			
 			<div id="editcreate" style="display:none;">
@@ -478,6 +479,12 @@
 		function usermanagementadmin(){
 			document.location.href = "http://localhost/workspace/swimp/WebContent/benutzerverwaltungadmin.html";
 		}
+	</script>
+		<!-- obere Buttons gleich groß machen -->
+	<script>
+	 var max = Math.max ($("#b1").width (), $("#b2").width ());
+	    $("#b1").width (max);
+	    $("#b2").width (max); 
 	</script>
 	
 </body>
