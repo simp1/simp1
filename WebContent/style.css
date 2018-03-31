@@ -10,8 +10,23 @@ li a{
 .main-panel{
 	padding-left:5px;
 }
+#borderweg{
+	border:none;
+}
+#b2{
+	margin-top:5px;
+}
+#b3{
+	margin-top:5px;
+}
+#b1{
+	margin-top:5px;
+}
 #leer{
 	background-color:#555;
+}
+#überschrift{
+	text-align:center;
 }
 #einstellungen{
 	color:white !important;
@@ -32,13 +47,13 @@ a #buttonright.btn.btn-success{
 	color:white;	
 }
 #sidebar{
-	background-color: #28a745;
 	/*border: 2px solid #349a4b;*/
 	color:white;
 }
 #abstandoben{
 	margin-top:58px;
 }
+/*
 #abstandbutton{
 	padding-top:15px !important;
 	padding-left:5px;
@@ -46,6 +61,21 @@ a #buttonright.btn.btn-success{
 	padding-bottom:15px !important;
 	float:right;
 	}
+*/
+
+#butlang{
+	max-width:150px;
+	
+}        
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-nrw8{font-size:14px}
+
+table,
+td {
+	border: 1px solid;
+}
 #btn_reload_function{
 	margin-top:7px;
 }
@@ -56,12 +86,12 @@ a #buttonright.btn.btn-success{
 	margin-top:58px;
 }
 #klein{
-	text-size:17px;
+	text-size:16px;
 	text-align:center;
 }
 #inhalt{
 	text-align:center;
-	text-size:20px;
+	text-size:18px;
 }
 #headerbutton{
 	text-align:center;

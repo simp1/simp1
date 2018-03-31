@@ -1,36 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>WSV HS-OG</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     
-    <!-- Custom styles for this template -->
-    
-    <link href="light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>
-    <!-- Bootstrap core CSS -->
     <link href="bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" href="assets/css/custom-themes.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link href="style.css" rel="stylesheet">
+     <script src="assets/js/custom.js"></script>
 </head>
 <body> 	
-   <div class="wrapper">
+   <div class="page-wrapper chiller-theme toggled">
 
-<!-- SeitenleisteStart+Farbe in data-color -->
-    <div class="sidebar" data-color="#555">
-    	<div class="sidebar-wrapper">
-        
-			<ul class="nav flex-column mb-2">
-
-
-				 <li class="nav-item">
-                <a class="nav-link" href="#" id="einstellungen">
-                  <span data-feather="file"></span>
-                  Eigenschaften
-                </a>
-              </li>
-                <li class="nav-item">
+<!-- SeitenleisteStart -->
+		 <nav id="sidebar" class="sidebar-wrapper" data-color="#555">
+       
+                <div id="toggle-sidebar">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div class="sidebar-brand">
+                    <a href="#">Eigenschaften</a>
+                </div>
+                <div class="sidebar-menu">
+                <ul>  
+                 <li class="nav-item">
                 <a class="nav-link" href="http://localhost/workspace/swimp/WebContent/index.html">
                   <span data-feather="file"></span>
                   Home
@@ -68,32 +65,32 @@
                   Element3
                 </a>
               </li>
-            </ul>
-			
-	
-            <!-- NavEnde -->
-            
-            
-            
-    	</div>
-    </div>
+                        
+                        
+                    </ul>
+                </div>
+                
+        </nav>
+
 	<!-- Seitenleiste Ende -->
 	
-	
-
-      		<!--Hier beginnt der Hauptteil rechts neben Leiste -->
-            <div class="main-panel">
-            <div  id="abstandbutton">
-				 <div class="col-md-12 text-right">
-				<a class="btn btn-success .navbar-right" id="b1" onClick="createUser()" href="#">Neuer Benutzer erstellen</a>
+	    <div class="page-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="form-group col-md-12" id="überschrift">
+                        <h1>Benutzerverwaltung</h1>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="form-group col-md-12 text-center" id="abstandbutton">
+                <a class="btn btn-success .navbar-right" id="b1" onClick="createUser()" href="#">Neuer Benutzer erstellen</a>
 			
 				<a class="btn btn-success .navbar-right" id="b1" onClick="recreateUser()" href="#">Benutzer wiederherstellen</a>
 				
-				<a class="btn btn-success .navbar-right" id="b2" onClick="location.reload()"  href="#">ZurÃ¼ck</a>
-		</div>
-			</div>
-			
-			<div id="editcreate" style="display:none;">
+				<a class="btn btn-success .navbar-right" id="b2" onClick="location.reload()"  href="#">Zurück</a>
+				
+				<div id="editcreate" style="display:none;">
 				<div class="col-sm-4">
 				   <label>Benutzer:</label><br><label id="editUserLabel"> </label><br>
 				   <label for="inputTextEdit">Passwort:</label>
@@ -137,27 +134,24 @@
 				   <br>
 				</div>
 			</div>
-			
-			
-			
-             <div id="tab_div">
-				 </div> 
-         
-            
+				
+                    </div>
+                </div>
+                
+                
+                 <div class="row">
+                 <div class="form-group col-md-12">
+                    <div  id="tab_div">
+                     
+					</div>
+                    </div>
+                </div>
+
+          
             </div>
-        
 
-
-
-
-        
-
+    </div>
 </div>
-
-	
-       
-    
-	 
  
 			
 			<script>
@@ -235,7 +229,7 @@
 								}else if(data=="exist"){
 									alert("Benutzer existiert bereits!");
 								}else if(data=="token"){
-									alert("Login ungÃ¼ltig");
+									alert("Login ungültig");
 									document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
 								}else{
 									alert("keine Rechte!");
@@ -282,7 +276,7 @@
 							}else if(data=="exist"){
 								alert("Benutzer existiert bereits!");
 							}else if(data=="token"){
-								alert("Login ungÃ¼ltig");
+								alert("Login ungültig");
 								document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
 							}else{
 								alert("keine Rechte!");
@@ -294,7 +288,7 @@
 					    }
 					});
 				}
-				//prÃ¼ft einen Benutzer
+				//prüft einen Benutzer
 				function createUser(){
 					var uid=Cookies.get("name");
 					var tok1=Cookies.get("token");
@@ -319,7 +313,7 @@
 					    }
 					});	
 				}
-				//FÃ¼gt den Benutzer ein
+				//Fügt den Benutzer ein
 				function insertUser(){
 					var uid=document.getElementById('inputName').value;
 					var pid=document.getElementById('inputPass').value;
@@ -348,7 +342,7 @@
 							}else if(data=="doppelt"){
 								alert("Benutzer existiert bereits!");
 							}else if(data=="token"){
-								alert("Login ungÃ¼ltig");
+								alert("Login ungültig");
 								document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
 							}else{
 								alert("keine Rechte!");
@@ -360,7 +354,7 @@
 					    }
 					});
 				}
-				// zeigt gelÃ¶schte Nutzer
+				// zeigt gelöschte Nutzer
 				function recreateUser(){
 					var uid=Cookies.get("name");
 					var tok1=Cookies.get("token");
@@ -401,7 +395,7 @@
 					    }
 					});
 				}
-				//Stellt gelÃ¶schte Nutzer wieder her
+				//Stellt gelöschte Nutzer wieder her
 				function recreate(id){
 					var uid=id;
 					var uuid = Cookies.get("name");
@@ -424,7 +418,7 @@
 							}else if(data=="exist"){
 								alert("Benutzer existiert bereits!");
 							}else if(data=="token"){
-								alert("Login ungÃ¼ltig");
+								alert("Login ungültig");
 								document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
 							}else{
 								alert("keine Rechte!");
@@ -438,7 +432,7 @@
 				}
 				// Keine Rechte warnung
 				function norights(){
-					alert("Sie haben keine Befugnisse diese Aktion auszufÃ¼hren.");
+					alert("Sie haben keine Befugnisse diese Aktion auszuführen.");
 				}
 			</script>
 				<script>
@@ -463,7 +457,7 @@
 				}else if(data=="noadmin"){
 					
 				}else{
-					alert("Login ungÃ¼ltig");
+					alert("Login ungültig");
 					document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
 				}
 			},
@@ -480,7 +474,7 @@
 			document.location.href = "http://localhost/workspace/swimp/WebContent/benutzerverwaltungadmin.html";
 		}
 	</script>
-		<!-- obere Buttons gleich groÃŸ machen -->
+		<!-- obere Buttons gleich groß machen -->
 	<script>
 	 var max = Math.max ($("#b1").width (), $("#b2").width ());
 	    $("#b1").width (max);

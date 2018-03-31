@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" href="assets/css/custom-themes.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="style.css" rel="stylesheet">
+     <script src="assets/js/custom.js"></script>
+</head>
+<body> 	
+   <div class="page-wrapper chiller-theme toggled">
+
+<!-- SeitenleisteStart -->
+		 <nav id="sidebar" class="sidebar-wrapper" data-color="#555">
+       
+                <div id="toggle-sidebar">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div class="sidebar-brand">
+                    <a href="#">Eigenschaften</a>
+                </div>
+                <div class="sidebar-menu">
+                <ul>  
+                 <li class="nav-item">
+                <a class="nav-link" href="http://localhost/workspace/swimp/WebContent/index.html">
+                  <span data-feather="file"></span>
+                  Home
+                </a>
+              </li>
+               <li class="nav-item" id="superadminverwaltung" onClick="usermanagement()" style="display:none;">
+                <a class="nav-link" href="#">
+                  <span data-feather="file"  ></span>
+                  Benutzerverwaltung
+                </a>
+              </li>
+              
+              <li class="nav-item" id="adminverwaltung" onClick="usermanagementadmin()" style="display:none;">
+                <a class="nav-link" href="#">
+                  <span data-feather="file"></span>
+                  Benutzerverwaltung
+                </a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file"></span>
+                  Werkzeugübersicht
+                </a>
+              </li>
+               <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file"></span>
+                  Element1
+                </a>
+              </li>
+               <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file"></span>
+                  Element2
+                </a>
+              </li>     
+            </ul>
+        </div>
+  </nav>
+	<!-- Seitenleiste Ende -->
+	
+	    <div class="page-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="form-group col-md-12" id="überschrift">
+                        <h1>Werkzeugübersicht</h1>
+                    </div>
+                </div>
+                 <div class="row">
+                 <div class="form-group col-md-12 text-center" id="abstandbutton">
+                <a class="btn btn-success .navbar-right"  onClick="createUser()" href="#" id="b2">Alle</a>
+				<a class="btn btn-success .navbar-right"  onClick="recreateUser()"  href="#" id="b3">Filtern</a>
+				<a class="btn btn-success .navbar-right"  onClick="location.reload()" id="b1"  href="#">+ neues Anlegen...</a>
+				</div>
+                </div>
+                
+   <div class="row  table-responsive" >             
+ <table class="table table-bordered " id="tabresp">
+  <tbody>
+   <tr>
+    <th class="tg-nrw8">Werkzeugnummer</th>
+    <th class="tg-031e">20180326/01</th>
+    <th class="tg-031e" >Grafik:</th>
+    <th class="tg-031e" >QR-Code:</th>
+    <th class="tg-031e"></th>
+  </tr>
+  <tr>
+    <td class="tg-031e">Kurzbezeichnung</td>
+    <td class="tg-031e">"Testmatrize"</td>
+    <td class="tg-031e"  rowspan="5"></td>
+    <td class="tg-031e"  rowspan="5"></td>
+    <td class="tg-031e"></td>
+  </tr>
+  <tr>
+    <td class="tg-031e" rowspan="2">Druckmaterial</td>
+    <td class="tg-031e" rowspan="2">RGD515<br>RGD531</td>
+    <td class="tg-031e"></td>
+  </tr>
+  <tr>
+    <td class="tg-031e"></td>
+  </tr>
+  <tr>
+    <td class="tg-031e">Druckmodus</td>
+    <td class="tg-031e">HQ</td>
+    <td class="tg-031e"><a class="btn btn-success .navbar-right btn-block"  onClick="recreateUser()"  href="#" id="butlang">Öffnen</a></td>
+  </tr>
+  <tr>
+    <td class="tg-031e">Herstelldatum</td>
+    <td class="tg-031e">26.05.2018</td>
+    <td class="tg-031e"><a class="btn btn-success btn-block" href="#" id="butlang" >Bearbeiten</a></td>
+  </tr>
+  </tbody>
+</table>
+</div>
+   <div class="row  table-responsive" >             
+ <table class="table table-bordered " id="tabresp">
+  <tbody>
+   <tr>
+    <th class="tg-nrw8">Werkzeugnummer</th>
+    <th class="tg-031e">20180326/01</th>
+    <th class="tg-031e" >Grafik:</th>
+    <th class="tg-031e" >QR-Code:</th>
+    <th class="tg-031e"></th>
+  </tr>
+  <tr>
+    <td class="tg-031e">Kurzbezeichnung</td>
+    <td class="tg-031e">"Testmatrize"</td>
+    <td class="tg-031e"  rowspan="5"></td>
+    <td class="tg-031e"  rowspan="5"></td>
+    <td class="tg-031e"></td>
+  </tr>
+  <tr>
+    <td class="tg-031e" rowspan="2">Druckmaterial</td>
+    <td class="tg-031e" rowspan="2">RGD515<br>RGD531</td>
+    <td class="tg-031e"></td>
+  </tr>
+  <tr>
+    <td class="tg-031e"></td>
+  </tr>
+  <tr>
+    <td class="tg-031e">Druckmodus</td>
+    <td class="tg-031e">HQ</td>
+    <td class="tg-031e"><a class="btn btn-success .navbar-right btn-block"  onClick="recreateUser()"  href="#" id="butlang">Öffnen</a></td>
+  </tr>
+  <tr>
+    <td class="tg-031e">Herstelldatum</td>
+    <td class="tg-031e">26.05.2018</td>
+    <td class="tg-031e"><a class="btn btn-success btn-block" href="#" id="butlang" >Bearbeiten</a></td>
+  </tr>
+  </tbody>
+</table>
+</div>
+    <div class="row  table-responsive" >             
+ <table class="table table-bordered " id="tabresp">
+  <tbody>
+   <tr>
+    <th class="tg-nrw8">Werkzeugnummer</th>
+    <th class="tg-031e">20180326/01</th>
+    <th class="tg-031e" >Grafik:</th>
+    <th class="tg-031e" >QR-Code:</th>
+    <th class="tg-031e"></th>
+  </tr>
+  <tr>
+    <td class="tg-031e">Kurzbezeichnung</td>
+    <td class="tg-031e">"Testmatrize"</td>
+    <td class="tg-031e"  rowspan="5"></td>
+    <td class="tg-031e"  rowspan="5"></td>
+    <td class="tg-031e"></td>
+  </tr>
+  <tr>
+    <td class="tg-031e" rowspan="2">Druckmaterial</td>
+    <td class="tg-031e" rowspan="2">RGD515<br>RGD531</td>
+    <td class="tg-031e"></td>
+  </tr>
+  <tr>
+    <td class="tg-031e"></td>
+  </tr>
+  <tr>
+    <td class="tg-031e">Druckmodus</td>
+    <td class="tg-031e">HQ</td>
+    <td class="tg-031e"><a class="btn btn-success .navbar-right btn-block"  onClick="recreateUser()"  href="#" id="butlang">Öffnen</a></td>
+  </tr>
+  <tr>
+    <td class="tg-031e">Herstelldatum</td>
+    <td class="tg-031e">26.05.2018</td>
+    <td class="tg-031e"><a class="btn btn-success btn-block" href="#" id="butlang"  >Bearbeiten</a></td>
+  </tr>
+  </tbody>
+</table>
+</div>
+
+                    
+                    
+                    
+                </div>
+
+          
+            </div>
+
+    </div>
+<!-- obere Buttons gleich groß machen -->
+	<script>
+	 var max = Math.max ($("#b1").width (), $("#b2").width ());
+	    $("#b1").width (max);
+	    $("#b2").width (max);
+	    $("#b3").width (max);
+	    
+	</script>
+      		
+
+	
+</body>
+</html>
