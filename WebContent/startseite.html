@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="assets/css/custom-themes.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link href="style.css" rel="stylesheet">
-     <script src="assets/js/custom.js"></script>
+    <script src="assets/js/custom.js"></script>
     
 </head>
 <body> 		
 
-
+ <div class="page-wrapper chiller-theme toggled">
 <!-- SeitenleisteStart -->
 		 <nav id="sidebar" class="sidebar-wrapper" data-color="#555">
        
@@ -34,24 +34,24 @@
                   Home
                 </a>
               </li>
-               <li class="nav-item" id="superadminverwaltung" onClick="usermanagement()" style="display:none;">
-                <a class="nav-link" href="#">
+               <li class="nav-item" id="superadminverwaltung" style="display:none;">
+                <a class="nav-link" href="benutzerverwaltung.html">
                   <span data-feather="file"  ></span>
                   Benutzerverwaltung
                 </a>
               </li>
               
-              <li class="nav-item" id="adminverwaltung" onClick="usermanagementadmin()" style="display:none;">
-                <a class="nav-link" href="#">
+              <li class="nav-item" id="adminverwaltung" style="display:none;">
+                <a class="nav-link" href="benutzerverwaltungadmin.html">
                   <span data-feather="file"></span>
                   Benutzerverwaltung
                 </a>
               </li>
               
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="stammdaten.html">
                   <span data-feather="file"></span>
-                  Element1
+                  Stammdaten
                 </a>
               </li>
                <li class="nav-item">
@@ -170,7 +170,7 @@
                 </div>
                 
      
-
+  </div>
     <footer class="container  py-5">
         <div class="row">
            <div class="col-6 col-md">
@@ -249,12 +249,6 @@
 		        document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
 		    }
 		});
-		function usermanagement(){
-			document.location.href = "http://localhost/workspace/swimp/WebContent/benutzerverwaltung.html";
-		}
-		function usermanagementadmin(){
-			document.location.href = "http://localhost/workspace/swimp/WebContent/benutzerverwaltungadmin.html";
-		}
 	</script>
 	
 </body>

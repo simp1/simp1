@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     
     <link href="bootstrap.min.css" rel="stylesheet">
@@ -9,19 +10,81 @@
     <link rel="stylesheet" href="assets/css/custom-themes.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link href="style.css" rel="stylesheet">
-    <meta charset="UTF-8"> 
-    
+     <script src="assets/js/custom.js"></script>
 </head>
-<body> 		
- 	<div id="data_div">
+<body> 	
+   <div class="page-wrapper chiller-theme toggled">
+
+<!-- SeitenleisteStart -->
+		 <nav id="sidebar" class="sidebar-wrapper" data-color="#555">
+       
+                <div id="toggle-sidebar">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div class="sidebar-brand">
+                    <a href="#">Eigenschaften</a>
+                </div>
+                <div class="sidebar-menu">
+                <ul>  
+                 <li class="nav-item">
+                <a class="nav-link" href="http://localhost/workspace/swimp/WebContent/startseite.html">
+                  <span data-feather="file"></span>
+                  Home
+                </a>
+              </li>
+               <li class="nav-item" id="superadminverwaltung" style="display:none;">
+                <a class="nav-link" href="benutzerverwaltung.html">
+                  <span data-feather="file"  ></span>
+                  Benutzerverwaltung
+                </a>
+              </li>
+              
+              <li class="nav-item" id="adminverwaltung" style="display:none;">
+                <a class="nav-link" href="benutzerverwaltungadmin.html">
+                  <span data-feather="file"></span>
+                  Benutzerverwaltung
+                </a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="stammdaten.html">
+                  <span data-feather="file"></span>
+                  Stammdaten
+                </a>
+              </li>
+               <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file"></span>
+                  Element2
+                </a>
+              </li>
+               <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file"></span>
+                  Element3
+                </a>
+              </li>     
+            </ul>
+        </div>
+  </nav>
+	<!-- Seitenleiste Ende -->
+	
+	    <div class="page-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="form-group col-md-12" id="überschrift">
+                        <div id="data_div">
  	</div>
 <!-- Stammdaten Form + Btn -->
+	<div id="btn_stammdaten_show">
 	<button id="btn_stammdata" onClick="createData()"> Stammdaten </button>
 
 	<input type="text" id="suchfkt" placeholder="Werkzeugsuche" onkeydown="searchforitem()" required>
 	
 	<button id="btn_reload" onClick="location.reload()"> Seite neuladen </button>
-	
+	</div>
 	<div id="createStamm" style="display:none;">
 		<div class="col-sm-6">
 			<label for="inputTextCreate">Werkzeugnummer*:</label>
@@ -52,9 +115,9 @@
 	        <div class="form-label-group">
 	            <input type="date" id="inputDateCreate" class="form-control" required>
 	        </div>
-	        <label for="inputTextCreate">SchlagwÃ¶rter(Drucker,Type,ID sind standartmÃ¤ÃŸig):</label>
+	        <label for="inputTextCreate">Schlagwörter(Drucker,Type,ID sind standartmäßig):</label>
 	        <div class="form-label-group">
-	            <input type="text" id="inputSchlagwoerterCreate" class="form-control" placeholder="SchlagwÃ¶rter" required>
+	            <input type="text" id="inputSchlagwoerterCreate" class="form-control" placeholder="Schlagwörter" required>
 	        </div>
 	        <br>
 	        <input type="hidden" id="usrid" value="">
@@ -62,8 +125,26 @@
 			<br>
 		</div>
 	</div>
+                    </div>
+                </div>
+                 <div class="row">
+                 <div class="form-group col-md-12">
+                    <!-- Hier drin ist der main-Teil -->
+                    
+                    
+                    
+                    </div>
+                </div>
+
+          
+            </div>
+
+    </div>
+</div>
+      		
+
 	<script>
-		//prÃ¼fen des Benutzers + Stammdaten laden
+		//prüfen des Benutzers + Stammdaten laden
 		var uid=Cookies.get("name");
 		var tok1=Cookies.get("token");
 		var tok2=Cookies.get("token_login");
@@ -83,6 +164,64 @@
 			error: function (request, error) {
 		        console.log(arguments);
 		        alert(" Can't do because: " + error);
+		    }
+		});
+		//prüfen rechte
+		var uid=Cookies.get("name");
+		var tok1=Cookies.get("token");
+		var tok2=Cookies.get("token_login");
+		$.ajax({
+			type: "GET",
+			url: "http://localhost/workspace/swimp/WebContent/Includes/checkrights.inc.php?jsoncallback=?",
+			data: {
+				"username": uid,
+				"token": tok1,
+				"token_login": tok2
+			},
+			dataType:"JSONp",
+			timeout: 5000,
+			success: function(data){
+				if(data=="success"){
+					
+				}else{
+					document.getElementById('btn_stammdaten_show').style.display = "none";
+				}
+			},
+			error: function (request, error) {
+		        console.log(arguments);
+		        alert(" Can't do because: " + error);
+		    }
+		});
+		//Startleiste
+		var uid=Cookies.get("name");
+		var tok1=Cookies.get("token");
+		var tok2=Cookies.get("token_login");
+		$.ajax({
+			type: "GET",
+			url: "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/adminverwaltung.inc.php?jsoncallback=?",
+			data: {
+				"username": uid,
+				"token": tok1,
+				"token_login": tok2
+			},
+			dataType:"JSONp",
+			timeout: 5000,
+			success: function(data){
+				if(data=="sadmin"){
+					document.getElementById('superadminverwaltung').style.display = "block";
+				}else if(data=="admin"){
+					document.getElementById('adminverwaltung').style.display = "block";
+				}else if(data=="noadmin"){
+					
+				}else{
+					alert("Login ungültig");
+					document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+				}
+			},
+			error: function (request, error) {
+		        console.log(arguments);
+		        alert(" Can't do because: " + error);
+		        document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
 		    }
 		});
 		// Einblenden des Stammdaten Formulares
@@ -150,9 +289,9 @@
 						}else if(data=="fehler"){
 							alert("Es ist ein Fehler aufgetreten!");
 						}else if(data=="rechte"){
-							alert("Sie haben keine Rechte diese Aktion auszufÃ¼hren!");
+							alert("Sie haben keine Rechte diese Aktion auszuführen!");
 						}else if(data=="token"){
-							alert("Zeitlimit Ã¼berschritten!");
+							alert("Zeitlimit überschritten!");
 							document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
 						}else{
 							alert("Unexpected answer! Bitte Antwort aufschreiben.");
@@ -164,9 +303,10 @@
 				    }
 				});	
 			}else{
-				alert("Die mit * markierten Felder mÃ¼ssen ausgefÃ¼llt sein!");
+				alert("Die mit * markierten Felder müssen ausgefüllt sein!");
 			}
 		}
+		//suchfkt
 		function searchforitem(){
 			var uid = Cookies.get("name");
 			var tok1 = Cookies.get("token");
@@ -192,5 +332,6 @@
 			});
 		}
 	</script>
+	
 </body>
-</html>
+</html>	
