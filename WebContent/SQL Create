@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 23. Mrz 2018 um 12:44
+-- Erstellungszeit: 08. Apr 2018 um 15:09
 -- Server-Version: 10.1.31-MariaDB
 -- PHP-Version: 7.2.3
 
@@ -46,16 +46,78 @@ INSERT INTO `benutzer` (`username`, `password`, `admin`, `rights`, `superadmin`,
 ('adminb', '82ab84c9a03ace51218f8f3eff340c8e65feb6ea', 1, 1, 0, 1),
 ('asdasd', '331a4f44a6a875b2ce139ae0c9ce5bb5e1ec0d97', 1, 1, 0, 1),
 ('Daniel', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1, 1, 0, 0),
+('esses', 'b009c7a279b7c92472f331fc8cca642aae7f6123', 1, 1, 0, 1),
 ('sad', 'f10e2821bbbea527ea02200352313bc059445190', 0, 0, 0, 1),
+('t', '8efd86fb78a56a5145ed7739dcb00c78581c5375', 0, 0, 0, 1),
 ('test', 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3', 1, 1, 0, 1),
-('Test0', '356a192b7913b04c54574d18c28d46e6395428ab', 0, 0, 0, 0),
-('Test1', '356a192b7913b04c54574d18c28d46e6395428ab', 0, 1, 0, 0),
+('Test0', 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3', 1, 0, 0, 0),
+('Test1', 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3', 0, 1, 0, 0),
 ('Test10', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 0, 0, 0, 1),
 ('Test4', 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3', 1, 1, 0, 1),
 ('testacc', '17ba0791499db908433b80f37c5fbc89b870084b', 1, 1, 0, 1),
 ('testss', 'c6b77501af2051430fdce1659e8a9582ccba40ca', 0, 1, 0, 1),
+('testss1', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 0, 0, 0, 1),
 ('Trtl', '930a0029225aa4c28b8ef095b679285eaae27078', 1, 1, 0, 1),
 ('Trtls', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 0, 0, 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `schlagwort`
+--
+
+CREATE TABLE `schlagwort` (
+  `schlagwortID` int(255) NOT NULL,
+  `werkzeugID` int(255) NOT NULL,
+  `schlagwort` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `schlagwort`
+--
+
+INSERT INTO `schlagwort` (`schlagwortID`, `werkzeugID`, `schlagwort`) VALUES
+(72, 27, 'apfel'),
+(73, 27, 'test'),
+(74, 27, 'banen'),
+(75, 27, '1'),
+(76, 27, 'test'),
+(77, 27, 'test'),
+(78, 27, 'test'),
+(79, 27, '2018-04-07'),
+(80, 28, 'birne'),
+(81, 28, 'hose'),
+(82, 28, 'apfel'),
+(83, 28, '2'),
+(84, 28, 'j500'),
+(85, 28, 'Stein'),
+(86, 28, 'Hammer'),
+(87, 28, '2018-04-07');
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `stammdaten`
+--
+
+CREATE TABLE `stammdaten` (
+  `werkzeugID` int(255) NOT NULL,
+  `werkzeug_nummer` varchar(255) NOT NULL,
+  `kurzbeschreibung` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `druckmaterial` varchar(255) NOT NULL,
+  `druckmodus` varchar(255) NOT NULL,
+  `drucker` varchar(255) NOT NULL,
+  `herstelldatum` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `stammdaten`
+--
+
+INSERT INTO `stammdaten` (`werkzeugID`, `werkzeug_nummer`, `kurzbeschreibung`, `type`, `druckmaterial`, `druckmodus`, `drucker`, `herstelldatum`) VALUES
+(27, '1', 'Test', 'test', 'test', 'test', 'test', '2018-04-07'),
+(28, '2', 'Auch ein Werkzeug', 'Hammer', 'Stein', 'schnell', 'j500', '2018-04-07');
 
 -- --------------------------------------------------------
 
@@ -78,8 +140,23 @@ CREATE TABLE `tokens` (
 
 INSERT INTO `tokens` (`id`, `timestamp`, `token`, `token_login`, `lastip`, `username`) VALUES
 (1, 1521633386, '1bacf814380ce284f1f6af1a5c417e392a210903', '9027baf6144c234474100a781afb30290128f0a6', '0', 'test'),
-(2, 1521805225, '09c56731245f006ef23e407ee5df854feae7508e', '9027baf6144c234474100a781afb30290128f0a6', '0', 'admin'),
-(3, 1521805401, 'b42a71dda1ac2e68fe33489838fc05533ca838ff', '9027baf6144c234474100a781afb30290128f0a6', '0', 'Daniel');
+(2, 1523180074, 'bcd1ad2edb87c3af2c4062e6e0d5abb14ff10ece', '9027baf6144c234474100a781afb30290128f0a6', '0', 'admin'),
+(3, 1521923806, '632e38134a94db946a1b900c27ba3668671f94cd', '9027baf6144c234474100a781afb30290128f0a6', '0', 'Daniel'),
+(4, 1521848888, 'beee3a0f544318f6a4089125f4807bf1455ad8e8', '9027baf6144c234474100a781afb30290128f0a6', '0', 'Test0'),
+(5, 1521848927, '4b8a672bc5d6332308215b69843f76de1b9e8e61', '9027baf6144c234474100a781afb30290128f0a6', '0', 'Test1');
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `werkzeug_attribute`
+--
+
+CREATE TABLE `werkzeug_attribute` (
+  `werkzeug_attID` int(255) NOT NULL,
+  `werkzeugID` int(255) NOT NULL,
+  `bezeichnung` varchar(255) NOT NULL,
+  `wert` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indizes der exportierten Tabellen
@@ -92,20 +169,56 @@ ALTER TABLE `benutzer`
   ADD PRIMARY KEY (`username`);
 
 --
+-- Indizes für die Tabelle `schlagwort`
+--
+ALTER TABLE `schlagwort`
+  ADD PRIMARY KEY (`schlagwortID`);
+
+--
+-- Indizes für die Tabelle `stammdaten`
+--
+ALTER TABLE `stammdaten`
+  ADD PRIMARY KEY (`werkzeugID`);
+
+--
 -- Indizes für die Tabelle `tokens`
 --
 ALTER TABLE `tokens`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indizes für die Tabelle `werkzeug_attribute`
+--
+ALTER TABLE `werkzeug_attribute`
+  ADD PRIMARY KEY (`werkzeug_attID`);
+
+--
 -- AUTO_INCREMENT für exportierte Tabellen
 --
+
+--
+-- AUTO_INCREMENT für Tabelle `schlagwort`
+--
+ALTER TABLE `schlagwort`
+  MODIFY `schlagwortID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+
+--
+-- AUTO_INCREMENT für Tabelle `stammdaten`
+--
+ALTER TABLE `stammdaten`
+  MODIFY `werkzeugID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT für Tabelle `tokens`
 --
 ALTER TABLE `tokens`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT für Tabelle `werkzeug_attribute`
+--
+ALTER TABLE `werkzeug_attribute`
+  MODIFY `werkzeug_attID` int(255) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

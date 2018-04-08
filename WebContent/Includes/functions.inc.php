@@ -27,7 +27,7 @@
 		}else{
 			return false;
 		}
-		if($time_tab>900){//Gab es innerhalb 15 min aktivität!
+		if($time_tab>90000){//Gab es innerhalb 1500 min aktivität!
 			return false;
 		}else{
 			$timestamp=time();

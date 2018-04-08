@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" href="assets/css/custom-themes.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="style.css" rel="stylesheet">
+    <meta charset="UTF-8"> 
+    
+</head>
+<body> 		
+ 	<div id="data_div">
+ 	</div>
+<!-- Stammdaten Form + Btn -->
+	<button id="btn_stammdata" onClick="createData()"> Stammdaten </button>
+
+	<input type="text" id="suchfkt" placeholder="Werkzeugsuche" onkeydown="searchforitem()" required>
+	
+	<button id="btn_reload" onClick="location.reload()"> Seite neuladen </button>
+	
+	<div id="createStamm" style="display:none;">
+		<div class="col-sm-6">
+			<label for="inputTextCreate">Werkzeugnummer*:</label>
+	        <div class="form-label-group">
+	            <input type="text" id="inputWerkzeugnummerCreate" class="form-control" placeholder="Werkzeugnummer" required>
+	        </div>
+	        <label for="inputTextCreate">Kurzbeschreibung*:</label>
+	        <div class="form-label-group">
+	            <input type="text" id="inputKurzBeschreibungCreate" class="form-control" placeholder="Kurze Beschreibung des Werkzeugs" required>
+	        </div>
+	        <label for="inputTextCreate">Typ des Werkzeugs*:</label>
+	        <div class="form-label-group">
+	            <input type="text" id="inputTypeCreate" class="form-control" placeholder="Werkzeugtyp" required>
+	        </div>
+	         <label for="inputTextCreate">Drucker*:</label>
+	        <div class="form-label-group">
+	            <input type="text" id="inputDruckCreate" class="form-control" placeholder="Drucker" required>
+	        </div>
+	         <label for="inputTextCreate">Druckmaterial*:</label>
+	        <div class="form-label-group">
+	            <input type="text" id="inputMaterialCreate" class="form-control" placeholder="Druckmaterial" required>
+	        </div>
+	         <label for="inputTextCreate">Druckmodus*:</label>
+	        <div class="form-label-group">
+	            <input type="text" id="inputModusCreate" class="form-control" placeholder="Druckmodus" required>
+	        </div>
+	        <label for="inputTextCreate">Herstelldatum*:</label>
+	        <div class="form-label-group">
+	            <input type="date" id="inputDateCreate" class="form-control" required>
+	        </div>
+	        <label for="inputTextCreate">Schlagwörter(Drucker,Type,ID sind standartmäßig):</label>
+	        <div class="form-label-group">
+	            <input type="text" id="inputSchlagwoerterCreate" class="form-control" placeholder="Schlagwörter" required>
+	        </div>
+	        <br>
+	        <input type="hidden" id="usrid" value="">
+	        <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="createStammData()">Erstellen</button>
+			<br>
+		</div>
+	</div>
+	<script>
+		//prüfen des Benutzers + Stammdaten laden
+		var uid=Cookies.get("name");
+		var tok1=Cookies.get("token");
+		var tok2=Cookies.get("token_login");
+		$.ajax({
+			type: "GET",
+			url: "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/stammdateninterface.inc.php?jsoncallback=?",
+			data: {
+				"username": uid,
+				"token": tok1,
+				"token_login": tok2
+			},
+			dataType:"JSONp",
+			timeout: 5000,
+			success: function(data){
+				$('#data_div').html(data);
+			},
+			error: function (request, error) {
+		        console.log(arguments);
+		        alert(" Can't do because: " + error);
+		    }
+		});
+		// Einblenden des Stammdaten Formulares
+		function createData(){
+			var uid=Cookies.get("name");
+			var tok1=Cookies.get("token");
+			var tok2=Cookies.get("token_login");
+			$.ajax({
+				type: "GET",
+				url: "http://localhost/workspace/swimp/WebContent/Includes/checktoken.inc.php?jsoncallback=?",
+				data: {
+					"username": uid,
+					"token": tok1,
+					"token_login": tok2
+				},
+				dataType:"JSONp",
+				timeout: 5000,
+				success: function(data){
+					document.getElementById('createStamm').style.display = "block";
+					document.getElementById('inputDateCreate').valueAsDate = new Date();
+				},
+				error: function (request, error) {
+			        console.log(arguments);
+			        alert(" Can't do because: " + error);
+			    }
+			});	
+		}
+		// Erstellen der Stammdaten
+		function createStammData(){
+			var wnr = document.getElementById('inputWerkzeugnummerCreate').value;
+			var desc = document.getElementById('inputKurzBeschreibungCreate').value;
+			var typ = document.getElementById('inputTypeCreate').value;
+			var drucker = document.getElementById('inputDruckCreate').value;
+			var material = document.getElementById('inputMaterialCreate').value;
+			var modus = document.getElementById('inputModusCreate').value;
+			var hd = document.getElementById('inputDateCreate').value;
+			var sw = document.getElementById('inputSchlagwoerterCreate').value;
+			var uid=Cookies.get("name");
+			var tok1=Cookies.get("token");
+			var tok2=Cookies.get("token_login");
+			if(wnr&&desc&&typ&&drucker&&material&&modus&&hd){
+				$.ajax({
+					type: "GET",
+					url: "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/stammdaten.inc.php?jsoncallback=?",
+					data: {
+						"username": uid,
+						"token": tok1,
+						"token_login": tok2,
+						"werkzeugnummer": wnr,
+						"beschreibung": desc,
+						"typ": typ,
+						"drucker": drucker,
+						"material": material,
+						"modus": modus,
+						"hd": hd,
+						"sw": sw
+					},
+					dataType:"JSONp",
+					timeout: 5000,
+					success: function(data){
+						if(data=="success"){
+							location.reload();
+						}else if(data=="doppelt"){
+							alert("Werkzeugnummer existiert bereits.");
+						}else if(data=="fehler"){
+							alert("Es ist ein Fehler aufgetreten!");
+						}else if(data=="rechte"){
+							alert("Sie haben keine Rechte diese Aktion auszuführen!");
+						}else if(data=="token"){
+							alert("Zeitlimit überschritten!");
+							document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+						}else{
+							alert("Unexpected answer! Bitte Antwort aufschreiben.");
+						}
+					},
+					error: function (request, error) {
+				        console.log(arguments);
+				        alert(" Can't do because: " + error);
+				    }
+				});	
+			}else{
+				alert("Die mit * markierten Felder müssen ausgefüllt sein!");
+			}
+		}
+		function searchforitem(){
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			var item = document.getElementById('suchfkt').value;
+			$.ajax({
+				type: "GET",
+				url: "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/searchforitem.inc.php?jsoncallback=?",
+				data: {
+					"username": uid,
+					"token": tok1,
+					"token_login": tok2,
+					"suchwort": item
+				},
+				dataType:"JSONp",
+				timeout: 5000,
+				success: function(data){
+					$('#data_div').html(data);
+				},
+				error: function (request, error) {
+			        console.log(arguments);
+			    }
+			});
+		}
+	</script>
+</body>
+</html>
