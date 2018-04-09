@@ -4,6 +4,10 @@
 	margin-bottom:40px;
 	text-align:center;
 }
+#text{
+	margin-left:10px;
+	margin-right: 10px;
+}
 li a{
 	color:white !important;
 }
