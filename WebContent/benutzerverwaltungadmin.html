@@ -97,10 +97,6 @@
 	               <div class="form-label-group">
 	                  <input type="text" id="inputPassEdit" class="form-control" placeholder="Passwort" required>
 	               </div>
-	               <label for="inputTextEdit">Adminrechte(0 = keine,1 = admin):</label>
-	               <div class="form-label-group">
-	                  <input type="number" id="inputAdminEdit" class="form-control" min="0" max="1" value="0" required>
-	               </div>
 	               <label for="inputText">Leserechte(0 = keine,1 = read):</label>
 	               <div class="form-label-group">
 	                  <input type="number" id="inputReadEdit" class="form-control" min="0" max="1" value="0" required>
@@ -120,10 +116,6 @@
 	               <label for="inputText">Passwort:</label>
 	               <div class="form-label-group">
 	                  <input type="text" id="inputPass" class="form-control" placeholder="Passwort" required>
-	               </div>
-	               <label for="inputText">Adminrechte(0 = keine,1 = admin):</label>
-	               <div class="form-label-group">
-	                  <input type="number" id="inputAdmin" class="form-control" min="0" max="1" value="0" required>
 	               </div>
 	               <label for="inputText">Leserechte(0 = keine,1 = read):</label>
 	               <div class="form-label-group">
@@ -251,7 +243,7 @@
 				function editfinalUser(){
 					var uid=document.getElementById('usrid').value;
 					var pid=document.getElementById('inputPassEdit').value;
-					var aid=document.getElementById('inputAdminEdit').value;
+					var aid=0;
 					var rid=document.getElementById('inputReadEdit').value;
 					var uuid = Cookies.get("name");
 					var tok1=Cookies.get("token");
@@ -317,7 +309,7 @@
 				function insertUser(){
 					var uid=document.getElementById('inputName').value;
 					var pid=document.getElementById('inputPass').value;
-					var aid=document.getElementById('inputAdmin').value;
+					var aid=0;
 					var rid=document.getElementById('inputRead').value;
 					var uuid = Cookies.get("name");
 					var tok1=Cookies.get("token");
