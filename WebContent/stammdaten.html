@@ -333,7 +333,37 @@
 		}
 		//Löschen
 		function entfernen(id){
-			alert(id);
+			var uid = Cookies.get("name");
+			var tok1=Cookies.get("token");
+			var tok2=Cookies.get("token_login");
+			$.ajax({
+				type: "GET",
+				url: "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/stammdatenloeschen.inc.php?jsoncallback=?",
+				data: {
+					"werkzeugID": id,
+					"username": uid,
+					"token": tok1,
+					"token_login": tok2								
+				},
+				dataType:"JSONp",
+				timeout: 5000,
+				success: function(data){
+					if(data=="success"){
+						location.reload();
+					}else if(data=="exist"){
+						alert("Benutzer existiert bereits!");
+					}else if(data=="token"){
+						alert("Login ungültig");
+						document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+					}else{
+						alert("keine Rechte!");
+					}
+				},
+				error: function (request, error) {
+			        console.log(arguments);
+			        alert(" Can't do because: " + error);
+			    }
+			});
 		}
 		//Fehlermeldung keine Rechte
 		function norights(){

@@ -84,12 +84,16 @@
                 
                 <div class="row">
                     <div class="form-group col-md-12 text-center" id="abstandbutton">
+                <div id="edit_create_reload">
                 <a class="btn btn-success .navbar-right" id="b1" onClick="createUser()" href="#">Neuer Benutzer erstellen</a>
 			
 				<a class="btn btn-success .navbar-right" id="b1" onClick="recreateUser()" href="#">Benutzer wiederherstellen</a>
 				
 				<a class="btn btn-success .navbar-right" id="b2" onClick="location.reload()"  href="#">Benutzerverwaltung</a>
-				
+				</div>
+				<div id="netterversuch">
+					
+				</div>
 				<div id="editcreate" style="display:none;">
 				<div class="col-sm-4">
 				   <label>Benutzer:</label><br><label id="editUserLabel"> </label><br>
@@ -147,6 +151,35 @@
  
 			
 			<script>
+				//prüfen rechte
+				var uid=Cookies.get("name");
+				var tok1=Cookies.get("token");
+				var tok2=Cookies.get("token_login");
+				$.ajax({
+					type: "GET",
+					url: "http://localhost/workspace/swimp/WebContent/Includes/checkrightsadmin.inc.php?jsoncallback=?",
+					data: {
+						"username": uid,
+						"token": tok1,
+						"token_login": tok2
+					},
+					dataType:"JSONp",
+					timeout: 5000,
+					success: function(data){
+						if(data=="success"){
+							
+						}else{
+							document.getElementById('edit_create_reload').style.display = "none";
+							document.getElementById('netterversuch').style.display = "block";
+							document.getElementById('netterversuch').innerHTML = "Netter Versuch, eine Nachricht an den Admin wird rausgegeben. Herr/Frau "+uid;
+						}
+					},
+					error: function (request, error) {
+				        console.log(arguments);
+				        alert(" Can't do because: " + error);
+				    }
+				});
+				// lade tabelle
 				var uid=Cookies.get("name");
 				var tok1=Cookies.get("token");
 				var tok2=Cookies.get("token_login");
