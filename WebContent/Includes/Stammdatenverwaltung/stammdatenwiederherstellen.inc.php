@@ -12,10 +12,10 @@
 	$username=$_GET['username']; 
 	if(checktoken($token,$token_login,$username)){
 		$erg = status($username);
-		if($erg>=0){
+		if($erg>=1){
 			$output="";
 			#Anzuzeigende werte
-			$sql="SELECT * FROM stammdaten WHERE entfernt=0";
+			$sql="SELECT * FROM stammdaten WHERE entfernt=1";
 			$statemt = getsql($sql);
 			while($ausgabe = $statemt->fetch_object()){
 				$werkzeugID = $ausgabe->werkzeugID;
@@ -40,17 +40,7 @@
 				$output .= "<tr><td>Kurzbeschreibung</td><td>".$kurzbeschreibung."</td><td>Druckmodus</td><td>".$modus."</td></tr>";
 				$output .= "<tr><td>Werkzeugtyp</td><td>".$typ."</td><td>Herstelldatum</td><td>".$hd."</td></tr>";
 				$output .= "<tr><td>Schlagworte</td><td colspan='3'>".$sw."</td></tr>";
-				if($erg>=1){
-					$output .="<tr><td><button type='button' id=".$werkzeugID." onClick='editieren(id)'>editieren</button></td>";
-					$output .="<td><button type='button' id=".$werkzeugID." onClick='entfernen(id)'>entfernen</button></td>";
-					$output .="<td><button type='button' id=".$werkzeugID." onClick='open(id)'>oeffnen</button></td>";
-					$output .="<td><button type='button' id=".$werkzeugID." onClick='attribut(id)'>Add Attribute</button></td></tr>";
-				}else{
-					$output .="<tr><td><button type='button' id=".$werkzeugID." onClick='norights()'>editieren</button></td>";
-					$output .="<td><button type='button' id=".$werkzeugID." onClick='norights()'>entfernen</button></td>";
-					$output .="<td><button type='button' id=".$werkzeugID." onClick='open(id)'>oeffnen</button></td>";
-					$output .="<td><button type='button' id=".$werkzeugID." onClick='norights()'>Add Attribute</button></td></tr>";
-				}
+				$output .="<tr><td><button type='button' id=".$werkzeugID." onClick='activate(id)'>Wiederherstellen</button></td></tr>";
 				$output .="</div></table>";
 				
 			}

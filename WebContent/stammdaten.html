@@ -84,6 +84,7 @@
 	<input type="text" id="suchfkt" placeholder="Werkzeugsuche" onkeydown="searchforitem()" required>
 	
 	<button id="btn_reload" onClick="location.reload()"> Seite neuladen </button>
+	<button id="btn_recreate" onClick="reactivate()"> Wiederherstellen </button>
 	</div>
 	<div id="createStamm" style="display:none;">
 		<div class="col-sm-6">
@@ -122,6 +123,46 @@
 	        <br>
 	        <input type="hidden" id="usrid" value="">
 	        <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="createStammData()">Erstellen</button>
+			<br>
+		</div>
+	</div>
+	<div id="editStamm" style="display:none;">
+		<div class="col-sm-6">
+			<label for="inputTextCreate">Werkzeugnummer*:</label>
+	        <div class="form-label-group">
+	            <input type="text" id="inputWerkzeugnummerEdit" class="form-control" placeholder="Werkzeugnummer" required>
+	        </div>
+	        <label for="inputTextCreate">Kurzbeschreibung*:</label>
+	        <div class="form-label-group">
+	            <input type="text" id="inputKurzBeschreibungEdit" class="form-control" placeholder="Kurze Beschreibung des Werkzeugs" required>
+	        </div>
+	        <label for="inputTextCreate">Typ des Werkzeugs*:</label>
+	        <div class="form-label-group">
+	            <input type="text" id="inputTypeEdit" class="form-control" placeholder="Werkzeugtyp" required>
+	        </div>
+	         <label for="inputTextCreate">Drucker*:</label>
+	        <div class="form-label-group">
+	            <input type="text" id="inputDruckEdit" class="form-control" placeholder="Drucker" required>
+	        </div>
+	         <label for="inputTextCreate">Druckmaterial*:</label>
+	        <div class="form-label-group">
+	            <input type="text" id="inputMaterialEdit" class="form-control" placeholder="Druckmaterial" required>
+	        </div>
+	         <label for="inputTextCreate">Druckmodus*:</label>
+	        <div class="form-label-group">
+	            <input type="text" id="inputModusEdit" class="form-control" placeholder="Druckmodus" required>
+	        </div>
+	        <label for="inputTextCreate">Herstelldatum*:</label>
+	        <div class="form-label-group">
+	            <input type="date" id="inputDateEdit" class="form-control" required>
+	        </div>
+	        <label for="inputTextCreate">Schlagwörter(Drucker,Type,ID sind standartmäßig):</label>
+	        <div class="form-label-group">
+	            <input type="text" id="inputSchlagwoerterEdit" class="form-control" placeholder="Schlagwörter" required>
+	        </div>
+	        <br>
+	        <input type="hidden" id="werkzeugID_edit" value="">
+	        <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="editStammData()">Editieren</button>
 			<br>
 		</div>
 	</div>
@@ -364,6 +405,167 @@
 			        alert(" Can't do because: " + error);
 			    }
 			});
+		}
+		//function anzeigen deaktivierter Stammdaten
+		function reactivate(){
+			var uid=Cookies.get("name");
+			var tok1=Cookies.get("token");
+			var tok2=Cookies.get("token_login");
+			$.ajax({
+				type: "GET",
+				url: "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/stammdatenwiederherstellen.inc.php?jsoncallback=?",
+				data: {
+					"username": uid,
+					"token": tok1,
+					"token_login": tok2
+				},
+				dataType:"JSONp",
+				timeout: 5000,
+				success: function(data){
+					$('#data_div').html(data);
+				},
+				error: function (request, error) {
+			        console.log(arguments);
+			        alert(" Can't do because: " + error);
+			    }
+			});
+		}
+		//function aktivieren eines satzes
+		function activate(id){
+			var uid = Cookies.get("name");
+			var tok1=Cookies.get("token");
+			var tok2=Cookies.get("token_login");
+			$.ajax({
+				type: "GET",
+				url: "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/stammdatenactivieren.inc.php?jsoncallback=?",
+				data: {
+					"werkzeugID": id,
+					"username": uid,
+					"token": tok1,
+					"token_login": tok2								
+				},
+				dataType:"JSONp",
+				timeout: 5000,
+				success: function(data){
+					if(data=="success"){
+						location.reload();
+					}else if(data=="exist"){
+						alert("Benutzer existiert bereits!");
+					}else if(data=="token"){
+						alert("Login ungültig");
+						document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+					}else{
+						alert("keine Rechte!");
+					}
+				},
+				error: function (request, error) {
+			        console.log(arguments);
+			        alert(" Can't do because: " + error);
+			    }
+			});
+		}
+		//editieren der Daten
+		function editieren(id){
+			document.getElementById('editStamm').style.display = "block";
+			var uid = Cookies.get("name");
+			var tok1=Cookies.get("token");
+			var tok2=Cookies.get("token_login");
+			$.ajax({
+				type: "GET",
+				url: "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/stammedit.inc.php?jsoncallback=?",
+				data: {
+					"werkzeugID": id,
+					"username": uid,
+					"token": tok1,
+					"token_login": tok2								
+				},
+				dataType:"JSONp",
+				timeout: 5000,
+				success: function(data){
+					if(data=="rights"){
+						norights();
+					}else if(data=="exist"){
+						alert("Benutzer existiert bereits!");
+					}else if(data=="token"){
+						alert("Login ungültig");
+						document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+					}else{
+						var res = data.split(";");
+						document.getElementById('inputWerkzeugnummerEdit').value=res[0];
+						document.getElementById('inputKurzBeschreibungEdit').value=res[2];
+						document.getElementById('inputTypeEdit').value=res[1];
+						document.getElementById('inputDruckEdit').value=res[3];
+						document.getElementById('inputMaterialEdit').value=res[4];
+						document.getElementById('inputModusEdit').value=res[5];
+						document.getElementById('inputDateEdit').value=res[6];
+						document.getElementById('inputSchlagwoerterEdit').value=res[7];
+						document.getElementById('werkzeugID_edit').value=res[8];
+					}
+				},
+				error: function (request, error) {
+			        console.log(arguments);
+			        alert(" Can't do because: " + error);
+			    }
+			});		
+		}
+		//editieren der Stammdaten
+		function editStammData(){
+			var wnr = document.getElementById('inputWerkzeugnummerEdit').value;
+			var desc = document.getElementById('inputKurzBeschreibungEdit').value;
+			var typ = document.getElementById('inputTypeEdit').value;
+			var drucker = document.getElementById('inputDruckEdit').value;
+			var material = document.getElementById('inputMaterialEdit').value;
+			var modus = document.getElementById('inputModusEdit').value;
+			var hd = document.getElementById('inputDateEdit').value;
+			var sw = document.getElementById('inputSchlagwoerterEdit').value;
+			var werkzeugID = document.getElementById('werkzeugID_edit').value;
+			var uid=Cookies.get("name");
+			var tok1=Cookies.get("token");
+			var tok2=Cookies.get("token_login");
+			if(wnr&&desc&&typ&&drucker&&material&&modus&&hd&&werkzeugID){
+				$.ajax({
+					type: "GET",
+					url: "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/stammchanges.inc.php?jsoncallback=?",
+					data: {
+						"username": uid,
+						"token": tok1,
+						"token_login": tok2,
+						"werkzeugnummer": wnr,
+						"beschreibung": desc,
+						"typ": typ,
+						"drucker": drucker,
+						"material": material,
+						"modus": modus,
+						"hd": hd,
+						"sw": sw,
+						"werkzeugID": werkzeugID
+					},
+					dataType:"JSONp",
+					timeout: 5000,
+					success: function(data){
+						if(data=="success"){
+							location.reload();
+						}else if(data=="doppelt"){
+							alert("Werkzeugnummer existiert bereits.");
+						}else if(data=="fehler"){
+							alert("Es ist ein Fehler aufgetreten!");
+						}else if(data=="rechte"){
+							alert("Sie haben keine Rechte diese Aktion auszuführen!");
+						}else if(data=="token"){
+							alert("Zeitlimit überschritten!");
+							document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+						}else{
+							alert("Unexpected answer! Bitte Antwort aufschreiben.");
+						}
+					},
+					error: function (request, error) {
+				        console.log(arguments);
+				        alert(" Can't do because: " + error);
+				    }
+				});	
+			}else{
+				alert("Die mit * markierten Felder müssen ausgefüllt sein!");
+			}
 		}
 		//Fehlermeldung keine Rechte
 		function norights(){

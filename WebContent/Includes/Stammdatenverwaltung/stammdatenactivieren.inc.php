@@ -23,7 +23,7 @@
 			$stmt->bind_result($userid);
 			$stmt->store_result();
 			if($stmt->num_rows == 1){
-				$stmt = $con->prepare("UPDATE stammdaten SET entfernt=1 WHERE werkzeugID=?");
+				$stmt = $con->prepare("UPDATE stammdaten SET entfernt=0 WHERE werkzeugID=?");
 				$stmt->bind_param('i', $werkzeugID);
 				$stmt->execute();
 				echo $_GET['jsoncallback'].'('.json_encode("success").');';
