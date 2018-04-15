@@ -16,7 +16,7 @@
 		if($erg>=0){
 			$output="";
 			#Anzuzeigende werte
-			$sql="SELECT * FROM stammdaten LEFT JOIN schlagwort ON stammdaten.werkzeugID = schlagwort.werkzeugID WHERE schlagwort.schlagwort like '%".$suchwort."%' GROUP BY stammdaten.werkzeugID";
+			$sql="SELECT * FROM stammdaten LEFT JOIN schlagwort ON stammdaten.werkzeugID = schlagwort.werkzeugID WHERE schlagwort.schlagwort like '%".$suchwort."%' AND stammdaten.entfernt = 0 GROUP BY stammdaten.werkzeugID";
 			$statemt = getsql($sql);
 			while($ausgabe = $statemt->fetch_object()){
 				$werkzeugID = $ausgabe->werkzeugID;
@@ -32,7 +32,11 @@
 				$statement = getsql($sql);
 				while($op = $statement->fetch_object()){
 					$wort = $op->schlagwort;
-					$sw .= $wort.", ";
+					if(empty($wort)){
+						
+					}else{
+						$sw .= $wort.", ";
+					}
 				}
 				$sw .= $werkzeugID;
 				$output .= "<div class='table-responsive'><table class='table table-striped'>";
@@ -41,6 +45,17 @@
 				$output .= "<tr><td>Kurzbeschreibung</td><td>".$kurzbeschreibung."</td><td>Druckmodus</td><td>".$modus."</td></tr>";
 				$output .= "<tr><td>Werkzeugtyp</td><td>".$typ."</td><td>Herstelldatum</td><td>".$hd."</td></tr>";
 				$output .= "<tr><td>Schlagworte</td><td colspan='3'>".$sw."</td></tr>";
+				if($erg>=1){
+					$output .="<tr><td><button type='button' id=".$werkzeugID." onClick='editieren(id)'>editieren</button></td>";
+					$output .="<td><button type='button' id=".$werkzeugID." onClick='entfernen(id)'>entfernen</button></td>";
+					$output .="<td><button type='button' id=".$werkzeugID." onClick='open(id)'>oeffnen</button></td>";
+					$output .="<td><button type='button' id=".$werkzeugID." onClick='attribut(id)'>Add Attribute</button></td></tr>";
+				}else{
+					$output .="<tr><td><button type='button' id=".$werkzeugID." onClick='norights()'>editieren</button></td>";
+					$output .="<td><button type='button' id=".$werkzeugID." onClick='norights()'>entfernen</button></td>";
+					$output .="<td><button type='button' id=".$werkzeugID." onClick='open(id)'>oeffnen</button></td>";
+					$output .="<td><button type='button' id=".$werkzeugID." onClick='norights()'>Add Attribute</button></td></tr>";
+				}
 				$output .="</div></table>";
 				
 			}

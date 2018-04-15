@@ -31,7 +31,11 @@
 				$statement = getsql($sql);
 				while($op = $statement->fetch_object()){
 					$wort = $op->schlagwort;
-					$sw .= $wort.", ";
+					if(empty($wort)){
+						
+					}else{
+						$sw .= $wort.", ";
+					}
 				}
 				$sw .= $werkzeugID;
 				$output .= "<div class='table-responsive'><table class='table table-striped'>";
