@@ -10,13 +10,13 @@
 	$token=$_GET['token'];
 	$token_login=$_GET['token_login'];
 	$username=$_GET['username']; 
-	$suchwort=$_GET['suchwort'];
+	$werknummer=$_GET['werkzeugnummer'];
 	if(checktoken($token,$token_login,$username)){
 		$erg = status($username);
 		if($erg>=0){
 			$output="";
 			#Anzuzeigende werte
-			$sql="SELECT * FROM stammdaten LEFT JOIN schlagwort ON stammdaten.werkzeugID = schlagwort.werkzeugID WHERE schlagwort.schlagwort like '%".$suchwort."%' AND stammdaten.entfernt = 0 GROUP BY stammdaten.werkzeugID";
+			$sql="SELECT * FROM stammdaten WHERE werkzeug_nummer='".$werknummer."' AND entfernt = 0";
 			$statemt = getsql($sql);
 			while($ausgabe = $statemt->fetch_object()){
 				$werkzeugID = $ausgabe->werkzeugID;
@@ -45,14 +45,20 @@
 				$output .= "<tr><td>Kurzbeschreibung</td><td>".$kurzbeschreibung."</td><td>Druckmodus</td><td>".$modus."</td></tr>";
 				$output .= "<tr><td>Werkzeugtyp</td><td>".$typ."</td><td>Herstelldatum</td><td>".$hd."</td></tr>";
 				$output .= "<tr><td>Schlagworte</td><td colspan='3'>".$sw."</td></tr>";
-				if($erg>=1){
-					$output .="<tr><td><button type='button' id=".$werkzeugID." onClick='editieren(id)'>editieren</button></td>";
-					$output .="<td><button type='button' id=".$werkzeugID." onClick='entfernen(id)'>entfernen</button></td>";
-					$output .="<td><button type='button' id=".$werkzeugnummer." onClick='openlink(id)'>oeffnen</button></td></tr>";
-				}else{
-					$output .="<tr><td><button type='button' id=".$werkzeugID." onClick='norights()'>editieren</button></td>";
-					$output .="<td><button type='button' id=".$werkzeugID." onClick='norights()'>entfernen</button></td>";
-					$output .="<td><button type='button' id=".$werkzeugnummer." onClick='openlink(id)'>oeffnen</button></td></tr>";
+				$output .="</div></table>";
+				$output .= "<div class='table-responsive'><table class='table table-striped'>";
+				$sql="SELECT * FROM werkzeug_attribute WHERE werkzeugID='".$werkzeugID."'";
+				$statemt = getsql($sql);
+				while($ausgabe = $statemt->fetch_object()){
+					$bez = $ausgabe->bezeichnung;
+					$val = $ausgabe->wert;
+					$id_attr = $ausgabe->werkzeug_attID;
+					$output .= "<tr><td>".$bez."</td><td>".$val."</td>";
+					if($erg>=1){
+						$output .="<td><button type='button' id=".$id_attr." onClick='entfernen(id)'>entfernen</button></td></tr>";
+					}else{
+						$output .="<td><button type='button' id=".$id_attr." onClick='norights()'>entfernen</button></td></tr>";
+					}
 				}
 				$output .="</div></table>";
 				

@@ -75,13 +75,38 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="form-group col-md-12" id="überschrift">
-                        <h1>Leerseite</h1>
+                    	<div id="data_div">
+                    	</div>
+                    	<div id="attribut_div">
+                    	</div>
+                    	<div id="btn_stammdaten_show">
+                    		<button id="btn_stammdata" onClick="createAttribut()"> Attribut hinzufügen </button>
+                    	</div>
+                    	<div id="addAttr" style="display:none;">
+							<div class="col-sm-6">
+								<label for="inputTextAttr">Bezeichnung:</label>
+						        <div class="form-label-group">
+						            <input type="text" id="inputBezAttr" class="form-control" placeholder="Bezeichnung" required autofocus>
+						        </div>
+						        <label for="inputTextAttr">Wert:</label>
+						        <div class="form-label-group">
+						            <input type="text" id="inputValAttr" class="form-control" placeholder="Wert des Attributes" required>
+						        </div>
+						        <br>
+						        <input type="hidden" id="werkzeug_nummer_attribut" value="">
+						        <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="addAttributfkt()">Hinzufügen</button>
+								<br>
+							</div>
+						</div>
+                        <div id="werkzeugsuchfktdiv">
+							<input type="text" id="werkzeugsuchfkt" placeholder="Werkzeugnummer" onkeyup="searchwerkzeug()" required>
+						</div>
                     </div>
                 </div>
                  <div class="row">
                  <div class="form-group col-md-12">
                     <!-- Hier drin ist der main-Teil -->
-                    <script>alert(document.location.href);</script>
+                   
                     
                     
                     </div>
@@ -125,8 +150,138 @@
 	        document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
 	    }
 	});
-</script>  		
-
-	
+	//werkzeugnummer aus der url parsen
+	var url = document.location.href;
+	var res = url.split("=");
+	if(res[1]){
+		document.getElementById('werkzeugsuchfkt').value=res[1];
+		searchwerkzeug();
+	}
+	//suchfkt
+	function searchwerkzeug(){
+		var uid = Cookies.get("name");
+		var tok1 = Cookies.get("token");
+		var tok2 = Cookies.get("token_login");
+		var item = document.getElementById('werkzeugsuchfkt').value;
+		document.getElementById('werkzeug_nummer_attribut').value=item;
+		$.ajax({
+			type: "GET",
+			url: "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/werkzeugnummersuche.inc.php?jsoncallback=?",
+			data: {
+				"username": uid,
+				"token": tok1,
+				"token_login": tok2,
+				"werkzeugnummer": item
+			},
+			dataType:"JSONp",
+			timeout: 5000,
+			success: function(data){
+				$('#data_div').html(data);
+			},
+			error: function (request, error) {
+		        console.log(arguments);
+		    }
+		});
+	}
+	//prüfen rechte
+	var uid=Cookies.get("name");
+	var tok1=Cookies.get("token");
+	var tok2=Cookies.get("token_login");
+	$.ajax({
+		type: "GET",
+		url: "http://localhost/workspace/swimp/WebContent/Includes/checkrights.inc.php?jsoncallback=?",
+		data: {
+			"username": uid,
+			"token": tok1,
+			"token_login": tok2
+		},
+		dataType:"JSONp",
+		timeout: 5000,
+		success: function(data){
+			if(data=="success"){
+				
+			}else{
+				document.getElementById('btn_stammdaten_show').style.display = "none";
+			}
+		},
+		error: function (request, error) {
+	        console.log(arguments);
+	        alert(" Can't do because: " + error);
+	    }
+	});
+	// Einblenden des Attribut Formulares
+	function createAttribut(){
+		var uid=Cookies.get("name");
+		var tok1=Cookies.get("token");
+		var tok2=Cookies.get("token_login");
+		$.ajax({
+			type: "GET",
+			url: "http://localhost/workspace/swimp/WebContent/Includes/checktoken.inc.php?jsoncallback=?",
+			data: {
+				"username": uid,
+				"token": tok1,
+				"token_login": tok2
+			},
+			dataType:"JSONp",
+			timeout: 5000,
+			success: function(data){
+				document.getElementById('addAttr').style.display = "block";
+			},
+			error: function (request, error) {
+		        console.log(arguments);
+		        alert(" Can't do because: " + error);
+		    }
+		});	
+	}
+	function addAttributfkt(){
+		var bez = document.getElementById('inputBezAttr').value;
+		var wert = document.getElementById('inputValAttr').value;
+		var nummer_werk = document.getElementById('werkzeug_nummer_attribut').value;
+		var uid=Cookies.get("name");
+		var tok1=Cookies.get("token");
+		var tok2=Cookies.get("token_login");
+		if(bez&&wert&&nummer_werk){
+			$.ajax({
+				type: "GET",
+				url: "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/addattribut.inc.php?jsoncallback=?",
+				data: {
+					"username": uid,
+					"token": tok1,
+					"token_login": tok2,
+					"bezeichnung": bez,
+					"wert": wert,
+					"werkzeugnummer": nummer_werk
+				},
+				dataType:"JSONp",
+				timeout: 5000,
+				success: function(data){
+					if(data=="success"){
+						location.reload();
+					}else if(data=="doppelt"){
+						alert("Werkzeugnummer existiert bereits.");
+					}else if(data=="fehler"){
+						alert("Es ist ein Fehler aufgetreten!");
+					}else if(data=="rechte"){
+						alert("Sie haben keine Rechte diese Aktion auszuführen!");
+					}else if(data=="token"){
+						alert("Zeitlimit überschritten!");
+						document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+					}else{
+						alert("Unexpected answer! Bitte Antwort aufschreiben.");
+					}
+				},
+				error: function (request, error) {
+			        console.log(arguments);
+			        alert(" Can't do because: " + error);
+			    }
+			});	
+		}else{
+			alert("Die mit * markierten Felder müssen ausgefüllt sein!");
+		}
+		
+	}
+</script>
+	http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/addattribut.inc.php?jsoncallback=?&username=admin&token=27512814c78c82e88eb93d531cf9f99593cc6a5d&token_login=9027baf6144c234474100a781afb30290128f0a6&werkzeugnummer=1&bezeichnung=test&wert=15
+token:"27512814c78c82e88eb93d531cf9f99593cc6a5d"
 </body>
 </html>
