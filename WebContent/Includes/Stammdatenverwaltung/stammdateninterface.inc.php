@@ -47,13 +47,11 @@
 				if($erg>=1){
 					$output .="<tr><td><button type='button' id=".$werkzeugID." onClick='editieren(id)'>editieren</button></td>";
 					$output .="<td><button type='button' id=".$werkzeugID." onClick='entfernen(id)'>entfernen</button></td>";
-					$output .="<td><button type='button' id=".$werkzeugID." onClick='open(id)'>oeffnen</button></td>";
-					$output .="<td><button type='button' id=".$werkzeugID." onClick='attribut(id)'>Add Attribute</button></td></tr>";
+					$output .="<td><button type='button' id=".$werkzeugID." onClick='openlink(id)'>oeffnen</button></td></tr>";
 				}else{
 					$output .="<tr><td><button type='button' id=".$werkzeugID." onClick='norights()'>editieren</button></td>";
 					$output .="<td><button type='button' id=".$werkzeugID." onClick='norights()'>entfernen</button></td>";
-					$output .="<td><button type='button' id=".$werkzeugID." onClick='open(id)'>oeffnen</button></td>";
-					$output .="<td><button type='button' id=".$werkzeugID." onClick='norights()'>Add Attribute</button></td></tr>";
+					$output .="<td><button type='button' id=".$werkzeugID." onClick='openlink(id)'>oeffnen</button></td></tr>";
 				}
 				$output .="</div></table>";
 				

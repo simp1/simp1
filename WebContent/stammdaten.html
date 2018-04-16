@@ -80,9 +80,12 @@
 <!-- Stammdaten Form + Btn -->
 	<div id="btn_stammdaten_show">
 	<button id="btn_stammdata" onClick="createData()"> Stammdaten </button>
-
-	<input type="text" id="suchfkt" placeholder="Werkzeugsuche" onkeyup="searchforitem()" required>
-	
+	<div id="werkzeugsucheforitem">
+		<input type="text" id="suchfkt" placeholder="Werkzeugsuche" onkeyup="searchforitem()" required>
+	</div>
+	<div id="werkzeugsuchefordelitem" style="display:none;">
+		<input type="text" id="suchdelfkt" placeholder="Werkzeugsuche" onkeyup="searchfordelitem()" required>
+	</div>
 	<button id="btn_reload" onClick="location.reload()"> Seite neuladen </button>
 	<button id="btn_recreate" onClick="reactivate()"> Wiederherstellen </button>
 	</div>
@@ -90,7 +93,7 @@
 		<div class="col-sm-6">
 			<label for="inputTextCreate">Werkzeugnummer*:</label>
 	        <div class="form-label-group">
-	            <input type="text" id="inputWerkzeugnummerCreate" class="form-control" placeholder="Werkzeugnummer" required>
+	            <input type="text" id="inputWerkzeugnummerCreate" class="form-control" placeholder="Werkzeugnummer" autofocus required>
 	        </div>
 	        <label for="inputTextCreate">Kurzbeschreibung*:</label>
 	        <div class="form-label-group">
@@ -130,7 +133,7 @@
 		<div class="col-sm-6">
 			<label for="inputTextCreate">Werkzeugnummer*:</label>
 	        <div class="form-label-group">
-	            <input type="text" id="inputWerkzeugnummerEdit" class="form-control" placeholder="Werkzeugnummer" required>
+	            <input type="text" id="inputWerkzeugnummerEdit" class="form-control" placeholder="Werkzeugnummer" required autofocus>
 	        </div>
 	        <label for="inputTextCreate">Kurzbeschreibung*:</label>
 	        <div class="form-label-group">
@@ -372,6 +375,31 @@
 			    }
 			});
 		}
+		//suchfkt gelöschte items
+		function searchfordelitem(){
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			var item = document.getElementById('suchdelfkt').value;
+			$.ajax({
+				type: "GET",
+				url: "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/searchfordelitem.inc.php?jsoncallback=?",
+				data: {
+					"username": uid,
+					"token": tok1,
+					"token_login": tok2,
+					"suchwort": item
+				},
+				dataType:"JSONp",
+				timeout: 5000,
+				success: function(data){
+					$('#data_div').html(data);
+				},
+				error: function (request, error) {
+			        console.log(arguments);
+			    }
+			});
+		}
 		//Löschen
 		function entfernen(id){
 			var uid = Cookies.get("name");
@@ -423,6 +451,8 @@
 				timeout: 5000,
 				success: function(data){
 					$('#data_div').html(data);
+					document.getElementById('werkzeugsucheforitem').style.display = "none";
+					document.getElementById('werkzeugsuchefordelitem').style.display = "block";
 				},
 				error: function (request, error) {
 			        console.log(arguments);
@@ -566,6 +596,10 @@
 			}else{
 				alert("Die mit * markierten Felder müssen ausgefüllt sein!");
 			}
+		}
+		//funktion zum öffnen der Seite Werkzeugverwaltung
+		function openlink(id){
+			document.location.href = "http://localhost/workspace/swimp/WebContent/werkzeugverwaltung.html?werkzeugID="+id;
 		}
 		//Fehlermeldung keine Rechte
 		function norights(){

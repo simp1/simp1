@@ -16,7 +16,7 @@
 		if($erg>=0){
 			$output="";
 			#Anzuzeigende werte
-			$sql="SELECT * FROM stammdaten LEFT JOIN schlagwort ON stammdaten.werkzeugID = schlagwort.werkzeugID WHERE schlagwort.schlagwort like '%".$suchwort."%' AND stammdaten.entfernt = 0 GROUP BY stammdaten.werkzeugID";
+			$sql="SELECT * FROM stammdaten LEFT JOIN schlagwort ON stammdaten.werkzeugID = schlagwort.werkzeugID WHERE schlagwort.schlagwort like '%".$suchwort."%' AND stammdaten.entfernt = 1 GROUP BY stammdaten.werkzeugID";
 			$statemt = getsql($sql);
 			while($ausgabe = $statemt->fetch_object()){
 				$werkzeugID = $ausgabe->werkzeugID;
@@ -46,13 +46,9 @@
 				$output .= "<tr><td>Werkzeugtyp</td><td>".$typ."</td><td>Herstelldatum</td><td>".$hd."</td></tr>";
 				$output .= "<tr><td>Schlagworte</td><td colspan='3'>".$sw."</td></tr>";
 				if($erg>=1){
-					$output .="<tr><td><button type='button' id=".$werkzeugID." onClick='editieren(id)'>editieren</button></td>";
-					$output .="<td><button type='button' id=".$werkzeugID." onClick='entfernen(id)'>entfernen</button></td>";
-					$output .="<td><button type='button' id=".$werkzeugID." onClick='openlink(id)'>oeffnen</button></td></tr>";
+					$output .="<tr><td><button type='button' id=".$werkzeugID." onClick='activate(id)'>Wiederherstellen</button></td></tr>";
 				}else{
-					$output .="<tr><td><button type='button' id=".$werkzeugID." onClick='norights()'>editieren</button></td>";
-					$output .="<td><button type='button' id=".$werkzeugID." onClick='norights()'>entfernen</button></td>";
-					$output .="<td><button type='button' id=".$werkzeugID." onClick='openlink(id)'>oeffnen</button></td></tr>";
+					$output .="<tr><td><button type='button' id=".$werkzeugID." onClick='norights()'>Wiederherstellen</button></td></tr>";
 				}
 				$output .="</div></table>";
 				
