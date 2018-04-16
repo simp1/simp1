@@ -61,9 +61,9 @@
                 </a>
               </li>
                <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="werkzeugverwaltung.html">
                   <span data-feather="file"></span>
-                  Element3
+                  Werkzeugverwaltung
                 </a>
               </li>     
             </ul>
@@ -93,7 +93,39 @@
     </div>
 </div>
       		
-
-	
+<script type="text/javascript">
+	//Startleiste
+	var uid=Cookies.get("name");
+	var tok1=Cookies.get("token");
+	var tok2=Cookies.get("token_login");
+	$.ajax({
+		type: "GET",
+		url: "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/adminverwaltung.inc.php?jsoncallback=?",
+		data: {
+			"username": uid,
+			"token": tok1,
+			"token_login": tok2
+		},
+		dataType:"JSONp",
+		timeout: 5000,
+		success: function(data){
+			if(data=="sadmin"){
+				document.getElementById('superadminverwaltung').style.display = "block";
+			}else if(data=="admin"){
+				document.getElementById('adminverwaltung').style.display = "block";
+			}else if(data=="noadmin"){
+				
+			}else{
+				alert("Login ungültig");
+				document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+			}
+		},
+		error: function (request, error) {
+	        console.log(arguments);
+	        alert(" Can't do because: " + error);
+	        document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+	    }
+	});
+</script>
 </body>
 </html>
