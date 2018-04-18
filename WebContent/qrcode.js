@@ -54,7 +54,11 @@ var QRCode;
 
 			this.parsedData.push(byteArray);
 		}
-
+		
+		
+		
+		
+		
 		this.parsedData = Array.prototype.concat.apply([], this.parsedData);
 
 		if (this.parsedData.length != this.data.length) {
@@ -221,6 +225,7 @@ var QRCode;
 
 	var useSVG = document.documentElement.tagName.toLowerCase() === "svg";
 
+	
 	// Drawing in DOM by using Table tag
 	var Drawing = useSVG ? svgDrawer : !_isSupportCanvas() ? (function () {
 		var Drawing = function (el, htOption) {
@@ -276,8 +281,12 @@ var QRCode;
 		function _onMakeImage() {
 			this._elImage.src = this._elCanvas.toDataURL("image/png");
 			this._elImage.style.display = "block";
-			this._elCanvas.style.display = "none";			
+			this._elCanvas.style.display = "none";	
+			
+			
+			
 		}
+	
 		
 		// Android 2.1 bug workaround
 		// http://code.google.com/p/android/issues/detail?id=5141
@@ -352,7 +361,6 @@ var QRCode;
 		var Drawing = function (el, htOption) {
     		this._bIsPainted = false;
     		this._android = _getAndroid();
-		
 			this._htOption = htOption;
 			this._elCanvas = document.createElement("canvas");
 			this._elCanvas.width = htOption.width;
@@ -503,7 +511,11 @@ var QRCode;
 	}
 
 	function _getUTF8Length(sText) {
+		//Geschriebener Text des Bildes
 		var replacedText = encodeURI(sText).toString().replace(/\%[0-9a-fA-F]{2}/g, 'a');
+		
+		
+		
 		return replacedText.length + (replacedText.length != sText ? 3 : 0);
 	}
 	
@@ -585,6 +597,7 @@ var QRCode;
 		this._el.title = sText;
 		this._oDrawing.draw(this._oQRCode);			
 		this.makeImage();
+		
 	};
 	
 	/**

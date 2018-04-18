@@ -1,169 +1,215 @@
 <!DOCTYPE html>
 <html>
-<head>
-    
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-    
-    <link href="bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/custom.css">
-    <link rel="stylesheet" href="assets/css/custom-themes.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link href="style.css" rel="stylesheet">
-     <script src="assets/js/custom.js"></script>
-     <script type="text/javascript" src="qrcode.js"></script>
-</head>
-<body onload="startleiste()"> 	
-   <div class="page-wrapper chiller-theme toggled">
-
-<!-- SeitenleisteStart -->
-		 <nav id="sidebar" class="sidebar-wrapper" data-color="#555">
-       
-                <div id="toggle-sidebar">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-                <div class="sidebar-brand">
-                    <a href="#">Eigenschaften</a>
-                </div>
-                <div class="sidebar-menu">
-                <ul>  
-                 <li class="nav-item">
-                <a class="nav-link" href="http://localhost/workspace/swimp/WebContent/startseite.html">
-                  <span data-feather="file"></span>
-                  Home
-                </a>
-              </li>
-               <li class="nav-item" id="superadminverwaltung" style="display:none;">
-                <a class="nav-link" href="benutzerverwaltung.html">
-                  <span data-feather="file"  ></span>
-                  Benutzerverwaltung
-                </a>
-              </li>
+   <head>
+      <link href="bootstrap.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="assets/css/custom.css">
+      <link rel="stylesheet" href="assets/css/custom-themes.css">
+      <link href="style.css" rel="stylesheet">
+   </head>
+   <body onload="startleiste()">
+      <div class="page-wrapper chiller-theme toggled">
+         <!-- SeitenleisteStart -->
+         <nav id="sidebar" class="sidebar-wrapper" data-color="#555">
+            <div id="toggle-sidebar">
+               <div></div>
+               <div></div>
+               <div></div>
+            </div>
+            <div class="sidebar-brand">
+               <a href="#">Eigenschaften</a>
+            </div>
+            <div class="sidebar-menu">
+               <ul>
+                  <li class="nav-item">
+                     <a class="nav-link" href="http://localhost/workspace/swimp/WebContent/startseite.html">
+                     <span data-feather="file"></span>
+                     Home
+                     </a>
+                  </li>
+                  <li class="nav-item" id="superadminverwaltung" style="display:none;">
+                     <a class="nav-link" href="benutzerverwaltung.html">
+                     <span data-feather="file"  ></span>
+                     Benutzerverwaltung
+                     </a>
+                  </li>
+                  <li class="nav-item" id="adminverwaltung" style="display:none;">
+                     <a class="nav-link" href="benutzerverwaltungadmin.html">
+                     <span data-feather="file"></span>
+                     Benutzerverwaltung
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="stammdaten.html">
+                     <span data-feather="file"></span>
+                     Stammdaten
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="qrcode.html">
+                     <span data-feather="file"></span>
+                     QR-Code Generator
+                     </a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="werkzeugverwaltung.html">
+                     <span data-feather="file"></span>
+                     Werkzeugverwaltung
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </nav>
+         <script type="text/javascript">
+            //Startleiste
+                function startleiste(){
+                    var uid=Cookies.get("name");
+                    var tok1=Cookies.get("token");
+                    var tok2=Cookies.get("token_login");
+                    $.ajax({
+                        type: "GET",
+                        url: "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/adminverwaltung.inc.php?jsoncallback=?",
+                        data: {
+                            "username": uid,
+                            "token": tok1,
+                            "token_login": tok2
+                        },
+                        dataType:"JSONp",
+                        timeout: 5000,
+                        success: function(data){
+                            if(data=="sadmin"){
+                                document.getElementById('superadminverwaltung').style.display = "block";
+                            }else if(data=="admin"){
+                                document.getElementById('adminverwaltung').style.display = "block";
+                            }else if(data=="noadmin"){
+                                
+                            }else{
+                                alert("Login ungültig");
+                                document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+                            }
+                        },
+                        error: function (request, error) {
+                            console.log(arguments);
+                            alert(" Can't do because: " + error);
+                            document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+                        }
+                    });
+                }
               
-              <li class="nav-item" id="adminverwaltung" style="display:none;">
-                <a class="nav-link" href="benutzerverwaltungadmin.html">
-                  <span data-feather="file"></span>
-                  Benutzerverwaltung
-                </a>
-              </li>
               
-              <li class="nav-item">
-                <a class="nav-link" href="stammdaten.html">
-                  <span data-feather="file"></span>
-                  	Stammdaten
-                </a>
-              </li>
-               <li class="nav-item">
-                <a class="nav-link" href="qrcode.html">
-                  <span data-feather="file"></span>
-                  QR-Code Generator
-                </a>
-              </li>
-               <li class="nav-item">
-                <a class="nav-link" href="werkzeugverwaltung.html">
-                  <span data-feather="file"></span>
-                  Werkzeugverwaltung
-                </a>
-              </li>
-                        
-                        
-                    </ul>
-                </div>
-                
-        </nav>
-    <script type="text/javascript">
-  //Startleiste
-  	function startleiste(){
-  		var uid=Cookies.get("name");
-  		var tok1=Cookies.get("token");
-  		var tok2=Cookies.get("token_login");
-  		$.ajax({
-  			type: "GET",
-  			url: "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/adminverwaltung.inc.php?jsoncallback=?",
-  			data: {
-  				"username": uid,
-  				"token": tok1,
-  				"token_login": tok2
-  			},
-  			dataType:"JSONp",
-  			timeout: 5000,
-  			success: function(data){
-  				if(data=="sadmin"){
-  					document.getElementById('superadminverwaltung').style.display = "block";
-  				}else if(data=="admin"){
-  					document.getElementById('adminverwaltung').style.display = "block";
-  				}else if(data=="noadmin"){
-  					
-  				}else{
-  					alert("Login ungültig");
-  					document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
-  				}
-  			},
-  			error: function (request, error) {
-  		        console.log(arguments);
-  		        alert(" Can't do because: " + error);
-  		        document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
-  		    }
-  		});
- 	 }
-	
-	</script> 
-	<!-- Seitenleiste Ende -->
-	
-	    <div class="page-content">
+         </script> 
+         <!-- Seitenleiste Ende -->
+         <div class="page-content">
             <!-- Text für QR-Code -->
-		<div class="container">
-		<div class="row">
-		<label for="code">QR-Code-Inhalt:</label>		
-		<input id="text" type="text" value="QR-Code" style="width:50%" />
-		<a class="btn btn-success .navbar-right" id="b1" onClick="makeCode()" href="#">Qr-Code anzeigen</a>
-		</div>
-
-<div class="row" id="abstandoben">
-<label for="code">QR-Code:</label>
-  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <g id="qrcode"/>
-  </svg>
- </div>
-		
-		
-		
-		</div>
-    </div>
-</div>
-      		
-    		
- <script type="text/javascript">
- 
-  var qrcode = new QRCode(document.getElementById("qrcode"), {
-      width : 100,
-      height : 100,
-      useSVG: true
-  });
-  function makeCode () {		
-      var elText = document.getElementById("text");
-      if (!elText.value) {
-          alert("Input a text");
-          elText.focus();
-          return;
-      }
-      qrcode.makeCode(elText.value);
-  }
-  makeCode();
-  $("#text").
-      on("blur", function () {
-          makeCode();
-      }).
-      on("keydown", function (e) {
-          if (e.keyCode == 13) {
-              makeCode();
-          }
-      });
-
-	
-</script>
-	
-</body>
+            <div class="container">
+               <!-- QR-Code Generator Eingabe -->
+               <div class="row" id="abstandunten">
+                  <label for="code">QR-Code-Inhalt:</label>   
+                  <input id="text" type="text"  class="form-control" value="QR-Code" style="width:50%" />
+                  <a class="btn btn-success .navbar-right .b1" id="qranzeigen" onClick="makeCode()" href="#">Qr-Code anzeigen</a>
+                  <a class="btn btn-success .navbar-right .b1" id="save">Save as Image</a>
+               </div>
+               <!-- QR-Code anzeigen -->
+               <div class="row" id="abstandunten">
+                  <svg>
+                     <g id="qrcode"/>
+                  </svg>
+               </div>
+               <!-- QR-Code in Bild umwandeln -->
+               <div class="row" id="abstandunten">
+                  <div id="svg"></div>
+               </div>
+               <div class="row" id="abstandunten">
+                  <div id="svgdataurl"></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Importe -->
+      <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="assets/js/custom.js"></script>
+      <script type="text/javascript" src="qrcode.js"></script>
+      <script src="http://d3js.org/d3.v3.min.js"></script>
+      <!-- QR-Code SVG zu Bild -->
+      <script>
+         var width = 960,
+             height = 500;
+         var m = 5, // number of series
+             n = 90; // number of values
+         // Generate random data into five arrays.
+         var data = d3.range(m).map(function() {
+           return d3.range(n).map(function() {
+             return Math.random() * 100 | 0;
+           });
+         });
+         
+         var x = d3.scale.linear()
+             .domain([0, n - 1])
+             .range([0, width]);
+         
+         var y = d3.scale.ordinal()
+             .domain(d3.range(m))
+             .rangePoints([0, height], 1);
+         
+         var color = d3.scale.ordinal()
+             .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56"]);
+         
+         var area = d3.svg.area()
+             .interpolate("basis")
+             .x(function(d, i) { return x(i); })
+             .y0(function(d) { return -d / 2; })
+             .y1(function(d) { return d / 2; });
+         
+         var svg = d3.select("#abstandoben").append("svg")
+             .attr("width", width)
+             .attr("height", height);
+         
+         svg.selectAll("path")
+             .data(data)
+           .enter().append("path")
+             .attr("transform", function(d, i) { return "translate(0," + y(i) + ")"; })
+             .style("fill", function(d, i) { return color(i); })
+             .attr("d", area);
+         
+         d3.select("#save").on("click", function(){
+           var html = d3.select("svg")
+                 .attr("version", 1.1)
+                 .attr("xmlns", "http://www.w3.org/2000/svg")
+                 .node().parentNode.innerHTML;
+         
+           //console.log(html);
+           var imgsrc = 'data:image/svg+xml;base64,'+ btoa(html);
+           var img = '<img src="'+imgsrc+'">'; 
+           d3.select("#svgdataurl").html(img);
+         
+         });
+      </script>
+      <!-- QR-Code Generator -->          
+      <script type="text/javascript">
+         var qrcode = new QRCode(document.getElementById("qrcode"), {
+             width : 100,
+             height : 100,
+             useSVG: true
+         });
+         function makeCode () {        
+             var elText = document.getElementById("text");
+             if (!elText.value) {
+                 alert("Input a text");
+                 elText.focus();
+                 return;
+             }
+             qrcode.makeCode(elText.value);
+         }
+         makeCode();
+         $("#text").
+             on("blur", function () {
+                 makeCode();
+             }).
+             on("keydown", function (e) {
+                 if (e.keyCode == 13) {
+                     makeCode();
+                 }
+             });   
+      </script>  
+   </body>
 </html>

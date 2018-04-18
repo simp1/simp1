@@ -17,6 +17,12 @@ li a{
 #borderweg{
 	border:none;
 }
+.b1 #qranzeigen{
+	/*margin-top:5px;*/
+	margin-left:5px;
+	margin-top:0px !important;
+	color:white !important;
+}
 #b2{
 	margin-top:5px;
 }
@@ -25,6 +31,11 @@ li a{
 }
 #b1{
 	margin-top:5px;
+}
+#save{
+	/*margin-top:5px !important;*/
+	margin-left:5px !important;
+	color:white !important;
 }
 #leer{
 	background-color:#555;
@@ -51,21 +62,13 @@ a #buttonright.btn.btn-success{
 	color:white;	
 }
 #sidebar{
-	/*border: 2px solid #349a4b;*/
+	
 	color:white;
 }
 #abstandoben{
 	margin-top:58px;
 }
-/*
-#abstandbutton{
-	padding-top:15px !important;
-	padding-left:5px;
-	padding-right:5px !important;
-	padding-bottom:15px !important;
-	float:right;
-	}
-*/
+
 
 #butlang{
 	max-width:150px;
@@ -84,7 +87,7 @@ td {
 	margin-top:7px;
 }
 #abstandunten{
-	margin-bottom:20px;
+	margin-bottom:30px;
 }
 #abstandBenutzer{
 	margin-top:58px;
