@@ -24,12 +24,61 @@
 	if(checktoken($token,$token_login,$username)){
 		$erg = status($username);
 		if($erg>=1){#werkzeug_nr ist unique
-			$stmt = $con->prepare("SELECT werkzeugID FROM stammdaten WHERE werkzeug_nummer=?");
-			$stmt->bind_param('s', $werkzeugnummer);
+			$stmt = $con->prepare("SELECT werkzeugID FROM stammdaten WHERE werkzeugID=? AND werkzeug_nummer=?");
+			$stmt->bind_param('is', $werkzeugID, $werkzeugnummer);
 			$stmt->execute();
 			$stmt->bind_result($werkid);
 			$stmt->store_result();
 			if($stmt->num_rows == 0){
+				$stmt = $con->prepare("SELECT werkzeugID FROM stammdaten WHERE werkzeug_nummer=?");
+				$stmt->bind_param('s', $werkzeugnummer);
+				$stmt->execute();
+				$stmt->bind_result($werkid);
+				$stmt->store_result();
+				if($stmt->num_rows == 0){
+					$stmt = $con->prepare("UPDATE stammdaten SET werkzeug_nummer=?,kurzbeschreibung=?,type=?,druckmaterial=?,druckmodus=?,drucker=?,herstelldatum=? WHERE werkzeugID=?");
+					$stmt->bind_param('sssssssi', $werkzeugnummer, $beschreibung, $typ, $material, $modus, $drucker,$hd,$werkzeugID);
+					$stmt->execute();
+					#schlagwörter löschen
+					$stmt = $con->prepare("DELETE FROM schlagwort WHERE werkzeugID=?");
+					$stmt->bind_param('i', $werkzeugID);
+					$stmt->execute();
+					#schalgwörter generieren und speichern
+					$teile = explode(",", $sw);
+					if(empty($werkzeugID)){#prüfe ob insert geklappt hat
+						echo $_GET['jsoncallback'].'('.json_encode("fehler").');';
+						exit();
+					}else{#die gesplitteten schlagwort durchlaufen
+						foreach ($teile as $schlagwort){
+							trim($schlagwort);
+							if($schlagwort==" "){
+								
+							}else{
+								$stmt = $con->prepare("INSERT INTO schlagwort (werkzeugID, schlagwort) VALUES (?,?)");
+								$stmt->bind_param('is', $werkzeugID, $schlagwort);
+								$stmt->execute();
+							}
+						}
+						#standartübernahmer der schlagwörter
+						$stmt = $con->prepare("INSERT INTO schlagwort (werkzeugID, schlagwort) VALUES (?,?)");
+						$stmt->bind_param('is', $werkzeugID, $werkzeugnummer);
+						$stmt->execute();
+						$stmt = $con->prepare("INSERT INTO schlagwort (werkzeugID, schlagwort) VALUES (?,?)");
+						$stmt->bind_param('is', $werkzeugID, $drucker);
+						$stmt->execute();
+						$stmt = $con->prepare("INSERT INTO schlagwort (werkzeugID, schlagwort) VALUES (?,?)");
+						$stmt->bind_param('is', $werkzeugID, $material);
+						$stmt->execute();
+						$stmt = $con->prepare("INSERT INTO schlagwort (werkzeugID, schlagwort) VALUES (?,?)");
+						$stmt->bind_param('is', $werkzeugID, $typ);
+						$stmt->execute();
+						$stmt = $con->prepare("INSERT INTO schlagwort (werkzeugID, schlagwort) VALUES (?,?)");
+						$stmt->bind_param('is', $werkzeugID, $hd);
+						$stmt->execute();
+					}
+					echo $_GET['jsoncallback'].'('.json_encode("success").');';
+					exit();
+				}
 				echo $_GET['jsoncallback'].'('.json_encode("exist").');';
 				exit();
 			}else{#einfügen in die tabelle stammdaten
@@ -42,22 +91,19 @@
 				$stmt->execute();
 				#schalgwörter generieren und speichern
 				$teile = explode(",", $sw);
-				#ermitteln der werkzeug id
-				$werkzeugID;
-				$sql="SELECT werkzeugID FROM stammdaten WHERE werkzeug_nummer='".$werkzeugnummer."'";
-				$statemt = getsql($sql);
-				while($ausgabe = $statemt->fetch_object()){
-					$werkzeugID = $ausgabe->werkzeugID;
-				}
 				if(empty($werkzeugID)){#prüfe ob insert geklappt hat
 					echo $_GET['jsoncallback'].'('.json_encode("fehler").');';
 					exit();
 				}else{#die gesplitteten schlagwort durchlaufen
 					foreach ($teile as $schlagwort){
-						$stmt = $con->prepare("INSERT INTO schlagwort (werkzeugID, schlagwort) VALUES (?,?)");
-						$stmt->bind_param('is', $werkzeugID, $schlagwort);
-						$stmt->execute();
-						
+						trim($schlagwort);
+						if($schlagwort==" "){
+							
+						}else{
+							$stmt = $con->prepare("INSERT INTO schlagwort (werkzeugID, schlagwort) VALUES (?,?)");
+							$stmt->bind_param('is', $werkzeugID, $schlagwort);
+							$stmt->execute();
+						}
 					}
 					#standartübernahmer der schlagwörter
 					$stmt = $con->prepare("INSERT INTO schlagwort (werkzeugID, schlagwort) VALUES (?,?)");
@@ -78,7 +124,6 @@
 				}
 				echo $_GET['jsoncallback'].'('.json_encode("success").');';
 				exit();
-			
 			}
 		}else{
 			echo $_GET['jsoncallback'].'('.json_encode("rechte").');';

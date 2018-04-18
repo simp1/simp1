@@ -27,7 +27,7 @@
 				$modus = $ausgabe->druckmodus;
 				$hd = $ausgabe->herstelldatum;
 				$sw="";
-				$sql="SELECT * FROM schlagwort WHERE werkzeugID ='".$werkzeugID."'";
+				$sql="SELECT * FROM schlagwort WHERE werkzeugID ='".$werkzeugID."' GROUP BY schlagwort";
 				$statement = getsql($sql);
 				while($op = $statement->fetch_object()){
 					$wort = $op->schlagwort;
@@ -37,7 +37,6 @@
 						$sw .= $wort.", ";
 					}
 				}
-				$sw .= $werkzeugID;
 				$output .= $werkzeugnummer.";".$typ.";".$kurzbeschreibung.";".$drucker.";".$material.";".$modus.";".$hd.";".$sw.";".$werkzeugID;
 				
 			}
