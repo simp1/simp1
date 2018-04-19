@@ -74,13 +74,13 @@
 	    <div class="page-content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="form-group col-md-12" id="überschrift">
+                    <div class="form-group col-md-12" id="Ã¼berschrift">
                     	<div id="data_div">
                     	</div>
                     	<div id="attribut_div">
                     	</div>
                     	<div id="btn_stammdaten_show">
-                    		<button id="btn_stammdata" onClick="createAttribut()"> Attribut hinzufügen </button>
+                    		<button id="btn_stammdata" onClick="createAttribut()"> Attribut hinzufÃ¼gen </button>
                     	</div>
                     	<div id="addAttr" style="display:none;">
 							<div class="col-sm-6">
@@ -94,7 +94,7 @@
 						        </div>
 						        <br>
 						        <input type="hidden" id="werkzeug_nummer_attribut" value="">
-						        <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="addAttributfkt()">Hinzufügen</button>
+						        <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="addAttributfkt()">HinzufÃ¼gen</button>
 								<br>
 							</div>
 						</div>
@@ -140,7 +140,7 @@
 			}else if(data=="noadmin"){
 				
 			}else{
-				alert("Login ungültig");
+				alert("Login ungÃ¼ltig");
 				document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
 			}
 		},
@@ -183,7 +183,7 @@
 		    }
 		});
 	}
-	//prüfen rechte
+	//prÃ¼fen rechte
 	var uid=Cookies.get("name");
 	var tok1=Cookies.get("token");
 	var tok2=Cookies.get("token_login");
@@ -262,9 +262,9 @@
 					}else if(data=="fehler"){
 						alert("Es ist ein Fehler aufgetreten!");
 					}else if(data=="rechte"){
-						alert("Sie haben keine Rechte diese Aktion auszuführen!");
+						alert("Sie haben keine Rechte diese Aktion auszufÃ¼hren!");
 					}else if(data=="token"){
-						alert("Zeitlimit überschritten!");
+						alert("Zeitlimit Ã¼berschritten!");
 						document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
 					}else{
 						alert("Unexpected answer! Bitte Antwort aufschreiben.");
@@ -276,12 +276,10 @@
 			    }
 			});	
 		}else{
-			alert("Die mit * markierten Felder müssen ausgefüllt sein!");
+			alert("Die mit * markierten Felder mÃ¼ssen ausgefÃ¼llt sein!");
 		}
 		
 	}
 </script>
-	http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/addattribut.inc.php?jsoncallback=?&username=admin&token=27512814c78c82e88eb93d531cf9f99593cc6a5d&token_login=9027baf6144c234474100a781afb30290128f0a6&werkzeugnummer=1&bezeichnung=test&wert=15
-token:"27512814c78c82e88eb93d531cf9f99593cc6a5d"
 </body>
 </html>
