@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="assets/css/custom.css">
     <link rel="stylesheet" href="assets/css/custom-themes.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link href="style.css" rel="stylesheet">
      <script src="assets/js/custom.js"></script>
+     <link href="style.css" rel="stylesheet">
 </head>
 <body> 	
    <div class="page-wrapper chiller-theme toggled">
@@ -77,19 +77,34 @@
                     <div class="form-group col-md-12" id="überschrift">
                         <div id="data_div">
  	</div>
+ 	</div>
+ 	</div>
+ 	
 <!-- Stammdaten Form + Btn -->
+	<div class="row">
+	<div class="form-group col-md-4 mb-3"></div>
+	<div class="form-group col-md-4 mb-3">
 	<div id="werkzeugsucheforitem">
-		<input type="text" id="suchfkt" placeholder="Werkzeugsuche" onkeyup="searchforitem()" required>
+		<input type="text"  id="suchfkt" class="form-control center-block text-center" placeholder="Werkzeugsuche" onkeyup="searchforitem()" required >
 	</div>
-	<div id="btn_stammdaten_show">
-	<button id="btn_stammdata" onClick="createData()"> Stammdaten </button>
+	</div>
+	</div>
+	<div class="row">
+	
+	<div id="btn_stammdaten_show" class="form-group col-md-12 text-center">
+	<button id="btn_stammdata" class="btn btn-success" onClick="createData()"> Stammdaten </button>
 	
 	<div id="werkzeugsuchefordelitem" style="display:none;">
 		<input type="text" id="suchdelfkt" placeholder="Werkzeugsuche" onkeyup="searchfordelitem()" required>
 	</div>
-	<button id="btn_reload" onClick="location.reload()"> Seite neuladen </button>
-	<button id="btn_recreate" onClick="reactivate()"> Wiederherstellen </button>
+	
+	<button id="btn_reload" class="btn btn-success" onClick="location.reload()"> Seite neuladen </button>
+	<button id="btn_recreate" class="btn btn-success"onClick="reactivate()"> Wiederherstellen </button>
 	</div>
+	
+	</div>
+	
+	
 	<div id="createStamm" style="display:none;">
 		<div class="col-sm-6">
 			<label for="inputTextCreate">Werkzeugnummer*:</label>
@@ -130,6 +145,8 @@
 			<br>
 		</div>
 	</div>
+	
+	
 	<div id="editStamm" style="display:none;">
 		<div class="col-sm-6">
 			<label for="inputTextCreate">Werkzeugnummer*:</label>
@@ -170,8 +187,9 @@
 			<br>
 		</div>
 	</div>
-                    </div>
-                </div>
+
+                    <!--</div>--->
+               
                  <div class="row">
                  <div class="form-group col-md-12">
                     <!-- Hier drin ist der main-Teil -->
@@ -607,6 +625,12 @@
 		function norights(){
 			alert("Sie haben keine Befugnisse diese Aktion auszuführen.");
 		}
+	</script>
+<!-- obere Buttons gleich groß machen b1:groß  b2:klein -->
+	<script>
+	 var max = Math.max ($("btn_recreate").width (), $("btn_stammdata").width ());
+	    $("btn_recreate").width (max);
+	    $("btn_stammdata").width (max); 
 	</script>
 	
 </body>

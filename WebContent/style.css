@@ -17,6 +17,9 @@ li a{
 #borderweg{
 	border:none;
 }
+.btn.btn-success{
+	width:200px;
+}
 .b1 #qranzeigen{
 	/*margin-top:5px;*/
 	margin-left:5px;

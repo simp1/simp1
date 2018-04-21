@@ -1,4 +1,7 @@
 <?php
+
+
+
 	#Anzeigen des Stammdatensatz
 	session_start();
 	header('Access-Control-Allow-Origin:*');
@@ -15,6 +18,7 @@
 		if($erg>=0){
 			$output="";
 			#Anzuzeigende werte
+			//$bootstrapbutton="btn";   class=".$bootstrapbutton."
 			$sql="SELECT * FROM stammdaten WHERE entfernt=0";
 			$statemt = getsql($sql);
 			while($ausgabe = $statemt->fetch_object()){
@@ -36,22 +40,23 @@
 					}else{
 						$sw .= $wort.", ";
 					}
-				}
+				} //<a class=".$bootstrapbutton." id=".$werkzeugID." onClick="editieren(id)" href="#">editieren</a>
+				//<button type='button' class=".$bootstrapbutton." id=".$werkzeugID." onClick='editieren(id)'>editieren</button></td>";
 				$sw .= $werkzeugID;
-				$output .= "<div class='table-responsive'><table class='table table-striped'>";
+				$output .= "<div class='table-responsive'><table class='table-striped'>";
 				$output .= "<tr><td>Werkzeugnummer</td><td>".$werkzeugnummer."</td><td>Drucker</td><td>".$drucker."</td></tr>";
 				$output .= "<tr><td>WerkzeugID</td><td>".$werkzeugID."</td><td>Druckmaterial</td><td>".$material."</td></tr>";
 				$output .= "<tr><td>Kurzbeschreibung</td><td>".$kurzbeschreibung."</td><td>Druckmodus</td><td>".$modus."</td></tr>";
 				$output .= "<tr><td>Werkzeugtyp</td><td>".$typ."</td><td>Herstelldatum</td><td>".$hd."</td></tr>";
 				$output .= "<tr><td>Schlagworte</td><td colspan='3'>".$sw."</td></tr>";
 				if($erg>=1){
-					$output .="<tr><td><button type='button' id=".$werkzeugID." onClick='editieren(id)'>editieren</button></td>";
+				    $output .="<tr><td><button type='button' id=".$werkzeugID." onClick='editieren(id)'>editieren</button></td>";
 					$output .="<td><button type='button' id=".$werkzeugID." onClick='entfernen(id)'>entfernen</button></td>";
-					$output .="<td><button type='button' id=".$werkzeugnummer." onClick='openlink(id)'>oeffnen</button></td></tr>";
+					$output .="<td><button type='button'  id=".$werkzeugnummer." onClick='openlink(id)'>oeffnen</button></td></tr>";
 				}else{
-					$output .="<tr><td><button type='button' id=".$werkzeugID." onClick='norights()'>editieren</button></td>";
-					$output .="<td><button type='button' id=".$werkzeugID." onClick='norights()'>entfernen</button></td>";
-					$output .="<td><button type='button' id=".$werkzeugnummer." onClick='openlink(id)'>oeffnen</button></td></tr>";
+					$output .="<tr><td><button type='button'  id=".$werkzeugID." onClick='norights()'>editieren</button></td>";
+					$output .="<td><button type='button'  id=".$werkzeugID." onClick='norights()'>entfernen</button></td>";
+					$output .="<td><button type='button'  id=".$werkzeugnummer." onClick='openlink(id)'>oeffnen</button></td></tr>";
 				}
 				$output .="</div></table>";
 				
@@ -68,3 +73,18 @@
 	}
 	
 ?>
+
+<html>
+<head>
+<title>PHP in HTML Example</title>
+<link href="bootstrap.min.css" rel="stylesheet">
+<style>
+a {
+    color:white !important;
+}
+</style>
+</head>
+<body>
+</body>
+</html>
+

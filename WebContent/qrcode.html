@@ -110,6 +110,7 @@
                </div>
                <!-- QR-Code anzeigen -->
                <div class="row" id="abstandunten">
+               
                   <svg>
                      <g id="qrcode"/>
                   </svg>
@@ -121,6 +122,15 @@
                <div class="row" id="abstandunten">
                   <div id="svgdataurl"></div>
                </div>
+               <!-- img-src Ausgabe als Text -->
+               <div class="row" id="abstandunten">
+                
+                  
+                  <form name="form1" method="post" action="">
+				  <input name="text1" type="text" size="500" maxlength="100000">
+				 <!--<input type="button" name="button1" value="KLICK" onClick="setText()">-->
+				</form>
+				 </div>
             </div>
          </div>
       </div>
@@ -181,6 +191,12 @@
            var imgsrc = 'data:image/svg+xml;base64,'+ btoa(html);
            var img = '<img src="'+imgsrc+'">'; 
            d3.select("#svgdataurl").html(img);
+           
+           //Zugriff auf img-src
+           //function setText() {
+        	    document.form1.text1.value = imgsrc;
+        	//}
+           
          
          });
       </script>
