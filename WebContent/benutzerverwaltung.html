@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    
+    <!-- Falls man später eine komplexere Benutzerverwaltung durchführen möchte, gibt es zwei Benutzerverwaltungen, wobei die Benutzerverwaltung.html für den Superadmin und die Benutzerverwaltungadmin.html für normale Admins vorgesehen sind -->
+    <!-- Import von JQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	 <!-- Implementierung der Cookies -->
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-    
+     <!-- Import von Bootstrap -->
     <link href="bootstrap.min.css" rel="stylesheet">
+     <!-- Import der Sidebar -->
     <link rel="stylesheet" href="assets/css/custom.css">
     <link rel="stylesheet" href="assets/css/custom-themes.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+     <!-- Implementierung der CSS Datei -->
     <link href="style.css" rel="stylesheet">
+     <!-- Import der JavaScript Funktionen für die Sidebar -->
      <script src="assets/js/custom.js"></script>
 </head>
 <body> 	
    <div class="page-wrapper chiller-theme toggled">
 
-<!-- SeitenleisteStart -->
+<!--  Start der Seitenleiste. Über sie findet die allgemeine Navigation innerhalb der Seite statt -->
 		 <nav id="sidebar" class="sidebar-wrapper" data-color="#555">
        
                 <div id="toggle-sidebar">
@@ -23,43 +27,48 @@
                     <div></div>
                     <div></div>
                 </div>
+                 <!-- Überschrift der Seitenleister -->
                 <div class="sidebar-brand">
                     <a href="#">Eigenschaften</a>
                 </div>
                 <div class="sidebar-menu">
                 <ul>  
+                <!-- Navigation auf die Seite startseite.html -->
                  <li class="nav-item">
                 <a class="nav-link" href="http://localhost/workspace/swimp/WebContent/startseite.html">
                   <span data-feather="file"></span>
                   Home
                 </a>
               </li>
+               <!-- Navigation auf die Seite benutzerverwaltung.html -->
                <li class="nav-item" id="superadminverwaltung" style="display:none;">
                 <a class="nav-link" href="benutzerverwaltung.html">
                   <span data-feather="file"  ></span>
                   Benutzerverwaltung
                 </a>
               </li>
-              
+              <!-- Navigation auf die Seite benutzerverwaltungadmin.html -->
               <li class="nav-item" id="adminverwaltung" style="display:none;">
                 <a class="nav-link" href="benutzerverwaltungadmin.html">
                   <span data-feather="file"></span>
                   Benutzerverwaltung
                 </a>
               </li>
-              
+              <!-- Navigation auf die Seite stammdaten.html -->
               <li class="nav-item">
                 <a class="nav-link" href="stammdaten.html">
                   <span data-feather="file"></span>
                   	Stammdaten
                 </a>
               </li>
+              <!-- Navigation auf die Seite qrcode.html -->
                <li class="nav-item">
                 <a class="nav-link" href="qrcode.html">
                   <span data-feather="file"></span>
                   QR-Code Generator
                 </a>
               </li>
+              <!-- Navigation auf die Seite werkzeugverwaltung.html -->
                <li class="nav-item">
                 <a class="nav-link" href="werkzeugverwaltung.html">
                   <span data-feather="file"></span>
@@ -74,9 +83,10 @@
         </nav>
 
 	<!-- Seitenleiste Ende -->
-	
+	<!-- Content Anfang -->
 	    <div class="page-content">
             <div class="container-fluid">
+            <!-- Seitenüberschrift -->
                 <div class="row">
                     <div class="form-group col-md-12" id="überschrift">
                         <h1>Benutzerverwaltung</h1>
@@ -86,46 +96,59 @@
                 <div class="row">
                     <div class="form-group col-md-12 text-center" id="abstandbutton">
                 <div id="edit-create-reload">
+                <!-- Legt einen Button an, welcher bei Klick die Funktion createUser durchführt -->
                 <a class="btn btn-success .navbar-right" id="b1" onClick="createUser()" href="#">Neuer Benutzer erstellen</a>
-			
+			 <!-- Legt einen Button an, welcher bei Klick die Funktion recreateUser durchführt -->
 				<a class="btn btn-success .navbar-right" id="b1" onClick="recreateUser()" href="#">Benutzer wiederherstellen</a>
-				
+				 <!-- Legt einen Button an, welcher bei Klick die Funktion location.reload durchführt -->
 				<a class="btn btn-success .navbar-right" id="b2" onClick="location.reload()"  href="#">Benutzerverwaltung</a>
 				</div>
+				 <!-- Hält User ohne Berechtigungen davon ab, auf die Benutzerverwaltung zuzugreifen. Hierzu folgt unten eine JavaScript Funktion -->
 				<div id="netterversuch">
 					
 				</div>
+				 <!-- Benutzer editieren Anfang -->
 				<div id="editcreate" style="display:none;">
 				<div class="col-sm-4">
+					 <!-- Eingabefeld für den Benutzernamen -->
 				   <label>Benutzer:</label><br><label id="editUserLabel"> </label><br>
+				   <!-- Eingabefeld für das Passwort-->
 				   <label for="inputTextEdit">Passwort:</label>
 	               <div class="form-label-group">
 	                  <input type="text" id="inputPassEdit" class="form-control" placeholder="Passwort" required>
 	               </div>
+	               <!-- Festlegung der Rechte: 0 -> Nur Leserechte; 1-> Lese und Schreibrechte (Admin) -->
 	               <label for="inputTextEdit">Adminrechte(0 = keine,1 = admin):</label>
 	               <div class="form-label-group">
 	                  <input type="number" id="inputAdminEdit" class="form-control" min="0" max="1" value="0" required>
 	               </div>
+	           
 	               <label for="inputText">Leserechte(0 = keine,1 = read):</label>
 	               <div class="form-label-group">
 	                  <input type="number" id="inputReadEdit" class="form-control" min="0" max="1" value="0" required>
 	               </div>
 	               <br>
 	               <input type="hidden" id="usrid" value="">
+	               <!-- Button zum Durchführen der Benutzereditierung -->
 	               <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="editfinalUser()">Editieren</button>
 				   <br>
 				</div>
 			</div>
+				 <!-- Benutzer editieren Ende -->
+				  <!-- Benutzer anlegen Anfang-->
 			<div id="usrcreate" style="display:none;">
 				<div class="col-sm-4">
+				 <!-- Eingabefeld für den Benutzernamen -->
 				   <label for="inputText">Benutzername:</label>
 	               <div class="form-label-group">
 	                  <input type="text" id="inputName" class="form-control" placeholder="Benutzername" required autofocus>
 	               </div>
+	                <!-- Eingabefeld für das Passwort -->
 	               <label for="inputText">Passwort:</label>
 	               <div class="form-label-group">
 	                  <input type="text" id="inputPass" class="form-control" placeholder="Passwort" required>
 	               </div>
+	               <!-- Festlegung der Rechte: 0 -> Nur Leserechte; 1-> Lese und Schreibrechte (Admin) -->
 	               <label for="inputText">Adminrechte(0 = keine,1 = admin):</label>
 	               <div class="form-label-group">
 	                  <input type="number" id="inputAdmin" class="form-control" min="0" max="1" value="0" required>
@@ -135,17 +158,18 @@
 	                  <input type="number" id="inputRead" class="form-control" min="0" max="1" value="0" required>
 	               </div>
 	               <br>
+	               <!-- Button zum Durchführen der Benutzererstellung -->
 	               <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="insertUser()">Erstellen</button>
 				   <br>
 				</div>
 			</div>
-				
+				<!-- Benutzer anlegen Ende-->
                     </div>
                 </div>
                 
-                
                  <div class="row">
                  <div class="form-group col-md-12">
+                 <!-- In dieses Feld werden die Daten der Benutzer geladen (Tabelle) -->
                     <div  id="tab_div">
                      
 					</div>
@@ -156,10 +180,17 @@
             </div>
 
     </div>
+    <!-- Content Ende -->
 </div>
       		
 			<script>
-				//prüfen rechte
+				/*
+				Die Cookies werden überprüft, sprich ob der angemeldete Benutzer berechtigt dazu ist, auf die Benutzerverwaltung zuzugreifen.
+				Hierzu werden die drei parameter name, token und token_login ausgelesen.
+				Dies geschiet über eine GET Funktion auf die url: "http://localhost/workspace/swimp/WebContent/Includes/checkrightsadmin.inc.php?jsoncallback=?".
+				Hat der Benutzer die erforderlichen Berechtigungen wird die funktion success durchgeführt, hat der Benutzer nicht die erforderlichen Berechtigungen, wird er darauf hingewiesen und kann nciht auf die Benutzerverwaltung zugreifen		
+				Bei fehlerhafter Abfrage der Cookies wird die Funktion error ausgeführt.
+				*/
 				var uid=Cookies.get("name");
 				var tok1=Cookies.get("token");
 				var tok2=Cookies.get("token_login");
@@ -187,7 +218,9 @@
 				        alert(" Can't do because: " + error);
 				    }
 				});
-				//lade tabelle
+				/*
+				Hier wird eine Anfrage mit den Tokens an den Server versendet, welcher dann eine die Tabelle mit den Benutzerinformationen auf die Seite lädt -> In den Abschnitt tab_div
+				*/
 				var uid=Cookies.get("name");
 				var tok1=Cookies.get("token");
 				var tok2=Cookies.get("token_login");
@@ -226,9 +259,13 @@
 				    }
 				});
 			</script>
-			<!-- editieren Funktion hinter einem Button in der Tabelle -->
+			<!-- Editieren-Funktion hinter einem Button in der Tabelle -->
 			<script>
-				//editieren Button Aktion
+				/*
+				Mit dem Klick auf den Editieren-Button werden die Eingabefelder für die Editierung geladen.
+				Das Feld Benutzername wird automatisch ausgefüllt, da dieser nicht geändert werden kann.
+				Es wird überprüft, ob der Superadmin bearbeitet wird und falls ja wird der Benutzer darauf hingewiesen, dass dieser nicht bearbeitet werden darf und kann.
+				*/
 				function editieren(id){
 					if(id!= "admin"){
 						document.getElementById('editcreate').style.display = "block";
@@ -238,7 +275,11 @@
 						alert("Superadmin darf nicht bearbeitet werden!")
 					}
 				}
-				//enterfenen Button Aktion
+				/*
+				Mit dem Klick auf denEntfernen-Button wird der ausgewählte Benutzer "gelöscht".
+				Der Benutzer ist dann nicht endgültig entfernt, sondern lediglich als inaktiv eingestuft.
+				Es wird überprüft, ob der Superadmin entfernt wird und falls ja wird der Benutzer darauf hingewiesen, dass dieser nicht bearbeitet werden darf und kann.
+				*/
 				function entfernen(id){
 					if(id!= "admin"){
 						var uid=id;
@@ -280,7 +321,12 @@
 			</script>
 			
 			<script> 
-				//bearbeitet den User
+			/*
+			Diese Funktion wird durchgeführt, wenn ein Benutzer editiert werden.
+			Dem Server werden die geänderten Benutzerdaten samt Token zugeschickt.
+			Bei Erfolg werden die geänderten Daten übernommen und die Seite wird neu geladen.
+			Bei einem Fehler wird die entsprechende Fehlermeldung ausgegeben.
+			*/
 				function editfinalUser(){
 					var uid=document.getElementById('usrid').value;
 					var pid=document.getElementById('inputPassEdit').value;
@@ -321,7 +367,10 @@
 					    }
 					});
 				}
-				//prüft einen Benutzer
+			
+				/*
+				Diese Funktion lädt das Formular mit den Eingabefeldern zum Erstellen eines neuen Benutzers
+				*/
 				function createUser(){
 					var uid=Cookies.get("name");
 					var tok1=Cookies.get("token");
@@ -346,7 +395,11 @@
 					    }
 					});	
 				}
-				//Fügt den Benutzer ein
+				/*
+				Mit dieser Funktion wird ein neuer Benutzer angelegt.
+				Bei Erfolg werden die geänderten Daten übernommen und die Seite wird neu geladen.
+				Bei einem Fehler wird die entsprechende Fehlermeldung ausgegeben.
+				*/
 				function insertUser(){
 					var uid=document.getElementById('inputName').value;
 					var pid=document.getElementById('inputPass').value;
@@ -387,7 +440,9 @@
 					    }
 					});
 				}
-				// zeigt gelöschte Nutzer
+				/*
+				Diese Funktion lädt eine Liste mit allen gelöschten/inaktiven Benutzern
+				*/
 				function recreateUser(){
 					var uid=Cookies.get("name");
 					var tok1=Cookies.get("token");
@@ -428,7 +483,9 @@
 					    }
 					});
 				}
-				//Stellt gelöschte Nutzer wieder her
+				/*
+			Mit dieser Funktion kann ein ausgewählter, gelöschter Benutzer wiederhergestellt werden
+				*/
 				function recreate(id){
 					var uid=id;
 					var uuid = Cookies.get("name");
@@ -463,12 +520,17 @@
 					    }
 					});
 				}
-				// Keine Rechte warnung
+				/*
+			Falls ein Benutzer keine Berechtigung für eine Aktion hat, wird diese Funktion anstelle ausgeführt udn der Benutzer wird darauf hingewiesen, dass ihm Berechtigungen fehlen
+				*/
 				function norights(){
 					alert("Sie haben keine Befugnisse diese Aktion auszuführen.");
 				}
 			</script>
 				<script>
+				/*
+		Stellt die korrekte Benutzerverwaltung der Seitenleiste dar
+				*/
 		var uid=Cookies.get("name");
 		var tok1=Cookies.get("token");
 		var tok2=Cookies.get("token_login");
@@ -501,8 +563,11 @@
 		    }
 		});
 	</script>
-	<!-- obere Buttons gleich groß machen b1:groß  b2:klein -->
+		
 	<script>
+	/*
+	Sorgt dafür, dass die Buttons Erstellen, Wiederherstellen und Benutzerverwaltung gleich groß sind
+			*/
 	 var max = Math.max ($("#b1").width (), $("#b2").width ());
 	    $("#b1").width (max);
 	    $("#b2").width (max); 

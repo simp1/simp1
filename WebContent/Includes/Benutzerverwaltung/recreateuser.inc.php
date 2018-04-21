@@ -27,9 +27,9 @@
 			$antwort .="<tr>";
 			$antwort .= "<td>".$uid."</td><td>".$pwd."</td><td>".$admin."</td><td>".$rights."</td>";
 			if($superadmin==0){
-				$antwort .="<td><button type='button' id=".$uid." onClick='recreate(id)'>wiederherstellen</button></td>";
+				$antwort .="<td><button type='button' id=".$uid." class='butosuccess' onClick='recreate(id)'>wiederherstellen</button></td>";
 			}else{
-				$antwort .="<td><button type='button' id=".$uid." onClick='norights()'>wiederherstellen</button></td>";
+				$antwort .="<td><button type='button' id=".$uid." class='butosuccess' onClick='norights()'>wiederherstellen</button></td>";
 			}
 			$antwort .="</tr>";
 		}
@@ -54,9 +54,9 @@
 			$antwort .="<tr>";
 			$antwort .= "<td>".$uid."</td><td>".$pwd."</td><td>".$admin."</td><td>".$rights."</td>";
 			if($superadmin==0&&$admin==0){
-				$antwort .="<td><button type='button' id=".$uid." onClick='recreate(id)'>wiederherstellen</button></td>";
+				$antwort .="<td><button type='button' class='butosuccess' id=".$uid." onClick='recreate(id)'>wiederherstellen</button></td>";
 			}else{
-				$antwort .="<td><button type='button' id=".$uid." onClick='norights()'>wiederherstellen</button></td>";
+				$antwort .="<td><button type='button' class='butosuccess' id=".$uid." onClick='norights()'>wiederherstellen</button></td>";
 			}
 			$antwort .="</tr>";
 		}

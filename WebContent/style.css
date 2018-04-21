@@ -20,6 +20,9 @@ li a{
 .btn.btn-success{
 	width:200px;
 }
+.abstandunten{
+	margin-bottom:5px;
+}
 .b1 #qranzeigen{
 	/*margin-top:5px;*/
 	margin-left:5px;
@@ -123,3 +126,53 @@ p {
 .container {
   max-width: 960px;
 }
+
+/*success-button für php umbenennen*/
+.butosuccess {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+  text-align:center;
+}
+
+.butosuccess:hover {
+  color: #fff;
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.butosuccess:focus, .butosuccess.focus {
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+}
+
+.butosuccess.disabled, .butosuccess:disabled {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.butosuccess:not(:disabled):not(.disabled):active, .butosuccess:not(:disabled):not(.disabled).active,
+.show > .butosuccess.dropdown-toggle {
+  color: #fff;
+  background-color: #1e7e34;
+  border-color: #1c7430;
+}
+
+.butosuccess:not(:disabled):not(.disabled):active:focus, .butosuccess:not(:disabled):not(.disabled).active:focus,
+.show > .butosuccess.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
