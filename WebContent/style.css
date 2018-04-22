@@ -134,7 +134,10 @@ p {
   border-color: #28a745;
   text-align:center;
 }
-
+#sucheschrift{
+	font-size:16px;
+	margin-left:20px;
+}
 .butosuccess:hover {
   color: #fff;
   background-color: #218838;

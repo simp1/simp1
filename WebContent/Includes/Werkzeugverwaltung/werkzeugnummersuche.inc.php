@@ -55,9 +55,9 @@
 					$id_attr = $ausgabe->werkzeug_attID;
 					$output .= "<tr><td>".$bez."</td><td>".$val."</td>";
 					if($erg>=1){
-						$output .="<td><button type='button' id=".$id_attr." onClick='entfernen(id)'>entfernen</button></td></tr>";
+						$output .="<td><button type='button' class='butosuccess' id=".$id_attr." onClick='entfernen(id)'>entfernen</button></td></tr>";
 					}else{
-						$output .="<td><button type='button' id=".$id_attr." onClick='norights()'>entfernen</button></td></tr>";
+						$output .="<td><button type='button' class='butosuccess' id=".$id_attr." onClick='norights()'>entfernen</button></td></tr>";
 					}
 				}
 				$output .="</div></table>";

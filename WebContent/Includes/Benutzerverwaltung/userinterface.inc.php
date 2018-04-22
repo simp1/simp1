@@ -17,7 +17,11 @@
 		$admin;
 		$rights;
 		$antwort .= "<div class='table-responsive'><table class='table table-striped'>";
-		$antwort .= "<tr><th>Benutzername</th><th>Passwort</th><th>Adminstatus</th><th>Rechte</th><th>Funktionen</th><th></th></tr>";
+		
+		$antwort .= "<thead class='thead-dark'>";
+		
+		$antwort .= "<tr><th>Benutzername</th><th>Passwort</th><th>Adminstatus</th><th>Rechte</th><th>Funktionen</th><th></th></tr></thead>";
+		
 		while($ausgabe = $statemt->fetch_object()){
 			$uid = $ausgabe->username;
 			$pwd = $ausgabe->password;

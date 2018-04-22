@@ -44,7 +44,7 @@
 				$output .= "<tr><td>Kurzbeschreibung</td><td>".$kurzbeschreibung."</td><td>Druckmodus</td><td>".$modus."</td></tr>";
 				$output .= "<tr><td>Werkzeugtyp</td><td>".$typ."</td><td>Herstelldatum</td><td>".$hd."</td></tr>";
 				$output .= "<tr><td>Schlagworte</td><td colspan='3'>".$sw."</td></tr>";
-				$output .="<tr><td><button type='button' id=".$werkzeugID." onClick='activate(id)'>Wiederherstellen</button></td></tr>";
+				$output .="<tr><td><button type='button' class='butosuccess' id=".$werkzeugID." onClick='activate(id)'>Wiederherstellen</button></td></tr>";
 				$output .="</div></table>";
 				
 			}

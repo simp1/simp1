@@ -43,7 +43,7 @@
 				} //<a class=".$bootstrapbutton." id=".$werkzeugID." onClick="editieren(id)" href="#">editieren</a>
 				//<button type='button' class=".$bootstrapbutton." id=".$werkzeugID." onClick='editieren(id)'>editieren</button></td>";
 				$sw .= $werkzeugID;
-				$output .= "<div class='table-responsive'><table class='table'>";
+				$output .= "<div class='table-responsive'><table class='table table-striped'>";
 				$output .= "<tr><td>Werkzeugnummer</td><td>".$werkzeugnummer."</td><td>Drucker</td><td>".$drucker."</td></tr>";
 				$output .= "<tr><td>WerkzeugID</td><td>".$werkzeugID."</td><td>Druckmaterial</td><td>".$material."</td></tr>";
 				$output .= "<tr><td>Kurzbeschreibung</td><td>".$kurzbeschreibung."</td><td>Druckmodus</td><td>".$modus."</td></tr>";

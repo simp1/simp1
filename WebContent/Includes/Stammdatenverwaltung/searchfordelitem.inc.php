@@ -46,9 +46,9 @@
 				$output .= "<tr><td>Werkzeugtyp</td><td>".$typ."</td><td>Herstelldatum</td><td>".$hd."</td></tr>";
 				$output .= "<tr><td>Schlagworte</td><td colspan='3'>".$sw."</td></tr>";
 				if($erg>=1){
-					$output .="<tr><td><button type='button' id=".$werkzeugID." onClick='activate(id)'>Wiederherstellen</button></td></tr>";
+					$output .="<tr><td><button type='button' class='butosuccess' id=".$werkzeugID." onClick='activate(id)'>Wiederherstellen</button></td></tr>";
 				}else{
-					$output .="<tr><td><button type='button' id=".$werkzeugID." onClick='norights()'>Wiederherstellen</button></td></tr>";
+					$output .="<tr><td><button type='button' class='butosuccess' id=".$werkzeugID." onClick='norights()'>Wiederherstellen</button></td></tr>";
 				}
 				$output .="</div></table>";
 				
