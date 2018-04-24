@@ -104,9 +104,9 @@
                <!-- QR-Code Generator Eingabe -->
                <div class="row" id="abstandunten">
                   <label for="code">QR-Code-Inhalt:</label>   
-                  <input id="text" type="text"  class="form-control" value="QR-Code" style="width:50%" />
+                  <input id="text" type="text"  class="form-control" value="QR-Code" style="width:200px" />
                   <a class="btn btn-success .navbar-right .b1" id="qranzeigen" onClick="makeCode()" href="#">Qr-Code anzeigen</a>
-                  <a class="btn btn-success .navbar-right .b1" id="save">Save as Image</a>
+                  <a class="btn btn-success .navbar-right .b1" id="save">SVG-Code anzeigen</a>
                </div>
                <!-- QR-Code anzeigen -->
                <div class="row" id="abstandunten">
@@ -119,15 +119,18 @@
                <div class="row" id="abstandunten">
                   <div id="svg"></div>
                </div>
+               <!-- Bild nochmal anzeigen  
                <div class="row" id="abstandunten">
                   <div id="svgdataurl"></div>
                </div>
+               -->
                <!-- img-src Ausgabe als Text -->
                <div class="row" id="abstandunten">
                 
                   
                   <form name="form1" method="post" action="">
-				  <input name="text1" type="text" size="500" maxlength="100000">
+				  <!--<input name="text1" type="text" size="500" maxlength="100000">-->
+				  <textarea  name="text1" type="text" cols="100" rows="40"> </textarea>
 				 <!--<input type="button" name="button1" value="KLICK" onClick="setText()">-->
 				</form>
 				 </div>
