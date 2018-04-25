@@ -80,7 +80,7 @@
                     	<div id="attribut_div">
                     	</div>
                     	<div id="btn_stammdaten_show">
-                    		<button id="btn_stammdata" onClick="createAttribut()"> Attribut hinzufügen </button>
+                    		<button id="btn_stammdata" class="btn btn-success abstandunten" onClick="createAttribut()"> Attribut hinzufügen </button>
                     	</div>
                     	<div id="addAttr" style="display:none;">
 							<div class="col-sm-6">
@@ -98,9 +98,18 @@
 								<br>
 							</div>
 						</div>
+						
+						<div class="row">
+						<div class="form-group col-md-5 mb-3 text-right"><label id="sucheschrift">Werkzeugsuche:</label></div>
+						<div class="form-group col-md-3 mb-3">
+						
                         <div id="werkzeugsuchfktdiv">
-							<input type="text" id="werkzeugsuchfkt" placeholder="Werkzeugnummer" onkeyup="searchwerkzeug()" required>
+							<input type="text" class="form-control center-block text-center" id="werkzeugsuchfkt" onkeyup="searchwerkzeug()" required>
 						</div>
+						</div>
+						</div>
+						
+						
                     </div>
                 </div>
                  <div class="row">
