@@ -409,6 +409,36 @@ ALTER TABLE `werkzeug_einsatz`
 --
 ALTER TABLE `werkzeug_pruef`
   MODIFY `pruefID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Tabellenstruktur für Tabelle `backup`
+--
+
+CREATE TABLE `backup` (
+  `backupID` int(11) NOT NULL,
+  `uid` varchar(255) NOT NULL,
+  `timestamp` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Indizes der exportierten Tabellen
+--
+
+--
+-- Indizes für die Tabelle `backup`
+--
+ALTER TABLE `backup`
+  ADD PRIMARY KEY (`backupID`);
+
+--
+-- AUTO_INCREMENT für exportierte Tabellen
+--
+
+--
+-- AUTO_INCREMENT für Tabelle `backup`
+--
+ALTER TABLE `backup`
+  MODIFY `backupID` int(11) NOT NULL AUTO_INCREMENT;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
