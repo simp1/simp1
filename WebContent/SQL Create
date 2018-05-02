@@ -409,8 +409,9 @@ ALTER TABLE `werkzeug_einsatz`
 --
 ALTER TABLE `werkzeug_pruef`
   MODIFY `pruefID` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- Tabellenstruktur fÃ¼r Tabelle `backup`
+-- Tabellenstruktur für Tabelle `backup`
 --
 
 CREATE TABLE `backup` (
@@ -424,21 +425,20 @@ CREATE TABLE `backup` (
 --
 
 --
--- Indizes fÃ¼r die Tabelle `backup`
+-- Indizes für die Tabelle `backup`
 --
 ALTER TABLE `backup`
   ADD PRIMARY KEY (`backupID`);
 
 --
--- AUTO_INCREMENT fÃ¼r exportierte Tabellen
+-- AUTO_INCREMENT für exportierte Tabellen
 --
 
 --
--- AUTO_INCREMENT fÃ¼r Tabelle `backup`
+-- AUTO_INCREMENT für Tabelle `backup`
 --
 ALTER TABLE `backup`
   MODIFY `backupID` int(11) NOT NULL AUTO_INCREMENT;
-
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

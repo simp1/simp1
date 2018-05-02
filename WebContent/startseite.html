@@ -249,6 +249,28 @@
 		        document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
 		    }
 		});
+		var uid=Cookies.get("name");
+		var tok1=Cookies.get("token");
+		var tok2=Cookies.get("token_login");
+		$.ajax({
+			type: "GET",
+			url: "http://localhost/workspace/swimp/WebContent/Includes/Backup/timestamp.inc.php?jsoncallback=?",
+			data: {
+				"username": uid,
+				"token": tok1,
+				"token_login": tok2
+			},
+			dataType:"JSONp",
+			timeout: 5000,
+			success: function(data){
+				alert(data);
+			},
+			error: function (request, error) {
+		        console.log(arguments);
+		        alert(" Can't do because: " + error);
+		        document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+		    }
+		});
 	</script>
 	
 </body>

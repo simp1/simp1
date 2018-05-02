@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<body>
+
+<button id="backup" onclick="backup">BACKUP</button>
+
+<script>
+function backup(){
+	
+			var uid=Cookies.get("name");
+			var tok1=Cookies.get("token");
+			var tok2=Cookies.get("token_login");
+			
+			$.ajax({
+				type: "GET",
+				url: "http://localhost/workspace/swimp/WebContent/Includes/Backup/backup.php?jsoncallback=?",
+				data: {
+					"username": uid,
+					"token": tok1,
+					"token_login": tok2
+				},
+				dataType:"JSONp",
+				timeout: 5000,
+				success: function(data){
+					alert("success");
+				},
+				
+				error: function (request, error) {
+			        console.log(arguments);
+			        alert(" Can't do because: " + error);
+			    }
+			});	
+		}
+</script>
+</body>
+</html>
+
+<!-- backupstamp($uid);    (username) -->

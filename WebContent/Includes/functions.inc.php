@@ -64,5 +64,19 @@
 		$erg = "".$superadmin."".$admin."".$rights;
 		return $erg;
 	}
+	// Zeitstempel für das BackUp
+	function backupstamp($username){
+		include 'config.inc.php';
+		$erg = status($username);
+		if($erg>=10){
+			$timestamp=time();
+			$sql="INSERT INTO backup (uid,timestamp) VALUES (?,?)";
+			$stmt = $con->prepare($sql);
+			$stmt->bind_param('si', $username, $timestamp);
+			$stmt->execute();
+			
+		}
+		
+	}
 
 ?>
