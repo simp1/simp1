@@ -89,13 +89,13 @@
                   <div class="row">
                     
                      <div class="col-md-4">
-                 <div class="card mb-4 box-shadow">
+                 <div class="card mb-4 box-shadow" id="backupbox">
                      <div class="card-body">
-                       <p class="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
-                          At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-                       </p>
+                     	<label> Letztes BackUP</label>
+                       <div id="backup_anzeige">
+                       </div>
                        <div class="d-flex justify-content-between align-items-center">
-                          <a class="btn btn-danger" href="#">Jenson Button</a>
+                          <a class="btn btn-danger" href="#">BackUp starten</a>
                        </div>
                     </div>
                  </div>
@@ -263,7 +263,14 @@
 			dataType:"JSONp",
 			timeout: 5000,
 			success: function(data){
-				alert(data);
+				var res = data.split(";");
+				if(res[1]){
+					var output= res[0] + "<br>Es wurde seit mehr als 7 Tage kein BackUp mehr durchgeführt! Bitte führen Sie ein BackUp durch. <br>";
+					$('#backup_anzeige').html(output);
+					$('#backupbox').css("background-color","red");
+				}else{
+					$('#backup_anzeige').html(res[0]);
+				}
 			},
 			error: function (request, error) {
 		        console.log(arguments);

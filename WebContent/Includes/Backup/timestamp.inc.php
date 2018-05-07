@@ -19,7 +19,15 @@
 			$stmt->bind_result($userid);
 			$stmt->store_result();
 			if($stmt->num_rows == 0){
-				echo $_GET['jsoncallback'].'('.json_encode("backup").');';
+				$lastupdate;
+				$sql="SELECT MAX(timestamp) as timestamp FROM backup";
+				$statemt = getsql($sql);
+				while($ausgabe = $statemt->fetch_object()){
+					$lastupdate=$ausgabe->timestamp;
+				}
+				$datum = date("d.m.Y - H:i",$lastupdate);
+				$datum .= ";backup";
+				echo $_GET['jsoncallback'].'('.json_encode($datum).');';
 				exit();
 			}else{
 				$lastupdate;
