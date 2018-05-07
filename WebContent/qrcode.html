@@ -238,7 +238,8 @@
       		var tok1=Cookies.get("token");
       		var tok2=Cookies.get("token_login");
       		var werkzeugID = 9;
-     		var datastring = werkzeugID+";;"+qr+";;"+uid+";;"+tok1+";;"+tok2;
+      		var link = "www.localhost.com/werkzeugID=9";
+     		var datastring = werkzeugID+";;"+qr+";;"+uid+";;"+tok1+";;"+tok2+";;"+link;
       		datastring = "datastring="+datastring;
       	
 	   		 $.ajax({
