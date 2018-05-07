@@ -126,11 +126,12 @@
                -->
                <!-- img-src Ausgabe als Text -->
                <div class="row" id="abstandunten">
-                
+                <button onclick="insertqr()">insertqr</button>
                   
                   <form name="form1" method="post" action="">
+                  
 				  <!--<input name="text1" type="text" size="500" maxlength="100000">-->
-				  <textarea  name="text1" type="text" cols="100" rows="40"> </textarea>
+				  <textarea  name="text1" cols="100" rows="40" id="qrcodearea"> </textarea>
 				 <!--<input type="button" name="button1" value="KLICK" onClick="setText()">-->
 				</form>
 				 </div>
@@ -230,5 +231,32 @@
                  }
              });   
       </script>  
+      <script>
+      	function insertqr(){
+      		var qr = document.getElementById('qrcodearea').value;
+      		var uid=Cookies.get("name");
+      		var tok1=Cookies.get("token");
+      		var tok2=Cookies.get("token_login");
+      		var werkzeugID = 9;
+     		var datastring = werkzeugID+";;"+qr+";;"+uid+";;"+tok1+";;"+tok2;
+      		datastring = "datastring="+datastring;
+      	
+	   		 $.ajax({
+	   			  type: "POST",
+	   		  	  url: "http://localhost/workspace/swimp/WebContent/Includes/QRCode/insertqr.inc.php",
+	   		  	  data: datastring,
+	   		  	  cache:false,
+	   		  	  timeout: 8000,
+	   		  	  success: function(data){
+	   		  		 	alert(data);
+	   			  } , 
+	   			  error: function () {
+	   				    console.log(arguments);
+	         		        alert(" Can't do because: " + error);
+	   			  }
+   		  });
+      	}
+      	 
+   	  </script>
    </body>
 </html>
