@@ -95,7 +95,9 @@
                        <div id="backup_anzeige">
                        </div>
                        <div class="d-flex justify-content-between align-items-center">
-                          <a class="btn btn-danger" href="#">BackUp starten</a>
+                          <a class="btn btn-danger" onclick="startbackup()" href="#">BackUp starten</a>
+                       </div>
+                       <div id="loadbox">
                        </div>
                     </div>
                  </div>
@@ -103,11 +105,11 @@
               <div class="col-md-4">
                  <div class="card mb-4 box-shadow">
                     <div class="card-body">
-                       <p class="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
-                          Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                       <p class="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
+                          At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
                        </p>
                        <div class="d-flex justify-content-between align-items-center">
-                          <a class="btn btn-info" href="#">Jenson Button</a>
+                          <a class="btn btn-success" href="#">Jenson Button</a>
                        </div>
                     </div>
                  </div>
@@ -278,6 +280,40 @@
 		        document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
 		    }
 		});
+		function startbackup(){
+			var uid=Cookies.get("name");
+			var tok1=Cookies.get("token");
+			var tok2=Cookies.get("token_login");
+			$.ajax({
+				type: "GET",
+				url: "http://localhost/workspace/swimp/WebContent/Includes/Backup/backup.inc.php?jsoncallback=?",
+				data: {
+					"username": uid,
+					"token": tok1,
+					"token_login": tok2
+				},
+				dataType:"JSONp",
+				timeout: 5000,
+				success: function(data){
+					if(data=="success"){
+						downbtn = '<a href="http://localhost/workspace/swimp/WebContent/Includes/Backup/backup_dump.sql" download>Download</a>';
+					 	$('#loadbox').html(downbtn);
+					}else if("token"){
+						alert("Sitzung abgelaufen!");
+						document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+					}else if("rights"){
+						alert("keine Rechte!");
+					}else{
+						alert("Unbekannter Fehler aufgetreten.");
+					}
+					 
+				},
+				error: function (request, error) {
+			        console.log(arguments);
+			        alert(" Can't do because: " + error);
+			    }
+			});
+		}
 	</script>
 	
 </body>

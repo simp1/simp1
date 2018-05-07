@@ -1,43 +1,33 @@
 <?php
-/*
-<?php
-$dbhost = 'localhost';
-$dbuser = 'username';
-$dbpassword = 'password';
-$dbname = 'datenbankname';
-$dumpfile = 'backups/' . $dbname . '_' . date("Y-m-d_H-i-s") . '.sql';
- 
-include_once('euer/pfad/zu/Mysqldump.php');
-$dump = new Ifsnop\Mysqldump\Mysqldump("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpassword);
-$dump->start($dumpfile);
-*/
 
-
-$dbhost = '127.0.0.1';
-$dbuser = 'root';
-$dbpassword = '';
-$dbname = 'project';
-$dumpfile = 'backups/' . $dbname . '_' . date("Y-m-d_H-i-s") . '.sql';
-//Speicherpfad 
-include_once('C:\Users\Michael\Desktop\Mysqldump.php');
-$dump = new Ifsnop\Mysqldump\Mysqldump("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpassword);
-$dump->start($dumpfile);
-
-
-//echo phpinfo();
-/*
-echo '<!DOCTYPE html>';
-echo '<html>';
-echo '<head>';
-echo '<title>Page Title</title>';
-echo '</head>';
-echo '<body>';
-echo '<button id="backup">BACKUP</button>'
-echo 'phpinfo();' 
-echo '<h1>This is a HeÄading</h1>';
-echo '<p>This is a paragraph.</p>';
-
-echo '</body>';
-echo '</html>';
-*/
+	session_start();
+	header('Access-Control-Allow-Origin:*');
+	header('Access-Control-Allow-Methods: GET');
+	
+	include '../functions.inc.php';
+	include '../config.inc.php';
+	$token=$_GET['token'];
+	$token_login=$_GET['token_login'];
+	$username=$_GET['username']; 	
+	$path="backup_dump.sql";
+	if(checktoken($token,$token_login,$username)){
+		$erg = status($username);
+		if($erg>=10){
+			$dbbezeichnung = "root";
+			$password = "";
+			$host = "127.0.0.1";
+			$dbname = "project";
+			
+			$backup = exec('C:/xampp/mysql/bin/mysqldump --user=' . $dbbezeichnung . ' --password='. $password .' --host=' . $host . ' ' . $dbname . ' > ' . $path . '');
+			backupstamp($username);
+			echo $_GET['jsoncallback'].'('.json_encode("success").');';
+			exit();
+		}else{
+			echo $_GET['jsoncallback'].'('.json_encode("rights").');';
+			exit();
+		}
+	}else{
+		echo $_GET['jsoncallback'].'('.json_encode("token").');';
+		exit();
+	}
 ?>
