@@ -322,6 +322,14 @@
 		    }
 		});
 	}
+	//funktion zum öffnen der Seite QR-Code
+	function openqr(id){
+		document.location.href = "http://localhost/workspace/swimp/WebContent/qrcode.html?werkzeugID="+id;
+	}
+	//Fehlermeldung keine Rechte
+	function norights(){
+		alert("Sie haben keine Befugnisse diese Aktion auszuführen.");
+	}
 </script>
 
 </body>

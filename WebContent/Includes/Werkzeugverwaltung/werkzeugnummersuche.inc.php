@@ -77,6 +77,11 @@
 				}
 				$output .= "<img src='".$imgsrc."'>";
 			}
+			if($erg>=1){
+				$output .="<button type='button' class='butosuccess' id=".$werkzeugID." onClick='openqr(id)'>QR-Code</button>";
+			}else{
+				$output .="<button type='button' class='butosuccess' id=".$werkzeugID." onClick='norights()'>QR-Code</button>";
+			}
 			echo $_GET['jsoncallback'].'('.json_encode($output).');';
 			exit();
 		}else{
