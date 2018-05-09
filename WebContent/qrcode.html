@@ -45,12 +45,6 @@
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="qrcode.html">
-                     <span data-feather="file"></span>
-                     QR-Code Generator
-                     </a>
-                  </li>
-                  <li class="nav-item">
                      <a class="nav-link" href="werkzeugverwaltung.html">
                      <span data-feather="file"></span>
                      Werkzeugverwaltung
@@ -141,18 +135,8 @@
     	  //werkzeugnummer aus der url parsen
          var url = document.location.href;
          var res = url.split("=");
-         if(res[1]){
-        	  var elText = "http://localhost/workspace/swimp/WebContent/werkzeugverwaltung.html?werkzeugID="+res[1];
-              
-              qrcode.makeCode(elText); 
-         }else{
-        	  var elText = "http://localhost/workspace/swimp/WebContent/werkzeugverwaltung.html?werkzeugID="+XXXXX;
-              
-              qrcode.makeCode(elText);
-         }
-         
-        
-          
+         var elText = "http://localhost/workspace/swimp/WebContent/werkzeugverwaltung.html?werkzeugID="+res[1];    
+         qrcode.makeCode(elText);  
       }
       makeCode();
       

@@ -48,10 +48,12 @@
 				if($erg>=1){
 					$output .="<tr><td><button type='button' class='butosuccess' id=".$werkzeugID." onClick='editieren(id)'>editieren</button></td>";
 					$output .="<td><button type='button' class='butosuccess' id=".$werkzeugID." onClick='entfernen(id)'>entfernen</button></td>";
+					$output .="<td><button type='button' class='butosuccess' id=".$werkzeugnummer." onClick='openqr(id)'>QR-Code</button></td>";
 					$output .="<td><button type='button' class='butosuccess' id=".$werkzeugnummer." onClick='openlink(id)'>oeffnen</button></td></tr>";
 				}else{
 					$output .="<tr><td><button type='button' class='butosuccess' id=".$werkzeugID." onClick='norights()'>editieren</button></td>";
 					$output .="<td><button type='button' class='butosuccess' id=".$werkzeugID." onClick='norights()'>entfernen</button></td>";
+					$output .="<td><button type='button' class='butosuccess' id=".$werkzeugnummer." onClick='norights()'>QR-Code</button></td>";
 					$output .="<td><button type='button' class='butosuccess' id=".$werkzeugnummer." onClick='openlink(id)'>oeffnen</button></td></tr>";
 				}
 				$output .="</div></table>";
