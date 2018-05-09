@@ -16,6 +16,8 @@
 		if($erg>=0){
 			$output="";
 			#Anzuzeigende werte
+			$werkzeugID;
+			$imgsrc;
 			$sql="SELECT * FROM stammdaten WHERE werkzeug_nummer='".$werknummer."' AND entfernt = 0";
 			$statemt = getsql($sql);
 			while($ausgabe = $statemt->fetch_object()){
@@ -60,8 +62,20 @@
 						$output .="<td><button type='button' class='butosuccess' id=".$id_attr." onClick='norights()'>entfernen</button></td></tr>";
 					}
 				}
-				$output .="</div></table>";
-				
+				$output .="</table></div>";	
+			}
+			$stmt = $con->prepare("SELECT svg FROM qrcode WHERE werkzeugID=?");
+			$stmt->bind_param('i', $werkzeugID);
+			$stmt->execute();
+			$stmt->bind_result($userid);
+			$stmt->store_result();
+			if($stmt->num_rows == 1){
+				$sql="SELECT svg FROM qrcode WHERE werkzeugID='".$werkzeugID."';";
+				$statemnt = getsql($sql);
+				while($ausgabe = $statemnt->fetch_object()){
+					$imgsrc = $ausgabe->svg;
+				}
+				$output .= "<img src='".$imgsrc."'>";
 			}
 			echo $_GET['jsoncallback'].'('.json_encode($output).');';
 			exit();

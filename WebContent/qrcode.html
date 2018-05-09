@@ -104,8 +104,8 @@
                <!-- QR-Code Generator Eingabe -->
                <div class="row" id="abstandunten">
                   <label for="code">QR-Code-Inhalt:</label>   
-                  <input id="text" type="text"  class="form-control" value="QR-Code" style="width:200px" />
-                  <a class="btn btn-success .navbar-right .b1" id="qranzeigen" onClick="makeCode()" href="#">Qr-Code anzeigen</a>
+                  <input id="text" type="text"  class="form-control" onkeyup="makeCode()" style="width:200px" />
+               
                   <a class="btn btn-success .navbar-right .b1" id="save">SVG-Code anzeigen</a>
                </div>
                <!-- QR-Code anzeigen -->
@@ -115,25 +115,12 @@
                      <g id="qrcode"/>
                   </svg>
                </div>
-               <!-- QR-Code in Bild umwandeln -->
-               <div class="row" id="abstandunten">
-                  <div id="svg"></div>
-               </div>
-               <!-- Bild nochmal anzeigen  
-               <div class="row" id="abstandunten">
-                  <div id="svgdataurl"></div>
-               </div>
-               -->
-               <!-- img-src Ausgabe als Text -->
+            
+             
                <div class="row" id="abstandunten">
                 <button onclick="insertqr()">insertqr</button>
-                  
-                  <form name="form1" method="post" action="">
-                  
-				  <!--<input name="text1" type="text" size="500" maxlength="100000">-->
-				  <textarea  name="text1" cols="100" rows="40" id="qrcodearea"> </textarea>
-				 <!--<input type="button" name="button1" value="KLICK" onClick="setText()">-->
-				</form>
+                <input  id="qrcodearea" type="hidden" />
+                
 				 </div>
             </div>
          </div>
@@ -196,16 +183,12 @@
            var img = '<img src="'+imgsrc+'">'; 
            d3.select("#svgdataurl").html(img);
            
-           //Zugriff auf img-src
-           //function setText() {
-        	    document.form1.text1.value = imgsrc;
-        	//}
-           
+       
+           document.getElementById("qrcodearea").value=imgsrc;
+        	
          
          });
-      </script>
-      <!-- QR-Code Generator -->          
-      <script type="text/javascript">
+  
          var qrcode = new QRCode(document.getElementById("qrcode"), {
              width : 100,
              height : 100,
@@ -213,25 +196,12 @@
          });
          function makeCode () {        
              var elText = document.getElementById("text");
-             if (!elText.value) {
-                 alert("Input a text");
-                 elText.focus();
-                 return;
-             }
+            
              qrcode.makeCode(elText.value);
+             
          }
-         makeCode();
-         $("#text").
-             on("blur", function () {
-                 makeCode();
-             }).
-             on("keydown", function (e) {
-                 if (e.keyCode == 13) {
-                     makeCode();
-                 }
-             });   
-      </script>  
-      <script>
+         
+ 
       	function insertqr(){
       		var qr = document.getElementById('qrcodearea').value;
       		var uid=Cookies.get("name");

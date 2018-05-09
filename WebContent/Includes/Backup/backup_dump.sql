@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.1.28-MariaDB, for Win32 (AMD64)
+-- MySQL dump 10.16  Distrib 10.1.31-MariaDB, for Win32 (AMD64)
 --
 -- Host: 127.0.0.1    Database: project
 -- ------------------------------------------------------
--- Server version	10.1.28-MariaDB
+-- Server version	10.1.31-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -27,7 +27,7 @@ CREATE TABLE `backup` (
   `uid` varchar(255) NOT NULL,
   `timestamp` int(255) NOT NULL,
   PRIMARY KEY (`backupID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +36,7 @@ CREATE TABLE `backup` (
 
 LOCK TABLES `backup` WRITE;
 /*!40000 ALTER TABLE `backup` DISABLE KEYS */;
-INSERT INTO `backup` VALUES (1,'admin',1524685381),(2,'admin',1525685381);
+INSERT INTO `backup` VALUES (1,'peter',17),(2,'franz',19),(3,'peter',1525264081);
 /*!40000 ALTER TABLE `backup` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,7 +160,7 @@ CREATE TABLE `schlagwort` (
   `werkzeugID` int(255) NOT NULL,
   `schlagwort` varchar(255) NOT NULL,
   PRIMARY KEY (`schlagwortID`)
-) ENGINE=InnoDB AUTO_INCREMENT=333 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=326 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -169,7 +169,7 @@ CREATE TABLE `schlagwort` (
 
 LOCK TABLES `schlagwort` WRITE;
 /*!40000 ALTER TABLE `schlagwort` DISABLE KEYS */;
-INSERT INTO `schlagwort` VALUES (168,42,'adad'),(169,42,'opp'),(170,42,'dada'),(171,42,'adad'),(172,42,'adada'),(173,42,'2018-04-09'),(184,43,'sad'),(185,43,'sada'),(186,43,'asdas'),(187,43,'asdsad'),(188,43,'2018-04-15'),(190,44,'sadss'),(191,44,'sada'),(192,44,'asdas'),(193,44,'asdsad'),(194,44,'2018-04-15'),(312,29,'   hose'),(313,29,'    schuhe'),(314,29,'   ball'),(315,29,'9'),(316,29,'P300'),(317,29,'Wasses'),(318,29,'Seil'),(319,29,'2018-04-08'),(320,41,'sdad'),(321,41,'opss'),(322,41,'sadasd'),(323,41,'sada'),(324,41,'dsaa'),(325,41,'2018-04-08'),(326,45,'dasd'),(327,45,'sdasd'),(328,45,'weffdsdas'),(329,45,'lkl'),(330,45,'gugu'),(331,45,'sda'),(332,45,'2018-05-07');
+INSERT INTO `schlagwort` VALUES (168,42,'adad'),(169,42,'opp'),(170,42,'dada'),(171,42,'adad'),(172,42,'adada'),(173,42,'2018-04-09'),(184,43,'sad'),(185,43,'sada'),(186,43,'asdas'),(187,43,'asdsad'),(188,43,'2018-04-15'),(190,44,'sadss'),(191,44,'sada'),(192,44,'asdas'),(193,44,'asdsad'),(194,44,'2018-04-15'),(312,29,'   hose'),(313,29,'    schuhe'),(314,29,'   ball'),(315,29,'9'),(316,29,'P300'),(317,29,'Wasses'),(318,29,'Seil'),(319,29,'2018-04-08'),(320,41,'sdad'),(321,41,'opss'),(322,41,'sadasd'),(323,41,'sada'),(324,41,'dsaa'),(325,41,'2018-04-08');
 /*!40000 ALTER TABLE `schlagwort` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -191,7 +191,7 @@ CREATE TABLE `stammdaten` (
   `herstelldatum` date NOT NULL,
   `entfernt` int(11) NOT NULL,
   PRIMARY KEY (`werkzeugID`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -200,7 +200,7 @@ CREATE TABLE `stammdaten` (
 
 LOCK TABLES `stammdaten` WRITE;
 /*!40000 ALTER TABLE `stammdaten` DISABLE KEYS */;
-INSERT INTO `stammdaten` VALUES (29,'9','testsdasda','Seil','Wasses','laser','P300','2018-04-08',0),(41,'opss','sdaassda','dsaa','sada','sada','sadasd','2018-04-08',0),(42,'opp','sada','adada','adad','ada','dada','2018-04-09',1),(43,'sad','sadasd','asdsad','asdas','sada','sada','2018-04-15',1),(44,'sadss','sadasd','asdsad','asdas','sada','sada','2018-04-15',1),(45,'weffdsdas','sdasda asdsad ads','sda','gugu','mlml','lkl','2018-05-07',0);
+INSERT INTO `stammdaten` VALUES (29,'9','testsdasda','Seil','Wasses','laser','P300','2018-04-08',0),(41,'opss','sdaassda','dsaa','sada','sada','sadasd','2018-04-08',0),(42,'opp','sada','adada','adad','ada','dada','2018-04-09',1),(43,'sad','sadasd','asdsad','asdas','sada','sada','2018-04-15',1),(44,'sadss','sadasd','asdsad','asdas','sada','sada','2018-04-15',1);
 /*!40000 ALTER TABLE `stammdaten` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,7 +228,7 @@ CREATE TABLE `tokens` (
 
 LOCK TABLES `tokens` WRITE;
 /*!40000 ALTER TABLE `tokens` DISABLE KEYS */;
-INSERT INTO `tokens` VALUES (1,1521633386,'1bacf814380ce284f1f6af1a5c417e392a210903','9027baf6144c234474100a781afb30290128f0a6','0','test'),(2,1525693931,'c89d2ddb50fe4a1db603bf037a2c5c018b0944da','9027baf6144c234474100a781afb30290128f0a6','0','admin'),(3,1523268711,'7a4ce19ce9f92a684b96a74efec27fbed9547666','9027baf6144c234474100a781afb30290128f0a6','0','Daniel'),(4,1521848888,'beee3a0f544318f6a4089125f4807bf1455ad8e8','9027baf6144c234474100a781afb30290128f0a6','0','Test0'),(5,1523269807,'d4d98c582fd7073ee8826266327dd2b710df3808','9027baf6144c234474100a781afb30290128f0a6','0','Test1'),(6,1524052343,'4f3dade0ffdb15e1ef9b8637a90fa79d6085c4b5','9027baf6144c234474100a781afb30290128f0a6','0','steffen');
+INSERT INTO `tokens` VALUES (1,1521633386,'1bacf814380ce284f1f6af1a5c417e392a210903','9027baf6144c234474100a781afb30290128f0a6','0','test'),(2,1525769298,'daefccfdc7d9b5f6dadc2cfbd7b12091cdf54db0','9027baf6144c234474100a781afb30290128f0a6','0','admin'),(3,1523268711,'7a4ce19ce9f92a684b96a74efec27fbed9547666','9027baf6144c234474100a781afb30290128f0a6','0','Daniel'),(4,1521848888,'beee3a0f544318f6a4089125f4807bf1455ad8e8','9027baf6144c234474100a781afb30290128f0a6','0','Test0'),(5,1523269807,'d4d98c582fd7073ee8826266327dd2b710df3808','9027baf6144c234474100a781afb30290128f0a6','0','Test1'),(6,1524052343,'4f3dade0ffdb15e1ef9b8637a90fa79d6085c4b5','9027baf6144c234474100a781afb30290128f0a6','0','steffen');
 /*!40000 ALTER TABLE `tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -245,7 +245,7 @@ CREATE TABLE `werkzeug_attribute` (
   `bezeichnung` varchar(255) NOT NULL,
   `wert` varchar(255) NOT NULL,
   PRIMARY KEY (`werkzeug_attID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -254,6 +254,7 @@ CREATE TABLE `werkzeug_attribute` (
 
 LOCK TABLES `werkzeug_attribute` WRITE;
 /*!40000 ALTER TABLE `werkzeug_attribute` DISABLE KEYS */;
+INSERT INTO `werkzeug_attribute` VALUES (1,29,'test','test');
 /*!40000 ALTER TABLE `werkzeug_attribute` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,7 +274,7 @@ CREATE TABLE `werkzeug_einsatz` (
   `maschine` varchar(255) NOT NULL,
   `kuehlung` varchar(255) NOT NULL,
   `kuehldauer` varchar(255) NOT NULL,
-  `schlieÃŸkraft` int(11) NOT NULL,
+  `schließkraft` int(11) NOT NULL,
   PRIMARY KEY (`einsatzID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -347,4 +348,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-07 13:52:12
+-- Dump completed on 2018-05-08 10:48:19
