@@ -69,18 +69,18 @@
 			$stmt->execute();
 			$stmt->bind_result($userid);
 			$stmt->store_result();
-			if($stmt->num_rows == 1){
+			if($stmt->num_rows != 0){
 				$sql="SELECT svg FROM qrcode WHERE werkzeugID='".$werkzeugID."';";
 				$statemnt = getsql($sql);
 				while($ausgabe = $statemnt->fetch_object()){
 					$imgsrc = $ausgabe->svg;
 				}
-				$output .= "<img src='".$imgsrc."'>";
+				$output .= "<img src='".$imgsrc."' download>";
 			}
 			if($erg>=1){
-				$output .="<button type='button' class='butosuccess' id=".$werkzeugID." onClick='openqr(id)'>QR-Code</button>";
+				$output .="<button type='button' class='butosuccess' id=".$werkzeugnummer." onClick='openqr(id)'>QR-Code</button>";
 			}else{
-				$output .="<button type='button' class='butosuccess' id=".$werkzeugID." onClick='norights()'>QR-Code</button>";
+				$output .="<button type='button' class='butosuccess' id=".$werkzeugnummer." onClick='norights()'>QR-Code</button>";
 			}
 			echo $_GET['jsoncallback'].'('.json_encode($output).');';
 			exit();

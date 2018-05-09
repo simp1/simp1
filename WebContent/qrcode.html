@@ -199,7 +199,7 @@
    
         
           function callinsert() {
-        	  setTimeout(function(){ insertqr(); }, 4000);
+        	  setTimeout(function(){ insertqr(); }, 8000);
           }
           function insertqr(){
       		var qr = document.getElementById('qrcodearea').value;
@@ -212,7 +212,6 @@
       		var link = "http://localhost/workspace/swimp/WebContent/werkzeugverwaltung.html?werkzeugID="+res[1];
      		var datastring = werkzeugID+";;"+qr+";;"+uid+";;"+tok1+";;"+tok2+";;"+link;
       		datastring = "datastring="+datastring;
-      	
 	   		 $.ajax({
 	   			  type: "POST",
 	   		  	  url: "http://localhost/workspace/swimp/WebContent/Includes/QRCode/insertqr.inc.php",
@@ -220,7 +219,7 @@
 	   		  	  cache:false,
 	   		  	  timeout: 8000,
 	   		  	  success: function(data){
-	   		  		 	alert(data);
+	   		  	 	  document.location.href = "http://localhost/workspace/swimp/WebContent/werkzeugverwaltung.html?werkzeugID="+res[1];
 	   			  } , 
 	   			  error: function () {
 	   				    console.log(arguments);
