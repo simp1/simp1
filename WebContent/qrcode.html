@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
    <head>
+  	  <script data-require="snap.svg@*" data-semver="0.3.0" src="https://cdn.jsdelivr.net/npm/snapsvg@0.5.1/dist/snap.svg.min.js"></script>
       <link href="bootstrap.min.css" rel="stylesheet">
       <link rel="stylesheet" href="assets/css/custom.css">
       <link rel="stylesheet" href="assets/css/custom-themes.css">
@@ -103,12 +104,38 @@
                <!-- QR-Code anzeigen -->
                <div class="row" id="abstandunten">
                
-                  <svg>
+                  <svg id="svgContainer">
                      <g id="qrcode"/>
                   </svg>
+                  <button onclick="saveSVG()">Download SVG</button>
                </div>
-            
-             
+            <script type="text/javascript">
+            function downloadSVG(content, fileName)
+            {
+              var svgURL = blobURL(content, 'image/svg+xml');
+              var newElem = document.createElement('a');
+              newElem.href = svgURL;
+              newElem.setAttribute('download', fileName);
+              document.body.appendChild(newElem);
+              newElem.click();
+              document.body.removeChild(newElem);
+            }
+
+            function blobURL(content, contentType)
+            {
+              var blob = new Blob([content], {type: contentType});
+              return (window.URL || window.webkitURL).createObjectURL(blob);
+            }
+
+
+
+            function saveSVG()
+            {
+              var s = Snap('#svgContainer');
+              downloadSVG(s.toString(), 'demo.svg');
+            }
+            </script>
+             <a id="download"></a>
                <div class="row" id="abstandunten">
                 
                 <input  id="qrcodearea" type="hidden" />
@@ -122,7 +149,7 @@
       <script src="assets/js/custom.js"></script>
       <script type="text/javascript" src="qrcode.js"></script>
       <script src="http://d3js.org/d3.v3.min.js"></script>
-      
+    
       
       <!-- QR-Code SVG zu Bild -->
       <script>
@@ -180,7 +207,7 @@
               .attr("d", area);
           
           d3.select("#save").on("click", function(){
-        	
+  
             var html = d3.select("svg")
                   .attr("version", 1.1)
                   .attr("xmlns", "http://www.w3.org/2000/svg")
