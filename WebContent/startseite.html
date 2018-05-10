@@ -85,6 +85,7 @@
                      <div class="col-md-4">
                  <div class="card mb-4 box-shadow" id="backupbox">
                      <div class="card-body">
+                     	<div id="anzeigevonbackup">
                      	<label> Letztes BackUP</label>
                        <div id="backup_anzeige">
                        </div>
@@ -93,6 +94,7 @@
                        </div>
                        <div id="loadbox">
                        </div>
+						</div>
                     </div>
                  </div>
               </div>
@@ -259,19 +261,22 @@
 			dataType:"JSONp",
 			timeout: 5000,
 			success: function(data){
-				var res = data.split(";");
-				if(res[1]){
-					var output= res[0] + "<br>Es wurde seit mehr als 7 Tage kein BackUp mehr durchgeführt! Bitte führen Sie ein BackUp durch. <br>";
-					$('#backup_anzeige').html(output);
-					$('#backupbox').css("background-color","red");
+				if(data=="rights"||data=="token"){
+					document.getElementById('anzeigevonbackup').style.display = "none";
 				}else{
-					$('#backup_anzeige').html(res[0]);
+					var res = data.split(";");
+					if(res[1]){
+						var output= res[0] + "<br>Es wurde seit mehr als 7 Tage kein BackUp mehr durchgeführt! Bitte führen Sie ein BackUp durch. <br>";
+						$('#backup_anzeige').html(output);
+						$('#backupbox').css("background-color","red");
+					}else{
+						$('#backup_anzeige').html(res[0]);
+					}
 				}
 			},
 			error: function (request, error) {
 		        console.log(arguments);
 		        alert(" Can't do because: " + error);
-		        document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
 		    }
 		});
 		function startbackup(){

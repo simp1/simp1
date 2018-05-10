@@ -75,7 +75,7 @@
 				while($ausgabe = $statemnt->fetch_object()){
 					$imgsrc = $ausgabe->svg;
 				}
-				$output .= "<img src='".$imgsrc."' download>";
+				$output .= "<img id='imgqrcode' src='".$imgsrc."'>";
 			}
 			if($erg>=1){
 				$output .="<button type='button' class='butosuccess' id=".$werkzeugnummer." onClick='openqr(id)'>QR-Code</button>";
