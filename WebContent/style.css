@@ -23,6 +23,9 @@ li a{
 .abstandunten{
 	margin-bottom:5px;
 }
+.abstandoben{
+	margin-top:10px;
+}
 .b1 #qranzeigen{
 	/*margin-top:5px;*/
 	margin-left:5px;
