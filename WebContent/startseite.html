@@ -95,7 +95,7 @@
                        <div id="backup_anzeige">
                        </div>
                        
-                          <a class="btn btn-danger abstandunten abstandoben " onclick="startbackup()" href="#" style="width:200px;">BackUp starten</a>
+                          <a class="btn btn-success abstandunten abstandoben " onclick="startbackup()" href="#" style="width:200px;">BackUp starten</a>
                        
                        <div id="loadbox" class="abstandoben">
                        </div>
@@ -302,7 +302,7 @@
 				timeout: 5000,
 				success: function(data){
 					if(data=="success"){
-						downbtn = '<a style="width:200px;" class="btn btn-primary" href="http://localhost/workspace/swimp/WebContent/Includes/Backup/backup_dump.sql" download>Download</a>';
+						downbtn = '<a style="width:200px;" class="btn btn-success" href="http://localhost/workspace/swimp/WebContent/Includes/Backup/backup_dump.sql" download>Download</a>';
 					 	$('#loadbox').html(downbtn);
 					}else if("token"){
 						alert("Sitzung abgelaufen!");

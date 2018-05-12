@@ -99,17 +99,18 @@
                <!-- QR-Code Generator Eingabe -->
                <div class="row" id="abstandunten">
                
-                  <a class="btn btn-success .navbar-right .b1" id="save" onclick="callinsert()">QR-Code erstellen</a>
-               </div>
+                  <a class="btn btn-success .navbar-right .b1 abstandunten" id="save" onclick="callinsert()">QR-Code erstellen</a>
+                  <button class="btn btn-success abstandlinks abstandunten" onclick="saveSVG()">Download SVG</button>
+              </div>
                <!-- QR-Code anzeigen -->
-               <div class="row" id="abstandunten">
-               
+               <div class="row abstandoben abstandlinks2 center-block">
                   <svg id="svgContainer">
                      <g id="qrcode"/>
                   </svg>
-                 
                </div>
-               <button onclick="saveSVG()">Download SVG</button>
+	            
+	            
+	            
 	            <script type="text/javascript">
 	            function downloadSVG(content, fileName)
 	            {
@@ -136,6 +137,7 @@
 	              downloadSVG(s.toString(), 'demo.svg');
 	            }
 	            </script>
+	            
              <a id="download"></a>
                <div class="row" id="abstandunten">
                 

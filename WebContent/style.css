@@ -17,11 +17,17 @@ li a{
 #borderweg{
 	border:none;
 }
+.abstandlinks{
+	margin-left:10px;
+}
+.abstandlinks2{
+	margin-left:50px;
+}
 .btn.btn-success{
 	width:200px;
 }
 .abstandunten{
-	margin-bottom:5px;
+	margin-bottom:10px;
 }
 .abstandoben{
 	margin-top:10px;
