@@ -71,11 +71,125 @@
                     <div class="form-group col-md-12" id="überschrift">
                     	<div id="data_div">
                     	</div>
+                    	<div id="div_geo">
+                    	</div>
+                    	<div id="div_pruef">
+                    	</div>
+                    	<div id="div_einsatz">
+                    	</div>
                     	<br>
-								       
+                    	<div id="inputGeoCreate" style="display:none;">
+	                    	<div class="col-sm-6">
+								<label for="inputGeoAußenmaße">Außenmaße Gesamt-Soll (mm) nach CAD*:</label>
+								<div class="form-label-group">
+									<input  id="inputGeoAußenmaße" class="form-control" placeholder="Außenmaß"
+									type="text" required>
+								</div>
+								<label for="inputGeoForm">Formeinsatz Typ*:</label>
+								<div class="form-label-group">
+									<input id="inputGeoForm" class="form-control" placeholder="Formeinsatz"
+										type="text" required>
+								</div>
+								<label for="inputGeoBohrbild"">Bohrbild*:</label>
+								<div class="form-label-group">
+									<input id="inputGeoBohrbild" class="form-control" placeholder="Bohrbild"
+										type="text" required>
+								</div>
+								<label for="inputGeoMaßeAs">Maße AS*:</label>
+								<div class="form-label-group">
+									<input  id="inputGeoMaßeAs" class="form-control" placeholder="AS"
+									type="text" required>
+								</div>
+								<label for="inputGeoMaßeDs">Maße DS*:</label>
+								<div class="form-label-group">
+									<input  id="inputGeoMaßeDs" class="form-control" placeholder="DS"
+									type="text" required>
+								</div>
+								<label for="inputGeoAuswerfer">Auswerfer Anzahl*:</label>
+								<div class="form-label-group">
+									<input  id="inputGeoAuswerfer" class="form-control" value="1"
+									type="number" min="0" required>
+								</div>
+								<label for="inputGeoPosition">Position*:</label>
+								<div class="form-label-group">
+									<input  id="inputGeoPosition" class="form-control" placeholder="Position"
+									type="text" required>
+								</div>
+								<label for="inputGeoKavität">Beschreibung Kavität:</label>
+								<div class="form-label-group">
+									<input  id="inputGeoKavität" class="form-control" placeholder="Kavität"
+									type="text" required>
+								</div>
+								<br>
+						        <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="createGeoData()">Übernehmen</button>
+								<br>
+							</div>
+						</div>
+                    	<div id="inputPruefCreate" style="display:none;">
+	                    	<div class="col-sm-6">
+								<label for="inputPruefDate">Datum*:</label>
+								<div class="form-label-group">
+									<input type="date" id="inputPruefDate" class="form-control"
+										required>
+								</div>
+								<label for="inputPruefLaenge">Maß - Laenge*:</label>
+								<div class="form-label-group">
+									<input type="number" id="inputPruefLaenge" class="form-control" value="0.01"
+										type="number" step="0.01" min="0.01"  required>
+								</div>
+								<label for="inputPruefBreite">Maß - Breite*:</label>
+								<div class="form-label-group">
+									<input  id="inputPruefBreite" class="form-control" value="0.01"
+									type="number" step="0.01" min="0.01" required>
+								</div>
+								<br>
+						        <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="createPruefData()">Übernehmen</button>
+								<br>
+							</div>
+						</div>
+						<div id="inputEinsatzCreate" style="display:none;">
+							<div class="col-sm-6">
+								<label for="inputEinsatzCreate">Datum*:</label>
+						        <div class="form-label-group">
+						            <input type="date" id="inputEinsatzDate" class="form-control" required>
+						        </div>      
+						        <label for="inputEinsatzCreate">Schussnummer*:</label>
+				               <div class="form-label-group">
+				                  <input type="number" id="inputEinsatzSchuss" class="form-control" min="1" max="10" value="1" required>
+				               </div>
+				               <label for="inputEinsatzCreate">Maschine*:</label>
+						        <div class="form-label-group">
+						            <input type="text" id="inputEinsatzMaschine" class="form-control" placeholder="Maschine" required>
+						        </div>
+						        <label for="inputEinsatzCreate">Kühlung*:</label>
+						        <div class="form-label-group">
+						            <input type="text" id="inputEinsatzKuehlung" class="form-control" placeholder="Kuehlung" required>
+						        </div>
+						        <label for="inputEinsatzCreate">Kühldauer*:</label>
+						        <div class="form-label-group">
+						            <input type="number" id="inputEinsatzKuehldauer" class="form-control" placeholder="1" required>
+						        </div>
+						        <label for="inputEinsatzCreate">schlieskraft(kN)*:</label>
+						        <div class="form-label-group">
+						            <input type="number" id="inputEinsatzSchlies" class="form-control" placeholder="1" required>
+						        </div>
+						        <br>
+						        <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="createEinsatzData()">Übernehmen</button>
+								<br>
+						     </div>
+						</div>      
                     	<br>
                     	<div id="btn_stammdaten_show">
                     		<button id="btn_stammdata" class="btn btn-success abstandunten" onClick="createAttribut()"> Attribut hinzufügen </button>
+                    	</div>
+                    	<div id="btn_stammdaten_einsatz">
+                    		<button id="btn_stammdata_einsatz" class="btn btn-success abstandunten" onClick="showFormEinsatz()"> Einsatzprotokoll anlegen </button>
+                    	</div>
+                    	<div id="btn_stammdaten_pruef">
+                    		<button id="btn_stammdata_pruef" class="btn btn-success abstandunten" onClick="showFormPruef()"> Werkzeugprüfung </button>
+                    	</div>
+                    	<div id="btn_stammdaten_geo">
+                    		<button id="btn_stammdata_geo" class="btn btn-success abstandunten" onClick="showFormGeo()"> Werkzeuggeometrie </button>
                     	</div>
                     	<div id="addAttr" style="display:none;">
 							<div class="col-sm-6">
@@ -101,6 +215,7 @@
                         <div id="werkzeugsuchfktdiv">
 							<input type="text" class="form-control center-block text-center" id="werkzeugsuchfkt" onkeyup="searchwerkzeug()" required>
 						</div>
+						
 						</div>
 						</div>
 						
@@ -317,6 +432,149 @@
 		        alert(" Can't do because: " + error);
 		    }
 		});
+	}
+	//Einsatzformular anzeigne
+	function showFormEinsatz(){
+		var uid=Cookies.get("name");
+		var tok1=Cookies.get("token");
+		var tok2=Cookies.get("token_login");
+		$.ajax({
+			type: "GET",
+			url: "http://localhost/workspace/swimp/WebContent/Includes/checkrights.inc.php?jsoncallback=?",
+			data: {
+				"username": uid,
+				"token": tok1,
+				"token_login": tok2
+			},
+			dataType:"JSONp",
+			timeout: 5000,
+			success: function(data){
+				if(data=="success"){
+					document.getElementById('inputEinsatzCreate').style.display = "block";
+					document.getElementById('inputEinsatzDate').valueAsDate = new Date();
+				}
+			},
+			error: function (request, error) {
+		        console.log(arguments);
+		        alert(" Can't do because: " + error);
+		    }
+		});
+	}
+	//Prüfformular anzeigne
+	function showFormPruef(){
+		var uid=Cookies.get("name");
+		var tok1=Cookies.get("token");
+		var tok2=Cookies.get("token_login");
+		$.ajax({
+			type: "GET",
+			url: "http://localhost/workspace/swimp/WebContent/Includes/checkrights.inc.php?jsoncallback=?",
+			data: {
+				"username": uid,
+				"token": tok1,
+				"token_login": tok2
+			},
+			dataType:"JSONp",
+			timeout: 5000,
+			success: function(data){
+				if(data=="success"){
+					document.getElementById('inputPruefCreate').style.display = "block";
+					document.getElementById('inputPruefDate').valueAsDate = new Date();
+				}
+			},
+			error: function (request, error) {
+		        console.log(arguments);
+		        alert(" Can't do because: " + error);
+		    }
+		});
+	}
+	//Geoformular anzeigne
+	function showFormGeo(){
+		var uid=Cookies.get("name");
+		var tok1=Cookies.get("token");
+		var tok2=Cookies.get("token_login");
+		$.ajax({
+			type: "GET",
+			url: "http://localhost/workspace/swimp/WebContent/Includes/checkrights.inc.php?jsoncallback=?",
+			data: {
+				"username": uid,
+				"token": tok1,
+				"token_login": tok2
+			},
+			dataType:"JSONp",
+			timeout: 5000,
+			success: function(data){
+				if(data=="success"){
+					document.getElementById('inputGeoCreate').style.display = "block";
+				}
+			},
+			error: function (request, error) {
+		        console.log(arguments);
+		        alert(" Can't do because: " + error);
+		    }
+		});
+	}
+	//Pruefdaten übernehmen
+	function createPruefData(){
+		
+	}
+	//Geodaten übernehmen
+	function createGeoData(){
+		
+	}
+	//Einsatzdaten übernehmen
+	function createEinsatzData(){
+		var datum = document.getElementById('inputEinsatzDate').value;
+		var schuss = document.getElementById('inputEinsatzSchuss').value;
+		var maschine = document.getElementById('inputEinsatzMaschine').value;
+		var kuehl = document.getElementById('inputEinsatzKuehlung').value;
+		var kuehldauer = document.getElementById('inputEinsatzKuehldauer').value;
+		var schlies = document.getElementById('inputEinsatzSchlies').value;
+		var werkid = document.getElementById('werkzeugsuchfkt').value;
+		var uid=Cookies.get("name");
+		var tok1=Cookies.get("token");
+		var tok2=Cookies.get("token_login");
+		if(datum&&schuss&&maschine&&kuehl&&kuehldauer&&schlies&&werkid){
+			$.ajax({
+				type: "GET",
+				url: "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/createeinsatz.inc.php?jsoncallback=?",
+				data: {
+					"username": uid,
+					"token": tok1,
+					"token_login": tok2,
+					"werkzeugID": werkid,
+					"schuss": schuss,
+					"datum": datum,
+					"maschine": maschine,
+					"kuehl": kuehl,
+					"kuehldauer": kuehldauer,
+					"schlies": schlies
+				},
+				dataType:"JSONp",
+				timeout: 5000,
+				success: function(data){
+					if(data=="success"){
+						location.reload();
+					}else if(data=="doppelt"){
+						alert("Werkzeugnummer existiert bereits.");
+					}else if(data=="fehler"){
+						alert("Es ist ein Fehler aufgetreten!");
+					}else if(data=="rechte"){
+						alert("Sie haben keine Rechte diese Aktion auszuführen!");
+					}else if(data=="token"){
+						alert("Zeitlimit überschritten!");
+						document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+					}else{
+						alert("Unexpected answer! Bitte Antwort aufschreiben.");
+					}
+				},
+				error: function (request, error) {
+			        console.log(arguments);
+			        alert(" Can't do because: " + error);
+			    }
+			});	
+		}else{
+			alert("Die mit * markierten Felder müssen ausgefüllt sein!");
+		}
 	}
 	//funktion zum öffnen der Seite QR-Code
 	function openqr(id){
