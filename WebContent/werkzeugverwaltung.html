@@ -90,7 +90,7 @@
 									<input id="inputGeoForm" class="form-control" placeholder="Formeinsatz"
 										type="text" required>
 								</div>
-								<label for="inputGeoBohrbild"">Bohrbild*:</label>
+								<label for="inputGeoBohrbild">Bohrbild*:</label>
 								<div class="form-label-group">
 									<input id="inputGeoBohrbild" class="form-control" placeholder="Bohrbild"
 										type="text" required>
@@ -117,7 +117,7 @@
 								</div>
 								<label for="inputGeoKavität">Beschreibung Kavität:</label>
 								<div class="form-label-group">
-									<input  id="inputGeoKavität" class="form-control" placeholder="Kavität"
+									<input  id="inputGeoKavitaet" class="form-control" placeholder="Kavität"
 									type="text" required>
 								</div>
 								<br>
@@ -515,11 +515,111 @@
 	}
 	//Pruefdaten übernehmen
 	function createPruefData(){
-		
+		var werkid = document.getElementById('werkzeugsuchfkt').value;
+		var uid=Cookies.get("name");
+		var tok1=Cookies.get("token");
+		var tok2=Cookies.get("token_login");
+		var datum = document.getElementById('inputPruefDate').value;
+		var laenge = document.getElementById('inputPruefLaenge').value;
+		var breite = document.getElementById('inputPruefBreite').value;
+		if(datum&&laenge&&breite&&werkid){
+			$.ajax({
+				type: "GET",
+				url: "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/createpruef.inc.php?jsoncallback=?",
+				data: {
+					"username": uid,
+					"token": tok1,
+					"token_login": tok2,
+					"werkzeugID": werkid,
+					"laenge": laenge,
+					"datum": datum,
+					"breite": breite
+				},
+				dataType:"JSONp",
+				timeout: 5000,
+				success: function(data){
+					if(data=="success"){
+						location.reload();
+					}else if(data=="doppelt"){
+						alert("Werkzeugnummer existiert bereits.");
+					}else if(data=="fehler"){
+						alert("Es ist ein Fehler aufgetreten!");
+					}else if(data=="rights"){
+						alert("Sie haben keine Rechte diese Aktion auszuführen!");
+					}else if(data=="token"){
+						alert("Zeitlimit überschritten!");
+						document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+					}else{
+						alert("Unexpected answer! Bitte Antwort aufschreiben.");
+					}
+				},
+				error: function (request, error) {
+			        console.log(arguments);
+			        alert(" Can't do because: " + error);
+			    }
+			});	
+		}else{
+			alert("Die mit * markierten Felder müssen ausgefüllt sein!");
+		}
 	}
 	//Geodaten übernehmen
 	function createGeoData(){
-		
+		var werkid = document.getElementById('werkzeugsuchfkt').value;
+		var uid=Cookies.get("name");
+		var tok1=Cookies.get("token");
+		var tok2=Cookies.get("token_login");
+		var ausmas = document.getElementById('inputGeoAußenmaße').value;
+		var form = document.getElementById('inputGeoForm').value;
+		var bohrbild = document.getElementById('inputGeoBohrbild').value;
+		var as = document.getElementById('inputGeoMaßeAs').value;
+		var ds = document.getElementById('inputGeoMaßeDs').value;
+		var auswerfer = document.getElementById('inputGeoAuswerfer').value;
+		var position = document.getElementById('inputGeoPosition').value;
+		var kavitaet = document.getElementById('inputGeoKavitaet').value;
+		if(kavitaet&&position&&auswerfer&&as&&ds&&bohrbild&&form&&ausmas&&werkid){
+			$.ajax({
+				type: "GET",
+				url: "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/creategeo.inc.php?jsoncallback=?",
+				data: {
+					"username": uid,
+					"token": tok1,
+					"token_login": tok2,
+					"werkzeugID": werkid,
+					"ausmas": ausmas,
+					"form": form,
+					"as": as,
+					"ds": ds,
+					"auswerfer": auswerfer,
+					"kavitaet": kavitaet,
+					"bohrbild": bohrbild,
+					"position": position
+				},
+				dataType:"JSONp",
+				timeout: 5000,
+				success: function(data){
+					if(data=="success"){
+						location.reload();
+					}else if(data=="doppelt"){
+						alert("Werkzeugnummer existiert bereits.");
+					}else if(data=="fehler"){
+						alert("Es ist ein Fehler aufgetreten!");
+					}else if(data=="rights"){
+						alert("Sie haben keine Rechte diese Aktion auszuführen!");
+					}else if(data=="token"){
+						alert("Zeitlimit überschritten!");
+						document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+					}else{
+						alert(data+"Unexpected answer! Bitte Antwort aufschreiben.");
+					}
+				},
+				error: function (request, error) {
+			        console.log(arguments);
+			        alert(" Can't do because: " + error);
+			    }
+			});	
+		}else{
+			alert("Die mit * markierten Felder müssen ausgefüllt sein!");
+		}
 	}
 	//Einsatzdaten übernehmen
 	function createEinsatzData(){
