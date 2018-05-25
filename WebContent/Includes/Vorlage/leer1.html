@@ -1,125 +1,128 @@
 <!DOCTYPE html>
 <html>
 <head>
-    
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-    
-    <link href="bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/custom.css">
-    <link rel="stylesheet" href="assets/css/custom-themes.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link href="style.css" rel="stylesheet">
-     <script src="assets/js/custom.js"></script>
+<meta charset="utf-8">
+<meta name="author" content="Steffen Selz, Michael Wenk">
+<meta name="description"
+	content="Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationssystem">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+<link href="bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/custom.css">
+<link rel="stylesheet" href="assets/css/custom-themes.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="style.css" rel="stylesheet">
+<script src="assets/js/custom.js"></script>
 </head>
-<body> 	
-   <div class="page-wrapper chiller-theme toggled">
+<body>
+	<div class="page-wrapper chiller-theme toggled">
 
-<!-- SeitenleisteStart -->
-		 <nav id="sidebar" class="sidebar-wrapper" data-color="#555">
-       
-                <div id="toggle-sidebar">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-                <div class="sidebar-brand">
-                    <a href="#">Eigenschaften</a>
-                </div>
-                <div class="sidebar-menu">
-                <ul>  
-                 <li class="nav-item">
-                <a class="nav-link" href="http://localhost/workspace/swimp/WebContent/index.html">
-                  <span data-feather="file"></span>
-                  Home
-                </a>
-              </li>
-               <li class="nav-item" id="superadminverwaltung" style="display:none;">
-                <a class="nav-link" href="benutzerverwaltung.html">
-                  <span data-feather="file"  ></span>
-                  Benutzerverwaltung
-                </a>
-              </li>
-              
-              <li class="nav-item" id="adminverwaltung" style="display:none;">
-                <a class="nav-link" href="benutzerverwaltungadmin.html">
-                  <span data-feather="file"></span>
-                  Benutzerverwaltung
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a class="nav-link" href="stammdaten.html">
-                  <span data-feather="file"></span>
-                  Stammdaten
-                </a>
-              </li>      
-               <li class="nav-item">
-                <a class="nav-link" href="werkzeugverwaltung.html">
-                  <span data-feather="file"></span>
-                  Werkzeugverwaltung
-                </a>
-              </li>     
-            </ul>
-        </div>
-  </nav>
-	<!-- Seitenleiste Ende -->
-	
-	    <div class="page-content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="form-group col-md-12" id="überschrift">
-                        <h1>Leerseite</h1>
-                    </div>
-                </div>
-                 <div class="row">
-                 <div class="form-group col-md-12">
-                    <!-- Hier drin ist der main-Teil -->
-                    
-                    
-                    
-                    </div>
-                </div>
+		<!-- SeitenleisteStart -->
+		<nav id="sidebar" class="sidebar-wrapper" data-color="#555">
 
-          
-            </div>
+			<div id="toggle-sidebar">
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+			<div class="sidebar-brand">
+				<a href="#">Eigenschaften</a>
+			</div>
+			<div class="sidebar-menu">
+				<ul>
+					<li class="nav-item"><a class="nav-link"
+						href="http://localhost/workspace/swimp/WebContent/index.html">
+							<span data-feather="file"></span> Home
+					</a></li>
+					<li class="nav-item" id="superadminverwaltung"
+						style="display: none;"><a class="nav-link"
+						href="benutzerverwaltung.html"> <span data-feather="file"></span>
+							Benutzerverwaltung
+					</a></li>
 
-    </div>
-</div>
-      		
-<script type="text/javascript">
-	//Startleiste
-	var uid=Cookies.get("name");
-	var tok1=Cookies.get("token");
-	var tok2=Cookies.get("token_login");
-	$.ajax({
-		type: "GET",
-		url: "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/adminverwaltung.inc.php?jsoncallback=?",
-		data: {
-			"username": uid,
-			"token": tok1,
-			"token_login": tok2
-		},
-		dataType:"JSONp",
-		timeout: 5000,
-		success: function(data){
-			if(data=="sadmin"){
-				document.getElementById('superadminverwaltung').style.display = "block";
-			}else if(data=="admin"){
-				document.getElementById('adminverwaltung').style.display = "block";
-			}else if(data=="noadmin"){
-				
-			}else{
-				alert("Login ungültig");
-				document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
-			}
-		},
-		error: function (request, error) {
-	        console.log(arguments);
-	        alert(" Can't do because: " + error);
-	        document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
-	    }
-	});
-</script>
+					<li class="nav-item" id="adminverwaltung" style="display: none;">
+						<a class="nav-link" href="benutzerverwaltungadmin.html"> <span
+							data-feather="file"></span> Benutzerverwaltung
+					</a>
+					</li>
+
+					<li class="nav-item"><a class="nav-link"
+						href="stammdaten.html"> <span data-feather="file"></span>
+							Stammdaten
+					</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="werkzeugverwaltung.html"> <span data-feather="file"></span>
+							Werkzeugverwaltung
+					</a></li>
+					<li class="nav-item listenende"><a class="nav-link"
+						href="index.html" onclick="deleteAllCookies()"> <span
+							data-feather="file"></span>Logout
+					</a></li>
+				</ul>
+			</div>
+		</nav>
+		<!-- Seitenleiste Ende -->
+
+		<div class="page-content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="form-group col-md-12" id="Ã¼berschrift">
+						<h1>Leerseite</h1>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-12">
+						<!-- Hier drin ist der main-Teil -->
+
+
+
+					</div>
+				</div>
+
+
+			</div>
+
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		//Startleiste
+		var uid = Cookies.get("name");
+		var tok1 = Cookies.get("token");
+		var tok2 = Cookies.get("token_login");
+		$
+				.ajax({
+					type : "GET",
+					url : "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/adminverwaltung.inc.php?jsoncallback=?",
+					data : {
+						"username" : uid,
+						"token" : tok1,
+						"token_login" : tok2
+					},
+					dataType : "JSONp",
+					timeout : 5000,
+					success : function(data) {
+						if (data == "sadmin") {
+							document.getElementById('superadminverwaltung').style.display = "block";
+						} else if (data == "admin") {
+							document.getElementById('adminverwaltung').style.display = "block";
+						} else if (data == "noadmin") {
+
+						} else {
+							alert("Login ungÃ¼ltig");
+							document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+						}
+					},
+					error : function(request, error) {
+						console.log(arguments);
+						alert(" Can't do because: " + error);
+						document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+					}
+				});
+	</script>
 </body>
 </html>

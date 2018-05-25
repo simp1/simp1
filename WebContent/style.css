@@ -32,6 +32,10 @@ li a{
 .abstandoben{
 	margin-top:10px;
 }
+.listenende{
+	position: absolute;
+	bottom: 0;
+}
 .b1 #qranzeigen{
 	/*margin-top:5px;*/
 	margin-left:5px;
