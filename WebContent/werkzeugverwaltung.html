@@ -185,11 +185,20 @@
                     	<div id="btn_stammdaten_einsatz">
                     		<button id="btn_stammdata_einsatz" class="btn btn-success abstandunten" onClick="showFormEinsatz()"> Einsatzprotokoll anlegen </button>
                     	</div>
+                    	<div id="btn_stammdaten_einsatz">
+                    		<button id="btn_stammdata_einsatz" class="btn btn-success abstandunten" onClick="showFormEinsatzAttr()">Einsatz Attribut anlegen </button>
+                    	</div>
                     	<div id="btn_stammdaten_pruef">
                     		<button id="btn_stammdata_pruef" class="btn btn-success abstandunten" onClick="showFormPruef()"> Werkzeugprüfung </button>
                     	</div>
+                    	<div id="btn_stammdaten_pruef">
+                    		<button id="btn_stammdata_pruef" class="btn btn-success abstandunten" onClick="showFormPruefAttr()"> Prüfmerkmal</button>
+                    	</div>
                     	<div id="btn_stammdaten_geo">
                     		<button id="btn_stammdata_geo" class="btn btn-success abstandunten" onClick="showFormGeo()"> Werkzeuggeometrie </button>
+                    	</div>
+                    	<div id="btn_stammdaten_geo">
+                    		<button id="btn_stammdata_geo" class="btn btn-success abstandunten" onClick="showFormGeoAttr()">Geo Attribut anlegen </button>
                     	</div>
                     	<div id="addAttr" style="display:none;">
 							<div class="col-sm-6">
@@ -207,7 +216,59 @@
 								<br>
 							</div>
 						</div>
-						
+						<div id="addAttrGeo" style="display:none;">
+							<div class="col-sm-6">
+								<label for="inputTextAttr">Bezeichnung:</label>
+						        <div class="form-label-group">
+						            <input type="text" id="inputBezAttrGeo" class="form-control" placeholder="Bezeichnung" required autofocus>
+						        </div>
+						        <label for="inputTextAttr">Wert:</label>
+						        <div class="form-label-group">
+						            <input type="text" id="inputValAttrGeo" class="form-control" placeholder="Wert des Attributes" required>
+						        </div>
+						        <br>
+						        <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="addAttributGeofkt()">Hinzufügen</button>
+								<br>
+							</div>
+						</div>
+						<div id="addAttrPruef" style="display:none;">
+							<div class="col-sm-6">
+								<label for="inputTextAttr">Merkmal:</label>
+						        <div class="form-label-group">
+						            <input type="text" id="inputBezAttrPruef" class="form-control" placeholder="Bezeichnung" required autofocus>
+						        </div>
+						        <label for="inputTextAttr">Wert:</label>
+						        <div class="form-label-group">
+						            <input type="text" id="inputValAttrPruef" class="form-control" placeholder="Wert des Attributes" required>
+						        </div>
+						        <label for="inputTextAttr">Laufendenummer:</label>
+						        <div class="form-label-group">
+						            <input type="text" id="inputLfdAttrPruef" class="form-control" placeholder="Laufendenummer" required>
+						        </div>
+						        <br>
+						        <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="addAttributPrueffkt()">Hinzufügen</button>
+								<br>
+							</div>
+						</div>
+						<div id="addAttrEinsatz" style="display:none;">
+							<div class="col-sm-6">
+								<label for="inputTextAttr">Bezeichnung:</label>
+						        <div class="form-label-group">
+						            <input type="text" id="inputBezAttrEinsatz" class="form-control" placeholder="Bezeichnung" required autofocus>
+						        </div>
+						        <label for="inputTextAttr">Wert:</label>
+						        <div class="form-label-group">
+						            <input type="text" id="inputValAttrEinsatz" class="form-control" placeholder="Wert des Attributes" required>
+						        </div>
+						        <label for="inputTextAttr">Laufendenummer:</label>
+						        <div class="form-label-group">
+						            <input type="text" id="inputLfdAttrEinsatz" class="form-control" placeholder="Laufendenummer" required>
+						        </div>
+						        <br>
+						        <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="addAttributEinsatzfkt()">Hinzufügen</button>
+								<br>
+							</div>
+						</div>
 						<div class="row">
 						<div class="form-group col-md-5 mb-3 text-right"><label id="sucheschrift">Werkzeugsuche:</label></div>
 						<div class="form-group col-md-3 mb-3">
@@ -376,6 +437,7 @@
 				success: function(data){
 					if(data=="success"){
 						searchwerkzeug();
+						document.getElementById('addAttr').style.display = "none";
 					}else if(data=="doppelt"){
 						alert("Werkzeugnummer existiert bereits.");
 					}else if(data=="fehler"){
@@ -513,6 +575,84 @@
 		    }
 		});
 	}
+	//Geoformular anzeigne
+	function showFormGeoAttr(){
+		var uid=Cookies.get("name");
+		var tok1=Cookies.get("token");
+		var tok2=Cookies.get("token_login");
+		$.ajax({
+			type: "GET",
+			url: "http://localhost/workspace/swimp/WebContent/Includes/checkrights.inc.php?jsoncallback=?",
+			data: {
+				"username": uid,
+				"token": tok1,
+				"token_login": tok2
+			},
+			dataType:"JSONp",
+			timeout: 5000,
+			success: function(data){
+				if(data=="success"){
+					document.getElementById('addAttrGeo').style.display = "block";
+				}
+			},
+			error: function (request, error) {
+		        console.log(arguments);
+		        alert(" Can't do because: " + error);
+		    }
+		});
+	}
+	//Pruefformular anzeigne
+	function showFormPruefAttr(){
+		var uid=Cookies.get("name");
+		var tok1=Cookies.get("token");
+		var tok2=Cookies.get("token_login");
+		$.ajax({
+			type: "GET",
+			url: "http://localhost/workspace/swimp/WebContent/Includes/checkrights.inc.php?jsoncallback=?",
+			data: {
+				"username": uid,
+				"token": tok1,
+				"token_login": tok2
+			},
+			dataType:"JSONp",
+			timeout: 5000,
+			success: function(data){
+				if(data=="success"){
+					document.getElementById('addAttrPruef').style.display = "block";
+				}
+			},
+			error: function (request, error) {
+		        console.log(arguments);
+		        alert(" Can't do because: " + error);
+		    }
+		});
+	}
+	//Geoformular anzeigne
+	function showFormEinsatzAttr(){
+		var uid=Cookies.get("name");
+		var tok1=Cookies.get("token");
+		var tok2=Cookies.get("token_login");
+		$.ajax({
+			type: "GET",
+			url: "http://localhost/workspace/swimp/WebContent/Includes/checkrights.inc.php?jsoncallback=?",
+			data: {
+				"username": uid,
+				"token": tok1,
+				"token_login": tok2
+			},
+			dataType:"JSONp",
+			timeout: 5000,
+			success: function(data){
+				if(data=="success"){
+					document.getElementById('addAttrEinsatz').style.display = "block";
+				}
+			},
+			error: function (request, error) {
+		        console.log(arguments);
+		        alert(" Can't do because: " + error);
+		    }
+		});
+	}
 	//Pruefdaten übernehmen
 	function createPruefData(){
 		var werkid = document.getElementById('werkzeugsuchfkt').value;
@@ -539,7 +679,8 @@
 				timeout: 5000,
 				success: function(data){
 					if(data=="success"){
-						location.reload();
+						searchwerkzeug();
+						document.getElementById('inputPruefCreate').style.display = "none";
 					}else if(data=="doppelt"){
 						alert("Werkzeugnummer existiert bereits.");
 					}else if(data=="fehler"){
@@ -576,6 +717,7 @@
 		var auswerfer = document.getElementById('inputGeoAuswerfer').value;
 		var position = document.getElementById('inputGeoPosition').value;
 		var kavitaet = document.getElementById('inputGeoKavitaet').value;
+		alert(werkid);
 		if(kavitaet&&position&&auswerfer&&as&&ds&&bohrbild&&form&&ausmas&&werkid){
 			$.ajax({
 				type: "GET",
@@ -598,7 +740,8 @@
 				timeout: 5000,
 				success: function(data){
 					if(data=="success"){
-						location.reload();
+						searchwerkzeug();
+						document.getElementById('inputGeoCreate').style.display = "none";
 					}else if(data=="doppelt"){
 						alert("Werkzeugnummer existiert bereits.");
 					}else if(data=="fehler"){
@@ -653,7 +796,152 @@
 				timeout: 5000,
 				success: function(data){
 					if(data=="success"){
-						location.reload();
+						searchwerkzeug();
+						document.getElementById('inputEinsatzCreate').style.display = "none";
+					}else if(data=="doppelt"){
+						alert("Werkzeugnummer existiert bereits.");
+					}else if(data=="fehler"){
+						alert("Es ist ein Fehler aufgetreten!");
+					}else if(data=="rechte"){
+						alert("Sie haben keine Rechte diese Aktion auszuführen!");
+					}else if(data=="token"){
+						alert("Zeitlimit überschritten!");
+						document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+					}else{
+						alert("Unexpected answer! Bitte Antwort aufschreiben.");
+					}
+				},
+				error: function (request, error) {
+			        console.log(arguments);
+			        alert(" Can't do because: " + error);
+			    }
+			});	
+		}else{
+			alert("Die mit * markierten Felder müssen ausgefüllt sein!");
+		}
+	}
+	//hinzufügen Geo attribut
+	function addAttributGeofkt(){
+		var bez = document.getElementById('inputBezAttrGeo').value;
+		var wert = document.getElementById('inputValAttrGeo').value;
+		var werkid = document.getElementById('werkzeugsuchfkt').value;
+		var uid=Cookies.get("name");
+		var tok1=Cookies.get("token");
+		var tok2=Cookies.get("token_login");
+		if(bez&&wert&&werkid){
+			$.ajax({
+				type: "GET",
+				url: "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/addgeoattr.inc.php?jsoncallback=?",
+				data: {
+					"username": uid,
+					"token": tok1,
+					"token_login": tok2,
+					"wert": wert,
+					"bez": bez,
+					"werkid": werkid
+				},
+				dataType:"JSONp",
+				timeout: 5000,
+				success: function(data){
+					if(data=="success"){
+						searchwerkzeug();
+						document.getElementById('addAttrGeo').style.display = "none";
+					}else if(data=="doppelt"){
+						alert("Werkzeugnummer existiert bereits.");
+					}else if(data=="fehler"){
+						alert("Es ist ein Fehler aufgetreten!");
+					}else if(data=="rechte"){
+						alert("Sie haben keine Rechte diese Aktion auszuführen!");
+					}else if(data=="token"){
+						alert("Zeitlimit überschritten!");
+						document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+					}else{
+						alert("Unexpected answer! Bitte Antwort aufschreiben.");
+					}
+				},
+				error: function (request, error) {
+			        console.log(arguments);
+			        alert(" Can't do because: " + error);
+			    }
+			});	
+		}else{
+			alert("Die mit * markierten Felder müssen ausgefüllt sein!");
+		}
+	}
+	//hinzufügen Prüfmerkmal
+	function addAttributPrueffkt(){
+		var bez = document.getElementById('inputBezAttrPruef').value;
+		var wert = document.getElementById('inputValAttrPruef').value;
+		var lfd = document.getElementById('inputLfdAttrPruef').value;
+		var uid=Cookies.get("name");
+		var tok1=Cookies.get("token");
+		var tok2=Cookies.get("token_login");
+		if(bez&&wert&&lfd){
+			$.ajax({
+				type: "GET",
+				url: "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/addpruefmerkmal.inc.php?jsoncallback=?",
+				data: {
+					"username": uid,
+					"token": tok1,
+					"token_login": tok2,
+					"wert": wert,
+					"bez": bez,
+					"lfd": lfd
+				},
+				dataType:"JSONp",
+				timeout: 5000,
+				success: function(data){
+					if(data=="success"){
+						searchwerkzeug();
+						document.getElementById('addAttrPruef').style.display = "none";
+					}else if(data=="doppelt"){
+						alert("Werkzeugnummer existiert bereits.");
+					}else if(data=="fehler"){
+						alert("Es ist ein Fehler aufgetreten!");
+					}else if(data=="rechte"){
+						alert("Sie haben keine Rechte diese Aktion auszuführen!");
+					}else if(data=="token"){
+						alert("Zeitlimit überschritten!");
+						document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+					}else{
+						alert("Unexpected answer! Bitte Antwort aufschreiben.");
+					}
+				},
+				error: function (request, error) {
+			        console.log(arguments);
+			        alert(" Can't do because: " + error);
+			    }
+			});	
+		}else{
+			alert("Die mit * markierten Felder müssen ausgefüllt sein!");
+		}
+	}
+	//hinzufügen einsatzprot
+	function addAttributEinsatzfkt(){
+		var bez = document.getElementById('inputBezAttrEinsatz').value;
+		var wert = document.getElementById('inputValAttrEinsatz').value;
+		var lfd = document.getElementById('inputLfdAttrEinsatz').value;
+		var uid=Cookies.get("name");
+		var tok1=Cookies.get("token");
+		var tok2=Cookies.get("token_login");
+		if(bez&&wert&&lfd){
+			$.ajax({
+				type: "GET",
+				url: "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/einsatzattr.inc.php?jsoncallback=?",
+				data: {
+					"username": uid,
+					"token": tok1,
+					"token_login": tok2,
+					"wert": wert,
+					"bez": bez,
+					"lfd": lfd
+				},
+				dataType:"JSONp",
+				timeout: 5000,
+				success: function(data){
+					if(data=="success"){
+						searchwerkzeug();
+						document.getElementById('addAttrEinsatz').style.display = "none";
 					}else if(data=="doppelt"){
 						alert("Werkzeugnummer existiert bereits.");
 					}else if(data=="fehler"){
