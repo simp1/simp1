@@ -1,569 +1,599 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Falls man später eine komplexere Benutzerverwaltung durchführen möchte, gibt es zwei Benutzerverwaltungen, wobei die Benutzerverwaltung.html für den Superadmin und die Benutzerverwaltungadmin.html für normale Admins vorgesehen sind -->
-    <!-- Import von JQuery -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	 <!-- Implementierung der Cookies -->
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-     <!-- Import von Bootstrap -->
-    <link href="bootstrap.min.css" rel="stylesheet">
-     <!-- Import der Sidebar -->
-    <link rel="stylesheet" href="assets/css/custom.css">
-    <link rel="stylesheet" href="assets/css/custom-themes.css">
-     <!-- Implementierung der CSS Datei -->
-    <link href="style.css" rel="stylesheet">
-     <!-- Import der JavaScript Funktionen für die Sidebar -->
-     <script src="assets/js/custom.js"></script>
+<meta charset="utf-8">
+<meta name="author" content="Steffen Selz, Michael Wenk">
+<meta name="description"
+	content="Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationssystem">
+<!-- Falls man spÃ¤ter eine komplexere Benutzerverwaltung durchfÃ¼hren mÃ¶chte, gibt es zwei Benutzerverwaltungen, wobei die Benutzerverwaltung.html fÃ¼r den Superadmin und die Benutzerverwaltungadmin.html fÃ¼r normale Admins vorgesehen sind -->
+<!-- Import von JQuery -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Implementierung der Cookies -->
+<script
+	src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<!-- Import von Bootstrap -->
+<link href="bootstrap.min.css" rel="stylesheet">
+<!-- Import der Sidebar -->
+<link rel="stylesheet" href="assets/css/custom.css">
+<link rel="stylesheet" href="assets/css/custom-themes.css">
+<!-- Implementierung der CSS Datei -->
+<link href="style.css" rel="stylesheet">
+<!-- Import der JavaScript Funktionen fÃ¼r die Sidebar -->
+<script src="assets/js/custom.js"></script>
 </head>
-<body> 	
-   <div class="page-wrapper chiller-theme toggled">
+<body>
+	<div class="page-wrapper chiller-theme toggled">
 
-<!--  Start der Seitenleiste. Über sie findet die allgemeine Navigation innerhalb der Seite statt -->
-		 <nav id="sidebar" class="sidebar-wrapper" data-color="#555">
-       
-                <div id="toggle-sidebar">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-                 <!-- Überschrift der Seitenleister -->
-                <div class="sidebar-brand">
-                    <a href="#">Eigenschaften</a>
-                </div>
-                <div class="sidebar-menu">
-                <ul>  
-                <!-- Navigation auf die Seite startseite.html -->
-                 <li class="nav-item">
-                <a class="nav-link" href="http://localhost/workspace/swimp/WebContent/startseite.html">
-                  <span data-feather="file"></span>
-                  Home
-                </a>
-              </li>
-               <!-- Navigation auf die Seite benutzerverwaltung.html -->
-               <li class="nav-item" id="superadminverwaltung" style="display:none;">
-                <a class="nav-link" href="benutzerverwaltung.html">
-                  <span data-feather="file"  ></span>
-                  Benutzerverwaltung
-                </a>
-              </li>
-              <!-- Navigation auf die Seite benutzerverwaltungadmin.html -->
-              <li class="nav-item" id="adminverwaltung" style="display:none;">
-                <a class="nav-link" href="benutzerverwaltungadmin.html">
-                  <span data-feather="file"></span>
-                  Benutzerverwaltung
-                </a>
-              </li>
-              <!-- Navigation auf die Seite stammdaten.html -->
-              <li class="nav-item">
-                <a class="nav-link" href="stammdaten.html">
-                  <span data-feather="file"></span>
-                  	Stammdaten
-                </a>
-              </li>
-              <!-- Navigation auf die Seite werkzeugverwaltung.html -->
-               <li class="nav-item">
-                <a class="nav-link" href="werkzeugverwaltung.html">
-                  <span data-feather="file"></span>
-                  Werkzeugverwaltung
-                </a>
-              </li>
-                        
-                        
-                    </ul>
-                </div>
-                
-        </nav>
+		<!--  Start der Seitenleiste. Ãœber sie findet die allgemeine Navigation innerhalb der Seite statt -->
+		<nav id="sidebar" class="sidebar-wrapper" data-color="#555">
 
-	<!-- Seitenleiste Ende -->
-	<!-- Content Anfang -->
-	    <div class="page-content">
-            <div class="container-fluid">
-            <!-- Seitenüberschrift -->
-                <div class="row">
-                    <div class="form-group col-md-12" id="überschrift">
-                        <h1>Benutzerverwaltung</h1>
-                    </div>
-                </div>
-               
-                <div class="row">
-                    <div class="form-group col-md-12 text-center" id="abstandbutton">
-                <div id="edit-create-reload" class="abstandunten">
-                <!-- Legt einen Button an, welcher bei Klick die Funktion createUser durchführt -->
-                <a class="btn btn-success .navbar-right" id="b1" onClick="createUser()" href="#">Neuer Benutzer erstellen</a>
-			 <!-- Legt einen Button an, welcher bei Klick die Funktion recreateUser durchführt -->
-				<a class="btn btn-success .navbar-right" id="b1" onClick="recreateUser()" href="#">Benutzer wiederherstellen</a>
-				 <!-- Legt einen Button an, welcher bei Klick die Funktion location.reload durchführt -->
-				<a class="btn btn-success .navbar-right" id="b2" onClick="location.reload()"  href="#">Benutzerverwaltung</a>
-				</div>
-				 <!-- Hält User ohne Berechtigungen davon ab, auf die Benutzerverwaltung zuzugreifen. Hierzu folgt unten eine JavaScript Funktion -->
-				<div id="netterversuch">
-					
-				</div>
-				 <!-- Benutzer editieren Anfang -->
-				<div id="editcreate" style="display:none;">
-				<div class="col-sm-4">
-					 <!-- Eingabefeld für den Benutzernamen -->
-				   <label>Benutzer:</label><br><label id="editUserLabel"> </label><br>
-				   <!-- Eingabefeld für das Passwort-->
-				   <label for="inputTextEdit">Passwort:</label>
-	               <div class="form-label-group">
-	                  <input type="text" id="inputPassEdit" class="form-control" placeholder="Passwort" required>
-	               </div>
-	               <!-- Festlegung der Rechte: 0 -> Nur Leserechte; 1-> Lese und Schreibrechte (Admin) -->
-	               <label for="inputTextEdit">Adminrechte(0 = keine,1 = admin):</label>
-	               <div class="form-label-group">
-	                  <input type="number" id="inputAdminEdit" class="form-control" min="0" max="1" value="0" required>
-	               </div>
-	           
-	               <label for="inputText">Leserechte(0 = keine,1 = read):</label>
-	               <div class="form-label-group">
-	                  <input type="number" id="inputReadEdit" class="form-control" min="0" max="1" value="0" required>
-	               </div>
-	               <br>
-	               <input type="hidden" id="usrid" value="">
-	               <!-- Button zum Durchführen der Benutzereditierung -->
-	               <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="editfinalUser()">Editieren</button>
-				   <br>
-				</div>
+			<div id="toggle-sidebar">
+				<div></div>
+				<div></div>
+				<div></div>
 			</div>
-				 <!-- Benutzer editieren Ende -->
-				  <!-- Benutzer anlegen Anfang-->
-			<div id="usrcreate" style="display:none;">
-				<div class="col-sm-4">
-				 <!-- Eingabefeld für den Benutzernamen -->
-				   <label for="inputText">Benutzername:</label>
-	               <div class="form-label-group">
-	                  <input type="text" id="inputName" class="form-control" placeholder="Benutzername" required autofocus>
-	               </div>
-	                <!-- Eingabefeld für das Passwort -->
-	               <label for="inputText">Passwort:</label>
-	               <div class="form-label-group">
-	                  <input type="text" id="inputPass" class="form-control" placeholder="Passwort" required>
-	               </div>
-	               <!-- Festlegung der Rechte: 0 -> Nur Leserechte; 1-> Lese und Schreibrechte (Admin) -->
-	               <label for="inputText">Adminrechte(0 = keine,1 = admin):</label>
-	               <div class="form-label-group">
-	                  <input type="number" id="inputAdmin" class="form-control" min="0" max="1" value="0" required>
-	               </div>
-	               <label for="inputText">Leserechte(0 = keine,1 = read):</label>
-	               <div class="form-label-group">
-	                  <input type="number" id="inputRead" class="form-control" min="0" max="1" value="0" required>
-	               </div>
-	               <br>
-	               <!-- Button zum Durchführen der Benutzererstellung -->
-	               <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="insertUser()">Erstellen</button>
-				   <br>
-				</div>
+			<!-- Ãœberschrift der Seitenleister -->
+			<div class="sidebar-brand">
+				<a href="#">Eigenschaften</a>
 			</div>
-				<!-- Benutzer anlegen Ende-->
-                    </div>
-                </div>
-                
-                 <div class="row">
-                 <div class="form-group col-md-12">
-                 <!-- In dieses Feld werden die Daten der Benutzer geladen (Tabelle) -->
-                    <div  id="tab_div">
-                     
+			<div class="sidebar-menu">
+				<ul>
+					<!-- Navigation auf die Seite startseite.html -->
+					<li class="nav-item"><a class="nav-link"
+						href="http://localhost/workspace/swimp/WebContent/startseite.html">
+							<span data-feather="file"></span> Home
+					</a></li>
+					<!-- Navigation auf die Seite benutzerverwaltung.html -->
+					<li class="nav-item" id="superadminverwaltung"
+						style="display: none;"><a class="nav-link"
+						href="benutzerverwaltung.html"> <span data-feather="file"></span>
+							Benutzerverwaltung
+					</a></li>
+					<!-- Navigation auf die Seite benutzerverwaltungadmin.html -->
+					<li class="nav-item" id="adminverwaltung" style="display: none;">
+						<a class="nav-link" href="benutzerverwaltungadmin.html"> <span
+							data-feather="file"></span> Benutzerverwaltung
+					</a>
+					</li>
+					<!-- Navigation auf die Seite stammdaten.html -->
+					<li class="nav-item"><a class="nav-link"
+						href="stammdaten.html"> <span data-feather="file"></span>
+							Stammdaten
+					</a></li>
+					<!-- Navigation auf die Seite werkzeugverwaltung.html -->
+					<li class="nav-item"><a class="nav-link"
+						href="werkzeugverwaltung.html"> <span data-feather="file"></span>
+							Werkzeugverwaltung
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="index.html"
+						onclick="deleteAllCookies()"> <span data-feather="file"></span>Logout
+					</a></li>
+
+				</ul>
+			</div>
+
+		</nav>
+
+		<!-- Seitenleiste Ende -->
+		<!-- Content Anfang -->
+		<div class="page-content">
+			<div class="container-fluid">
+				<!-- SeitenÃ¼berschrift -->
+				<div class="row">
+					<div class="form-group col-md-12" id="Ã¼berschrift">
+						<h1>Benutzerverwaltung</h1>
 					</div>
-                    </div>
-                </div>
+				</div>
 
-          
-            </div>
+				<div class="row">
+					<div class="form-group col-md-12 text-center" id="abstandbutton">
+						<div id="edit-create-reload" class="abstandunten">
+							<!-- Legt einen Button an, welcher bei Klick die Funktion createUser durchfÃ¼hrt -->
+							<a class="btn btn-success .navbar-right" id="b1"
+								onClick="createUser()" href="#">Neuer Benutzer erstellen</a>
+							<!-- Legt einen Button an, welcher bei Klick die Funktion recreateUser durchfÃ¼hrt -->
+							<a class="btn btn-success .navbar-right" id="b1"
+								onClick="recreateUser()" href="#">Benutzer wiederherstellen</a>
+							<!-- Legt einen Button an, welcher bei Klick die Funktion location.reload durchfÃ¼hrt -->
+							<a class="btn btn-success .navbar-right" id="b2"
+								onClick="location.reload()" href="#">Benutzerverwaltung</a>
+						</div>
+						<!-- HÃ¤lt User ohne Berechtigungen davon ab, auf die Benutzerverwaltung zuzugreifen. Hierzu folgt unten eine JavaScript Funktion -->
+						<div id="netterversuch"></div>
+						<!-- Benutzer editieren Anfang -->
+						<div id="editcreate" style="display: none;">
+							<div class="col-sm-4">
+								<!-- Eingabefeld fÃ¼r den Benutzernamen -->
+								<label>Benutzer:</label><br>
+								<label id="editUserLabel"> </label><br>
+								<!-- Eingabefeld fÃ¼r das Passwort-->
+								<label for="inputTextEdit">Passwort:</label>
+								<div class="form-label-group">
+									<input type="text" id="inputPassEdit" class="form-control"
+										placeholder="Passwort" required>
+								</div>
+								<!-- Festlegung der Rechte: 0 -> Nur Leserechte; 1-> Lese und Schreibrechte (Admin) -->
+								<label for="inputTextEdit">Adminrechte(0 = keine,1 =
+									admin):</label>
+								<div class="form-label-group">
+									<input type="number" id="inputAdminEdit" class="form-control"
+										min="0" max="1" value="0" required>
+								</div>
 
-    </div>
-    <!-- Content Ende -->
-</div>
-      		
-			<script>
-				/*
-				Die Cookies werden überprüft, sprich ob der angemeldete Benutzer berechtigt dazu ist, auf die Benutzerverwaltung zuzugreifen.
-				Hierzu werden die drei parameter name, token und token_login ausgelesen.
-				Dies geschiet über eine GET Funktion auf die url: "http://localhost/workspace/swimp/WebContent/Includes/checkrightsadmin.inc.php?jsoncallback=?".
-				Hat der Benutzer die erforderlichen Berechtigungen wird die funktion success durchgeführt, hat der Benutzer nicht die erforderlichen Berechtigungen, wird er darauf hingewiesen und kann nciht auf die Benutzerverwaltung zugreifen		
-				Bei fehlerhafter Abfrage der Cookies wird die Funktion error ausgeführt.
-				*/
-				var uid=Cookies.get("name");
-				var tok1=Cookies.get("token");
-				var tok2=Cookies.get("token_login");
-				$.ajax({
-					type: "GET",
-					url: "http://localhost/workspace/swimp/WebContent/Includes/checkrightsadmin.inc.php?jsoncallback=?",
-					data: {
-						"username": uid,
-						"token": tok1,
-						"token_login": tok2
+								<label for="inputText">Leserechte(0 = keine,1 = read):</label>
+								<div class="form-label-group">
+									<input type="number" id="inputReadEdit" class="form-control"
+										min="0" max="1" value="0" required>
+								</div>
+								<br> <input type="hidden" id="usrid" value="">
+								<!-- Button zum DurchfÃ¼hren der Benutzereditierung -->
+								<button class="btn btn-lg btn-primary btn-block" type="submit"
+									onClick="editfinalUser()">Editieren</button>
+								<br>
+							</div>
+						</div>
+						<!-- Benutzer editieren Ende -->
+						<!-- Benutzer anlegen Anfang-->
+						<div id="usrcreate" style="display: none;">
+							<div class="col-sm-4">
+								<!-- Eingabefeld fÃ¼r den Benutzernamen -->
+								<label for="inputText">Benutzername:</label>
+								<div class="form-label-group">
+									<input type="text" id="inputName" class="form-control"
+										placeholder="Benutzername" required autofocus>
+								</div>
+								<!-- Eingabefeld fÃ¼r das Passwort -->
+								<label for="inputText">Passwort:</label>
+								<div class="form-label-group">
+									<input type="text" id="inputPass" class="form-control"
+										placeholder="Passwort" required>
+								</div>
+								<!-- Festlegung der Rechte: 0 -> Nur Leserechte; 1-> Lese und Schreibrechte (Admin) -->
+								<label for="inputText">Adminrechte(0 = keine,1 = admin):</label>
+								<div class="form-label-group">
+									<input type="number" id="inputAdmin" class="form-control"
+										min="0" max="1" value="0" required>
+								</div>
+								<label for="inputText">Leserechte(0 = keine,1 = read):</label>
+								<div class="form-label-group">
+									<input type="number" id="inputRead" class="form-control"
+										min="0" max="1" value="0" required>
+								</div>
+								<br>
+								<!-- Button zum DurchfÃ¼hren der Benutzererstellung -->
+								<button class="btn btn-lg btn-primary btn-block" type="submit"
+									onClick="insertUser()">Erstellen</button>
+								<br>
+							</div>
+						</div>
+						<!-- Benutzer anlegen Ende-->
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-12">
+						<!-- In dieses Feld werden die Daten der Benutzer geladen (Tabelle) -->
+						<div id="tab_div"></div>
+					</div>
+				</div>
+
+
+			</div>
+
+		</div>
+		<!-- Content Ende -->
+	</div>
+
+	<script>
+		/*
+		Die Cookies werden Ã¼berprÃ¼ft, sprich ob der angemeldete Benutzer berechtigt dazu ist, auf die Benutzerverwaltung zuzugreifen.
+		Hierzu werden die drei parameter name, token und token_login ausgelesen.
+		Dies geschiet Ã¼ber eine GET Funktion auf die url: "http://localhost/workspace/swimp/WebContent/Includes/checkrightsadmin.inc.php?jsoncallback=?".
+		Hat der Benutzer die erforderlichen Berechtigungen wird die funktion success durchgefÃ¼hrt, hat der Benutzer nicht die erforderlichen Berechtigungen, wird er darauf hingewiesen und kann nciht auf die Benutzerverwaltung zugreifen		
+		Bei fehlerhafter Abfrage der Cookies wird die Funktion error ausgefÃ¼hrt.
+		 */
+		var uid = Cookies.get("name");
+		var tok1 = Cookies.get("token");
+		var tok2 = Cookies.get("token_login");
+		$
+				.ajax({
+					type : "GET",
+					url : "http://localhost/workspace/swimp/WebContent/Includes/checkrightsadmin.inc.php?jsoncallback=?",
+					data : {
+						"username" : uid,
+						"token" : tok1,
+						"token_login" : tok2
 					},
-					dataType:"JSONp",
-					timeout: 5000,
-					success: function(data){
-						if(data=="success"){
-							
-						}else{
+					dataType : "JSONp",
+					timeout : 5000,
+					success : function(data) {
+						if (data == "success") {
+
+						} else {
 							document.getElementById('edit-create-reload').style.display = "none";
 							document.getElementById('netterversuch').style.display = "block";
-							document.getElementById('netterversuch').innerHTML = "Netter Versuch, eine Nachricht an den Admin wird rausgegeben. Herr/Frau "+uid;
+							document.getElementById('netterversuch').innerHTML = "Netter Versuch, eine Nachricht an den Admin wird rausgegeben. Herr/Frau "
+									+ uid;
 						}
 					},
-					error: function (request, error) {
-				        console.log(arguments);
-				        alert(" Can't do because: " + error);
-				    }
-				});
-				/*
-				Hier wird eine Anfrage mit den Tokens an den Server versendet, welcher dann eine die Tabelle mit den Benutzerinformationen auf die Seite lädt -> In den Abschnitt tab_div
-				*/
-				var uid=Cookies.get("name");
-				var tok1=Cookies.get("token");
-				var tok2=Cookies.get("token_login");
-				$.ajax({
-					type: "GET",
-					url: "http://localhost/workspace/swimp/WebContent/Includes/checktoken.inc.php?jsoncallback=?",
-					data: {
-						"username": uid,
-						"token": tok1,
-						"token_login": tok2
-					},
-					dataType:"JSONp",
-					timeout: 5000,
-					success: function(data){
-						$.ajax({
-							type: "GET",
-							url: "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/userinterface.inc.php?jsoncallback=?",
-							data: {
-								"username": uid
-							},
-							dataType:"JSONp",
-							timeout: 5000,
-							success: function(data){
-								$('#tab_div').html(data);
-							},
-							error: function (request, error) {
-						        console.log(arguments);
-						        alert(" Can't do because: " + error);
-						    }
-						});
-					},
-					error: function (request, error) {
-				        console.log(arguments);
-				        alert(" Can't do because: " + error);
-				        document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
-				    }
-				});
-			</script>
-			<!-- Editieren-Funktion hinter einem Button in der Tabelle -->
-			<script>
-				/*
-				Mit dem Klick auf den Editieren-Button werden die Eingabefelder für die Editierung geladen.
-				Das Feld Benutzername wird automatisch ausgefüllt, da dieser nicht geändert werden kann.
-				Es wird überprüft, ob der Superadmin bearbeitet wird und falls ja wird der Benutzer darauf hingewiesen, dass dieser nicht bearbeitet werden darf und kann.
-				*/
-				function editieren(id){
-					if(id!= "admin"){
-						document.getElementById('editcreate').style.display = "block";
-						document.getElementById('editUserLabel').innerHTML =id;
-						document.getElementById('usrid').value =id;
-					}else{
-						alert("Superadmin darf nicht bearbeitet werden!")
+					error : function(request, error) {
+						console.log(arguments);
+						alert(" Can't do because: " + error);
 					}
-				}
-				/*
-				Mit dem Klick auf denEntfernen-Button wird der ausgewählte Benutzer "gelöscht".
-				Der Benutzer ist dann nicht endgültig entfernt, sondern lediglich als inaktiv eingestuft.
-				Es wird überprüft, ob der Superadmin entfernt wird und falls ja wird der Benutzer darauf hingewiesen, dass dieser nicht bearbeitet werden darf und kann.
-				*/
-				function entfernen(id){
-					if(id!= "admin"){
-						var uid=id;
-						var uuid = Cookies.get("name");
-						var tok1=Cookies.get("token");
-						var tok2=Cookies.get("token_login");
-						$.ajax({
-							type: "GET",
-							url: "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/deluser.inc.php?jsoncallback=?",
-							data: {
-								"username": uid,
-								"username_token": uuid,
-								"token": tok1,
-								"token_login": tok2								
+				});
+		/*
+		Hier wird eine Anfrage mit den Tokens an den Server versendet, welcher dann eine die Tabelle mit den Benutzerinformationen auf die Seite lÃ¤dt -> In den Abschnitt tab_div
+		 */
+		var uid = Cookies.get("name");
+		var tok1 = Cookies.get("token");
+		var tok2 = Cookies.get("token_login");
+		$
+				.ajax({
+					type : "GET",
+					url : "http://localhost/workspace/swimp/WebContent/Includes/checktoken.inc.php?jsoncallback=?",
+					data : {
+						"username" : uid,
+						"token" : tok1,
+						"token_login" : tok2
+					},
+					dataType : "JSONp",
+					timeout : 5000,
+					success : function(data) {
+						$
+								.ajax({
+									type : "GET",
+									url : "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/userinterface.inc.php?jsoncallback=?",
+									data : {
+										"username" : uid
+									},
+									dataType : "JSONp",
+									timeout : 5000,
+									success : function(data) {
+										$('#tab_div').html(data);
+									},
+									error : function(request, error) {
+										console.log(arguments);
+										alert(" Can't do because: " + error);
+									}
+								});
+					},
+					error : function(request, error) {
+						console.log(arguments);
+						alert(" Can't do because: " + error);
+						document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+					}
+				});
+	</script>
+	<!-- Editieren-Funktion hinter einem Button in der Tabelle -->
+	<script>
+		/*
+		Mit dem Klick auf den Editieren-Button werden die Eingabefelder fÃ¼r die Editierung geladen.
+		Das Feld Benutzername wird automatisch ausgefÃ¼llt, da dieser nicht geÃ¤ndert werden kann.
+		Es wird Ã¼berprÃ¼ft, ob der Superadmin bearbeitet wird und falls ja wird der Benutzer darauf hingewiesen, dass dieser nicht bearbeitet werden darf und kann.
+		 */
+		function editieren(id) {
+			if (id != "admin") {
+				document.getElementById('editcreate').style.display = "block";
+				document.getElementById('editUserLabel').innerHTML = id;
+				document.getElementById('usrid').value = id;
+			} else {
+				alert("Superadmin darf nicht bearbeitet werden!")
+			}
+		}
+		/*
+		Mit dem Klick auf denEntfernen-Button wird der ausgewÃ¤hlte Benutzer "gelÃ¶scht".
+		Der Benutzer ist dann nicht endgÃ¼ltig entfernt, sondern lediglich als inaktiv eingestuft.
+		Es wird Ã¼berprÃ¼ft, ob der Superadmin entfernt wird und falls ja wird der Benutzer darauf hingewiesen, dass dieser nicht bearbeitet werden darf und kann.
+		 */
+		function entfernen(id) {
+			if (id != "admin") {
+				var uid = id;
+				var uuid = Cookies.get("name");
+				var tok1 = Cookies.get("token");
+				var tok2 = Cookies.get("token_login");
+				$
+						.ajax({
+							type : "GET",
+							url : "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/deluser.inc.php?jsoncallback=?",
+							data : {
+								"username" : uid,
+								"username_token" : uuid,
+								"token" : tok1,
+								"token_login" : tok2
 							},
-							dataType:"JSONp",
-							timeout: 5000,
-							success: function(data){
-								if(data=="success"){
+							dataType : "JSONp",
+							timeout : 5000,
+							success : function(data) {
+								if (data == "success") {
 									location.reload();
-								}else if(data=="exist"){
+								} else if (data == "exist") {
 									alert("Benutzer existiert bereits!");
-								}else if(data=="token"){
-									alert("Login ungültig");
+								} else if (data == "token") {
+									alert("Login ungÃ¼ltig");
 									document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
-								}else{
+								} else {
 									alert("keine Rechte!");
 								}
 							},
-							error: function (request, error) {
-						        console.log(arguments);
-						        alert(" Can't do because: " + error);
-						    }
+							error : function(request, error) {
+								console.log(arguments);
+								alert(" Can't do because: " + error);
+							}
 						});
-					}else{
-						alert("Superadmin darf nicht bearbeitet werden!")
-					}
-				}
-			</script>
-			
-			<script> 
-			/*
-			Diese Funktion wird durchgeführt, wenn ein Benutzer editiert werden.
-			Dem Server werden die geänderten Benutzerdaten samt Token zugeschickt.
-			Bei Erfolg werden die geänderten Daten übernommen und die Seite wird neu geladen.
-			Bei einem Fehler wird die entsprechende Fehlermeldung ausgegeben.
-			*/
-				function editfinalUser(){
-					var uid=document.getElementById('usrid').value;
-					var pid=document.getElementById('inputPassEdit').value;
-					var aid=document.getElementById('inputAdminEdit').value;
-					var rid=document.getElementById('inputReadEdit').value;
-					var uuid = Cookies.get("name");
-					var tok1=Cookies.get("token");
-					var tok2=Cookies.get("token_login");
-					$.ajax({
-						type: "GET",
-						url: "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/edituser.inc.php?jsoncallback=?",
-						data: {
-							"username": uid,
-							"username_token": uuid,
-							"token": tok1,
-							"token_login": tok2,
-							"password": pid,
-							"admin": aid,
-							"rights": rid
+			} else {
+				alert("Superadmin darf nicht bearbeitet werden!")
+			}
+		}
+	</script>
+
+	<script>
+		/*
+		Diese Funktion wird durchgefÃ¼hrt, wenn ein Benutzer editiert werden.
+		Dem Server werden die geÃ¤nderten Benutzerdaten samt Token zugeschickt.
+		Bei Erfolg werden die geÃ¤nderten Daten Ã¼bernommen und die Seite wird neu geladen.
+		Bei einem Fehler wird die entsprechende Fehlermeldung ausgegeben.
+		 */
+		function editfinalUser() {
+			var uid = document.getElementById('usrid').value;
+			var pid = document.getElementById('inputPassEdit').value;
+			var aid = document.getElementById('inputAdminEdit').value;
+			var rid = document.getElementById('inputReadEdit').value;
+			var uuid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/edituser.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"username_token" : uuid,
+							"token" : tok1,
+							"token_login" : tok2,
+							"password" : pid,
+							"admin" : aid,
+							"rights" : rid
 						},
-						dataType:"JSONp",
-						timeout: 5000,
-						success: function(data){
-							if(data=="success"){
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							if (data == "success") {
 								location.reload();
-							}else if(data=="exist"){
+							} else if (data == "exist") {
 								alert("Benutzer existiert bereits!");
-							}else if(data=="token"){
-								alert("Login ungültig");
+							} else if (data == "token") {
+								alert("Login ungÃ¼ltig");
 								document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
-							}else{
+							} else {
 								alert("keine Rechte!");
 							}
 						},
-						error: function (request, error) {
-					        console.log(arguments);
-					        alert(" Can't do because: " + error);
-					    }
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+						}
 					});
-				}
-			
-				/*
-				Diese Funktion lädt das Formular mit den Eingabefeldern zum Erstellen eines neuen Benutzers
-				*/
-				function createUser(){
-					var uid=Cookies.get("name");
-					var tok1=Cookies.get("token");
-					var tok2=Cookies.get("token_login");
-					$.ajax({
-						type: "GET",
-						url: "http://localhost/workspace/swimp/WebContent/Includes/checktoken.inc.php?jsoncallback=?",
-						data: {
-							"username": uid,
-							"token": tok1,
-							"token_login": tok2
+		}
+
+		/*
+		Diese Funktion lÃ¤dt das Formular mit den Eingabefeldern zum Erstellen eines neuen Benutzers
+		 */
+		function createUser() {
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/checktoken.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2
 						},
-						dataType:"JSONp",
-						timeout: 5000,
-						success: function(data){
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
 							document.getElementById('usrcreate').style.display = "block";
 						},
-						error: function (request, error) {
-					        console.log(arguments);
-					        alert(" Can't do because: " + error);
-					        document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
-					    }
-					});	
-				}
-				/*
-				Mit dieser Funktion wird ein neuer Benutzer angelegt.
-				Bei Erfolg werden die geänderten Daten übernommen und die Seite wird neu geladen.
-				Bei einem Fehler wird die entsprechende Fehlermeldung ausgegeben.
-				*/
-				function insertUser(){
-					var uid=document.getElementById('inputName').value;
-					var pid=document.getElementById('inputPass').value;
-					var aid=document.getElementById('inputAdmin').value;
-					var rid=document.getElementById('inputRead').value;
-					var uuid = Cookies.get("name");
-					var tok1=Cookies.get("token");
-					var tok2=Cookies.get("token_login");
-					$.ajax({
-						type: "GET",
-						url: "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/createuser.inc.php?jsoncallback=?",
-						data: {
-							"username": uid,
-							"username_token": uuid,
-							"token": tok1,
-							"token_login": tok2,
-							"password": pid,
-							"admin": aid,
-							"rights": rid
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+							document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+						}
+					});
+		}
+		/*
+		Mit dieser Funktion wird ein neuer Benutzer angelegt.
+		Bei Erfolg werden die geÃ¤nderten Daten Ã¼bernommen und die Seite wird neu geladen.
+		Bei einem Fehler wird die entsprechende Fehlermeldung ausgegeben.
+		 */
+		function insertUser() {
+			var uid = document.getElementById('inputName').value;
+			var pid = document.getElementById('inputPass').value;
+			var aid = document.getElementById('inputAdmin').value;
+			var rid = document.getElementById('inputRead').value;
+			var uuid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/createuser.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"username_token" : uuid,
+							"token" : tok1,
+							"token_login" : tok2,
+							"password" : pid,
+							"admin" : aid,
+							"rights" : rid
 						},
-						dataType:"JSONp",
-						timeout: 5000,
-						success: function(data){
-							if(data=="success"){
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							if (data == "success") {
 								location.reload();
-							}else if(data=="doppelt"){
+							} else if (data == "doppelt") {
 								alert("Benutzer existiert bereits!");
-							}else if(data=="token"){
-								alert("Login ungültig");
+							} else if (data == "token") {
+								alert("Login ungÃ¼ltig");
 								document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
-							}else{
+							} else {
 								alert("keine Rechte!");
 							}
 						},
-						error: function (request, error) {
-					        console.log(arguments);
-					        alert(" Can't do because: " + error);
-					    }
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+						}
 					});
-				}
-				/*
-				Diese Funktion lädt eine Liste mit allen gelöschten/inaktiven Benutzern
-				*/
-				function recreateUser(){
-					var uid=Cookies.get("name");
-					var tok1=Cookies.get("token");
-					var tok2=Cookies.get("token_login");
-					$.ajax({
-						type: "GET",
-						url: "http://localhost/workspace/swimp/WebContent/Includes/checktoken.inc.php?jsoncallback=?",
-						data: {
-							"username": uid,
-							"token": tok1,
-							"token_login": tok2
+		}
+		/*
+		Diese Funktion lÃ¤dt eine Liste mit allen gelÃ¶schten/inaktiven Benutzern
+		 */
+		function recreateUser() {
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/checktoken.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2
 						},
-						dataType:"JSONp",
-						timeout: 5000,
-						success: function(data){
-							$.ajax({
-								type: "GET",
-								url: "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/recreateuser.inc.php?jsoncallback=?",
-								data: {
-									"username": uid
-								},
-								dataType:"JSONp",
-								timeout: 5000,
-								success: function(data){
-									$('#tab_div').html(data);
-									document.getElementById('btn_reload_function').style.display = "block";
-								},
-								error: function (request, error) {
-							        console.log(arguments);
-							        alert(" Can't do because: " + error);
-							    }
-							});
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							$
+									.ajax({
+										type : "GET",
+										url : "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/recreateuser.inc.php?jsoncallback=?",
+										data : {
+											"username" : uid
+										},
+										dataType : "JSONp",
+										timeout : 5000,
+										success : function(data) {
+											$('#tab_div').html(data);
+											document
+													.getElementById('btn_reload_function').style.display = "block";
+										},
+										error : function(request, error) {
+											console.log(arguments);
+											alert(" Can't do because: " + error);
+										}
+									});
 						},
-						error: function (request, error) {
-					        console.log(arguments);
-					        alert(" Can't do because: " + error);
-					        document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
-					    }
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+							document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+						}
 					});
-				}
-				/*
-			Mit dieser Funktion kann ein ausgewählter, gelöschter Benutzer wiederhergestellt werden
-				*/
-				function recreate(id){
-					var uid=id;
-					var uuid = Cookies.get("name");
-					var tok1=Cookies.get("token");
-					var tok2=Cookies.get("token_login");
-					$.ajax({
-						type: "GET",
-						url: "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/activateuser.inc.php?jsoncallback=?",
-						data: {
-							"username": uid,
-							"username_token": uuid,
-							"token": tok1,
-							"token_login": tok2								
+		}
+		/*
+		Mit dieser Funktion kann ein ausgewÃ¤hlter, gelÃ¶schter Benutzer wiederhergestellt werden
+		 */
+		function recreate(id) {
+			var uid = id;
+			var uuid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/activateuser.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"username_token" : uuid,
+							"token" : tok1,
+							"token_login" : tok2
 						},
-						dataType:"JSONp",
-						timeout: 5000,
-						success: function(data){
-							if(data=="success"){
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							if (data == "success") {
 								location.reload();
-							}else if(data=="exist"){
+							} else if (data == "exist") {
 								alert("Benutzer existiert bereits!");
-							}else if(data=="token"){
-								alert("Login ungültig");
+							} else if (data == "token") {
+								alert("Login ungÃ¼ltig");
 								document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
-							}else{
+							} else {
 								alert("keine Rechte!");
 							}
 						},
-						error: function (request, error) {
-					        console.log(arguments);
-					        alert(" Can't do because: " + error);
-					    }
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+						}
 					});
-				}
-				/*
-			Falls ein Benutzer keine Berechtigung für eine Aktion hat, wird diese Funktion anstelle ausgeführt udn der Benutzer wird darauf hingewiesen, dass ihm Berechtigungen fehlen
-				*/
-				function norights(){
-					alert("Sie haben keine Befugnisse diese Aktion auszuführen.");
-				}
-			</script>
-				<script>
-				/*
-		Stellt die korrekte Benutzerverwaltung der Seitenleiste dar
-				*/
-		var uid=Cookies.get("name");
-		var tok1=Cookies.get("token");
-		var tok2=Cookies.get("token_login");
-		$.ajax({
-			type: "GET",
-			url: "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/adminverwaltung.inc.php?jsoncallback=?",
-			data: {
-				"username": uid,
-				"token": tok1,
-				"token_login": tok2
-			},
-			dataType:"JSONp",
-			timeout: 5000,
-			success: function(data){
-				if(data=="sadmin"){
-					document.getElementById('superadminverwaltung').style.display = "block";
-				}else if(data=="admin"){
-					document.getElementById('adminverwaltung').style.display = "block";
-				}else if(data=="noadmin"){
-					
-				}else{
-					alert("Login ungültig");
-					document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
-				}
-			},
-			error: function (request, error) {
-		        console.log(arguments);
-		        alert(" Can't do because: " + error);
-		        document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
-		    }
-		});
+		}
+		/*
+		Falls ein Benutzer keine Berechtigung fÃ¼r eine Aktion hat, wird diese Funktion anstelle ausgefÃ¼hrt udn der Benutzer wird darauf hingewiesen, dass ihm Berechtigungen fehlen
+		 */
+		function norights() {
+			alert("Sie haben keine Befugnisse diese Aktion auszufÃ¼hren.");
+		}
 	</script>
-		
 	<script>
-	/*
-	Sorgt dafür, dass die Buttons Erstellen, Wiederherstellen und Benutzerverwaltung gleich groß sind
-			*/
-	 var max = Math.max ($("#b1").width (), $("#b2").width ());
-	    $("#b1").width (max);
-	    $("#b2").width (max); 
+		/*
+		Stellt die korrekte Benutzerverwaltung der Seitenleiste dar
+		 */
+		var uid = Cookies.get("name");
+		var tok1 = Cookies.get("token");
+		var tok2 = Cookies.get("token_login");
+		$
+				.ajax({
+					type : "GET",
+					url : "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/adminverwaltung.inc.php?jsoncallback=?",
+					data : {
+						"username" : uid,
+						"token" : tok1,
+						"token_login" : tok2
+					},
+					dataType : "JSONp",
+					timeout : 5000,
+					success : function(data) {
+						if (data == "sadmin") {
+							document.getElementById('superadminverwaltung').style.display = "block";
+						} else if (data == "admin") {
+							document.getElementById('adminverwaltung').style.display = "block";
+						} else if (data == "noadmin") {
+
+						} else {
+							alert("Login ungÃ¼ltig");
+							document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+						}
+					},
+					error : function(request, error) {
+						console.log(arguments);
+						alert(" Can't do because: " + error);
+						document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+					}
+				});
+	</script>
+
+	<script>
+		/*
+		Sorgt dafÃ¼r, dass die Buttons Erstellen, Wiederherstellen und Benutzerverwaltung gleich groÃŸ sind
+		 */
+		var max = Math.max($("#b1").width(), $("#b2").width());
+		$("#b1").width(max);
+		$("#b2").width(max);
+	</script>
+	<!-- Cookies lÃ¶schen fÃ¼r Logout -->
+	<script>
+		function deleteAllCookies() {
+			Cookies.remove('name');
+			Cookies.remove('token');
+			Cookies.remove('token_login');
+		}
 	</script>
 </body>
 </html>

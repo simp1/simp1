@@ -1,326 +1,380 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-    
-    <link href="bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/custom.css">
-    <link rel="stylesheet" href="assets/css/custom-themes.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link href="style.css" rel="stylesheet">
-    <script src="assets/js/custom.js"></script>
-    
+<meta charset="utf-8">
+<meta name="author" content="Steffen Selz, Michael Wenk">
+<meta name="description"
+	content="Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationssystem">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+<link href="bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/custom.css">
+<link rel="stylesheet" href="assets/css/custom-themes.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="style.css" rel="stylesheet">
+<script src="assets/js/custom.js"></script>
+
 </head>
-<body> 		
+<body>
 
- <div class="page-wrapper chiller-theme toggled">
-<!-- SeitenleisteStart -->
-		 <nav id="sidebar" class="sidebar-wrapper" data-color="#555">
-       
-                <div id="toggle-sidebar">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-                <div class="sidebar-brand">
-                    <a href="#">Eigenschaften</a>
-                </div>
-                <div class="sidebar-menu">
-                <ul>  
-                 <li class="nav-item">
-                <a class="nav-link" href="http://localhost/workspace/swimp/WebContent/startseite.html">
-                  <span data-feather="file"></span>
-                  Home
-                </a>
-              </li>
-               <li class="nav-item" id="superadminverwaltung" style="display:none;">
-                <a class="nav-link" href="benutzerverwaltung.html">
-                  <span data-feather="file"  ></span>
-                  Benutzerverwaltung
-                </a>
-              </li>
-              
-              <li class="nav-item" id="adminverwaltung" style="display:none;">
-                <a class="nav-link" href="benutzerverwaltungadmin.html">
-                  <span data-feather="file"></span>
-                  Benutzerverwaltung
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a class="nav-link" href="stammdaten.html">
-                  <span data-feather="file"></span>
-                  Stammdaten
-                </a>
-              </li>
-               <li class="nav-item">
-                <a class="nav-link" href="werkzeugverwaltung.html">
-                  <span data-feather="file"></span>
-                  Werkzeugverwaltung
-                </a>
-              </li>
-                        
-                        
-                    </ul>
-                </div>
-                
-        </nav>
+	<div class="page-wrapper chiller-theme toggled">
+		<!-- SeitenleisteStart -->
+		<nav id="sidebar" class="sidebar-wrapper" data-color="#555">
 
-	<!-- Seitenleiste Ende -->
-  <div class="page-content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="form-group col-md-12" id="überschrift">
-                        <h1 id="inhalt">Werkzeugverwaltung Startseite</h1>
-        <p id="klein">Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationstool</p>
-        
-           <h1 id="inhalt">Inhalt</h1>
-                    </div>
-                </div>
-                
-            
-                  <div class="row">
-                    
-                     <div class="col-md-4 card mb-4 box-shadow" id="backupbox">
-                 
-                     <div class="card-body">
-                     <h1 class="abstandunten ">Backup</h1>
-                     <p class="abstandunten">
-                    Hier kann der Administrator ein Backup anlegen. Wenn mehr als 7 Tage lang kein Backup angelegt wurde, dann wird eine Meldung angezeigt.
-                    Für Nutzer ohne Administrator-Rechten ist der Kasten nicht sichtbar.
-                    </p>
-                     	<div id="anzeigevonbackup" class="abstandoben">
-                     	<p> Letztes BackUp:</p>
-                       <div id="backup_anzeige">
-                       </div>
-                       
-                          <a class="btn btn-success abstandunten abstandoben " onclick="startbackup()" href="#" style="width:200px;">BackUp starten</a>
-                       
-                       <div id="loadbox" class="abstandoben">
-                       </div>
+			<div id="toggle-sidebar">
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+			<div class="sidebar-brand">
+				<a href="#">Eigenschaften</a>
+			</div>
+			<div class="sidebar-menu">
+				<ul>
+					<li class="nav-item"><a class="nav-link"
+						href="http://localhost/workspace/swimp/WebContent/startseite.html">
+							<span data-feather="file"></span> Home
+					</a></li>
+					<li class="nav-item" id="superadminverwaltung"
+						style="display: none;"><a class="nav-link"
+						href="benutzerverwaltung.html"> <span data-feather="file"></span>
+							Benutzerverwaltung
+					</a></li>
+
+					<li class="nav-item" id="adminverwaltung" style="display: none;">
+						<a class="nav-link" href="benutzerverwaltungadmin.html"> <span
+							data-feather="file"></span> Benutzerverwaltung
+					</a>
+					</li>
+
+					<li class="nav-item"><a class="nav-link"
+						href="stammdaten.html"> <span data-feather="file"></span>
+							Stammdaten
+					</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="werkzeugverwaltung.html"> <span data-feather="file"></span>
+							Werkzeugverwaltung
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="index.html"
+						onclick="deleteAllCookies()"> <span data-feather="file"></span>Logout
+					</a></li>
+
+
+				</ul>
+			</div>
+
+		</nav>
+
+		<!-- Seitenleiste Ende -->
+		<div class="page-content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="form-group col-md-12" id="Ã¼berschrift">
+						<h1 id="inhalt">Werkzeugverwaltung Startseite</h1>
+						<p id="klein">Erstellung einer Online-Datenbank als
+							Werkzeugverwaltungs- und Dokumentationstool</p>
+
+						<h1 id="inhalt">Inhalt</h1>
+					</div>
+				</div>
+
+
+				<div class="row">
+
+					<div class="col-md-4 card mb-4 box-shadow" id="backupbox">
+
+						<div class="card-body">
+							<h1 class="abstandunten ">Backup</h1>
+							<p class="abstandunten">Hier kann der Administrator ein
+								Backup anlegen. Wenn mehr als 7 Tage lang kein Backup angelegt
+								wurde, dann wird eine Meldung angezeigt. FÃ¼r Nutzer ohne
+								Administrator-Rechten ist der Kasten nicht sichtbar.</p>
+							<div id="anzeigevonbackup" class="abstandoben">
+								<p>Letztes BackUp:</p>
+								<div id="backup_anzeige"></div>
+
+								<a class="btn btn-success abstandunten abstandoben "
+									onclick="startbackup()" href="#" style="width: 200px;">BackUp
+									starten</a>
+
+								<div id="loadbox" class="abstandoben"></div>
+							</div>
 						</div>
-                    </div>
-                    
-                 
-              </div>
-              <div class="col-md-4">
-                 <div class="card mb-4 box-shadow">
-                    <div class="card-body">
-                       <p class="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
-                          At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-                       </p>
-                       <div class="d-flex justify-content-between align-items-center">
-                          <a class="btn btn-success" href="#">Jenson Button</a>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-              <div class="col-md-4">
-                 <div class="card mb-4 box-shadow">
-                    <div class="card-body">
-                       <p class="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
-                          At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-                       </p>
-                       <div class="d-flex justify-content-between align-items-center">
-                          <a class="btn btn-success" href="#">Jenson Button</a>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-                   
-                </div>
-                
-                <!-- Zweite Reihe -->
-                   <div class="row">
-                    
-                     <div class="col-md-4">
-                 <div class="card mb-4 box-shadow">
-                     <div class="card-body">
-                       <p class="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
-                          At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-                       </p>
-                       <div class="d-flex justify-content-between align-items-center">
-                          <a class="btn btn-danger" href="#">Jenson Button</a>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-              <div class="col-md-4">
-                 <div class="card mb-4 box-shadow">
-                    <div class="card-body">
-                       <p class="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
-                          Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-                       </p>
-                       <div class="d-flex justify-content-between align-items-center">
-                          <a class="btn btn-info" href="#">Jenson Button</a>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-              <div class="col-md-4">
-                 <div class="card mb-4 box-shadow">
-                    <div class="card-body">
-                       <p class="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
-                          At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-                       </p>
-                       <div class="d-flex justify-content-between align-items-center">
-                          <a class="btn btn-success" href="#">Jenson Button</a>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-                   
-                </div>
-                
-     
-  </div>
-    <footer class="container  py-5">
-        <div class="row">
-           <div class="col-6 col-md">
-              <h5>Features</h5>
-              <ul class="list-unstyled text-small">
-                 <li><a class="text-muted" href="#">Inhalt</a></li>
-                 <li><a class="text-muted" href="#">Inhalt</a></li>
-                 <li><a class="text-muted" href="#">Inhalt</a></li>
-                 <li><a class="text-muted" href="#">Inhalt</a></li>
-              
-              </ul>
-           </div>
-           <div class="col-6 col-md">
-              <h5>Peaks</h5>
-              <ul class="list-unstyled text-small">
-                 <li><a class="text-muted" href="#">Inhalt</a></li>
-                 <li><a class="text-muted" href="#">Inhalt</a></li>
-                 <li><a class="text-muted" href="#">Inhalt</a></li>
-                 <li><a class="text-muted" href="#">Inhalt</a></li>
-              </ul>
-           </div>
-           <div class="col-6 col-md">
-              <h5>Resources</h5>
-              <ul class="list-unstyled text-small">
-                 <li><a class="text-muted" href="#">Inhalt</a></li>
-                 <li><a class="text-muted" href="#">Inhalt</a></li>
-                 <li><a class="text-muted" href="#">Inhalt</a></li>
-                 <li><a class="text-muted" href="#">Inhalt</a></li>
-              </ul>
-           </div>
-           <div class="col-6 col-md">
-              <h5>About</h5>
-              <ul class="list-unstyled text-small">
-                 <li><a class="text-muted" href="#">Inhalt</a></li>
-                 <li><a class="text-muted" href="#">Inhalt</a></li>
-                 <li><a class="text-muted" href="#">Inhalt</a></li>
-                 <li><a class="text-muted" href="#">Inhalt</a></li>
-              </ul>
-           </div>
-        </div>
-     </footer>
-		
+
+
+					</div>
+					<div class="col-md-4">
+						<div class="card mb-4 box-shadow">
+							<div class="card-body">
+								<p class="card-text">Lorem ipsum dolor sit amet, consetetur
+									sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+									labore et dolore magna aliquyam erat, sed diam voluptua. At
+									vero eos et accusam et justo duo dolores et ea rebum. Stet
+									clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+									dolor sit amet. Lorem ipsum dolor sit amet, consetetur
+									sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+									labore et dolore magna aliquyam erat, sed diam voluptua. At
+									vero eos et accusam et justo duo dolores et ea rebum. Stet
+									clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+									dolor sit amet.</p>
+								<div class="d-flex justify-content-between align-items-center">
+									<a class="btn btn-success" href="#">Jenson Button</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="card mb-4 box-shadow">
+							<div class="card-body">
+								<p class="card-text">Lorem ipsum dolor sit amet, consetetur
+									sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+									labore et dolore magna aliquyam erat, sed diam voluptua. At
+									vero eos et accusam et justo duo dolores et ea rebum. Stet
+									clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+									dolor sit amet. Lorem ipsum dolor sit amet, consetetur
+									sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+									labore et dolore magna aliquyam erat, sed diam voluptua. At
+									vero eos et accusam et justo duo dolores et ea rebum. Stet
+									clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+									dolor sit amet.</p>
+								<div class="d-flex justify-content-between align-items-center">
+									<a class="btn btn-success" href="#">Jenson Button</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<!-- Zweite Reihe -->
+				<div class="row">
+
+					<div class="col-md-4">
+						<div class="card mb-4 box-shadow">
+							<div class="card-body">
+								<p class="card-text">Lorem ipsum dolor sit amet, consetetur
+									sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+									labore et dolore magna aliquyam erat, sed diam voluptua. At
+									vero eos et accusam et justo duo dolores et ea rebum. Stet
+									clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+									dolor sit amet. Lorem ipsum dolor sit amet, consetetur
+									sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+									labore et dolore magna aliquyam erat, sed diam voluptua. At
+									vero eos et accusam et justo duo dolores et ea rebum. Stet
+									clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+									dolor sit amet.</p>
+								<div class="d-flex justify-content-between align-items-center">
+									<a class="btn btn-danger" href="#">Jenson Button</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="card mb-4 box-shadow">
+							<div class="card-body">
+								<p class="card-text">Lorem ipsum dolor sit amet, consetetur
+									sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+									labore et dolore magna aliquyam erat, sed diam voluptua. At
+									vero eos et accusam et justo duo dolores et ea rebum. Stet
+									clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+									dolor sit amet. Lorem ipsum dolor sit amet, consetetur
+									sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+									labore et dolore magna aliquyam erat, sed diam voluptua. At
+									vero eos et accusam et justo duo dolores et ea rebum. Stet
+									clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+									dolor sit amet.</p>
+								<div class="d-flex justify-content-between align-items-center">
+									<a class="btn btn-info" href="#">Jenson Button</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="card mb-4 box-shadow">
+							<div class="card-body">
+								<p class="card-text">Lorem ipsum dolor sit amet, consetetur
+									sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+									labore et dolore magna aliquyam erat, sed diam voluptua. At
+									vero eos et accusam et justo duo dolores et ea rebum. Stet
+									clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+									dolor sit amet. Lorem ipsum dolor sit amet, consetetur
+									sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+									labore et dolore magna aliquyam erat, sed diam voluptua. At
+									vero eos et accusam et justo duo dolores et ea rebum. Stet
+									clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+									dolor sit amet.</p>
+								<div class="d-flex justify-content-between align-items-center">
+									<a class="btn btn-success" href="#">Jenson Button</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+
+			</div>
+			<footer class="container  py-5">
+				<div class="row">
+					<div class="col-6 col-md">
+						<h5>Features</h5>
+						<ul class="list-unstyled text-small">
+							<li><a class="text-muted" href="#">Inhalt</a></li>
+							<li><a class="text-muted" href="#">Inhalt</a></li>
+							<li><a class="text-muted" href="#">Inhalt</a></li>
+							<li><a class="text-muted" href="#">Inhalt</a></li>
+
+						</ul>
+					</div>
+					<div class="col-6 col-md">
+						<h5>Peaks</h5>
+						<ul class="list-unstyled text-small">
+							<li><a class="text-muted" href="#">Inhalt</a></li>
+							<li><a class="text-muted" href="#">Inhalt</a></li>
+							<li><a class="text-muted" href="#">Inhalt</a></li>
+							<li><a class="text-muted" href="#">Inhalt</a></li>
+						</ul>
+					</div>
+					<div class="col-6 col-md">
+						<h5>Resources</h5>
+						<ul class="list-unstyled text-small">
+							<li><a class="text-muted" href="#">Inhalt</a></li>
+							<li><a class="text-muted" href="#">Inhalt</a></li>
+							<li><a class="text-muted" href="#">Inhalt</a></li>
+							<li><a class="text-muted" href="#">Inhalt</a></li>
+						</ul>
+					</div>
+					<div class="col-6 col-md">
+						<h5>About</h5>
+						<ul class="list-unstyled text-small">
+							<li><a class="text-muted" href="#">Inhalt</a></li>
+							<li><a class="text-muted" href="#">Inhalt</a></li>
+							<li><a class="text-muted" href="#">Inhalt</a></li>
+							<li><a class="text-muted" href="#">Inhalt</a></li>
+						</ul>
+					</div>
+				</div>
+			</footer>
+
+		</div>
 	</div>
-	</div>
-	
- 
+
+
 	<script>
-		var uid=Cookies.get("name");
-		var tok1=Cookies.get("token");
-		var tok2=Cookies.get("token_login");
-		$.ajax({
-			type: "GET",
-			url: "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/adminverwaltung.inc.php?jsoncallback=?",
-			data: {
-				"username": uid,
-				"token": tok1,
-				"token_login": tok2
-			},
-			dataType:"JSONp",
-			timeout: 5000,
-			success: function(data){
-				if(data=="sadmin"){
-					document.getElementById('superadminverwaltung').style.display = "block";
-				}else if(data=="admin"){
-					document.getElementById('adminverwaltung').style.display = "block";
-				}else if(data=="noadmin"){
-					
-				}else{
-					alert("Login ungültig");
-					document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
-				}
-			},
-			error: function (request, error) {
-		        console.log(arguments);
-		        alert(" Can't do because: " + error);
-		        document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
-		    }
-		});
-		var uid=Cookies.get("name");
-		var tok1=Cookies.get("token");
-		var tok2=Cookies.get("token_login");
-		$.ajax({
-			type: "GET",
-			url: "http://localhost/workspace/swimp/WebContent/Includes/Backup/timestamp.inc.php?jsoncallback=?",
-			data: {
-				"username": uid,
-				"token": tok1,
-				"token_login": tok2
-			},
-			dataType:"JSONp",
-			timeout: 5000,
-			success: function(data){
-				if(data=="rights"||data=="token"){
-					document.getElementById('anzeigevonbackup').style.display = "none";
-				}else{
-					var res = data.split(";");
-					if(res[1]){
-						var output= res[0] + "<br>Es wurde seit mehr als 7 Tage kein BackUp mehr durchgeführt! Bitte führen Sie ein BackUp durch. <br>";
-						$('#backup_anzeige').html(output);
-						//$('#backupbox').css("background-color","red");
-						alert("Seit mehr als 7 Tagen kein Backup ausgeführt!");
-					}else{
-						$('#backup_anzeige').html(res[0]);
-					}
-				}
-			},
-			error: function (request, error) {
-		        console.log(arguments);
-		        alert(" Can't do because: " + error);
-		    }
-		});
-		function startbackup(){
-			var uid=Cookies.get("name");
-			var tok1=Cookies.get("token");
-			var tok2=Cookies.get("token_login");
-			$.ajax({
-				type: "GET",
-				url: "http://localhost/workspace/swimp/WebContent/Includes/Backup/backup.inc.php?jsoncallback=?",
-				data: {
-					"username": uid,
-					"token": tok1,
-					"token_login": tok2
-				},
-				dataType:"JSONp",
-				timeout: 5000,
-				success: function(data){
-					if(data=="success"){
-						downbtn = '<a style="width:200px;" class="btn btn-success" href="http://localhost/workspace/swimp/WebContent/Includes/Backup/backup_dump.sql" download>Download</a>';
-					 	$('#loadbox').html(downbtn);
-					}else if("token"){
-						alert("Sitzung abgelaufen!");
+		var uid = Cookies.get("name");
+		var tok1 = Cookies.get("token");
+		var tok2 = Cookies.get("token_login");
+		$
+				.ajax({
+					type : "GET",
+					url : "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/adminverwaltung.inc.php?jsoncallback=?",
+					data : {
+						"username" : uid,
+						"token" : tok1,
+						"token_login" : tok2
+					},
+					dataType : "JSONp",
+					timeout : 5000,
+					success : function(data) {
+						if (data == "sadmin") {
+							document.getElementById('superadminverwaltung').style.display = "block";
+						} else if (data == "admin") {
+							document.getElementById('adminverwaltung').style.display = "block";
+						} else if (data == "noadmin") {
+
+						} else {
+							alert("Login ungÃ¼ltig");
+							document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+						}
+					},
+					error : function(request, error) {
+						console.log(arguments);
+						alert(" Can't do because: " + error);
 						document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
-					}else if("rights"){
-						alert("keine Rechte!");
-					}else{
-						alert("Unbekannter Fehler aufgetreten.");
 					}
-					 
-				},
-				error: function (request, error) {
-			        console.log(arguments);
-			        alert(" Can't do because: " + error);
-			    }
-			});
+				});
+		var uid = Cookies.get("name");
+		var tok1 = Cookies.get("token");
+		var tok2 = Cookies.get("token_login");
+		$
+				.ajax({
+					type : "GET",
+					url : "http://localhost/workspace/swimp/WebContent/Includes/Backup/timestamp.inc.php?jsoncallback=?",
+					data : {
+						"username" : uid,
+						"token" : tok1,
+						"token_login" : tok2
+					},
+					dataType : "JSONp",
+					timeout : 5000,
+					success : function(data) {
+						if (data == "rights" || data == "token") {
+							document.getElementById('anzeigevonbackup').style.display = "none";
+						} else {
+							var res = data.split(";");
+							if (res[1]) {
+								var output = res[0]
+										+ "<br>Es wurde seit mehr als 7 Tage kein BackUp mehr durchgefÃ¼hrt! Bitte fÃ¼hren Sie ein BackUp durch. <br>";
+								$('#backup_anzeige').html(output);
+								//$('#backupbox').css("background-color","red");
+								alert("Seit mehr als 7 Tagen kein Backup ausgefÃ¼hrt!");
+							} else {
+								$('#backup_anzeige').html(res[0]);
+							}
+						}
+					},
+					error : function(request, error) {
+						console.log(arguments);
+						alert(" Can't do because: " + error);
+					}
+				});
+		function startbackup() {
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/Backup/backup.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							if (data == "success") {
+								downbtn = '<a style="width:200px;" class="btn btn-success" href="http://localhost/workspace/swimp/WebContent/Includes/Backup/backup_dump.sql" download>Download</a>';
+								$('#loadbox').html(downbtn);
+							} else if ("token") {
+								alert("Sitzung abgelaufen!");
+								document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+							} else if ("rights") {
+								alert("keine Rechte!");
+							} else {
+								alert("Unbekannter Fehler aufgetreten.");
+							}
+
+						},
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+						}
+					});
 		}
 	</script>
-	
+	<!-- Cookies lÃ¶schen fÃ¼r Logout -->
+	<script>
+		function deleteAllCookies() {
+			Cookies.remove('name');
+			Cookies.remove('token');
+			Cookies.remove('token_login');
+		}
+	</script>
 </body>
 </html>

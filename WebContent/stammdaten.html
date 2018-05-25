@@ -1,318 +1,354 @@
 <!DOCTYPE html>
 <html>
 <head>
-    
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-    
-    <link href="bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/custom.css">
-    <link rel="stylesheet" href="assets/css/custom-themes.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="assets/js/custom.js"></script>
-    <link href="style.css" rel="stylesheet">
-    <script src="assets/js/custom.js"></script>
-    <script type="text/javascript" src="qrcode.js"></script>
-    <script src="http://d3js.org/d3.v3.min.js"></script>
+<meta charset="utf-8">
+<meta name="author" content="Steffen Selz, Michael Wenk">
+<meta name="description"
+	content="Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationssystem">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+<link href="bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/custom.css">
+<link rel="stylesheet" href="assets/css/custom-themes.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="assets/js/custom.js"></script>
+<link href="style.css" rel="stylesheet">
+<script src="assets/js/custom.js"></script>
+<script type="text/javascript" src="qrcode.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
 </head>
-<body> 	
-   <div class="page-wrapper chiller-theme toggled">
+<body>
+	<div class="page-wrapper chiller-theme toggled">
 
-<!-- SeitenleisteStart -->
-		 <nav id="sidebar" class="sidebar-wrapper" data-color="#555">
-       
-                <div id="toggle-sidebar">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-                <div class="sidebar-brand">
-                    <a href="#">Eigenschaften</a>
-                </div>
-                <div class="sidebar-menu">
-                <ul>  
-                 <li class="nav-item">
-                <a class="nav-link" href="http://localhost/workspace/swimp/WebContent/startseite.html">
-                  <span data-feather="file"></span>
-                  Home
-                </a>
-              </li>
-               <li class="nav-item" id="superadminverwaltung" style="display:none;">
-                <a class="nav-link" href="benutzerverwaltung.html">
-                  <span data-feather="file"  ></span>
-                  Benutzerverwaltung
-                </a>
-              </li>
-              
-              <li class="nav-item" id="adminverwaltung" style="display:none;">
-                <a class="nav-link" href="benutzerverwaltungadmin.html">
-                  <span data-feather="file"></span>
-                  Benutzerverwaltung
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a class="nav-link" href="stammdaten.html">
-                  <span data-feather="file"></span>
-                  Stammdaten
-                </a>
-              </li>
-               <li class="nav-item">
-                <a class="nav-link" href="werkzeugverwaltung.html">
-                  <span data-feather="file"></span>
-                  Werkzeugverwaltung
-                </a>
-              </li>     
-            </ul>
-        </div>
-  </nav>
-	<!-- Seitenleiste Ende -->
-	
-	    <div class="page-content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="form-group col-md-12" id="überschrift">
-                        <div id="data_div">
- 	</div>
- 	</div>
- 	</div>
- 	
-<!-- Stammdaten Form + Btn -->
-	<div class="row">
-	<div class="form-group col-md-5 mb-3 text-right"><label id="sucheschrift">Werkzeugsuche:</label></div>
-	<div class="form-group col-md-3 mb-3">
-	<div id="werkzeugsucheforitem">
+		<!-- SeitenleisteStart -->
+		<nav id="sidebar" class="sidebar-wrapper" data-color="#555">
 
-		<input type="text"  id="suchfkt" class="form-control center-block text-center" onkeyup="searchforitem()" >
-	
-	</div>
-	</div>
-	</div>
-	<div class="row">
-	
-	<div id="btn_stammdaten_show" class="form-group col-md-12 text-center">
-	<button id="btn_stammdata" class="btn btn-success abstandunten" onClick="createData()"> Stammdaten </button>
-	
-	<div id="werkzeugsuchefordelitem" style="display:none;">
-		<input type="text" id="suchdelfkt" placeholder="Werkzeugsuche" onkeyup="searchfordelitem()" required>
-	</div>
-	
-	<button id="btn_reload" class="btn btn-success abstandunten" onClick="location.reload()"> Seite neuladen </button>
-	<button id="btn_recreate" class="btn btn-success abstandunten"onClick="reactivate()"> Wiederherstellen </button>
-	</div>
-	
-	</div>
-	
-	
-	<div id="createStamm" style="display:none;">
-		<div class="col-sm-6">
-			<label for="inputTextCreate">Werkzeugnummer*:</label>
-	        <div class="form-label-group">
-	            <input type="text" id="inputWerkzeugnummerCreate" class="form-control" placeholder="Werkzeugnummer" autofocus required>
-	        </div>
-	        <label for="inputTextCreate">Kurzbeschreibung*:</label>
-	        <div class="form-label-group">
-	            <input type="text" id="inputKurzBeschreibungCreate" class="form-control" placeholder="Kurze Beschreibung des Werkzeugs" required>
-	        </div>
-	        <label for="inputTextCreate">Typ des Werkzeugs*:</label>
-	        <div class="form-label-group">
-	            <input type="text" id="inputTypeCreate" class="form-control" placeholder="Werkzeugtyp" required>
-	        </div>
-	         <label for="inputTextCreate">Drucker*:</label>
-	        <div class="form-label-group">
-	            <input type="text" id="inputDruckCreate" class="form-control" placeholder="Drucker" required>
-	        </div>
-	         <label for="inputTextCreate">Druckmaterial*:</label>
-	        <div class="form-label-group">
-	            <input type="text" id="inputMaterialCreate" class="form-control" placeholder="Druckmaterial" required>
-	        </div>
-	         <label for="inputTextCreate">Druckmodus*:</label>
-	        <div class="form-label-group">
-	            <input type="text" id="inputModusCreate" class="form-control" placeholder="Druckmodus" required>
-	        </div>
-	        <label for="inputTextCreate">Herstelldatum*:</label>
-	        <div class="form-label-group">
-	            <input type="date" id="inputDateCreate" class="form-control" required>
-	        </div>
-	        <label for="inputTextCreate">Schlagwörter(Drucker,Type,ID sind standartmäßig):</label>
-	        <div class="form-label-group">
-	            <input type="text" id="inputSchlagwoerterCreate" class="form-control" placeholder="Schlagwörter" required>
-	        </div>
-	        <br>
-	        <input type="hidden" id="usrid" value="">
-	        <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="createStammData()">Erstellen</button>
-			<br>
+			<div id="toggle-sidebar">
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+			<div class="sidebar-brand">
+				<a href="#">Eigenschaften</a>
+			</div>
+			<div class="sidebar-menu">
+				<ul>
+					<li class="nav-item"><a class="nav-link"
+						href="http://localhost/workspace/swimp/WebContent/startseite.html">
+							<span data-feather="file"></span> Home
+					</a></li>
+					<li class="nav-item" id="superadminverwaltung"
+						style="display: none;"><a class="nav-link"
+						href="benutzerverwaltung.html"> <span data-feather="file"></span>
+							Benutzerverwaltung
+					</a></li>
+
+					<li class="nav-item" id="adminverwaltung" style="display: none;">
+						<a class="nav-link" href="benutzerverwaltungadmin.html"> <span
+							data-feather="file"></span> Benutzerverwaltung
+					</a>
+					</li>
+
+					<li class="nav-item"><a class="nav-link"
+						href="stammdaten.html"> <span data-feather="file"></span>
+							Stammdaten
+					</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="werkzeugverwaltung.html"> <span data-feather="file"></span>
+							Werkzeugverwaltung
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="index.html"
+						onclick="deleteAllCookies()"> <span data-feather="file"></span>Logout
+					</a></li>
+				</ul>
+			</div>
+		</nav>
+		<!-- Seitenleiste Ende -->
+
+		<div class="page-content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="form-group col-md-12" id="Ã¼berschrift">
+						<div id="data_div"></div>
+					</div>
+				</div>
+
+				<!-- Stammdaten Form + Btn -->
+				<div class="row">
+					<div class="form-group col-md-5 mb-3 text-right">
+						<label id="sucheschrift">Werkzeugsuche:</label>
+					</div>
+					<div class="form-group col-md-3 mb-3">
+						<div id="werkzeugsucheforitem">
+
+							<input type="text" id="suchfkt"
+								class="form-control center-block text-center"
+								onkeyup="searchforitem()">
+
+						</div>
+					</div>
+				</div>
+				<div class="row">
+
+					<div id="btn_stammdaten_show"
+						class="form-group col-md-12 text-center">
+						<button id="btn_stammdata" class="btn btn-success abstandunten"
+							onClick="createData()">Stammdaten</button>
+
+						<div id="werkzeugsuchefordelitem" style="display: none;">
+							<input type="text" id="suchdelfkt" placeholder="Werkzeugsuche"
+								onkeyup="searchfordelitem()" required>
+						</div>
+
+						<button id="btn_reload" class="btn btn-success abstandunten"
+							onClick="location.reload()">Seite neuladen</button>
+						<button id="btn_recreate" class="btn btn-success abstandunten"
+							onClick="reactivate()">Wiederherstellen</button>
+					</div>
+
+				</div>
+
+
+				<div id="createStamm" style="display: none;">
+					<div class="col-sm-6">
+						<label for="inputTextCreate">Werkzeugnummer*:</label>
+						<div class="form-label-group">
+							<input type="text" id="inputWerkzeugnummerCreate"
+								class="form-control" placeholder="Werkzeugnummer" autofocus
+								required>
+						</div>
+						<label for="inputTextCreate">Kurzbeschreibung*:</label>
+						<div class="form-label-group">
+							<input type="text" id="inputKurzBeschreibungCreate"
+								class="form-control"
+								placeholder="Kurze Beschreibung des Werkzeugs" required>
+						</div>
+						<label for="inputTextCreate">Typ des Werkzeugs*:</label>
+						<div class="form-label-group">
+							<input type="text" id="inputTypeCreate" class="form-control"
+								placeholder="Werkzeugtyp" required>
+						</div>
+						<label for="inputTextCreate">Drucker*:</label>
+						<div class="form-label-group">
+							<input type="text" id="inputDruckCreate" class="form-control"
+								placeholder="Drucker" required>
+						</div>
+						<label for="inputTextCreate">Druckmaterial*:</label>
+						<div class="form-label-group">
+							<input type="text" id="inputMaterialCreate" class="form-control"
+								placeholder="Druckmaterial" required>
+						</div>
+						<label for="inputTextCreate">Druckmodus*:</label>
+						<div class="form-label-group">
+							<input type="text" id="inputModusCreate" class="form-control"
+								placeholder="Druckmodus" required>
+						</div>
+						<label for="inputTextCreate">Herstelldatum*:</label>
+						<div class="form-label-group">
+							<input type="date" id="inputDateCreate" class="form-control"
+								required>
+						</div>
+						<label for="inputTextCreate">SchlagwÃ¶rter(Drucker,Type,ID
+							sind standartmÃ¤ÃŸig):</label>
+						<div class="form-label-group">
+							<input type="text" id="inputSchlagwoerterCreate"
+								class="form-control" placeholder="SchlagwÃ¶rter" required>
+						</div>
+						<br> <input type="hidden" id="usrid" value="">
+						<button class="btn btn-lg btn-primary btn-block" type="submit"
+							onClick="createStammData()">Erstellen</button>
+						<br>
+					</div>
+				</div>
+
+
+				<div id="editStamm" style="display: none;">
+					<div class="col-sm-6">
+						<label for="inputTextCreate">Werkzeugnummer*:</label>
+						<div class="form-label-group">
+							<input type="text" id="inputWerkzeugnummerEdit"
+								class="form-control" placeholder="Werkzeugnummer" required
+								autofocus>
+						</div>
+						<label for="inputTextCreate">Kurzbeschreibung*:</label>
+						<div class="form-label-group">
+							<input type="text" id="inputKurzBeschreibungEdit"
+								class="form-control"
+								placeholder="Kurze Beschreibung des Werkzeugs" required>
+						</div>
+						<label for="inputTextCreate">Typ des Werkzeugs*:</label>
+						<div class="form-label-group">
+							<input type="text" id="inputTypeEdit" class="form-control"
+								placeholder="Werkzeugtyp" required>
+						</div>
+						<label for="inputTextCreate">Drucker*:</label>
+						<div class="form-label-group">
+							<input type="text" id="inputDruckEdit" class="form-control"
+								placeholder="Drucker" required>
+						</div>
+						<label for="inputTextCreate">Druckmaterial*:</label>
+						<div class="form-label-group">
+							<input type="text" id="inputMaterialEdit" class="form-control"
+								placeholder="Druckmaterial" required>
+						</div>
+						<label for="inputTextCreate">Druckmodus*:</label>
+						<div class="form-label-group">
+							<input type="text" id="inputModusEdit" class="form-control"
+								placeholder="Druckmodus" required>
+						</div>
+						<label for="inputTextCreate">Herstelldatum*:</label>
+						<div class="form-label-group">
+							<input type="date" id="inputDateEdit" class="form-control"
+								required>
+						</div>
+						<label for="inputTextCreate">SchlagwÃ¶rter(Drucker,Type,ID
+							sind standartmÃ¤ÃŸig):</label>
+						<div class="form-label-group">
+							<input type="text" id="inputSchlagwoerterEdit"
+								class="form-control" placeholder="SchlagwÃ¶rter" required>
+						</div>
+						<br> <input type="hidden" id="werkzeugID_edit" value="">
+						<button class="btn btn-lg btn-primary btn-block" type="submit"
+							onClick="editStammData()">Editieren</button>
+						<br>
+					</div>
+				</div>
+
+				<!--</div>--->
+
+				<div class="row">
+					<div class="form-group col-md-12">
+						<!-- Hier drin ist der main-Teil -->
+
+
+
+					</div>
+				</div>
+
+
+			</div>
+
 		</div>
 	</div>
-	
-	
-	<div id="editStamm" style="display:none;">
-		<div class="col-sm-6">
-			<label for="inputTextCreate">Werkzeugnummer*:</label>
-	        <div class="form-label-group">
-	            <input type="text" id="inputWerkzeugnummerEdit" class="form-control" placeholder="Werkzeugnummer" required autofocus>
-	        </div>
-	        <label for="inputTextCreate">Kurzbeschreibung*:</label>
-	        <div class="form-label-group">
-	            <input type="text" id="inputKurzBeschreibungEdit" class="form-control" placeholder="Kurze Beschreibung des Werkzeugs" required>
-	        </div>
-	        <label for="inputTextCreate">Typ des Werkzeugs*:</label>
-	        <div class="form-label-group">
-	            <input type="text" id="inputTypeEdit" class="form-control" placeholder="Werkzeugtyp" required>
-	        </div>
-	         <label for="inputTextCreate">Drucker*:</label>
-	        <div class="form-label-group">
-	            <input type="text" id="inputDruckEdit" class="form-control" placeholder="Drucker" required>
-	        </div>
-	         <label for="inputTextCreate">Druckmaterial*:</label>
-	        <div class="form-label-group">
-	            <input type="text" id="inputMaterialEdit" class="form-control" placeholder="Druckmaterial" required>
-	        </div>
-	         <label for="inputTextCreate">Druckmodus*:</label>
-	        <div class="form-label-group">
-	            <input type="text" id="inputModusEdit" class="form-control" placeholder="Druckmodus" required>
-	        </div>
-	        <label for="inputTextCreate">Herstelldatum*:</label>
-	        <div class="form-label-group">
-	            <input type="date" id="inputDateEdit" class="form-control" required>
-	        </div>
-	        <label for="inputTextCreate">Schlagwörter(Drucker,Type,ID sind standartmäßig):</label>
-	        <div class="form-label-group">
-	            <input type="text" id="inputSchlagwoerterEdit" class="form-control" placeholder="Schlagwörter" required>
-	        </div>
-	        <br>
-	        <input type="hidden" id="werkzeugID_edit" value="">
-	        <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="editStammData()">Editieren</button>
-			<br>
-		</div>
-	</div>
 
-                    <!--</div>--->
-               
-                 <div class="row">
-                 <div class="form-group col-md-12">
-                    <!-- Hier drin ist der main-Teil -->
-                    
-                    
-                    
-                    </div>
-                </div>
-
-          
-            </div>
-
-    </div>
-</div>
-      		
 
 	<script>
-		//prüfen des Benutzers + Stammdaten laden
-		var uid=Cookies.get("name");
-		var tok1=Cookies.get("token");
-		var tok2=Cookies.get("token_login");
-		$.ajax({
-			type: "GET",
-			url: "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/stammdateninterface.inc.php?jsoncallback=?",
-			data: {
-				"username": uid,
-				"token": tok1,
-				"token_login": tok2
-			},
-			dataType:"JSONp",
-			timeout: 5000,
-			success: function(data){
-				$('#data_div').html(data);
-			},
-			error: function (request, error) {
-		        console.log(arguments);
-		        alert(" Can't do because: " + error);
-		    }
-		});
-		//prüfen rechte
-		var uid=Cookies.get("name");
-		var tok1=Cookies.get("token");
-		var tok2=Cookies.get("token_login");
-		$.ajax({
-			type: "GET",
-			url: "http://localhost/workspace/swimp/WebContent/Includes/checkrights.inc.php?jsoncallback=?",
-			data: {
-				"username": uid,
-				"token": tok1,
-				"token_login": tok2
-			},
-			dataType:"JSONp",
-			timeout: 5000,
-			success: function(data){
-				if(data=="success"){
-					
-				}else{
-					document.getElementById('btn_stammdaten_show').style.display = "none";
-				}
-			},
-			error: function (request, error) {
-		        console.log(arguments);
-		        alert(" Can't do because: " + error);
-		    }
-		});
+		//prÃ¼fen des Benutzers + Stammdaten laden
+		var uid = Cookies.get("name");
+		var tok1 = Cookies.get("token");
+		var tok2 = Cookies.get("token_login");
+		$
+				.ajax({
+					type : "GET",
+					url : "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/stammdateninterface.inc.php?jsoncallback=?",
+					data : {
+						"username" : uid,
+						"token" : tok1,
+						"token_login" : tok2
+					},
+					dataType : "JSONp",
+					timeout : 5000,
+					success : function(data) {
+						$('#data_div').html(data);
+					},
+					error : function(request, error) {
+						console.log(arguments);
+						alert(" Can't do because: " + error);
+					}
+				});
+		//prÃ¼fen rechte
+		var uid = Cookies.get("name");
+		var tok1 = Cookies.get("token");
+		var tok2 = Cookies.get("token_login");
+		$
+				.ajax({
+					type : "GET",
+					url : "http://localhost/workspace/swimp/WebContent/Includes/checkrights.inc.php?jsoncallback=?",
+					data : {
+						"username" : uid,
+						"token" : tok1,
+						"token_login" : tok2
+					},
+					dataType : "JSONp",
+					timeout : 5000,
+					success : function(data) {
+						if (data == "success") {
+
+						} else {
+							document.getElementById('btn_stammdaten_show').style.display = "none";
+						}
+					},
+					error : function(request, error) {
+						console.log(arguments);
+						alert(" Can't do because: " + error);
+					}
+				});
 		//Startleiste
-		var uid=Cookies.get("name");
-		var tok1=Cookies.get("token");
-		var tok2=Cookies.get("token_login");
-		$.ajax({
-			type: "GET",
-			url: "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/adminverwaltung.inc.php?jsoncallback=?",
-			data: {
-				"username": uid,
-				"token": tok1,
-				"token_login": tok2
-			},
-			dataType:"JSONp",
-			timeout: 5000,
-			success: function(data){
-				if(data=="sadmin"){
-					document.getElementById('superadminverwaltung').style.display = "block";
-				}else if(data=="admin"){
-					document.getElementById('adminverwaltung').style.display = "block";
-				}else if(data=="noadmin"){
-					
-				}else{
-					alert("Login ungültig");
-					document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
-				}
-			},
-			error: function (request, error) {
-		        console.log(arguments);
-		        alert(" Can't do because: " + error);
-		        document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
-		    }
-		});
+		var uid = Cookies.get("name");
+		var tok1 = Cookies.get("token");
+		var tok2 = Cookies.get("token_login");
+		$
+				.ajax({
+					type : "GET",
+					url : "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/adminverwaltung.inc.php?jsoncallback=?",
+					data : {
+						"username" : uid,
+						"token" : tok1,
+						"token_login" : tok2
+					},
+					dataType : "JSONp",
+					timeout : 5000,
+					success : function(data) {
+						if (data == "sadmin") {
+							document.getElementById('superadminverwaltung').style.display = "block";
+						} else if (data == "admin") {
+							document.getElementById('adminverwaltung').style.display = "block";
+						} else if (data == "noadmin") {
+
+						} else {
+							alert("Login ungÃ¼ltig");
+							document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+						}
+					},
+					error : function(request, error) {
+						console.log(arguments);
+						alert(" Can't do because: " + error);
+						document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+					}
+				});
 		// Einblenden des Stammdaten Formulares
-		function createData(){
-			var uid=Cookies.get("name");
-			var tok1=Cookies.get("token");
-			var tok2=Cookies.get("token_login");
-			$.ajax({
-				type: "GET",
-				url: "http://localhost/workspace/swimp/WebContent/Includes/checktoken.inc.php?jsoncallback=?",
-				data: {
-					"username": uid,
-					"token": tok1,
-					"token_login": tok2
-				},
-				dataType:"JSONp",
-				timeout: 5000,
-				success: function(data){
-					document.getElementById('createStamm').style.display = "block";
-					document.getElementById('inputDateCreate').valueAsDate = new Date();//################################################
-				},
-				error: function (request, error) {
-			        console.log(arguments);
-			        alert(" Can't do because: " + error);
-			    }
-			});	
+		function createData() {
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/checktoken.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							document.getElementById('createStamm').style.display = "block";
+							document.getElementById('inputDateCreate').valueAsDate = new Date();//################################################
+						},
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+						}
+					});
 		}
 		// Erstellen der Stammdaten
-		function createStammData(){
+		function createStammData() {
 			var wnr = document.getElementById('inputWerkzeugnummerCreate').value;
 			var desc = document.getElementById('inputKurzBeschreibungCreate').value;
 			var typ = document.getElementById('inputTypeCreate').value;
@@ -321,243 +357,253 @@
 			var modus = document.getElementById('inputModusCreate').value;
 			var hd = document.getElementById('inputDateCreate').value;
 			var sw = document.getElementById('inputSchlagwoerterCreate').value;
-			var uid=Cookies.get("name");
-			var tok1=Cookies.get("token");
-			var tok2=Cookies.get("token_login");
-			if(wnr&&desc&&typ&&drucker&&material&&modus&&hd){
-				$.ajax({
-					type: "GET",
-					url: "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/stammdaten.inc.php?jsoncallback=?",
-					data: {
-						"username": uid,
-						"token": tok1,
-						"token_login": tok2,
-						"werkzeugnummer": wnr,
-						"beschreibung": desc,
-						"typ": typ,
-						"drucker": drucker,
-						"material": material,
-						"modus": modus,
-						"hd": hd,
-						"sw": sw
-					},
-					dataType:"JSONp",
-					timeout: 5000,
-					success: function(data){
-						if(data=="success"){
-							location.reload();
-						}else if(data=="doppelt"){
-							alert("Werkzeugnummer existiert bereits.");
-						}else if(data=="fehler"){
-							alert("Es ist ein Fehler aufgetreten!");
-						}else if(data=="rechte"){
-							alert("Sie haben keine Rechte diese Aktion auszuführen!");
-						}else if(data=="token"){
-							alert("Zeitlimit überschritten!");
-							document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
-						}else{
-							alert("Unexpected answer! Bitte Antwort aufschreiben.");
-						}
-					},
-					error: function (request, error) {
-				        console.log(arguments);
-				        alert(" Can't do because: " + error);
-				    }
-				});	
-			}else{
-				alert("Die mit * markierten Felder müssen ausgefüllt sein!");
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			if (wnr && desc && typ && drucker && material && modus && hd) {
+				$
+						.ajax({
+							type : "GET",
+							url : "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/stammdaten.inc.php?jsoncallback=?",
+							data : {
+								"username" : uid,
+								"token" : tok1,
+								"token_login" : tok2,
+								"werkzeugnummer" : wnr,
+								"beschreibung" : desc,
+								"typ" : typ,
+								"drucker" : drucker,
+								"material" : material,
+								"modus" : modus,
+								"hd" : hd,
+								"sw" : sw
+							},
+							dataType : "JSONp",
+							timeout : 5000,
+							success : function(data) {
+								if (data == "success") {
+									location.reload();
+								} else if (data == "doppelt") {
+									alert("Werkzeugnummer existiert bereits.");
+								} else if (data == "fehler") {
+									alert("Es ist ein Fehler aufgetreten!");
+								} else if (data == "rechte") {
+									alert("Sie haben keine Rechte diese Aktion auszufÃ¼hren!");
+								} else if (data == "token") {
+									alert("Zeitlimit Ã¼berschritten!");
+									document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+								} else {
+									alert("Unexpected answer! Bitte Antwort aufschreiben.");
+								}
+							},
+							error : function(request, error) {
+								console.log(arguments);
+								alert(" Can't do because: " + error);
+							}
+						});
+			} else {
+				alert("Die mit * markierten Felder mÃ¼ssen ausgefÃ¼llt sein!");
 			}
 		}
 		//suchfkt
-		function searchforitem(){
+		function searchforitem() {
 			var uid = Cookies.get("name");
 			var tok1 = Cookies.get("token");
 			var tok2 = Cookies.get("token_login");
 			var item = document.getElementById('suchfkt').value;
-			$.ajax({
-				type: "GET",
-				url: "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/searchforitem.inc.php?jsoncallback=?",
-				data: {
-					"username": uid,
-					"token": tok1,
-					"token_login": tok2,
-					"suchwort": item
-				},
-				dataType:"JSONp",
-				timeout: 5000,
-				success: function(data){
-					$('#data_div').html(data);
-				},
-				error: function (request, error) {
-			        console.log(arguments);
-			    }
-			});
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/searchforitem.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2,
+							"suchwort" : item
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							$('#data_div').html(data);
+						},
+						error : function(request, error) {
+							console.log(arguments);
+						}
+					});
 		}
-		//suchfkt gelöschte items
-		function searchfordelitem(){
+		//suchfkt gelÃ¶schte items
+		function searchfordelitem() {
 			var uid = Cookies.get("name");
 			var tok1 = Cookies.get("token");
 			var tok2 = Cookies.get("token_login");
 			var item = document.getElementById('suchdelfkt').value;
-			$.ajax({
-				type: "GET",
-				url: "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/searchfordelitem.inc.php?jsoncallback=?",
-				data: {
-					"username": uid,
-					"token": tok1,
-					"token_login": tok2,
-					"suchwort": item
-				},
-				dataType:"JSONp",
-				timeout: 5000,
-				success: function(data){
-					$('#data_div').html(data);
-				},
-				error: function (request, error) {
-			        console.log(arguments);
-			    }
-			});
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/searchfordelitem.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2,
+							"suchwort" : item
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							$('#data_div').html(data);
+						},
+						error : function(request, error) {
+							console.log(arguments);
+						}
+					});
 		}
-		//Löschen
-		function entfernen(id){
+		//LÃ¶schen
+		function entfernen(id) {
 			var uid = Cookies.get("name");
-			var tok1=Cookies.get("token");
-			var tok2=Cookies.get("token_login");
-			$.ajax({
-				type: "GET",
-				url: "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/stammdatenloeschen.inc.php?jsoncallback=?",
-				data: {
-					"werkzeugID": id,
-					"username": uid,
-					"token": tok1,
-					"token_login": tok2								
-				},
-				dataType:"JSONp",
-				timeout: 5000,
-				success: function(data){
-					if(data=="success"){
-						location.reload();
-					}else if(data=="exist"){
-						alert("Benutzer existiert bereits!");
-					}else if(data=="token"){
-						alert("Login ungültig");
-						document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
-					}else{
-						alert("keine Rechte!");
-					}
-				},
-				error: function (request, error) {
-			        console.log(arguments);
-			        alert(" Can't do because: " + error);
-			    }
-			});
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/stammdatenloeschen.inc.php?jsoncallback=?",
+						data : {
+							"werkzeugID" : id,
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							if (data == "success") {
+								location.reload();
+							} else if (data == "exist") {
+								alert("Benutzer existiert bereits!");
+							} else if (data == "token") {
+								alert("Login ungÃ¼ltig");
+								document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+							} else {
+								alert("keine Rechte!");
+							}
+						},
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+						}
+					});
 		}
 		//function anzeigen deaktivierter Stammdaten
-		function reactivate(){
-			var uid=Cookies.get("name");
-			var tok1=Cookies.get("token");
-			var tok2=Cookies.get("token_login");
-			$.ajax({
-				type: "GET",
-				url: "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/stammdatenwiederherstellen.inc.php?jsoncallback=?",
-				data: {
-					"username": uid,
-					"token": tok1,
-					"token_login": tok2
-				},
-				dataType:"JSONp",
-				timeout: 5000,
-				success: function(data){
-					$('#data_div').html(data);
-					document.getElementById('werkzeugsucheforitem').style.display = "none";
-					document.getElementById('werkzeugsuchefordelitem').style.display = "block";
-				},
-				error: function (request, error) {
-			        console.log(arguments);
-			        alert(" Can't do because: " + error);
-			    }
-			});
+		function reactivate() {
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/stammdatenwiederherstellen.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							$('#data_div').html(data);
+							document.getElementById('werkzeugsucheforitem').style.display = "none";
+							document.getElementById('werkzeugsuchefordelitem').style.display = "block";
+						},
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+						}
+					});
 		}
 		//function aktivieren eines satzes
-		function activate(id){
+		function activate(id) {
 			var uid = Cookies.get("name");
-			var tok1=Cookies.get("token");
-			var tok2=Cookies.get("token_login");
-			$.ajax({
-				type: "GET",
-				url: "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/stammdatenactivieren.inc.php?jsoncallback=?",
-				data: {
-					"werkzeugID": id,
-					"username": uid,
-					"token": tok1,
-					"token_login": tok2								
-				},
-				dataType:"JSONp",
-				timeout: 5000,
-				success: function(data){
-					if(data=="success"){
-						location.reload();
-					}else if(data=="exist"){
-						alert("Benutzer existiert bereits!");
-					}else if(data=="token"){
-						alert("Login ungültig");
-						document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
-					}else{
-						alert("keine Rechte!");
-					}
-				},
-				error: function (request, error) {
-			        console.log(arguments);
-			        alert(" Can't do because: " + error);
-			    }
-			});
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/stammdatenactivieren.inc.php?jsoncallback=?",
+						data : {
+							"werkzeugID" : id,
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							if (data == "success") {
+								location.reload();
+							} else if (data == "exist") {
+								alert("Benutzer existiert bereits!");
+							} else if (data == "token") {
+								alert("Login ungÃ¼ltig");
+								document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+							} else {
+								alert("keine Rechte!");
+							}
+						},
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+						}
+					});
 		}
 		//editieren der Daten
-		function editieren(id){
+		function editieren(id) {
 			document.getElementById('editStamm').style.display = "block";
 			var uid = Cookies.get("name");
-			var tok1=Cookies.get("token");
-			var tok2=Cookies.get("token_login");
-			$.ajax({
-				type: "GET",
-				url: "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/stammedit.inc.php?jsoncallback=?",
-				data: {
-					"werkzeugID": id,
-					"username": uid,
-					"token": tok1,
-					"token_login": tok2								
-				},
-				dataType:"JSONp",
-				timeout: 5000,
-				success: function(data){
-					if(data=="rights"){
-						norights();
-					}else if(data=="exist"){
-						alert("Benutzer existiert bereits!");
-					}else if(data=="token"){
-						alert("Login ungültig");
-						document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
-					}else{
-						var res = data.split(";");
-						document.getElementById('inputWerkzeugnummerEdit').value=res[0];
-						document.getElementById('inputKurzBeschreibungEdit').value=res[2];
-						document.getElementById('inputTypeEdit').value=res[1];
-						document.getElementById('inputDruckEdit').value=res[3];
-						document.getElementById('inputMaterialEdit').value=res[4];
-						document.getElementById('inputModusEdit').value=res[5];
-						document.getElementById('inputDateEdit').value=res[6];
-						document.getElementById('inputSchlagwoerterEdit').value=res[7];
-						document.getElementById('werkzeugID_edit').value=res[8];
-					}
-				},
-				error: function (request, error) {
-			        console.log(arguments);
-			        alert(" Can't do because: " + error);
-			    }
-			});		
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/stammedit.inc.php?jsoncallback=?",
+						data : {
+							"werkzeugID" : id,
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							if (data == "rights") {
+								norights();
+							} else if (data == "exist") {
+								alert("Benutzer existiert bereits!");
+							} else if (data == "token") {
+								alert("Login ungÃ¼ltig");
+								document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+							} else {
+								var res = data.split(";");
+								document
+										.getElementById('inputWerkzeugnummerEdit').value = res[0];
+								document
+										.getElementById('inputKurzBeschreibungEdit').value = res[2];
+								document.getElementById('inputTypeEdit').value = res[1];
+								document.getElementById('inputDruckEdit').value = res[3];
+								document.getElementById('inputMaterialEdit').value = res[4];
+								document.getElementById('inputModusEdit').value = res[5];
+								document.getElementById('inputDateEdit').value = res[6];
+								document
+										.getElementById('inputSchlagwoerterEdit').value = res[7];
+								document.getElementById('werkzeugID_edit').value = res[8];
+							}
+						},
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+						}
+					});
 		}
 		//editieren der Stammdaten
-		function editStammData(){
+		function editStammData() {
 			var wnr = document.getElementById('inputWerkzeugnummerEdit').value;
 			var desc = document.getElementById('inputKurzBeschreibungEdit').value;
 			var typ = document.getElementById('inputTypeEdit').value;
@@ -567,74 +613,87 @@
 			var hd = document.getElementById('inputDateEdit').value;
 			var sw = document.getElementById('inputSchlagwoerterEdit').value;
 			var werkzeugID = document.getElementById('werkzeugID_edit').value;
-			var uid=Cookies.get("name");
-			var tok1=Cookies.get("token");
-			var tok2=Cookies.get("token_login");
-			if(wnr&&desc&&typ&&drucker&&material&&modus&&hd&&werkzeugID){
-				$.ajax({
-					type: "GET",
-					url: "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/stammchanges.inc.php?jsoncallback=?",
-					data: {
-						"username": uid,
-						"token": tok1,
-						"token_login": tok2,
-						"werkzeugnummer": wnr,
-						"beschreibung": desc,
-						"typ": typ,
-						"drucker": drucker,
-						"material": material,
-						"modus": modus,
-						"hd": hd,
-						"sw": sw,
-						"werkzeugID": werkzeugID
-					},
-					dataType:"JSONp",
-					timeout: 5000,
-					success: function(data){
-						if(data=="success"){
-							location.reload();
-						}else if(data=="doppelt"){
-							alert("Werkzeugnummer existiert bereits.");
-						}else if(data=="fehler"){
-							alert("Es ist ein Fehler aufgetreten!");
-						}else if(data=="rechte"){
-							alert("Sie haben keine Rechte diese Aktion auszuführen!");
-						}else if(data=="token"){
-							alert("Zeitlimit überschritten!");
-							document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
-						}else{
-							alert(data);
-							alert("Unexpected answer! Bitte Antwort aufschreiben.");
-						}
-					},
-					error: function (request, error) {
-				        console.log(arguments);
-				        alert(" Can't do because: " + error);
-				    }
-				});	
-			}else{
-				alert("Die mit * markierten Felder müssen ausgefüllt sein!");
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			if (wnr && desc && typ && drucker && material && modus && hd
+					&& werkzeugID) {
+				$
+						.ajax({
+							type : "GET",
+							url : "http://localhost/workspace/swimp/WebContent/Includes/Stammdatenverwaltung/stammchanges.inc.php?jsoncallback=?",
+							data : {
+								"username" : uid,
+								"token" : tok1,
+								"token_login" : tok2,
+								"werkzeugnummer" : wnr,
+								"beschreibung" : desc,
+								"typ" : typ,
+								"drucker" : drucker,
+								"material" : material,
+								"modus" : modus,
+								"hd" : hd,
+								"sw" : sw,
+								"werkzeugID" : werkzeugID
+							},
+							dataType : "JSONp",
+							timeout : 5000,
+							success : function(data) {
+								if (data == "success") {
+									location.reload();
+								} else if (data == "doppelt") {
+									alert("Werkzeugnummer existiert bereits.");
+								} else if (data == "fehler") {
+									alert("Es ist ein Fehler aufgetreten!");
+								} else if (data == "rechte") {
+									alert("Sie haben keine Rechte diese Aktion auszufÃ¼hren!");
+								} else if (data == "token") {
+									alert("Zeitlimit Ã¼berschritten!");
+									document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+								} else {
+									alert(data);
+									alert("Unexpected answer! Bitte Antwort aufschreiben.");
+								}
+							},
+							error : function(request, error) {
+								console.log(arguments);
+								alert(" Can't do because: " + error);
+							}
+						});
+			} else {
+				alert("Die mit * markierten Felder mÃ¼ssen ausgefÃ¼llt sein!");
 			}
 		}
-		//funktion zum öffnen der Seite Werkzeugverwaltung
-		function openlink(id){
-			document.location.href = "http://localhost/workspace/swimp/WebContent/werkzeugverwaltung.html?werkzeugID="+id;
+		//funktion zum Ã¶ffnen der Seite Werkzeugverwaltung
+		function openlink(id) {
+			document.location.href = "http://localhost/workspace/swimp/WebContent/werkzeugverwaltung.html?werkzeugID="
+					+ id;
 		}
-		//funktion zum öffnen der Seite QR-Code
-		function openqr(id){
-			document.location.href = "http://localhost/workspace/swimp/WebContent/qrcode.html?werkzeugID="+id;
+		//funktion zum Ã¶ffnen der Seite QR-Code
+		function openqr(id) {
+			document.location.href = "http://localhost/workspace/swimp/WebContent/qrcode.html?werkzeugID="
+					+ id;
 		}
 		//Fehlermeldung keine Rechte
-		function norights(){
-			alert("Sie haben keine Befugnisse diese Aktion auszuführen.");
+		function norights() {
+			alert("Sie haben keine Befugnisse diese Aktion auszufÃ¼hren.");
 		}
 	</script>
-<!-- obere Buttons gleich groß machen b1:groß  b2:klein -->
+	<!-- obere Buttons gleich groÃŸ machen b1:groÃŸ  b2:klein -->
 	<script>
-	 var max = Math.max ($("btn_recreate").width (), $("btn_stammdata").width ());
-	    $("btn_recreate").width (max);
-	    $("btn_stammdata").width (max); 
+		var max = Math.max($("btn_recreate").width(), $("btn_stammdata")
+				.width());
+		$("btn_recreate").width(max);
+		$("btn_stammdata").width(max);
 	</script>
-	
+	<!-- Cookies lÃ¶schen fÃ¼r Logout -->
+	<script>
+		function deleteAllCookies() {
+			Cookies.remove('name');
+			Cookies.remove('token');
+			Cookies.remove('token_login');
+		}
+	</script>
+
 </body>
-</html>	
+</html>

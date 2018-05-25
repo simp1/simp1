@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8">
+<meta name="author" content="Steffen Selz, Michael Wenk">
+<meta name="description" content="Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationssystem">
+
+
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <link href="bootstrap.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
     <script src="bootstrap.min.js"></script>
-    
 </head>
 <body> 
  	<header>
@@ -196,8 +200,8 @@
 	<script>
 	/*
 	Dies ist die Login Funktion.
-	Sie holt sich den Input aus den Eingabefeldern InputName und InputPassword Feld und prüft, ob die felder ausgfelüllt sind. Ist eins der Felder nicht ausgefüllt kommt eine entsprechende Fehlermeldung.
-	Die Parameter uid (username) und pid (password) werden mit der GET Methode aus dem Link ausgelesen. Das Password ist hierbei verschlüsselt. 
+	Sie holt sich den Input aus den Eingabefeldern InputName und InputPassword Feld und prÃ¼ft, ob die felder ausgfelÃ¼llt sind. Ist eins der Felder nicht ausgefÃ¼llt kommt eine entsprechende Fehlermeldung.
+	Die Parameter uid (username) und pid (password) werden mit der GET Methode aus dem Link ausgelesen. Das Password ist hierbei verschlÃ¼sselt. 
 	Ein Timeout der Abfage findet nach 5 Sekunden statt.
 	Wenn die Abfrage keine Fehler aufweist, wird die Methode success aufgerufen, es wird ein Cookie generiert und der User wird auf die Startseite weitergeleitet
 	Wenn es bei der Abfrage ein php bezogener Fehler auftritt, wird die error Funktion aufgerufen
@@ -250,9 +254,9 @@
 			}
 		}
 	</script>
-	<!-- Bei Enter-Drücken für ganze Seite wird login_function aufgerufen -->
+	<!-- Bei Enter-DrÃ¼cken fÃ¼r ganze Seite wird login_function aufgerufen -->
       <script type="text/javascript">
- 	 /*Bei der 13. taste handelt es sich um die enter Taste. Drückt der User sie soll die Login-Funktion ausgeführt werden. Sie dient als Alternative zu dem Login-Button */
+ 	 /*Bei der 13. taste handelt es sich um die enter Taste. DrÃ¼ckt der User sie soll die Login-Funktion ausgefÃ¼hrt werden. Sie dient als Alternative zu dem Login-Button */
          $(document).keypress(function (e) {
                      if (e.which == 13 || event.keyCode == 13) {
                  //alert('enter key is pressed');
@@ -260,5 +264,6 @@
              }
          });
       </script>
+      
 </body>
 </html>
