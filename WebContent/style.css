@@ -17,6 +17,21 @@ li a{
 #borderweg{
 	border:none;
 }
+.selftable{
+	color: #white;
+	background-color: #white
+}
+
+.table-dark .selfleerzeile{
+	color: #black;
+	background-color: #black
+}
+
+
+
+
+
+
 .abstandlinks{
 	margin-left:10px;
 }
