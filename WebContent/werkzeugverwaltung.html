@@ -71,9 +71,13 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="form-group col-md-12" id="überschrift">
+						<br>
 						<div id="data_div"></div>
+						<br>
 						<div id="div_geo"></div>
+						<br>
 						<div id="div_pruef"></div>
+						<br>
 						<div id="div_einsatz"></div>
 						<br>
 						<div id="inputGeoCreate" style="display: none;">
@@ -403,6 +407,60 @@
 						timeout : 5000,
 						success : function(data) {
 							$('#data_div').html(data);
+							$.ajax({
+								type : "GET",
+								url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/anzeigeprot.inc.php?jsoncallback=?",
+								data : {
+									"username" : uid,
+									"token" : tok1,
+									"token_login" : tok2,
+									"werkzeugnummer" : item
+								},
+								dataType : "JSONp",
+								timeout : 5000,
+								success : function(data) {
+									$('#div_pruef').html(data);
+								},
+								error : function(request, error) {
+									console.log(arguments);
+								}
+							});
+							$.ajax({
+								type : "GET",
+								url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/anzeigegeo.inc.php?jsoncallback=?",
+								data : {
+									"username" : uid,
+									"token" : tok1,
+									"token_login" : tok2,
+									"werkzeugnummer" : item
+								},
+								dataType : "JSONp",
+								timeout : 5000,
+								success : function(data) {
+									$('#div_geo').html(data);
+								},
+								error : function(request, error) {
+									console.log(arguments);
+								}
+							});
+							$.ajax({
+								type : "GET",
+								url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/anzeigeeinsatz.inc.php?jsoncallback=?",
+								data : {
+									"username" : uid,
+									"token" : tok1,
+									"token_login" : tok2,
+									"werkzeugnummer" : item
+								},
+								dataType : "JSONp",
+								timeout : 5000,
+								success : function(data) {
+									$('#div_einsatz').html(data);
+								},
+								error : function(request, error) {
+									console.log(arguments);
+								}
+							});
 						},
 						error : function(request, error) {
 							console.log(arguments);

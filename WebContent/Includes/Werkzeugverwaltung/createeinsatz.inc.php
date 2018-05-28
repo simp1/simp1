@@ -26,7 +26,7 @@
 				$werkzeugID = $ausgabe->werkzeugID;
 			}
 			
-			$sql="SELECT MAX(laufendenummer) as laufendenummer FROM werkzeug_einsatz";
+			$sql="SELECT MAX(laufendenummer) as laufendenummer FROM werkzeug_einsatz WHERE werkzeugID='".$werkzeugID."'";
 			$statemt = getsql($sql);
 			while($ausgabe = $statemt->fetch_object()){
 				$laufendenummer = $ausgabe->laufendenummer;

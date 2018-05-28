@@ -20,9 +20,13 @@
 			while($ausgabe = $statemt->fetch_object()){
 				$werkzeugID = $ausgabe->werkzeugID;
 			}
-			
-			$stmt = $con->prepare("INSERT INTO werkzeuggeoattr (werkzeugID, bezeichnung, wert) VALUES (?,?,?)");
-			$stmt->bind_param('iss', $werkzeugID, $bez, $wert);
+			$sql="SELECT * FROM werkzeuggeometrie WHERE werkzeugID='".$werkzeugID."'";
+			$statemt = getsql($sql);
+			while($ausgabe = $statemt->fetch_object()){
+				$werkzeuggeoID = $ausgabe->werkzeuggeoID;
+			}
+			$stmt = $con->prepare("INSERT INTO werkzeuggeoattr (werkzeuggeoID, bezeichnung, wert) VALUES (?,?,?)");
+			$stmt->bind_param('iss', $werkzeuggeoID, $bez, $wert);
 			$stmt->execute();
 			echo $_GET['jsoncallback'].'('.json_encode("success").');';
 			exit();

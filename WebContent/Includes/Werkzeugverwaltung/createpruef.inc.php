@@ -24,7 +24,7 @@
 			while($ausgabe = $statemt->fetch_object()){
 				$werkzeugID = $ausgabe->werkzeugID;
 			}
-			$sql="SELECT MAX(laufendenummer) as laufendenummer FROM werkzeug_pruef";
+			$sql="SELECT MAX(laufendenummer) as laufendenummer FROM werkzeug_pruef WHERE werkzeugID='".$werkzeugID."'";
 			$statemt = getsql($sql);
 			while($ausgabe = $statemt->fetch_object()){
 				$laufendenummer = $ausgabe->laufendenummer;
