@@ -5,8 +5,9 @@
 <meta name="author" content="Steffen Selz, Michael Wenk">
 <meta name="description"
 	content="Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationssystem">
-	<!-- Favicon im Browserfenster -->
-<link rel="shortcut icon" type="image/x-icon" href="assets/Icons/hammer1.png">
+<!-- Favicon im Browserfenster -->
+<link rel="shortcut icon" type="image/x-icon"
+	href="assets/Icons/hammer1.png">
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -64,9 +65,10 @@
 						href="werkzeugverwaltung.html"> <span data-feather="file"></span>
 							Werkzeugverwaltung
 					</a></li>
-					
-					<li class="nav-item listenende"><a class="nav-link" href="index.html"
-						onclick="deleteAllCookies()"> <span data-feather="file"></span>Logout
+
+					<li class="nav-item listenende"><a class="nav-link"
+						href="index.html" onclick="deleteAllCookies()"> <span
+							data-feather="file"></span>Logout
 					</a></li>
 				</ul>
 			</div>
@@ -94,19 +96,22 @@
 								onkeyup="searchforitem()">
 
 						</div>
+
+						<div id="werkzeugsuchefordelitem" style="display: none;">
+
+							<input class="form-control center-block text-center" type="text"
+								id="suchdelfkt" onkeyup="searchfordelitem()" required>
+						</div>
 					</div>
 				</div>
 				<div class="row">
+
 
 					<div id="btn_stammdaten_show"
 						class="form-group col-md-12 text-center">
 						<button id="btn_stammdata" class="btn btn-success abstandunten"
 							onClick="createData()">Stammdaten</button>
 
-						<div id="werkzeugsuchefordelitem" style="display: none;">
-							<input type="text" id="suchdelfkt" placeholder="Werkzeugsuche"
-								onkeyup="searchfordelitem()" required>
-						</div>
 
 						<button id="btn_reload" class="btn btn-success abstandunten"
 							onClick="location.reload()">Seite neuladen</button>
