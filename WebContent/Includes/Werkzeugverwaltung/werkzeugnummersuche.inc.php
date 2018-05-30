@@ -15,6 +15,10 @@
 		$erg = status($username);
 		if($erg>=0){
 			$output="";
+			$output .= "<div class='table-responsive'><table class='table table-striped'>";
+			$output .= "<thead class='thead-dark'>";
+			$output .= "<tr><th>Werkzeugnummer</th><th>WerkzeugID</th><th>Kurzbeschreibung</th><th>Werkzeugtyp</th><th>Drucker</th><th>Druckmaterial</th><th>Druckmodus</th><th>Herstelldatum</th><th>Schlagworte</th><th>Attribute</th><th>Aktion</th></tr></thead>";
+			
 			#Anzuzeigende werte
 			$werkzeugID;
 			$imgsrc;
@@ -40,30 +44,31 @@
 						$sw .= $wort.", ";
 					}
 				}
+				
+				
+				
 				$sw .= $werkzeugID;
-				$output .= "<div class='table-responsive'><table class='table table-striped'>";
-				$output .= "<tr><td>Werkzeugnummer</td><td>".$werkzeugnummer."</td><td>Drucker</td><td>".$drucker."</td></tr>";
-				$output .= "<tr><td>WerkzeugID</td><td>".$werkzeugID."</td><td>Druckmaterial</td><td>".$material."</td></tr>";
-				$output .= "<tr><td>Kurzbeschreibung</td><td>".$kurzbeschreibung."</td><td>Druckmodus</td><td>".$modus."</td></tr>";
-				$output .= "<tr><td>Werkzeugtyp</td><td>".$typ."</td><td>Herstelldatum</td><td>".$hd."</td></tr>";
-				$output .= "<tr><td>Schlagworte</td><td colspan='3'>".$sw."</td></tr>";
-				$output .="</div></table>";
-				$output .= "<div class='table-responsive'><table class='table table-striped'>";
+				$output .= "<tr>";
+				$output .= "<td>".$werkzeugnummer."</td><td>".$werkzeugID."</td><td>".$kurzbeschreibung."</td><td>".$typ."</td><td>".$drucker."</td><td>".$material."</td><td>".$modus."</td><td>".$hd."</td><td>".$sw."</td>";
+				
 				$sql="SELECT * FROM werkzeug_attribute WHERE werkzeugID='".$werkzeugID."'";
 				$statemt = getsql($sql);
 				while($ausgabe = $statemt->fetch_object()){
 					$bez = $ausgabe->bezeichnung;
 					$val = $ausgabe->wert;
 					$id_attr = $ausgabe->werkzeug_attID;
-					$output .= "<tr><td>".$bez."</td><td>".$val."</td>";
+					$output .= "<td>".$bez." ".$val."</td>"; //Werkzeugattribute
 					if($erg>=1){
 						$output .="<td><button type='button' class='butosuccess' id=".$id_attr." onClick='entfernen(id)'>entfernen</button></td></tr>";
 					}else{
 						$output .="<td><button type='button' class='butosuccess' id=".$id_attr." onClick='norights()'>entfernen</button></td></tr>";
 					}
 				}
-				$output .="</table></div>";	
+				
 			}
+			$output .="</table></div>";	
+			
+			/* QR-Code
 			$stmt = $con->prepare("SELECT svg FROM qrcode WHERE werkzeugID=?");
 			$stmt->bind_param('i', $werkzeugID);
 			$stmt->execute();
@@ -82,6 +87,11 @@
 			}else{
 				$output .="<button type='button' class='butosuccess' id=".$werkzeugnummer." onClick='norights()'>QR-Code</button>";
 			}
+			*/
+			
+			
+			
+			
 			echo $_GET['jsoncallback'].'('.json_encode($output).');';
 			exit();
 		}else{

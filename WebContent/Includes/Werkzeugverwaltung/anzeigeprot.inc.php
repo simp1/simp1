@@ -13,6 +13,8 @@
 		$erg = status($username);
 		if($erg>=0){
 			$output="";
+			
+			
 			$werkzeugID;
 			$sql="SELECT * FROM stammdaten WHERE werkzeug_nummer='".$werknummer."' AND entfernt = 0";
 			$statemt = getsql($sql);

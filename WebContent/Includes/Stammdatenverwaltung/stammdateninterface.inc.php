@@ -19,7 +19,6 @@
 			$output="";
 			$output .= "<div class='table-responsive'><table class='table table-striped'>";
 			$output .= "<thead class='thead-dark'>";
-			
 			$output .= "<tr><th>Werkzeugnummer</th><th>WerkzeugID</th><th>Kurzbeschreibung</th><th>Werkzeugtyp</th><th>Drucker</th><th>Druckmaterial</th><th>Druckmodus</th><th>Herstelldatum</th><th>Schlagworte</th><th>Aktion</th></tr></thead>";
 			
 			#Anzuzeigende werte
@@ -71,6 +70,14 @@
 				
 			}
 			$output .="</div></table>";
+			
+			
+			
+			
+			
+			
+			
+			
 			echo $_GET['jsoncallback'].'('.json_encode($output).');';
 			exit();
 		}else{
