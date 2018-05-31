@@ -131,27 +131,33 @@
 								anlegen</button>
 						</div>
 						</div>
+						<div id="btn_stammdaten_upload" class="abstandlinks abstandunten">
+							<button id="btn_stammdata_upload"
+								class="btn btn-success abstandunten"
+								onClick="showFormUpload()">File Upload</button>
+						</div>
 						<br>
 						<!-- Upload File -->
-						<h1>Upload File</h1>
-						<div class="row d-flex justify-content-center abstandoben">
-						<form action="Includes/upload.php" method="post" enctype="multipart/form-data">
-                            Select File to upload: 
-                            <select name="zugehoerig">
-                              <option value="1">Werkzeug</option>
-                              <option value="2">Geometrie</option>
-                              <option value="3">Einsatz</option>
-                              <option value="4">Prüfprotokoll</option>
-                            </select>
-                            
-                             <input class="abstandoben" type="hidden" name="werkzeugzuge" id="werkzeugIDHidden" value="">
-                             ID für spezielle Zuordnung: <input type="number" name="idzuge">
-                             <br>
-                            <input   type="file" name="fileToUpload" id="fileToUpload">
-                            <input class="butosuccess"  type="submit" value="Upload File" name="submit">
-                          
- 						</form>
-						
+						<div id="uploadform" style="display:none">
+							<h1>Upload File</h1>
+							<div class="row d-flex justify-content-center abstandoben">
+							<form action="Includes/upload.php" method="post" enctype="multipart/form-data">
+	                            Select File to upload: 
+	                            <select name="zugehoerig">
+	                              <option value="1">Werkzeug</option>
+	                              <option value="2">Geometrie</option>
+	                              <option value="3">Einsatz</option>
+	                              <option value="4">Prüfprotokoll</option>
+	                            </select>
+	                            
+	                             <input class="abstandoben" type="hidden" name="werkzeugzuge" id="werkzeugIDHidden" value="">
+	                             ID für spezielle Zuordnung: <input type="number" name="idzuge">
+	                             <br>
+	                            <input   type="file" name="fileToUpload" id="fileToUpload">
+	                            <input class="butosuccess"  type="submit" value="Upload File" name="submit">
+	                          
+	 						</form>
+							</div>
 						</div>
 						<br>
 						<div id="inputGeoCreate" style="display: none;">
@@ -418,9 +424,10 @@
 				});
 		//werkzeugnummer aus der url parsen
 		var url = document.location.href;
-		var res = url.split("=");
-		if (res[1]) {
-			document.getElementById('werkzeugsuchfkt').value = res[1];
+		var erg = url.split("=");
+		var res = erg[1].split("&");
+		if (res[0]) {
+			document.getElementById('werkzeugsuchfkt').value = res[0];
 			searchwerkzeug();
 		}
 		//suchfkt
@@ -661,6 +668,34 @@
 							if (data == "success") {
 								document.getElementById('inputEinsatzCreate').style.display = "block";
 								document.getElementById('inputEinsatzDate').valueAsDate = new Date();
+							}
+						},
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+						}
+					});
+		}
+		//Uploadformular anzeigen
+		function showFormUpload() {
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/checkrights.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							if (data == "success") {
+								document.getElementById('uploadform').style.display = "block";
+								
 							}
 						},
 						error : function(request, error) {
