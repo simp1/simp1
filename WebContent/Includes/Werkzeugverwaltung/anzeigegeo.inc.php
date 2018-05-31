@@ -59,23 +59,16 @@ if(checktoken($token,$token_login,$username)){
         while($ausgabe = $statement->fetch_object()){
             $bezeichnung = $ausgabe->bezeichnung;
             $wert = $ausgabe->wert;
+            $geoattributsID = $ausgabe->geoattrID;
             $output .= "<tr><td>".$bezeichnung."</td><td>".$wert."</td>";
-            
-            
-            
-            
-            
-            //Löschenbutton
-            $geoattributsID="";
-            
-            
-            
-            
-            
-            
+            if($erg>=1){
+            	$output .="<td><button type='button' id='".$geoattributsID."' onclick='geoattrloeschen(id)' class='butosuccess'>entfernen</button></td></tr>";
+            }else{
+            	$output .="<td><button type='button' id='".$geoattributsID."' onclick='norights()' class='butosuccess'>entfernen</button></td></tr>";
+            }
         }
        
-        $output .="</tr></table></div>";
+        $output .="</table></div>";
         echo $_GET['jsoncallback'].'('.json_encode($output).');';
         exit();
     }else{

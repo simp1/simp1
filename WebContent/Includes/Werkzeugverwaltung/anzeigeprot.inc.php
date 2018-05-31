@@ -40,7 +40,12 @@
 					$wert = $ausgabe->wert;
 					$output .= "<b>".$beschreibung.":</b> ".$wert." ";
 				}
-				$output .="</td><td><button type='button' class='butosuccess'>entfernen</button>";//43+28
+				$output .="</td>";
+				if($erg>=1){
+					$output .="<td><button type='button' id='".$pruefID."' onclick='pruefloeschen(id)' class='butosuccess'>entfernen</button></td>";
+				}else{
+					$output .="<td><button type='button' id='".$pruefIDID."' onclick='norights()' class='butosuccess'>entfernen</button></td>";
+				}
 				$output .="</td></tr>";
 			}
 			

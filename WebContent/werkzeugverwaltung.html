@@ -719,41 +719,6 @@
 						}
 					});
 		}
-		//pruef attr löschen
-		function pruefattrloeschen(id) {
-			var uid = Cookies.get("name");
-			var tok1 = Cookies.get("token");
-			var tok2 = Cookies.get("token_login");
-			$
-					.ajax({
-						type : "GET",
-						url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/delpruefattr.inc.php?jsoncallback=?",
-						data : {
-							"attrID" : id,
-							"username" : uid,
-							"token" : tok1,
-							"token_login" : tok2
-						},
-						dataType : "JSONp",
-						timeout : 5000,
-						success : function(data) {
-							if (data == "success") {
-								searchwerkzeug();
-							} else if (data == "exist") {
-								alert("Benutzer existiert bereits!");
-							} else if (data == "token") {
-								alert("Login ungültig");
-								document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
-							} else {
-								alert("keine Rechte!");
-							}
-						},
-						error : function(request, error) {
-							console.log(arguments);
-							alert(" Can't do because: " + error);
-						}
-					});
-		}
 		//einsatz löschen
 		function einsatzloeschen(id) {
 			var uid = Cookies.get("name");
@@ -763,41 +728,6 @@
 					.ajax({
 						type : "GET",
 						url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/deleinsatz.inc.php?jsoncallback=?",
-						data : {
-							"attrID" : id,
-							"username" : uid,
-							"token" : tok1,
-							"token_login" : tok2
-						},
-						dataType : "JSONp",
-						timeout : 5000,
-						success : function(data) {
-							if (data == "success") {
-								searchwerkzeug();
-							} else if (data == "exist") {
-								alert("Benutzer existiert bereits!");
-							} else if (data == "token") {
-								alert("Login ungültig");
-								document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
-							} else {
-								alert("keine Rechte!");
-							}
-						},
-						error : function(request, error) {
-							console.log(arguments);
-							alert(" Can't do because: " + error);
-						}
-					});
-		}
-		//einsatz attr löschen
-		function einsatzattrloeschen(id) {
-			var uid = Cookies.get("name");
-			var tok1 = Cookies.get("token");
-			var tok2 = Cookies.get("token_login");
-			$
-					.ajax({
-						type : "GET",
-						url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/deleinsatzattr.inc.php?jsoncallback=?",
 						data : {
 							"attrID" : id,
 							"username" : uid,
