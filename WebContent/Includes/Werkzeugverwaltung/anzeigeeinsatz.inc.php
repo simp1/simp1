@@ -23,9 +23,10 @@
 			$statemt = getsql($sql);
 			$output .= "<div class='table-responsive'><table class='table table-striped'>";
 			$output .= "<thead class='thead-dark'>";
-			$output .= "<tr><th>WerkzeugID</th><th>EinsatzID</th><th>Lfd</th><th>Datum</th><th>Schussnummer</th><th>Maschine</th><th>Kuehlung</th><th>Kuehldauer</th><th>Schliesskraft</th><th>Sonstige</th><th>Aktion</th>";
+			$output .= "<tr><th>WerkzeugID</th><th>EinsatzID</th><th>Lfd</th><th>Datum</th><th>Schussnummer</th><th>Maschine</th><th>Kuehlung</th><th>Kuehldauer</th><th>Schliesskraft</th><th>Sonstige</th><th>Aktion</th><th>Dokumente</th>";
 			$output .= "</tr></thead>";
 			while($ausgabe = $statemt->fetch_object()){
+				$x=0;
 				$laufendenummer = $ausgabe->laufendenummer;
 				$datum = $ausgabe->datum;
 				$einsatzID = $ausgabe->einsatzID;
@@ -43,16 +44,44 @@
 					$wert = $ausgabe->wert;
 					$output .= "<b>".$bezeichnung.":</b> ".$wert." ";
 				}
+				
 				$output .="</td>";
 				if($erg>=1){
 					$output .="<td><button type='button' id='".$einsatzID."' onclick='einsatzloeschen(id)' class='butosuccess'>entfernen</button></td>";
 				}else{
 					$output .="<td><button type='button' id='".$einsatzID."' onclick='norights()' class='butosuccess'>entfernen</button></td>";
 				}
+				$sql="SELECT * FROM dokumente WHERE einsatzID='".$einsatzID."'";
+				$statemet = getsql($sql);
+				$output .="<td>";
+				while($ausgabe = $statemet->fetch_object()){
+					$x=1;
+					$bez = $ausgabe->bezeichnung;
+					$url = $ausgabe->url;
+					$bez = substr($bez, 0, 15);
+					$output .="<a class='butosuccess' href='".$url."' download>".$bez."</a> ";
+				}
+				if($x==0){
+					$output .="no document";
+				}
+				$output .="</td></tr>";
 			}
 			
-			$output .="</tr></table></div>";	
+			$output .="</table></div>";	
 			
+			$output .="Dokumente zum Werkzeugeinsatz<br>";
+			$sql="SELECT * FROM dokumente WHERE werkzeugID='".$werkzeugID."' AND zuordnung='einsatz'";
+			$statemt = getsql($sql);
+			while($ausgabe = $statemt->fetch_object()){
+				$bez = $ausgabe->bezeichnung;
+				$url = $ausgabe->url;
+				$bez = substr($bez, 0, 25);
+				$output .="<a class='btn btn-success' href='".$url."' download>".$bez."</a><br>";
+			}
+			
+			
+			
+			$output .="</div>";
 			
 			echo $_GET['jsoncallback'].'('.json_encode($output).');';
 			exit();

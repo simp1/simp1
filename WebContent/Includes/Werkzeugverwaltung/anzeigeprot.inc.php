@@ -25,9 +25,10 @@
 			$statemt = getsql($sql);
 			$output .= "<div class='table-responsive'><table class='table table-striped'>";
 			$output .= "<thead class='thead-dark'>";
-			$output .= "<tr><th>WerkzeugID</th><th>PruefID</th><th>Lfd</th><th>Datum</th><th>Pruefmerkmale</th><th>Aktion</th>";
+			$output .= "<tr><th>WerkzeugID</th><th>PruefID</th><th>Lfd</th><th>Datum</th><th>Pruefmerkmale</th><th>Aktion</th><th>Dokumente</th>";
 			$output .= "</tr></thead>";
 			while($ausgabe = $statemt->fetch_object()){
+				$x=0;
 				$laufendenummer = $ausgabe->laufendenummer;
 				$datum = $ausgabe->datum;
 				$pruefID = $ausgabe->pruefID;
@@ -46,10 +47,38 @@
 				}else{
 					$output .="<td><button type='button' id='".$pruefIDID."' onclick='norights()' class='butosuccess'>entfernen</button></td>";
 				}
-				$output .="</td></tr>";
+				$sql="SELECT * FROM dokumente WHERE pruefID='".$pruefID."'";
+				$statemet = getsql($sql);
+				$output .="<td>";
+				while($ausgabe = $statemet->fetch_object()){
+					$x=1;
+					$bez = $ausgabe->bezeichnung;
+					$url = $ausgabe->url;
+					$bez = substr($bez, 0, 15);
+					$output .="<a class='butosuccess' href='".$url."' download>".$bez."</a> ";
+				}
+				
+				if($x==0){
+					$output .="no document";
+				}
+				$output .="</th></tr>";
 			}
 			
 			$output .="</table></div>";	
+			
+			$output .="Dokumente zum Werkzeugprotokoll<br>";
+			$sql="SELECT * FROM dokumente WHERE werkzeugID='".$werkzeugID."' AND zuordnung='pruef'";
+			$statemt = getsql($sql);
+			while($ausgabe = $statemt->fetch_object()){
+				$bez = $ausgabe->bezeichnung;
+				$url = $ausgabe->url;
+				$bez = substr($bez, 0, 25);
+				$output .="<a class='btn btn-success' href='".$url."' download>".$bez."</a><br>";
+			}
+			
+			
+			
+			$output .="</div>";
 			echo $_GET['jsoncallback'].'('.json_encode($output).');';
 			exit();
 		}else{

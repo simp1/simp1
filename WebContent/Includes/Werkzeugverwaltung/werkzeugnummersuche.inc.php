@@ -102,12 +102,21 @@
 			$output .="</div>";
 			
 			$output .="</div>";
+			$output .="<div>";
+			
+			$output .="Dokumente zum Werkzeug<br>";
+			$sql="SELECT * FROM dokumente WHERE werkzeugID='".$werkzeugID."' AND zuordnung='werkzeug'";
+			$statemt = getsql($sql);
+			while($ausgabe = $statemt->fetch_object()){
+				$bez = $ausgabe->bezeichnung;
+				$url = $ausgabe->url;
+				$bez = substr($bez, 0, 25);
+				$output .="<a class='btn btn-success' href='".$url."' download>".$bez."</a><br>";
+			}
 			
 			
 			
-			
-			
-			
+			$output .="</div>";
 			
 			echo $_GET['jsoncallback'].'('.json_encode($output).');';
 			exit();
