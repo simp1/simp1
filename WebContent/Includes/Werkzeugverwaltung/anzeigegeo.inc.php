@@ -23,7 +23,7 @@ if(checktoken($token,$token_login,$username)){
         $statemt = getsql($sql);
         $output .= "<div class='table-responsive'><table class='table table-striped'>";
         $output .= "<thead class='thead-dark'>";
-        $output .= "<tr><th>WerkzeugID</th><th>GeoID</th><th>Kavitaet</th><th>Position</th><th>auswerfer</th><th>Bohrbild</th><th>Form</th><th>Aussenmass</th><th>MassAs</th><th>MassDs</th>";
+        $output .= "<tr><th>WerkzeugID</th><th>GeoID</th><th>Kavitaet</th><th>Position</th><th>Auswerfer</th><th>Bohrbild</th><th>Form</th><th>Aussenmass</th><th>MassAs</th><th>MassDs</th>";
         $output .= "</tr></thead>";
         while($ausgabe = $statemt->fetch_object()){
             $werkzeuggeoID = $ausgabe->werkzeuggeoID;
@@ -55,7 +55,6 @@ if(checktoken($token,$token_login,$username)){
         $output .= "<thead class='thead-dark'>";
         $output .= "<tr><th>Bezeichnung</th><th>Wert</th><th>Aktion</th>";
         $output .= "</tr></thead>";
-        $output .= "<h1>Werkzeuggeometrie Attribute</h1><br>";
         while($ausgabe = $statement->fetch_object()){
             $bezeichnung = $ausgabe->bezeichnung;
             $wert = $ausgabe->wert;

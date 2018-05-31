@@ -17,7 +17,7 @@
 			$output="";
 			$output .= "<div class='table-responsive'><table class='table table-striped'>";
 			$output .= "<thead class='thead-dark'>";
-			$output .= "<tr><th>Werkzeugnummer</th><th>WerkzeugID</th><th>Kurzbeschreibung</th><th>Werkzeugtyp</th><th>Drucker</th><th>Druckmaterial</th><th>Druckmodus</th><th>Herstelldatum</th><th>Schlagworte</th><th>Aktion</th></tr></thead>";
+			$output .= "<tr><th>Werkzeugnummer</th><th>WerkzeugID</th><th>Kurzbeschreibung</th><th>Werkzeugtyp</th><th>Drucker</th><th>Druckmaterial</th><th>Druckmodus</th><th>Herstelldatum</th><th>Schlagworte</th></tr></thead>";
 			
 			#Anzuzeigende werte
 			$werkzeugID;
@@ -50,16 +50,13 @@
 				$sw .= $werkzeugID;
 				$output .= "<tr>";
 				$output .= "<td>".$werkzeugnummer."</td><td>".$werkzeugID."</td><td>".$kurzbeschreibung."</td><td>".$typ."</td><td>".$drucker."</td><td>".$material."</td><td>".$modus."</td><td>".$hd."</td><td>".$sw."</td>";
-				if($erg>=1){
-				    $output .="<td><button type='button' class='butosuccess'>entfernen</button></td></tr>";
-				}else{
-				    $output .="<td><button type='button' class='butosuccess'>entfernen</button></td></tr>";
-				}
+				
 			}
 				$output .="</tr></table></div>";
-				$output .="<h1>Werkzeugattribute</h1><br>";
+				
 				//Attribute
-				$output .= "<div class='table-responsive'><table class='table table-striped'>";
+				$output .= "<div class='row'>";
+				$output .= "<div class='table-responsive col-md-8'><table class='table table-striped'>";
 				$output .= "<thead class='thead-dark'>";
 				$output .= "<tr><th>Attributsbeschreibung</th><th>Attributswert</th><th>Aktion</th></tr></thead>";
 				
@@ -72,29 +69,17 @@
 					$output .= "<td>".$bez."</td>"; //Werkzeugattribute
 					$output .= "<td>".$val."</td>"; //Werkzeugattribute
 					if($erg>=1){
-					    $output .="<td><button type='button' class='butosuccess'>entfernen</button></td></tr>";//id=".$id_attr." onClick='norights()'
+					    $output .="<td><button type='button' class='butosuccess'>entfernen</button></tr></td>";//
 					}else{
-						$output .="<td><button type='button' class='butosuccess'>entfernen</button></td></tr>";
+						$output .="<td><button type='button' class='butosuccess'>entfernen</button></tr></td>";
 					}
 				}
-			$output .="</table></div>";	
+				$output .="</table></div>";
+
 			
+			//QR-Code
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			/*
-			$output .="<h1>QR-Code</h1>";
+			$output .="<div class='col-md-4'>";
 			$stmt = $con->prepare("SELECT svg FROM qrcode WHERE werkzeugID=?");
 			$stmt->bind_param('i', $werkzeugID);
 			$stmt->execute();
@@ -107,13 +92,19 @@
 					$imgsrc = $ausgabe->svg;
 				}
 				$output .= "<img id='imgqrcode' src='".$imgsrc."'>";
+				if($erg>=1){
+				    $output .="<button type='button' class='butosuccess' id=".$werkzeugnummer." onClick='openqr(id)'>QR-Code</button>";
+				}else{
+				    $output .="<button type='button' class='butosuccess' id=".$werkzeugnummer." onClick='norights()'>QR-Code</button>";
+				}
 			}
-			if($erg>=1){
-				$output .="<button type='button' class='butosuccess' id=".$werkzeugnummer." onClick='openqr(id)'>QR-Code</button>";
-			}else{
-				$output .="<button type='button' class='butosuccess' id=".$werkzeugnummer." onClick='norights()'>QR-Code</button>";
-			}
-			*/
+			
+			$output .="</div>";
+			
+			$output .="</div>";
+			
+			
+			
 			
 			
 			
