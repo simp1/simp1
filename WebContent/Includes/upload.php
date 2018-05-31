@@ -51,12 +51,8 @@ if ($uploadOk == 0) {
     		$sql="INSERT INTO dokumente (werkzeugID, format, url, bezeichnung, zuordnung) VALUES (?,?,?,?,?)";
     		$zuordnung=werkzeug;
     	}elseif ($zugehoerigkeit==2){
-    		if(empty($idzuge)){
-    			$sql="INSERT INTO dokumente (werkzeugID, format, url, bezeichnung, zuordnung) VALUES (?,?,?,?,?)";
-    			$zuordnung=geo;
-    		}else{
-    			$sql="INSERT INTO dokumente (geoID, format, url, bezeichnung) VALUES (?,?,?,?)";
-    		}
+    		$sql="INSERT INTO dokumente (werkzeugID, format, url, bezeichnung, zuordnung) VALUES (?,?,?,?,?)";
+    		$zuordnung=geo;
     	}elseif ($zugehoerigkeit==3){
     		if(empty($idzuge)){
     			$sql="INSERT INTO dokumente (werkzeugID, format, url, bezeichnung, zuordnung) VALUES (?,?,?,?,?)";

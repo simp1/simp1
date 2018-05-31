@@ -23,7 +23,7 @@
 			$statemt = getsql($sql);
 			$output .= "<div class='table-responsive'><table class='table table-striped'>";
 			$output .= "<thead class='thead-dark'>";
-			$output .= "<tr><th>WerkzeugID</th><th>EinsatzID</th><th>Lfd</th><th>Datum</th><th>Schussnummer</th><th>Maschine</th><th>Kuehlung</th><th>Kuehldauer</th><th>Schlieﬂkraft</th><th>Sonstige</th><th>Aktion</th>";
+			$output .= "<tr><th>WerkzeugID</th><th>EinsatzID</th><th>Lfd</th><th>Datum</th><th>Schussnummer</th><th>Maschine</th><th>Kuehlung</th><th>Kuehldauer</th><th>Schliesskraft</th><th>Sonstige</th><th>Aktion</th>";
 			$output .= "</tr></thead>";
 			while($ausgabe = $statemt->fetch_object()){
 				$laufendenummer = $ausgabe->laufendenummer;
