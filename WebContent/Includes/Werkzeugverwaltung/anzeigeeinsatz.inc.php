@@ -44,7 +44,7 @@
 					$output .= "<b>".$bezeichnung.":</b> ".$wert." ";
 				}
 				$output .="</td>";
-				$output .="<td><button type='button' class='butosuccess'>Download</button></td>";
+				$output .="<td><button type='button' class='butosuccess'>entfernen</button></td>";
 			}
 			
 			$output .="</tr></table></div>";	

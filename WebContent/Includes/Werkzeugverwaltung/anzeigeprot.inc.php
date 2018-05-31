@@ -40,7 +40,7 @@
 					$wert = $ausgabe->wert;
 					$output .= "<b>".$beschreibung.":</b> ".$wert." ";
 				}
-				$output .="</td><td><button type='button' class='butosuccess'>Download</button>";//43+28
+				$output .="</td><td><button type='button' class='butosuccess'>entfernen</button>";//43+28
 				$output .="</td></tr>";
 			}
 			
