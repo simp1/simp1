@@ -6,8 +6,7 @@
 <meta name="description"
 	content="Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationssystem">
 <!-- Favicon im Browserfenster -->
-<link rel="shortcut icon" type="image/x-icon"
-	href="assets/Icons/hammer1.png">
+<link rel="shortcut icon" type="image/x-icon" href="assets/Icons/hammer1.png">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
@@ -60,35 +59,32 @@
 						href="werkzeugverwaltung.html"> <span data-feather="file"></span>
 							Werkzeugverwaltung
 					</a></li>
-					<li class="nav-item listenende"><a class="nav-link"
-						href="index.html" onclick="deleteAllCookies()"> <span
-							data-feather="file"></span>Logout
+					<li class="nav-item listenende"><a class="nav-link" href="index.html"
+						onclick="deleteAllCookies()"> <span data-feather="file"></span>Logout
 					</a></li>
 				</ul>
 			</div>
 		</nav>
 		<!-- Seitenleiste Ende -->
 
-
-
-
-
-
-
-
-
-
 		<div class="page-content">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="form-group col-md-12" id="überschrift">
-						<br> <br>
-						<div class="row">
+						<h1>Stammdaten</h1>
+						<br>
+						<div id="data_div"></div>
+						<br>
 						<div id="btn_stammdaten_show" class="abstandlinks abstandunten">
 							<button id="btn_stammdata" class="btn btn-success abstandunten"
 								onClick="createAttribut()">Attribut hinzufügen</button>
 						</div>
-						
+						<br>
+						<h1>Werkzeuggeometrie</h1>
+						<br>
+						<div id="div_geo"></div>
+						<br>
+						<div class="row align-items-center justify-content-center">
 						<div id="btn_stammdaten_geo" class="abstandlinks abstandunten">
 							<button id="btn_stammdata_geo"
 								class="btn btn-success abstandunten" onClick="showFormGeo()">
@@ -99,7 +95,13 @@
 								class="btn btn-success abstandunten" onClick="showFormGeoAttr()">Geo
 								Attribut anlegen</button>
 						</div>
-						
+						</div>
+						<br>
+						<h1>Werkzeugpruefung</h1>
+						<br>
+						<div id="div_pruef"></div>
+						<br>
+						<div class="row align-items-center justify-content-center">
 						<div id="btn_stammdaten_pruef" class="abstandlinks abstandunten">
 							<button id="btn_stammdata_pruef"
 								class="btn btn-success abstandunten" onClick="showFormPruef()">
@@ -110,7 +112,13 @@
 								class="btn btn-success abstandunten"
 								onClick="showFormPruefAttr()">Prüfmerkmal</button>
 						</div>
-						
+						</div>
+						<br>
+						<h1>Werkzeugeinsatz</h1>
+						<br>
+						<div id="div_einsatz"></div>
+						<br>
+						<div class="row align-items-center justify-content-center">
 						<div id="btn_stammdaten_einsatz" class="abstandlinks abstandunten">
 							<button id="btn_stammdata_einsatz"
 								class="btn btn-success abstandunten" onClick="showFormEinsatz()">
@@ -124,7 +132,7 @@
 						</div>
 						</div>
 						<br>
-						<!-- Upload php-File -->
+						<!-- Upload File -->
 						<h1>Upload File</h1>
 						<div class="row d-flex justify-content-center abstandoben">
 						<form action="Includes/upload.php" method="post" enctype="multipart/form-data">
@@ -143,11 +151,8 @@
                             <input class="butosuccess"  type="submit" value="Upload File" name="submit">
                           
  						</form>
-						</div>
 						
-						<div id="div_geo"></div>
-						<br>
-						<div id="div_einsatz"></div>
+						</div>
 						<br>
 						<div id="inputGeoCreate" style="display: none;">
 							<div class="col-sm-6">
@@ -359,12 +364,17 @@
 
 							</div>
 						</div>
+
+
 					</div>
 				</div>
 				<div class="row">
-				<div id="div_pruef"></div>
-						
-					<div class="form-group col-md-12 abstandoben" id="data_div"></div>
+					<div class="form-group col-md-12">
+						<!-- Hier drin ist der main-Teil -->
+
+
+
+					</div>
 				</div>
 
 
@@ -434,63 +444,60 @@
 						timeout : 5000,
 						success : function(data) {
 							$('#data_div').html(data);
-							$
-									.ajax({
-										type : "GET",
-										url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/anzeigeprot.inc.php?jsoncallback=?",
-										data : {
-											"username" : uid,
-											"token" : tok1,
-											"token_login" : tok2,
-											"werkzeugnummer" : item
-										},
-										dataType : "JSONp",
-										timeout : 5000,
-										success : function(data) {
-											$('#div_pruef').html(data);
-										},
-										error : function(request, error) {
-											console.log(arguments);
-										}
-									});
-							$
-									.ajax({
-										type : "GET",
-										url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/anzeigegeo.inc.php?jsoncallback=?",
-										data : {
-											"username" : uid,
-											"token" : tok1,
-											"token_login" : tok2,
-											"werkzeugnummer" : item
-										},
-										dataType : "JSONp",
-										timeout : 5000,
-										success : function(data) {
-											$('#div_geo').html(data);
-										},
-										error : function(request, error) {
-											console.log(arguments);
-										}
-									});
-							$
-									.ajax({
-										type : "GET",
-										url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/anzeigeeinsatz.inc.php?jsoncallback=?",
-										data : {
-											"username" : uid,
-											"token" : tok1,
-											"token_login" : tok2,
-											"werkzeugnummer" : item
-										},
-										dataType : "JSONp",
-										timeout : 5000,
-										success : function(data) {
-											$('#div_einsatz').html(data);
-										},
-										error : function(request, error) {
-											console.log(arguments);
-										}
-									});
+							$.ajax({
+								type : "GET",
+								url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/anzeigeprot.inc.php?jsoncallback=?",
+								data : {
+									"username" : uid,
+									"token" : tok1,
+									"token_login" : tok2,
+									"werkzeugnummer" : item
+								},
+								dataType : "JSONp",
+								timeout : 5000,
+								success : function(data) {
+									$('#div_pruef').html(data);
+								},
+								error : function(request, error) {
+									console.log(arguments);
+								}
+							});
+							$.ajax({
+								type : "GET",
+								url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/anzeigegeo.inc.php?jsoncallback=?",
+								data : {
+									"username" : uid,
+									"token" : tok1,
+									"token_login" : tok2,
+									"werkzeugnummer" : item
+								},
+								dataType : "JSONp",
+								timeout : 5000,
+								success : function(data) {
+									$('#div_geo').html(data);
+								},
+								error : function(request, error) {
+									console.log(arguments);
+								}
+							});
+							$.ajax({
+								type : "GET",
+								url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/anzeigeeinsatz.inc.php?jsoncallback=?",
+								data : {
+									"username" : uid,
+									"token" : tok1,
+									"token_login" : tok2,
+									"werkzeugnummer" : item
+								},
+								dataType : "JSONp",
+								timeout : 5000,
+								success : function(data) {
+									$('#div_einsatz').html(data);
+								},
+								error : function(request, error) {
+									console.log(arguments);
+								}
+							});
 						},
 						error : function(request, error) {
 							console.log(arguments);
@@ -863,7 +870,6 @@
 			var auswerfer = document.getElementById('inputGeoAuswerfer').value;
 			var position = document.getElementById('inputGeoPosition').value;
 			var kavitaet = document.getElementById('inputGeoKavitaet').value;
-			alert(werkid);
 			if (kavitaet && position && auswerfer && as && ds && bohrbild
 					&& form && ausmas && werkid) {
 				$
@@ -1137,7 +1143,7 @@
 			Cookies.remove('token_login');
 		}
 	</script>
-	<!-- Upload php-File -->
+	<!-- Upload File -->
 	<script>
 	document.getElementById("werkzeugIDHidden").value=document.getElementById('werkzeugsuchfkt').value;
 	</script>

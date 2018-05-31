@@ -25,7 +25,7 @@
 			$statemt = getsql($sql);
 			$output .= "<div class='table-responsive'><table class='table table-striped'>";
 			$output .= "<thead class='thead-dark'>";
-			$output .= "<tr><th>WerkzeugID</th><th>PruefID</th><th>Lfd</th><th>Datum</th><th>Pruefmerkmale</th>";
+			$output .= "<tr><th>WerkzeugID</th><th>PruefID</th><th>Lfd</th><th>Datum</th><th>Pruefmerkmale</th><th>Aktion</th>";
 			$output .= "</tr></thead>";
 			while($ausgabe = $statemt->fetch_object()){
 				$laufendenummer = $ausgabe->laufendenummer;
@@ -40,6 +40,7 @@
 					$wert = $ausgabe->wert;
 					$output .= "<b>".$beschreibung.":</b> ".$wert." ";
 				}
+				$output .="</td><td><button type='button' class='butosuccess'>Download</button>";//43+28
 				$output .="</td></tr>";
 			}
 			
