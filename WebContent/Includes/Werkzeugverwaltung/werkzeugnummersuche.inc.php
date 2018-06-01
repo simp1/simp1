@@ -93,9 +93,9 @@
 				}
 				$output .= "<img id='imgqrcode' src='".$imgsrc."'>";
 				if($erg>=1){
-				    $output .="<button type='button' class='butosuccess' id=".$werkzeugnummer." onClick='openqr(id)'>QR-Code</button>";
+				    $output .="<button type='button' class='butosuccess abstandoben' id=".$werkzeugnummer." onClick='openqr(id)'>QR-Code</button>";
 				}else{
-				    $output .="<button type='button' class='butosuccess' id=".$werkzeugnummer." onClick='norights()'>QR-Code</button>";
+				    $output .="<button type='button' class='butosuccess abstandoben' id=".$werkzeugnummer." onClick='norights()'>QR-Code</button>";
 				}
 			}
 			
