@@ -60,6 +60,10 @@
 						href="werkzeugverwaltung.html"> <span data-feather="file"></span>
 							Werkzeugverwaltung
 					</a></li>
+					<li style="display: none;" id="dokuverwaltung" class="nav-item"><a class="nav-link"
+						href="dokumentenverwaltung.html"> <span data-feather="file"></span>
+							Dokumentenverwaltung
+					</a></li>
 					<li class="nav-item listenende"><a class="nav-link" href="index.html"
 						onclick="deleteAllCookies()"> <span data-feather="file"></span>Logout
 					</a></li>
@@ -522,6 +526,41 @@
 			Cookies.remove('token');
 			Cookies.remove('token_login');
 		}
+	</script>
+	<!-- Dokumentenverwaltung in Sidebar anzeigen bei Zugriffsrechten -->
+		<script type="text/javascript">
+		//Startleiste
+		var uid = Cookies.get("name");
+		var tok1 = Cookies.get("token");
+		var tok2 = Cookies.get("token_login");
+		$
+				.ajax({
+					type : "GET",
+					url : "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/adminverwaltung.inc.php?jsoncallback=?",
+					data : {
+						"username" : uid,
+						"token" : tok1,
+						"token_login" : tok2
+					},
+					dataType : "JSONp",
+					timeout : 5000,
+					success : function(data) {
+						if (data == "sadmin") {
+							document.getElementById('dokuverwaltung').style.display = "block";
+						} else if (data == "admin") {
+							document.getElementById('dokuverwaltung').style.display = "block";
+						} else if (data == "noadmin") {
+							document.getElementById('dokuverwaltung').style.display = "block";
+						} else {
+							//alert("Doku aus");
+						}
+					},
+					error : function(request, error) {
+						console.log(arguments);
+						alert(" Can't do because: " + error);
+						document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+					}
+				});
 	</script>
 
 </body>
