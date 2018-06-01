@@ -79,7 +79,7 @@
 			
 			//QR-Code
 			
-			$output .="<div class='col-md-2'>";
+			$output .="<div class='col-md-4'>";
 			$stmt = $con->prepare("SELECT svg FROM qrcode WHERE werkzeugID=?");
 			$stmt->bind_param('i', $werkzeugID);
 			$stmt->execute();
@@ -93,14 +93,14 @@
 				}
 				$output .= "<img id='imgqrcode' src='".$imgsrc."'>";
 				if($erg>=1){
-				    $output .="<button type='button' class='butosuccess abstandoben' id=".$werkzeugnummer." onClick='openqr(id)'>QR-Code</button>";
+				    $output .="<button type='button' class='butosuccess' id=".$werkzeugnummer." onClick='openqr(id)'>QR-Code</button>";
 				}else{
-				    $output .="<button type='button' class='butosuccess abstandoben' id=".$werkzeugnummer." onClick='norights()'>QR-Code</button>";
+				    $output .="<button type='button' class='butosuccess' id=".$werkzeugnummer." onClick='norights()'>QR-Code</button>";
 				}
 			}
 			
 			$output .="</div>";
-			$output .="<div class='col-md-2'></div>";
+			
 			$output .="</div>";
 			$output .="<div>";
 			

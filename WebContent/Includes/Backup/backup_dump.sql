@@ -27,7 +27,7 @@ CREATE TABLE `backup` (
   `uid` varchar(255) NOT NULL,
   `timestamp` int(255) NOT NULL,
   PRIMARY KEY (`backupID`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +36,7 @@ CREATE TABLE `backup` (
 
 LOCK TABLES `backup` WRITE;
 /*!40000 ALTER TABLE `backup` DISABLE KEYS */;
-INSERT INTO `backup` VALUES (1,'peter',17),(2,'franz',19),(3,'peter',1525264081),(4,'admin',1525769299),(5,'admin',1525948669),(6,'admin',1525964785),(7,'admin',1526894320),(8,'admin',1526975803),(9,'admin',1527233755),(10,'admin',1527368588),(11,'admin',1527676363);
+INSERT INTO `backup` VALUES (1,'peter',17),(2,'franz',19),(3,'peter',1525264081),(4,'admin',1525769299),(5,'admin',1525948669),(6,'admin',1525964785),(7,'admin',1526894320),(8,'admin',1526975803),(9,'admin',1527233755),(10,'admin',1527368588);
 /*!40000 ALTER TABLE `backup` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,7 +84,6 @@ CREATE TABLE `dokumente` (
   `format` varchar(255) NOT NULL,
   `url` varchar(255) NOT NULL,
   `bezeichnung` varchar(255) NOT NULL,
-  `Zuordnung` varchar(255) NOT NULL,
   PRIMARY KEY (`dokuID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -137,7 +136,7 @@ CREATE TABLE `pruefmerkmale` (
   `beschreibung` varchar(255) NOT NULL,
   `wert` varchar(255) NOT NULL,
   PRIMARY KEY (`merkmalID`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,7 +145,7 @@ CREATE TABLE `pruefmerkmale` (
 
 LOCK TABLES `pruefmerkmale` WRITE;
 /*!40000 ALTER TABLE `pruefmerkmale` DISABLE KEYS */;
-INSERT INTO `pruefmerkmale` VALUES (1,2,'Breite','0.29'),(2,2,'Laenge','0.02'),(3,1,'test','test'),(4,2,'te','sad'),(5,3,'Breite','0.01'),(6,3,'Laenge','0.01'),(7,3,'sadas','sadad'),(8,4,'Breite','0.01'),(9,4,'Laenge','0.01'),(10,4,'sadas','sadad'),(11,4,'sadas','sadad4'),(12,5,'Breite','0.01'),(13,5,'Laenge','0.01'),(14,6,'Breite','0.01'),(15,6,'Laenge','0.01'),(16,6,'uuu','uu'),(17,7,'Breite','0.04'),(18,7,'Laenge','0.03');
+INSERT INTO `pruefmerkmale` VALUES (1,2,'Breite','0.29'),(2,2,'Laenge','0.02'),(3,1,'test','test'),(4,2,'te','sad'),(5,3,'Breite','0.01'),(6,3,'Laenge','0.01'),(7,3,'sadas','sadad'),(8,4,'Breite','0.01'),(9,4,'Laenge','0.01'),(10,4,'sadas','sadad'),(11,4,'sadas','sadad4'),(12,5,'Breite','0.01'),(13,5,'Laenge','0.01');
 /*!40000 ALTER TABLE `pruefmerkmale` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -257,7 +256,7 @@ CREATE TABLE `tokens` (
 
 LOCK TABLES `tokens` WRITE;
 /*!40000 ALTER TABLE `tokens` DISABLE KEYS */;
-INSERT INTO `tokens` VALUES (1,1521633386,'1bacf814380ce284f1f6af1a5c417e392a210903','9027baf6144c234474100a781afb30290128f0a6','0','test'),(2,1527845288,'3243d83300311798ca7fef0787fe2a1a9953caea','9027baf6144c234474100a781afb30290128f0a6','0','admin'),(3,1523268711,'7a4ce19ce9f92a684b96a74efec27fbed9547666','9027baf6144c234474100a781afb30290128f0a6','0','Daniel'),(4,1521848888,'beee3a0f544318f6a4089125f4807bf1455ad8e8','9027baf6144c234474100a781afb30290128f0a6','0','Test0'),(5,1523269807,'d4d98c582fd7073ee8826266327dd2b710df3808','9027baf6144c234474100a781afb30290128f0a6','0','Test1'),(6,1524052343,'4f3dade0ffdb15e1ef9b8637a90fa79d6085c4b5','9027baf6144c234474100a781afb30290128f0a6','0','steffen'),(7,1525949168,'bf4c7217b24f9b50401714be61eec410055105de','9027baf6144c234474100a781afb30290128f0a6','0','teststest');
+INSERT INTO `tokens` VALUES (1,1521633386,'1bacf814380ce284f1f6af1a5c417e392a210903','9027baf6144c234474100a781afb30290128f0a6','0','test'),(2,1527534208,'5dc8ed79ab7e9788e2b7d4361766fe0ac7caa6e9','9027baf6144c234474100a781afb30290128f0a6','0','admin'),(3,1523268711,'7a4ce19ce9f92a684b96a74efec27fbed9547666','9027baf6144c234474100a781afb30290128f0a6','0','Daniel'),(4,1521848888,'beee3a0f544318f6a4089125f4807bf1455ad8e8','9027baf6144c234474100a781afb30290128f0a6','0','Test0'),(5,1523269807,'d4d98c582fd7073ee8826266327dd2b710df3808','9027baf6144c234474100a781afb30290128f0a6','0','Test1'),(6,1524052343,'4f3dade0ffdb15e1ef9b8637a90fa79d6085c4b5','9027baf6144c234474100a781afb30290128f0a6','0','steffen'),(7,1525949168,'bf4c7217b24f9b50401714be61eec410055105de','9027baf6144c234474100a781afb30290128f0a6','0','teststest');
 /*!40000 ALTER TABLE `tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -274,7 +273,7 @@ CREATE TABLE `werkzeug_attribute` (
   `bezeichnung` varchar(255) NOT NULL,
   `wert` varchar(255) NOT NULL,
   PRIMARY KEY (`werkzeug_attID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -283,7 +282,7 @@ CREATE TABLE `werkzeug_attribute` (
 
 LOCK TABLES `werkzeug_attribute` WRITE;
 /*!40000 ALTER TABLE `werkzeug_attribute` DISABLE KEYS */;
-INSERT INTO `werkzeug_attribute` VALUES (1,29,'test','test'),(2,46,'test','test'),(3,29,'ooooo','ooo');
+INSERT INTO `werkzeug_attribute` VALUES (1,29,'test','test'),(2,46,'test','test');
 /*!40000 ALTER TABLE `werkzeug_attribute` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -303,7 +302,7 @@ CREATE TABLE `werkzeug_einsatz` (
   `maschine` varchar(255) NOT NULL,
   `kuehlung` varchar(255) NOT NULL,
   `kuehldauer` int(255) NOT NULL,
-  `schlieÃŸkraft` int(11) NOT NULL,
+  `schließkraft` int(11) NOT NULL,
   PRIMARY KEY (`einsatzID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -331,7 +330,7 @@ CREATE TABLE `werkzeug_pruef` (
   `laufendenummer` int(11) NOT NULL,
   `datum` date NOT NULL,
   PRIMARY KEY (`pruefID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -340,7 +339,7 @@ CREATE TABLE `werkzeug_pruef` (
 
 LOCK TABLES `werkzeug_pruef` WRITE;
 /*!40000 ALTER TABLE `werkzeug_pruef` DISABLE KEYS */;
-INSERT INTO `werkzeug_pruef` VALUES (1,29,1,'2018-05-23'),(2,29,2,'2018-05-23'),(3,41,3,'2018-05-28'),(4,41,4,'2018-05-29'),(5,29,3,'2018-05-28'),(6,29,4,'2018-05-29'),(7,29,5,'2018-05-28');
+INSERT INTO `werkzeug_pruef` VALUES (1,29,1,'2018-05-23'),(2,29,2,'2018-05-23'),(3,41,3,'2018-05-28'),(4,41,4,'2018-05-29'),(5,29,3,'2018-05-28');
 /*!40000 ALTER TABLE `werkzeug_pruef` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -357,7 +356,7 @@ CREATE TABLE `werkzeuggeoattr` (
   `bezeichnung` varchar(255) NOT NULL,
   `wert` varchar(255) NOT NULL,
   PRIMARY KEY (`geoattrID`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -366,7 +365,7 @@ CREATE TABLE `werkzeuggeoattr` (
 
 LOCK TABLES `werkzeuggeoattr` WRITE;
 /*!40000 ALTER TABLE `werkzeuggeoattr` DISABLE KEYS */;
-INSERT INTO `werkzeuggeoattr` VALUES (1,29,'zts','tes'),(2,29,'zts','tes'),(3,29,'zts','tes'),(4,29,'zts','tes'),(5,29,'zts','tes'),(6,29,'zts','tes'),(7,29,'zts','tes'),(8,29,'zts','tes'),(9,29,'zts','tes'),(10,29,'test','test'),(11,3,'test','test'),(12,3,'test1','test'),(13,6,'uuu','uuu'),(14,6,'ztztz','tztztz'),(15,6,'rrr','rrr'),(16,6,'hh','zz');
+INSERT INTO `werkzeuggeoattr` VALUES (1,29,'zts','tes'),(2,29,'zts','tes'),(3,29,'zts','tes'),(4,29,'zts','tes'),(5,29,'zts','tes'),(6,29,'zts','tes'),(7,29,'zts','tes'),(8,29,'zts','tes'),(9,29,'zts','tes'),(10,29,'test','test'),(11,3,'test','test'),(12,3,'test1','test');
 /*!40000 ALTER TABLE `werkzeuggeoattr` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -389,7 +388,7 @@ CREATE TABLE `werkzeuggeometrie` (
   `massas` varchar(255) NOT NULL,
   `massds` varchar(255) NOT NULL,
   PRIMARY KEY (`werkzeuggeoID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -398,7 +397,7 @@ CREATE TABLE `werkzeuggeometrie` (
 
 LOCK TABLES `werkzeuggeometrie` WRITE;
 /*!40000 ALTER TABLE `werkzeuggeometrie` DISABLE KEYS */;
-INSERT INTO `werkzeuggeometrie` VALUES (1,29,'asd','sad',1,'asda','0','0','0','0'),(2,29,'asd','sad',1,'asda','asda','ads','asd','sad'),(3,29,'asd','asd',1,'asd','asd','sda','sad','ads'),(4,29,'s','s',1,'s','s','s','s','s'),(5,41,'2','2',1,'2','2','2','2','2'),(6,29,'oo','oo',1,'oo','oo','oo','oo','oo');
+INSERT INTO `werkzeuggeometrie` VALUES (1,29,'asd','sad',1,'asda','0','0','0','0'),(2,29,'asd','sad',1,'asda','asda','ads','asd','sad'),(3,29,'asd','asd',1,'asd','asd','sda','sad','ads');
 /*!40000 ALTER TABLE `werkzeuggeometrie` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -411,4 +410,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-01 11:28:08
+-- Dump completed on 2018-05-28 21:03:28
