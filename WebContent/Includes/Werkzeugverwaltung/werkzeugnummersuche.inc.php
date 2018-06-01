@@ -79,7 +79,7 @@
 			
 			//QR-Code
 			
-			$output .="<div class='col-md-4'>";
+			$output .="<div class='col-md-2'>";
 			$stmt = $con->prepare("SELECT svg FROM qrcode WHERE werkzeugID=?");
 			$stmt->bind_param('i', $werkzeugID);
 			$stmt->execute();
@@ -100,7 +100,7 @@
 			}
 			
 			$output .="</div>";
-			
+			$output .="<div class='col-md-2'></div>";
 			$output .="</div>";
 			$output .="<div>";
 			
