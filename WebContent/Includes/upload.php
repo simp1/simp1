@@ -47,6 +47,7 @@ if ($uploadOk == 0) {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
     	$sql;
     	$zuordnung;
+    	$allgemein;
     	if($zugehoerigkeit==1){
     		$sql="INSERT INTO dokumente (werkzeugID, format, url, bezeichnung, zuordnung) VALUES (?,?,?,?,?)";
     		$zuordnung=werkzeug;
@@ -60,6 +61,9 @@ if ($uploadOk == 0) {
     		}else{
     			$sql="INSERT INTO dokumente (einsatzID, format, url, bezeichnung) VALUES (?,?,?,?)";
     		}
+    	}elseif ($zugehoerigkeit==5){
+    			$sql="INSERT INTO dokumente (format, url, bezeichnung) VALUES (?,?,?)";
+    			$allgemein=1;
     	}else {
     		if(empty($idzuge)){
     			$sql="INSERT INTO dokumente (werkzeugID, format, url, bezeichnung, zuordnung) VALUES (?,?,?,?,?)";
@@ -72,9 +76,15 @@ if ($uploadOk == 0) {
     	$teile = explode(".", $nameofdoc);
     	$url="http://localhost/workspace/swimp/WebContent/uploads/pdf/".$nameofdoc;
     	if(empty($zuordnung)){
-    		$stmt = $con->prepare($sql);
-    		$stmt->bind_param('isss', $idzuge, $teile[1], $url, $teile[0]);
-    		$stmt->execute();
+    		if($allgemein==1){
+    			$stmt = $con->prepare($sql);
+    			$stmt->bind_param('sss', $teile[1], $url, $teile[0]);
+    			$stmt->execute();
+    		}else {
+    			$stmt = $con->prepare($sql);
+    			$stmt->bind_param('isss', $idzuge, $teile[1], $url, $teile[0]);
+    			$stmt->execute();
+    		}
     	}else{
     		$stmt = $con->prepare($sql);
     		$stmt->bind_param('issss', $werkid, $teile[1], $url, $teile[0], $zuordnung);
