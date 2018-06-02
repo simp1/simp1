@@ -28,9 +28,9 @@
 				$id = $ausgabe->dokuID;
 				$filename = '../../uploads/pdf/'.$name.'.'.$format;
 				if (file_exists($filename)) {
-					$antwort .= "<tr><td>".$name."</td><td><a class='btn btn-success' href='".$url."' download>".$name."</a><button type='button' class='butosuccess' id=".$id." onClick='entfernen(id)'>Delete</button></td><td>Existiert</td></tr>";
+					$antwort .= "<tr><td>".$name."</td><td><a href='".$url."' download><button class='butosuccess' type='button'>".$name."</button></a>   <button type='button' class='butosuccess' id=".$id." onClick='entfernen(id)'>Delete</button></td><td>Existiert</td></tr>";
 				}else{
-					$antwort .= "<tr><td>".$name."</td><td><button type='button' class='butosuccess' id=".$id." onClick='entfernen(id)'>Delete</button></td><td>Lost</td></tr>";
+					$antwort .= "<tr><td>".$name."</td><td><button type='button' class='butosuccess abstandlinks' id=".$id." onClick='entfernen(id)'>Delete</button></td><td>Lost</td></tr>";
 				}
 			}
 			$antwort .="</table></div>";
