@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Steffen Selz, Michael Wenk">
+<meta name="description"
+	content="Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationssystem">
+<!-- Favicon im Browserfenster -->
+<link rel="shortcut icon" type="image/x-icon" href="assets/Icons/hammer1.png">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+<link href="bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/custom.css">
+<link rel="stylesheet" href="assets/css/custom-themes.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="style.css" rel="stylesheet">
+<script src="assets/js/custom.js"></script>
+</head>
+<body>
+	<div class="page-wrapper chiller-theme toggled">
+		<!-- SeitenleisteStart -->
+		<nav id="sidebar" class="sidebar-wrapper" data-color="#555">
+
+			<div id="toggle-sidebar">
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+			<div class="sidebar-brand">
+				<a href="#">Eigenschaften</a>
+			</div>
+			<div class="sidebar-menu">
+				<ul>
+					<li class="nav-item"><a class="nav-link"
+						href="http://localhost/workspace/swimp/WebContent/startseite.html">
+							<span data-feather="file"></span> Home
+					</a></li>
+					<li class="nav-item" id="superadminverwaltung"
+						style="display: none;"><a class="nav-link"
+						href="benutzerverwaltung.html"> <span data-feather="file"></span>
+							Benutzerverwaltung
+					</a></li>
+
+					<li class="nav-item" id="adminverwaltung" style="display: none;">
+						<a class="nav-link" href="benutzerverwaltungadmin.html"> <span
+							data-feather="file"></span> Benutzerverwaltung
+					</a>
+					</li>
+
+					<li class="nav-item"><a class="nav-link"
+						href="stammdaten.html"> <span data-feather="file"></span>
+							Stammdaten
+					</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="werkzeugverwaltung.html"> <span data-feather="file"></span>
+							Werkzeugverwaltung
+					</a></li>
+					<li class="nav-item listenende"><a class="nav-link" href="index.html"
+						onclick="deleteAllCookies()"> <span data-feather="file"></span>Logout
+					</a></li>
+				</ul>
+			</div>
+		</nav>
+		<!-- Seitenleiste Ende -->
+
+		<div class="page-content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="form-group col-md-12" id="überschrift">
+						<h1>Stammdaten</h1>
+						<br>
+						<div id="data_div"></div>
+						<br>
+						<div id="btn_stammdaten_show" class="abstandlinks abstandunten">
+							<button id="btn_stammdata" class="btn btn-success abstandunten"
+								onClick="createAttribut()">Attribut hinzufügen</button>
+						</div>
+						<br>
+						<h1>Werkzeuggeometrie</h1>
+						<br>
+						<div id="div_geo"></div>
+						<br>
+						<div class="row align-items-center justify-content-center">
+						<div id="btn_stammdaten_geo" class="abstandlinks abstandunten">
+							<button id="btn_stammdata_geo"
+								class="btn btn-success abstandunten" onClick="showFormGeo()">
+								Werkzeuggeometrie</button>
+						</div>
+						<div id="btn_stammdaten_geo" class="abstandlinks abstandunten">
+							<button id="btn_stammdata_geo"
+								class="btn btn-success abstandunten" onClick="showFormGeoAttr()">Geo
+								Attribut anlegen</button>
+						</div>
+						</div>
+						<br>
+						<h1>Werkzeugpruefung</h1>
+						<br>
+						<div id="div_pruef"></div>
+						<br>
+						<div class="row align-items-center justify-content-center">
+						<div id="btn_stammdaten_pruef" class="abstandlinks abstandunten">
+							<button id="btn_stammdata_pruef"
+								class="btn btn-success abstandunten" onClick="showFormPruef()">
+								Werkzeugprüfung</button>
+						</div>
+						<div id="btn_stammdaten_pruef" class="abstandlinks abstandunten">
+							<button id="btn_stammdata_pruef"
+								class="btn btn-success abstandunten"
+								onClick="showFormPruefAttr()">Prüfmerkmal</button>
+						</div>
+						</div>
+						<br>
+						<h1>Werkzeugeinsatz</h1>
+						<br>
+						<div id="div_einsatz"></div>
+						<br>
+						<div class="row align-items-center justify-content-center">
+						<div id="btn_stammdaten_einsatz" class="abstandlinks abstandunten">
+							<button id="btn_stammdata_einsatz"
+								class="btn btn-success abstandunten" onClick="showFormEinsatz()">
+								Einsatzprotokoll anlegen</button>
+						</div>
+						<div id="btn_stammdaten_einsatz" class="abstandlinks abstandunten">
+							<button id="btn_stammdata_einsatz"
+								class="btn btn-success abstandunten"
+								onClick="showFormEinsatzAttr()">Einsatz Attribut
+								anlegen</button>
+						</div>
+						</div>
+						<div id="btn_stammdaten_upload" class="abstandlinks abstandunten">
+							<button id="btn_stammdata_upload"
+								class="btn btn-success abstandunten"
+								onClick="showFormUpload()">File Upload</button>
+						</div>
+						<br>
+						<!-- Upload File -->
+						<div id="uploadform" style="display:none">
+							<h1>Upload File</h1>
+							<div class="row d-flex justify-content-center abstandoben">
+							<form action="Includes/upload.php" method="post" enctype="multipart/form-data">
+	                            Select File to upload: 
+	                            <select name="zugehoerig">
+	                              <option value="1">Werkzeug</option>
+	                              <option value="2">Geometrie</option>
+	                              <option value="3">Einsatz</option>
+	                              <option value="4">Prüfprotokoll</option>
+	                              <option value="5">Allgemein</option>
+	                            </select>
+	                            
+	                             <input class="abstandoben" type="hidden" name="werkzeugzuge" id="werkzeugIDHidden" value="">
+	                             ID für spezielle Zuordnung: <input type="number" name="idzuge">
+	                             <br>
+	                            <input   type="file" name="fileToUpload" id="fileToUpload">
+	                            <input class="butosuccess"  type="submit" value="Upload File" name="submit">
+	                          
+	 						</form>
+							</div>
+						</div>
+						<br>
+						<div id="inputGeoCreate" style="display: none;">
+							<div class="col-sm-6">
+								<label for="inputGeoAußenmaße">Außenmaße Gesamt-Soll
+									(mm) nach CAD*:</label>
+								<div class="form-label-group">
+									<input id="inputGeoAußenmaße" class="form-control"
+										placeholder="Außenmaß" type="text" required>
+								</div>
+								<label for="inputGeoForm">Formeinsatz Typ*:</label>
+								<div class="form-label-group">
+									<input id="inputGeoForm" class="form-control"
+										placeholder="Formeinsatz" type="text" required>
+								</div>
+								<label for="inputGeoBohrbild">Bohrbild*:</label>
+								<div class="form-label-group">
+									<input id="inputGeoBohrbild" class="form-control"
+										placeholder="Bohrbild" type="text" required>
+								</div>
+								<label for="inputGeoMaßeAs">Maße AS*:</label>
+								<div class="form-label-group">
+									<input id="inputGeoMaßeAs" class="form-control"
+										placeholder="AS" type="text" required>
+								</div>
+								<label for="inputGeoMaßeDs">Maße DS*:</label>
+								<div class="form-label-group">
+									<input id="inputGeoMaßeDs" class="form-control"
+										placeholder="DS" type="text" required>
+								</div>
+								<label for="inputGeoAuswerfer">Auswerfer Anzahl*:</label>
+								<div class="form-label-group">
+									<input id="inputGeoAuswerfer" class="form-control" value="1"
+										type="number" min="0" required>
+								</div>
+								<label for="inputGeoPosition">Position*:</label>
+								<div class="form-label-group">
+									<input id="inputGeoPosition" class="form-control"
+										placeholder="Position" type="text" required>
+								</div>
+								<label for="inputGeoKavität">Beschreibung Kavität:</label>
+								<div class="form-label-group">
+									<input id="inputGeoKavitaet" class="form-control"
+										placeholder="Kavität" type="text" required>
+								</div>
+								<br>
+								<button class="btn btn-lg btn-primary btn-block" type="submit"
+									onClick="createGeoData()">Übernehmen</button>
+								<br>
+							</div>
+						</div>
+						<div id="inputPruefCreate" style="display: none;">
+							<div class="col-sm-6">
+								<label for="inputPruefDate">Datum*:</label>
+								<div class="form-label-group">
+									<input type="date" id="inputPruefDate" class="form-control"
+										required>
+								</div>
+								<label for="inputPruefLaenge">Maß - Laenge*:</label>
+								<div class="form-label-group">
+									<input type="number" id="inputPruefLaenge" class="form-control"
+										value="0.01" type="number" step="0.01" min="0.01" required>
+								</div>
+								<label for="inputPruefBreite">Maß - Breite*:</label>
+								<div class="form-label-group">
+									<input id="inputPruefBreite" class="form-control" value="0.01"
+										type="number" step="0.01" min="0.01" required>
+								</div>
+								<br>
+								<button class="btn btn-lg btn-primary btn-block" type="submit"
+									onClick="createPruefData()">Übernehmen</button>
+								<br>
+							</div>
+						</div>
+						<div id="inputEinsatzCreate" style="display: none;">
+							<div class="col-sm-6">
+								<label for="inputEinsatzCreate">Datum*:</label>
+								<div class="form-label-group">
+									<input type="date" id="inputEinsatzDate" class="form-control"
+										required>
+								</div>
+								<label for="inputEinsatzCreate">Schussnummer*:</label>
+								<div class="form-label-group">
+									<input type="number" id="inputEinsatzSchuss"
+										class="form-control" min="1" max="10" value="1" required>
+								</div>
+								<label for="inputEinsatzCreate">Maschine*:</label>
+								<div class="form-label-group">
+									<input type="text" id="inputEinsatzMaschine"
+										class="form-control" placeholder="Maschine" required>
+								</div>
+								<label for="inputEinsatzCreate">Kühlung*:</label>
+								<div class="form-label-group">
+									<input type="text" id="inputEinsatzKuehlung"
+										class="form-control" placeholder="Kuehlung" required>
+								</div>
+								<label for="inputEinsatzCreate">Kühldauer*:</label>
+								<div class="form-label-group">
+									<input type="number" id="inputEinsatzKuehldauer"
+										class="form-control" placeholder="1" required>
+								</div>
+								<label for="inputEinsatzCreate">schlieskraft(kN)*:</label>
+								<div class="form-label-group">
+									<input type="number" id="inputEinsatzSchlies"
+										class="form-control" placeholder="1" required>
+								</div>
+								<br>
+								<button class="btn btn-lg btn-primary btn-block" type="submit"
+									onClick="createEinsatzData()">Übernehmen</button>
+								<br>
+							</div>
+						</div>
+						<br>
+						<div id="addAttr" style="display: none;">
+							<div class="col-sm-6">
+								<label for="inputTextAttr">Bezeichnung:</label>
+								<div class="form-label-group">
+									<input type="text" id="inputBezAttr" class="form-control"
+										placeholder="Bezeichnung" required autofocus>
+								</div>
+								<label for="inputTextAttr">Wert:</label>
+								<div class="form-label-group">
+									<input type="text" id="inputValAttr" class="form-control"
+										placeholder="Wert des Attributes" required>
+								</div>
+								<br> <input type="hidden" id="werkzeug_nummer_attribut"
+									value="">
+								<button class="btn btn-lg btn-primary btn-block" type="submit"
+									onClick="addAttributfkt()">Hinzufügen</button>
+								<br>
+							</div>
+						</div>
+						<div id="addAttrGeo" style="display: none;">
+							<div class="col-sm-6">
+								<label for="inputTextAttr">Bezeichnung:</label>
+								<div class="form-label-group">
+									<input type="text" id="inputBezAttrGeo" class="form-control"
+										placeholder="Bezeichnung" required autofocus>
+								</div>
+								<label for="inputTextAttr">Wert:</label>
+								<div class="form-label-group">
+									<input type="text" id="inputValAttrGeo" class="form-control"
+										placeholder="Wert des Attributes" required>
+								</div>
+								<br>
+								<button class="btn btn-lg btn-primary btn-block" type="submit"
+									onClick="addAttributGeofkt()">Hinzufügen</button>
+								<br>
+							</div>
+						</div>
+						<div id="addAttrPruef" style="display: none;">
+							<div class="col-sm-6">
+								<label for="inputTextAttr">Merkmal:</label>
+								<div class="form-label-group">
+									<input type="text" id="inputBezAttrPruef" class="form-control"
+										placeholder="Bezeichnung" required autofocus>
+								</div>
+								<label for="inputTextAttr">Wert:</label>
+								<div class="form-label-group">
+									<input type="text" id="inputValAttrPruef" class="form-control"
+										placeholder="Wert des Attributes" required>
+								</div>
+								<label for="inputTextAttr">Laufendenummer:</label>
+								<div class="form-label-group">
+									<input type="text" id="inputLfdAttrPruef" class="form-control"
+										placeholder="Laufendenummer" required>
+								</div>
+								<br>
+								<button class="btn btn-lg btn-primary btn-block" type="submit"
+									onClick="addAttributPrueffkt()">Hinzufügen</button>
+								<br>
+							</div>
+						</div>
+						<div id="addAttrEinsatz" style="display: none;">
+							<div class="col-sm-6">
+								<label for="inputTextAttr">Bezeichnung:</label>
+								<div class="form-label-group">
+									<input type="text" id="inputBezAttrEinsatz"
+										class="form-control" placeholder="Bezeichnung" required
+										autofocus>
+								</div>
+								<label for="inputTextAttr">Wert:</label>
+								<div class="form-label-group">
+									<input type="text" id="inputValAttrEinsatz"
+										class="form-control" placeholder="Wert des Attributes"
+										required>
+								</div>
+								<label for="inputTextAttr">Laufendenummer:</label>
+								<div class="form-label-group">
+									<input type="text" id="inputLfdAttrEinsatz"
+										class="form-control" placeholder="Laufendenummer" required>
+								</div>
+								<br>
+								<button class="btn btn-lg btn-primary btn-block" type="submit"
+									onClick="addAttributEinsatzfkt()">Hinzufügen</button>
+								<br>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-md-5 mb-3 text-right">
+								<label id="sucheschrift">Werkzeugsuche:</label>
+							</div>
+							<div class="form-group col-md-3 mb-3">
+
+								<div id="werkzeugsuchfktdiv">
+									<input type="text"
+										class="form-control center-block text-center"
+										id="werkzeugsuchfkt" onkeyup="searchwerkzeug()" required>
+								</div>
+
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-12">
+						<!-- Hier drin ist der main-Teil -->
+
+
+
+					</div>
+				</div>
+
+
+			</div>
+
+		</div>
+	</div>
+	<script type="text/javascript">
+		//Startleiste
+		var uid = Cookies.get("name");
+		var tok1 = Cookies.get("token");
+		var tok2 = Cookies.get("token_login");
+		$
+				.ajax({
+					type : "GET",
+					url : "http://localhost/workspace/swimp/WebContent/Includes/Benutzerverwaltung/adminverwaltung.inc.php?jsoncallback=?",
+					data : {
+						"username" : uid,
+						"token" : tok1,
+						"token_login" : tok2
+					},
+					dataType : "JSONp",
+					timeout : 5000,
+					success : function(data) {
+						if (data == "sadmin") {
+							document.getElementById('superadminverwaltung').style.display = "block";
+						} else if (data == "admin") {
+							document.getElementById('adminverwaltung').style.display = "block";
+						} else if (data == "noadmin") {
+
+						} else {
+							alert("Login ungültig");
+							document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+						}
+					},
+					error : function(request, error) {
+						console.log(arguments);
+						alert(" Can't do because: " + error);
+						document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+					}
+				});
+		//werkzeugnummer aus der url parsen
+		var url = document.location.href;
+		var erg = url.split("=");
+		var res = erg[1].split("&");
+		if (res[0]) {
+			document.getElementById('werkzeugsuchfkt').value = res[0];
+			searchwerkzeug();
+		}
+		//suchfkt
+		function searchwerkzeug() {
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			var item = document.getElementById('werkzeugsuchfkt').value;
+			document.getElementById('werkzeug_nummer_attribut').value = item;
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/werkzeugnummersuche.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2,
+							"werkzeugnummer" : item
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							$('#data_div').html(data);
+							$.ajax({
+								type : "GET",
+								url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/anzeigeprot.inc.php?jsoncallback=?",
+								data : {
+									"username" : uid,
+									"token" : tok1,
+									"token_login" : tok2,
+									"werkzeugnummer" : item
+								},
+								dataType : "JSONp",
+								timeout : 5000,
+								success : function(data) {
+									$('#div_pruef').html(data);
+								},
+								error : function(request, error) {
+									console.log(arguments);
+								}
+							});
+							$.ajax({
+								type : "GET",
+								url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/anzeigegeo.inc.php?jsoncallback=?",
+								data : {
+									"username" : uid,
+									"token" : tok1,
+									"token_login" : tok2,
+									"werkzeugnummer" : item
+								},
+								dataType : "JSONp",
+								timeout : 5000,
+								success : function(data) {
+									$('#div_geo').html(data);
+								},
+								error : function(request, error) {
+									console.log(arguments);
+								}
+							});
+							$.ajax({
+								type : "GET",
+								url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/anzeigeeinsatz.inc.php?jsoncallback=?",
+								data : {
+									"username" : uid,
+									"token" : tok1,
+									"token_login" : tok2,
+									"werkzeugnummer" : item
+								},
+								dataType : "JSONp",
+								timeout : 5000,
+								success : function(data) {
+									$('#div_einsatz').html(data);
+								},
+								error : function(request, error) {
+									console.log(arguments);
+								}
+							});
+						},
+						error : function(request, error) {
+							console.log(arguments);
+						}
+					});
+		}
+		//prüfen rechte
+		var uid = Cookies.get("name");
+		var tok1 = Cookies.get("token");
+		var tok2 = Cookies.get("token_login");
+		$
+				.ajax({
+					type : "GET",
+					url : "http://localhost/workspace/swimp/WebContent/Includes/checkrights.inc.php?jsoncallback=?",
+					data : {
+						"username" : uid,
+						"token" : tok1,
+						"token_login" : tok2
+					},
+					dataType : "JSONp",
+					timeout : 5000,
+					success : function(data) {
+						if (data == "success") {
+
+						} else {
+							document.getElementById('btn_stammdaten_show').style.display = "none";
+						}
+					},
+					error : function(request, error) {
+						console.log(arguments);
+						alert(" Can't do because: " + error);
+					}
+				});
+		// Einblenden des Attribut Formulares
+		function createAttribut() {
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/checktoken.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							document.getElementById('addAttr').style.display = "block";
+						},
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+						}
+					});
+		}
+		//attribut hinzufügen
+		function addAttributfkt() {
+			var bez = document.getElementById('inputBezAttr').value;
+			var wert = document.getElementById('inputValAttr').value;
+			var nummer_werk = document
+					.getElementById('werkzeug_nummer_attribut').value;
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			if (bez && wert && nummer_werk) {
+				$
+						.ajax({
+							type : "GET",
+							url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/addattribut.inc.php?jsoncallback=?",
+							data : {
+								"username" : uid,
+								"token" : tok1,
+								"token_login" : tok2,
+								"bezeichnung" : bez,
+								"wert" : wert,
+								"werkzeugnummer" : nummer_werk
+							},
+							dataType : "JSONp",
+							timeout : 5000,
+							success : function(data) {
+								if (data == "success") {
+									searchwerkzeug();
+									document.getElementById('addAttr').style.display = "none";
+								} else if (data == "doppelt") {
+									alert("Werkzeugnummer existiert bereits.");
+								} else if (data == "fehler") {
+									alert("Es ist ein Fehler aufgetreten!");
+								} else if (data == "rechte") {
+									alert("Sie haben keine Rechte diese Aktion auszuführen!");
+								} else if (data == "token") {
+									alert("Zeitlimit überschritten!");
+									document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+								} else {
+									alert("Unexpected answer! Bitte Antwort aufschreiben.");
+								}
+							},
+							error : function(request, error) {
+								console.log(arguments);
+								alert(" Can't do because: " + error);
+							}
+						});
+			} else {
+				alert("Die mit * markierten Felder müssen ausgefüllt sein!");
+			}
+
+		}
+		//entfernt attribute
+		function entfernen(id) {
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/delattr.inc.php?jsoncallback=?",
+						data : {
+							"attrID" : id,
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							if (data == "success") {
+								searchwerkzeug();
+							} else if (data == "exist") {
+								alert("Benutzer existiert bereits!");
+							} else if (data == "token") {
+								alert("Login ungültig");
+								document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+							} else {
+								alert("keine Rechte!");
+							}
+						},
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+						}
+					});
+		}
+		//geo attribute löschen
+		function geoattrloeschen(id) {
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/delgeoattr.inc.php?jsoncallback=?",
+						data : {
+							"attrID" : id,
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							if (data == "success") {
+								searchwerkzeug();
+							} else if (data == "exist") {
+								alert("Benutzer existiert bereits!");
+							} else if (data == "token") {
+								alert("Login ungültig");
+								document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+							} else {
+								alert("keine Rechte!");
+							}
+						},
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+						}
+					});
+		}
+		//pruef löschen
+		function pruefloeschen(id) {
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/delpruef.inc.php?jsoncallback=?",
+						data : {
+							"attrID" : id,
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							if (data == "success") {
+								searchwerkzeug();
+							} else if (data == "exist") {
+								alert("Benutzer existiert bereits!");
+							} else if (data == "token") {
+								alert("Login ungültig");
+								document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+							} else {
+								alert("keine Rechte!");
+							}
+						},
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+						}
+					});
+		}
+		//einsatz löschen
+		function einsatzloeschen(id) {
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/deleinsatz.inc.php?jsoncallback=?",
+						data : {
+							"attrID" : id,
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							if (data == "success") {
+								searchwerkzeug();
+							} else if (data == "exist") {
+								alert("Benutzer existiert bereits!");
+							} else if (data == "token") {
+								alert("Login ungültig");
+								document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+							} else {
+								alert("keine Rechte!");
+							}
+						},
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+						}
+					});
+		}
+		//Einsatzformular anzeigne
+		function showFormEinsatz() {
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/checkrights.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							if (data == "success") {
+								document.getElementById('inputEinsatzCreate').style.display = "block";
+								document.getElementById('inputEinsatzDate').valueAsDate = new Date();
+							}
+						},
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+						}
+					});
+		}
+		//Uploadformular anzeigen
+		function showFormUpload() {
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/checkrights.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							if (data == "success") {
+								document.getElementById('uploadform').style.display = "block";
+								
+							}
+						},
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+						}
+					});
+		}
+		//Prüfformular anzeigne
+		function showFormPruef() {
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/checkrights.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							if (data == "success") {
+								document.getElementById('inputPruefCreate').style.display = "block";
+								document.getElementById('inputPruefDate').valueAsDate = new Date();
+							}
+						},
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+						}
+					});
+		}
+		//Geoformular anzeigne
+		function showFormGeo() {
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/checkrights.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							if (data == "success") {
+								document.getElementById('inputGeoCreate').style.display = "block";
+							}
+						},
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+						}
+					});
+		}
+		//Geoformular anzeigne
+		function showFormGeoAttr() {
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/checkrights.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							if (data == "success") {
+								document.getElementById('addAttrGeo').style.display = "block";
+							}
+						},
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+						}
+					});
+		}
+		//Pruefformular anzeigne
+		function showFormPruefAttr() {
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/checkrights.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							if (data == "success") {
+								document.getElementById('addAttrPruef').style.display = "block";
+							}
+						},
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+						}
+					});
+		}
+		//Geoformular anzeigne
+		function showFormEinsatzAttr() {
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://localhost/workspace/swimp/WebContent/Includes/checkrights.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							if (data == "success") {
+								document.getElementById('addAttrEinsatz').style.display = "block";
+							}
+						},
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+						}
+					});
+		}
+		//Pruefdaten übernehmen
+		function createPruefData() {
+			var werkid = document.getElementById('werkzeugsuchfkt').value;
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			var datum = document.getElementById('inputPruefDate').value;
+			var laenge = document.getElementById('inputPruefLaenge').value;
+			var breite = document.getElementById('inputPruefBreite').value;
+			if (datum && laenge && breite && werkid) {
+				$
+						.ajax({
+							type : "GET",
+							url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/createpruef.inc.php?jsoncallback=?",
+							data : {
+								"username" : uid,
+								"token" : tok1,
+								"token_login" : tok2,
+								"werkzeugID" : werkid,
+								"laenge" : laenge,
+								"datum" : datum,
+								"breite" : breite
+							},
+							dataType : "JSONp",
+							timeout : 5000,
+							success : function(data) {
+								if (data == "success") {
+									searchwerkzeug();
+									document.getElementById('inputPruefCreate').style.display = "none";
+								} else if (data == "doppelt") {
+									alert("Werkzeugnummer existiert bereits.");
+								} else if (data == "fehler") {
+									alert("Es ist ein Fehler aufgetreten!");
+								} else if (data == "rights") {
+									alert("Sie haben keine Rechte diese Aktion auszuführen!");
+								} else if (data == "token") {
+									alert("Zeitlimit überschritten!");
+									document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+								} else {
+									alert("Unexpected answer! Bitte Antwort aufschreiben.");
+								}
+							},
+							error : function(request, error) {
+								console.log(arguments);
+								alert(" Can't do because: " + error);
+							}
+						});
+			} else {
+				alert("Die mit * markierten Felder müssen ausgefüllt sein!");
+			}
+		}
+		//Geodaten übernehmen
+		function createGeoData() {
+			var werkid = document.getElementById('werkzeugsuchfkt').value;
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			var ausmas = document.getElementById('inputGeoAußenmaße').value;
+			var form = document.getElementById('inputGeoForm').value;
+			var bohrbild = document.getElementById('inputGeoBohrbild').value;
+			var as = document.getElementById('inputGeoMaßeAs').value;
+			var ds = document.getElementById('inputGeoMaßeDs').value;
+			var auswerfer = document.getElementById('inputGeoAuswerfer').value;
+			var position = document.getElementById('inputGeoPosition').value;
+			var kavitaet = document.getElementById('inputGeoKavitaet').value;
+			if (kavitaet && position && auswerfer && as && ds && bohrbild
+					&& form && ausmas && werkid) {
+				$
+						.ajax({
+							type : "GET",
+							url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/creategeo.inc.php?jsoncallback=?",
+							data : {
+								"username" : uid,
+								"token" : tok1,
+								"token_login" : tok2,
+								"werkzeugID" : werkid,
+								"ausmas" : ausmas,
+								"form" : form,
+								"as" : as,
+								"ds" : ds,
+								"auswerfer" : auswerfer,
+								"kavitaet" : kavitaet,
+								"bohrbild" : bohrbild,
+								"position" : position
+							},
+							dataType : "JSONp",
+							timeout : 5000,
+							success : function(data) {
+								if (data == "success") {
+									searchwerkzeug();
+									document.getElementById('inputGeoCreate').style.display = "none";
+								} else if (data == "doppelt") {
+									alert("Werkzeugnummer existiert bereits.");
+								} else if (data == "fehler") {
+									alert("Es ist ein Fehler aufgetreten!");
+								} else if (data == "rights") {
+									alert("Sie haben keine Rechte diese Aktion auszuführen!");
+								} else if (data == "token") {
+									alert("Zeitlimit überschritten!");
+									document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+								} else {
+									alert(data
+											+ "Unexpected answer! Bitte Antwort aufschreiben.");
+								}
+							},
+							error : function(request, error) {
+								console.log(arguments);
+								alert(" Can't do because: " + error);
+							}
+						});
+			} else {
+				alert("Die mit * markierten Felder müssen ausgefüllt sein!");
+			}
+		}
+		//Einsatzdaten übernehmen
+		function createEinsatzData() {
+			var datum = document.getElementById('inputEinsatzDate').value;
+			var schuss = document.getElementById('inputEinsatzSchuss').value;
+			var maschine = document.getElementById('inputEinsatzMaschine').value;
+			var kuehl = document.getElementById('inputEinsatzKuehlung').value;
+			var kuehldauer = document.getElementById('inputEinsatzKuehldauer').value;
+			var schlies = document.getElementById('inputEinsatzSchlies').value;
+			var werkid = document.getElementById('werkzeugsuchfkt').value;
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			if (datum && schuss && maschine && kuehl && kuehldauer && schlies
+					&& werkid) {
+				$
+						.ajax({
+							type : "GET",
+							url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/createeinsatz.inc.php?jsoncallback=?",
+							data : {
+								"username" : uid,
+								"token" : tok1,
+								"token_login" : tok2,
+								"werkzeugID" : werkid,
+								"schuss" : schuss,
+								"datum" : datum,
+								"maschine" : maschine,
+								"kuehl" : kuehl,
+								"kuehldauer" : kuehldauer,
+								"schlies" : schlies
+							},
+							dataType : "JSONp",
+							timeout : 5000,
+							success : function(data) {
+								if (data == "success") {
+									searchwerkzeug();
+									document
+											.getElementById('inputEinsatzCreate').style.display = "none";
+								} else if (data == "doppelt") {
+									alert("Werkzeugnummer existiert bereits.");
+								} else if (data == "fehler") {
+									alert("Es ist ein Fehler aufgetreten!");
+								} else if (data == "rechte") {
+									alert("Sie haben keine Rechte diese Aktion auszuführen!");
+								} else if (data == "token") {
+									alert("Zeitlimit überschritten!");
+									document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+								} else {
+									alert("Unexpected answer! Bitte Antwort aufschreiben.");
+								}
+							},
+							error : function(request, error) {
+								console.log(arguments);
+								alert(" Can't do because: " + error);
+							}
+						});
+			} else {
+				alert("Die mit * markierten Felder müssen ausgefüllt sein!");
+			}
+		}
+		//hinzufügen Geo attribut
+		function addAttributGeofkt() {
+			var bez = document.getElementById('inputBezAttrGeo').value;
+			var wert = document.getElementById('inputValAttrGeo').value;
+			var werkid = document.getElementById('werkzeugsuchfkt').value;
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			if (bez && wert && werkid) {
+				$
+						.ajax({
+							type : "GET",
+							url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/addgeoattr.inc.php?jsoncallback=?",
+							data : {
+								"username" : uid,
+								"token" : tok1,
+								"token_login" : tok2,
+								"wert" : wert,
+								"bez" : bez,
+								"werkid" : werkid
+							},
+							dataType : "JSONp",
+							timeout : 5000,
+							success : function(data) {
+								if (data == "success") {
+									searchwerkzeug();
+									document.getElementById('addAttrGeo').style.display = "none";
+								} else if (data == "doppelt") {
+									alert("Werkzeugnummer existiert bereits.");
+								} else if (data == "fehler") {
+									alert("Es ist ein Fehler aufgetreten!");
+								} else if (data == "rechte") {
+									alert("Sie haben keine Rechte diese Aktion auszuführen!");
+								} else if (data == "token") {
+									alert("Zeitlimit überschritten!");
+									document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+								} else {
+									alert("Unexpected answer! Bitte Antwort aufschreiben.");
+								}
+							},
+							error : function(request, error) {
+								console.log(arguments);
+								alert(" Can't do because: " + error);
+							}
+						});
+			} else {
+				alert("Die mit * markierten Felder müssen ausgefüllt sein!");
+			}
+		}
+		//hinzufügen Prüfmerkmal
+		function addAttributPrueffkt() {
+			var bez = document.getElementById('inputBezAttrPruef').value;
+			var wert = document.getElementById('inputValAttrPruef').value;
+			var lfd = document.getElementById('inputLfdAttrPruef').value;
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			if (bez && wert && lfd) {
+				$
+						.ajax({
+							type : "GET",
+							url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/addpruefmerkmal.inc.php?jsoncallback=?",
+							data : {
+								"username" : uid,
+								"token" : tok1,
+								"token_login" : tok2,
+								"wert" : wert,
+								"bez" : bez,
+								"lfd" : lfd
+							},
+							dataType : "JSONp",
+							timeout : 5000,
+							success : function(data) {
+								if (data == "success") {
+									searchwerkzeug();
+									document.getElementById('addAttrPruef').style.display = "none";
+								} else if (data == "doppelt") {
+									alert("Werkzeugnummer existiert bereits.");
+								} else if (data == "fehler") {
+									alert("Es ist ein Fehler aufgetreten!");
+								} else if (data == "rechte") {
+									alert("Sie haben keine Rechte diese Aktion auszuführen!");
+								} else if (data == "token") {
+									alert("Zeitlimit überschritten!");
+									document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+								} else {
+									alert("Unexpected answer! Bitte Antwort aufschreiben.");
+								}
+							},
+							error : function(request, error) {
+								console.log(arguments);
+								alert(" Can't do because: " + error);
+							}
+						});
+			} else {
+				alert("Die mit * markierten Felder müssen ausgefüllt sein!");
+			}
+		}
+		//hinzufügen einsatzprot
+		function addAttributEinsatzfkt() {
+			var bez = document.getElementById('inputBezAttrEinsatz').value;
+			var wert = document.getElementById('inputValAttrEinsatz').value;
+			var lfd = document.getElementById('inputLfdAttrEinsatz').value;
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			if (bez && wert && lfd) {
+				$
+						.ajax({
+							type : "GET",
+							url : "http://localhost/workspace/swimp/WebContent/Includes/Werkzeugverwaltung/einsatzattr.inc.php?jsoncallback=?",
+							data : {
+								"username" : uid,
+								"token" : tok1,
+								"token_login" : tok2,
+								"wert" : wert,
+								"bez" : bez,
+								"lfd" : lfd
+							},
+							dataType : "JSONp",
+							timeout : 5000,
+							success : function(data) {
+								if (data == "success") {
+									searchwerkzeug();
+									document.getElementById('addAttrEinsatz').style.display = "none";
+								} else if (data == "doppelt") {
+									alert("Werkzeugnummer existiert bereits.");
+								} else if (data == "fehler") {
+									alert("Es ist ein Fehler aufgetreten!");
+								} else if (data == "rechte") {
+									alert("Sie haben keine Rechte diese Aktion auszuführen!");
+								} else if (data == "token") {
+									alert("Zeitlimit überschritten!");
+									document.location.href = "http://localhost/workspace/swimp/WebContent/index.html";
+								} else {
+									alert("Unexpected answer! Bitte Antwort aufschreiben.");
+								}
+							},
+							error : function(request, error) {
+								console.log(arguments);
+								alert(" Can't do because: " + error);
+							}
+						});
+			} else {
+				alert("Die mit * markierten Felder müssen ausgefüllt sein!");
+			}
+		}
+		//funktion zum öffnen der Seite QR-Code
+		function openqr(id) {
+			document.location.href = "http://localhost/workspace/swimp/WebContent/qrcode.html?werkzeugID="
+					+ id;
+		}
+		//Fehlermeldung keine Rechte
+		function norights() {
+			alert("Sie haben keine Befugnisse diese Aktion auszuführen.");
+		}
+	</script>
+	<!-- Cookies löschen für Logout -->
+	<script>
+		function deleteAllCookies() {
+			Cookies.remove('name');
+			Cookies.remove('token');
+			Cookies.remove('token_login');
+		}
+	</script>
+	<!-- Upload File -->
+	<script>
+	document.getElementById("werkzeugIDHidden").value=document.getElementById('werkzeugsuchfkt').value;
+	</script>
+</body>
+</html>
