@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Steffen Selz, Michael Wenk">
+<meta name="description"
+	content="Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationssystem">
+<!-- Favicon im Browserfenster -->
+<link rel="shortcut icon" type="image/x-icon" href="assets/Icons/hammer1.png">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+<link href="bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/custom.css">
+<link rel="stylesheet" href="assets/css/custom-themes.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="style.css" rel="stylesheet">
+<script src="assets/js/custom.js"></script>
+</head>
+<body>
+<div id="data_div"></div><br>
+<div id="div_geo"></div><br>
+<div id="div_pruef"></div><br>
+<div id="div_einsatz"></div><br>
+<script>
+//werkzeugnummer aus der url parsen
+		var url = document.location.href;
+		var erg = url.split("=");
+		var res = erg[1].split("&");
+		if (res[0]) {
+
+			printwvs(res[0]);
+				
+		}
+function printwvs(id){
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			var item = id;
+
+			$
+					.ajax({
+						type : "GET",
+						url : "http://www01.bw.hs-offenburg.de/winprj01/Includes/Werkzeugverwaltung/druckstamm.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2,
+							"werkzeugnummer" : item
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							$('#data_div').html(data);
+							$.ajax({
+								type : "GET",
+								url : "http://www01.bw.hs-offenburg.de/winprj01/Includes/Werkzeugverwaltung/druckpruef.inc.php?jsoncallback=?",
+								data : {
+									"username" : uid,
+									"token" : tok1,
+									"token_login" : tok2,
+									"werkzeugnummer" : item
+								},
+								dataType : "JSONp",
+								timeout : 5000,
+								success : function(data) {
+									$('#div_pruef').html(data);
+								},
+								error : function(request, error) {
+									console.log(arguments);
+								}
+							});
+							$.ajax({
+								type : "GET",
+								url : "http://www01.bw.hs-offenburg.de/winprj01/Includes/Werkzeugverwaltung/druckgeo.inc.php?jsoncallback=?",
+								data : {
+									"username" : uid,
+									"token" : tok1,
+									"token_login" : tok2,
+									"werkzeugnummer" : item
+								},
+								dataType : "JSONp",
+								timeout : 5000,
+								success : function(data) {
+									$('#div_geo').html(data);
+								},
+								error : function(request, error) {
+									console.log(arguments);
+								}
+							});
+							$.ajax({
+								type : "GET",
+								url : "http://www01.bw.hs-offenburg.de/winprj01/Includes/Werkzeugverwaltung/druckeinsatz.inc.php?jsoncallback=?",
+								data : {
+									"username" : uid,
+									"token" : tok1,
+									"token_login" : tok2,
+									"werkzeugnummer" : item
+								},
+								dataType : "JSONp",
+								timeout : 5000,
+								success : function(data) {
+									$('#div_einsatz').html(data);
+								},
+								error : function(request, error) {
+									console.log(arguments);
+								}
+							});
+
+													},
+						error : function(request, error) {
+							console.log(arguments);
+						}
+					});
+		}
+	
+</script>
+
+</body>
+</html>

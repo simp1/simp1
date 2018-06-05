@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Steffen Selz, Michael Wenk">
+<meta name="description"
+	content="Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationssystem">
+	<!-- Favicon im Browserfenster -->
+<link rel="shortcut icon" type="image/x-icon" href="assets/Icons/hammer1.png">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+<link href="bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/custom.css">
+<link rel="stylesheet" href="assets/css/custom-themes.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="style.css" rel="stylesheet">
+<script src="assets/js/custom.js"></script>
+</head>
+<body>
+	<div class="page-wrapper chiller-theme toggled">
+
+		<!-- SeitenleisteStart -->
+		<nav id="sidebar" class="sidebar-wrapper" data-color="#555">
+
+			<div id="toggle-sidebar">
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+			<div class="sidebar-brand">
+				<a href="#">Eigenschaften</a>
+			</div>
+			<div class="sidebar-menu">
+				<ul>
+					<li class="nav-item"><a class="nav-link"
+						href="http://www01.bw.hs-offenburg.de/winprj01/startseite.html">
+							<span data-feather="file"></span> Home
+					</a></li>
+					<li class="nav-item" id="superadminverwaltung"
+						style="display: none;"><a class="nav-link"
+						href="benutzerverwaltung.html"> <span data-feather="file"></span>
+							Benutzerverwaltung
+					</a></li>
+
+					<li class="nav-item" id="adminverwaltung" style="display: none;">
+						<a class="nav-link" href="benutzerverwaltung.html"> <span
+							data-feather="file"></span> Benutzerverwaltung
+					</a>
+					</li>
+
+					<li class="nav-item"><a class="nav-link"
+						href="stammdaten.html"> <span data-feather="file"></span>
+							Stammdaten
+					</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="werkzeugverwaltung.html"> <span data-feather="file"></span>
+							Werkzeugverwaltung
+					</a></li>
+					<li style="display: none;" id="dokuverwaltung" class="nav-item"><a class="nav-link"
+						href="dokumentenverwaltung.html"> <span data-feather="file"></span>
+							Dokumentenverwaltung
+					</a></li>
+					<li class="nav-item listenende"><a class="nav-link" href="index.html"
+						onclick="deleteAllCookies()"> <span data-feather="file"></span>Logout
+					</a></li>
+
+
+				</ul>
+			</div>
+
+		</nav>
+
+		<!-- Seitenleiste Ende -->
+
+		<div class="page-content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="form-group col-md-12" id="überschrift">
+						<h1>Benutzerverwaltung</h1>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-12 text-center" id="abstandbutton">
+						<div id="edit_create_reload">
+							<a class="btn btn-success .navbar-right" id="b1"
+								onClick="createUser()" href="#">Neuer Benutzer erstellen</a> <a
+								class="btn btn-success .navbar-right" id="b1"
+								onClick="recreateUser()" href="#">Benutzer wiederherstellen</a>
+
+							<a class="btn btn-success .navbar-right" id="b2"
+								onClick="location.reload()" href="#">Benutzerverwaltung</a>
+						</div>
+						<div id="netterversuch"></div>
+						<div id="editcreate" style="display: none;">
+							<div class="col-sm-4">
+								<label>Benutzer:</label><br>
+								<label id="editUserLabel"> </label><br> <label
+									for="inputTextEdit">Passwort:</label>
+								<div class="form-label-group">
+									<input type="text" id="inputPassEdit" class="form-control"
+										placeholder="Passwort" required>
+								</div>
+								<label for="inputText">Leserechte(0 = keine,1 = read):</label>
+								<div class="form-label-group">
+									<input type="number" id="inputReadEdit" class="form-control"
+										min="0" max="1" value="0" required>
+								</div>
+								<br> <input type="hidden" id="usrid" value="">
+								<button class="btn btn-lg btn-primary btn-block" type="submit"
+									onClick="editfinalUser()">Editieren</button>
+								<br>
+							</div>
+						</div>
+						<div id="usrcreate" style="display: none;">
+							<div class="col-sm-4">
+								<label for="inputText">Benutzername:</label>
+								<div class="form-label-group">
+									<input type="text" id="inputName" class="form-control"
+										placeholder="Benutzername" required autofocus>
+								</div>
+								<label for="inputText">Passwort:</label>
+								<div class="form-label-group">
+									<input type="text" id="inputPass" class="form-control"
+										placeholder="Passwort" required>
+								</div>
+								<label for="inputText">Leserechte(0 = keine,1 = read):</label>
+								<div class="form-label-group">
+									<input type="number" id="inputRead" class="form-control"
+										min="0" max="1" value="0" required>
+								</div>
+								<br>
+								<button class="btn btn-lg btn-primary btn-block" type="submit"
+									onClick="insertUser()">Erstellen</button>
+								<br>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+
+				<div class="row">
+					<div class="form-group col-md-12">
+						<div id="tab_div"></div>
+					</div>
+				</div>
+
+
+			</div>
+
+		</div>
+	</div>
+
+
+	<script>
+		//prüfen rechte
+		var uid = Cookies.get("name");
+		var tok1 = Cookies.get("token");
+		var tok2 = Cookies.get("token_login");
+		$
+				.ajax({
+					type : "GET",
+					url : "http://www01.bw.hs-offenburg.de/winprj01/Includes/checkrightsadmin.inc.php?jsoncallback=?",
+					data : {
+						"username" : uid,
+						"token" : tok1,
+						"token_login" : tok2
+					},
+					dataType : "JSONp",
+					timeout : 5000,
+					success : function(data) {
+						if (data == "success") {
+
+						} else {
+							document.getElementById('edit_create_reload').style.display = "none";
+							document.getElementById('netterversuch').style.display = "block";
+							document.getElementById('netterversuch').innerHTML = "Netter Versuch, eine Nachricht an den Admin wird rausgegeben. Herr/Frau "
+									+ uid;
+						}
+					},
+					error : function(request, error) {
+						console.log(arguments);
+						alert(" Can't do because: " + error);
+					}
+				});
+		// lade tabelle
+		var uid = Cookies.get("name");
+		var tok1 = Cookies.get("token");
+		var tok2 = Cookies.get("token_login");
+		$
+				.ajax({
+					type : "GET",
+					url : "http://www01.bw.hs-offenburg.de/winprj01/Includes/checktoken.inc.php?jsoncallback=?",
+					data : {
+						"username" : uid,
+						"token" : tok1,
+						"token_login" : tok2
+					},
+					dataType : "JSONp",
+					timeout : 5000,
+					success : function(data) {
+						$
+								.ajax({
+									type : "GET",
+									url : "http://www01.bw.hs-offenburg.de/winprj01/Includes/Benutzerverwaltung/userinterface.inc.php?jsoncallback=?",
+									data : {
+										"username" : uid
+									},
+									dataType : "JSONp",
+									timeout : 5000,
+									success : function(data) {
+										$('#tab_div').html(data);
+									},
+									error : function(request, error) {
+										console.log(arguments);
+										alert(" Can't do because: " + error);
+									}
+								});
+					},
+					error : function(request, error) {
+						console.log(arguments);
+						alert(" Can't do because: " + error);
+						document.location.href = "http://www01.bw.hs-offenburg.de/winprj01/index.html";
+					}
+				});
+	</script>
+	<!-- editieren Funktion hinter einem Button in der Tabelle -->
+	<script>
+		//editieren Button Aktion
+		function editieren(id) {
+			if (id != "admin") {
+				document.getElementById('editcreate').style.display = "block";
+				document.getElementById('editUserLabel').innerHTML = id;
+				document.getElementById('usrid').value = id;
+			} else {
+				alert("Superadmin darf nicht bearbeitet werden!")
+			}
+		}
+		//enterfenen Button Aktion
+		function entfernen(id) {
+			if (id != "admin") {
+				var uid = id;
+				var uuid = Cookies.get("name");
+				var tok1 = Cookies.get("token");
+				var tok2 = Cookies.get("token_login");
+				$
+						.ajax({
+							type : "GET",
+							url : "http://www01.bw.hs-offenburg.de/winprj01/Includes/Benutzerverwaltung/deluser.inc.php?jsoncallback=?",
+							data : {
+								"username" : uid,
+								"username_token" : uuid,
+								"token" : tok1,
+								"token_login" : tok2
+							},
+							dataType : "JSONp",
+							timeout : 5000,
+							success : function(data) {
+								if (data == "success") {
+									location.reload();
+								} else if (data == "exist") {
+									alert("Benutzer existiert bereits!");
+								} else if (data == "token") {
+									alert("Login ungültig");
+									document.location.href = "http://www01.bw.hs-offenburg.de/winprj01/index.html";
+								} else {
+									alert("keine Rechte!");
+								}
+							},
+							error : function(request, error) {
+								console.log(arguments);
+								alert(" Can't do because: " + error);
+							}
+						});
+			} else {
+				alert("Superadmin darf nicht bearbeitet werden!")
+			}
+		}
+	</script>
+
+	<script>
+		//bearbeitet den User
+		function editfinalUser() {
+			var uid = document.getElementById('usrid').value;
+			var pid = document.getElementById('inputPassEdit').value;
+			var aid = 0;
+			var rid = document.getElementById('inputReadEdit').value;
+			var uuid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://www01.bw.hs-offenburg.de/winprj01/Includes/Benutzerverwaltung/edituser.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"username_token" : uuid,
+							"token" : tok1,
+							"token_login" : tok2,
+							"password" : pid,
+							"admin" : aid,
+							"rights" : rid
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							if (data == "success") {
+								location.reload();
+							} else if (data == "exist") {
+								alert("Benutzer existiert bereits!");
+							} else if (data == "token") {
+								alert("Login ungültig");
+								document.location.href = "http://www01.bw.hs-offenburg.de/winprj01/index.html";
+							} else {
+								alert("keine Rechte!");
+							}
+						},
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+						}
+					});
+		}
+		//prüft einen Benutzer
+		function createUser() {
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://www01.bw.hs-offenburg.de/winprj01/Includes/checktoken.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							document.getElementById('usrcreate').style.display = "block";
+						},
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+							document.location.href = "http://www01.bw.hs-offenburg.de/winprj01/index.html";
+						}
+					});
+		}
+		//Fügt den Benutzer ein
+		function insertUser() {
+			var uid = document.getElementById('inputName').value;
+			var pid = document.getElementById('inputPass').value;
+			var aid = 0;
+			var rid = document.getElementById('inputRead').value;
+			var uuid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://www01.bw.hs-offenburg.de/winprj01/Includes/Benutzerverwaltung/createuser.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"username_token" : uuid,
+							"token" : tok1,
+							"token_login" : tok2,
+							"password" : pid,
+							"admin" : aid,
+							"rights" : rid
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							if (data == "success") {
+								location.reload();
+							} else if (data == "doppelt") {
+								alert("Benutzer existiert bereits!");
+							} else if (data == "token") {
+								alert("Login ungültig");
+								document.location.href = "http://www01.bw.hs-offenburg.de/winprj01/index.html";
+							} else {
+								alert("keine Rechte!");
+							}
+						},
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+						}
+					});
+		}
+		// zeigt gelöschte Nutzer
+		function recreateUser() {
+			var uid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://www01.bw.hs-offenburg.de/winprj01/Includes/checktoken.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"token" : tok1,
+							"token_login" : tok2
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							$
+									.ajax({
+										type : "GET",
+										url : "http://www01.bw.hs-offenburg.de/winprj01/Includes/Benutzerverwaltung/recreateuser.inc.php?jsoncallback=?",
+										data : {
+											"username" : uid
+										},
+										dataType : "JSONp",
+										timeout : 5000,
+										success : function(data) {
+											$('#tab_div').html(data);
+											document
+													.getElementById('btn_reload_function').style.display = "block";
+										},
+										error : function(request, error) {
+											console.log(arguments);
+											alert(" Can't do because: " + error);
+										}
+									});
+						},
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+							document.location.href = "http://www01.bw.hs-offenburg.de/winprj01/index.html";
+						}
+					});
+		}
+		//Stellt gelöschte Nutzer wieder her
+		function recreate(id) {
+			var uid = id;
+			var uuid = Cookies.get("name");
+			var tok1 = Cookies.get("token");
+			var tok2 = Cookies.get("token_login");
+			$
+					.ajax({
+						type : "GET",
+						url : "http://www01.bw.hs-offenburg.de/winprj01/Includes/Benutzerverwaltung/activateuser.inc.php?jsoncallback=?",
+						data : {
+							"username" : uid,
+							"username_token" : uuid,
+							"token" : tok1,
+							"token_login" : tok2
+						},
+						dataType : "JSONp",
+						timeout : 5000,
+						success : function(data) {
+							if (data == "success") {
+								location.reload();
+							} else if (data == "exist") {
+								alert("Benutzer existiert bereits!");
+							} else if (data == "token") {
+								alert("Login ungültig");
+								document.location.href = "http://www01.bw.hs-offenburg.de/winprj01/index.html";
+							} else {
+								alert("keine Rechte!");
+							}
+						},
+						error : function(request, error) {
+							console.log(arguments);
+							alert(" Can't do because: " + error);
+						}
+					});
+		}
+		// Keine Rechte warnung
+		function norights() {
+			alert("Sie haben keine Befugnisse diese Aktion auszuführen.");
+		}
+	</script>
+	<script>
+		var uid = Cookies.get("name");
+		var tok1 = Cookies.get("token");
+		var tok2 = Cookies.get("token_login");
+		$
+				.ajax({
+					type : "GET",
+					url : "http://www01.bw.hs-offenburg.de/winprj01/Includes/Benutzerverwaltung/adminverwaltung.inc.php?jsoncallback=?",
+					data : {
+						"username" : uid,
+						"token" : tok1,
+						"token_login" : tok2
+					},
+					dataType : "JSONp",
+					timeout : 5000,
+					success : function(data) {
+						if (data == "sadmin") {
+							document.getElementById('superadminverwaltung').style.display = "block";
+						} else if (data == "admin") {
+							document.getElementById('adminverwaltung').style.display = "block";
+						} else if (data == "noadmin") {
+
+						} else {
+							alert("Login ungültig");
+							document.location.href = "http://www01.bw.hs-offenburg.de/winprj01/index.html";
+						}
+					},
+					error : function(request, error) {
+						console.log(arguments);
+						alert(" Can't do because: " + error);
+						document.location.href = "http://www01.bw.hs-offenburg.de/winprj01/index.html";
+					}
+				});
+	</script>
+	<!-- obere Buttons gleich groß machen -->
+	<script>
+		var max = Math.max($("#b1").width(), $("#b2").width());
+		$("#b1").width(max);
+		$("#b2").width(max);
+	</script>
+	<!-- Cookies löschen für Logout -->
+	<script>
+		function deleteAllCookies() {
+			Cookies.remove('name');
+			Cookies.remove('token');
+			Cookies.remove('token_login');
+		}
+	</script>
+	<!-- Dokumentenverwaltung in Sidebar anzeigen bei Zugriffsrechten -->
+		<script type="text/javascript">
+		//Startleiste
+		var uid = Cookies.get("name");
+		var tok1 = Cookies.get("token");
+		var tok2 = Cookies.get("token_login");
+		$
+				.ajax({
+					type : "GET",
+					url : "http://www01.bw.hs-offenburg.de/winprj01/Includes/Benutzerverwaltung/adminverwaltung.inc.php?jsoncallback=?",
+					data : {
+						"username" : uid,
+						"token" : tok1,
+						"token_login" : tok2
+					},
+					dataType : "JSONp",
+					timeout : 5000,
+					success : function(data) {
+						if (data == "sadmin") {
+							document.getElementById('dokuverwaltung').style.display = "block";
+						} else if (data == "admin") {
+							document.getElementById('dokuverwaltung').style.display = "block";
+						} else if (data == "noadmin") {
+							document.getElementById('dokuverwaltung').style.display = "block";
+						} else {
+							//alert("Doku aus");
+						}
+					},
+					error : function(request, error) {
+						console.log(arguments);
+						alert(" Can't do because: " + error);
+						document.location.href = "http://www01.bw.hs-offenburg.de/winprj01/index.html";
+					}
+				});
+	</script>
+
+</body>
+</html>
