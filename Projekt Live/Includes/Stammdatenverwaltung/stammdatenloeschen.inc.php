@@ -1,5 +1,5 @@
 <?php
-	#löscht den User
+	#setzt den Eintrag auf Inaktiv
 	session_start();
 	header('Access-Control-Allow-Origin:*');
 	header('Access-Control-Allow-Methods: GET');

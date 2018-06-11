@@ -23,8 +23,8 @@
 	//prüft tokens
 	if(checktoken($token,$token_login,$username_token)){
 		$erg = status($username_token);
-		if($erg>=100){
-			$stmt = $con->prepare("SELECT username FROM benutzer WHERE username=?");
+		if($erg>=100){#Superadmin, möglich admin anzulegen
+			$stmt = $con->prepare("SELECT username FROM benutzer WHERE username=?");#Prüft ob der Benutzername noch verfügbar ist
 			$stmt->bind_param('s', $username);
 			$stmt->execute();
 			$stmt->bind_result($userid);
@@ -33,7 +33,7 @@
 				echo $_GET['jsoncallback'].'('.json_encode("doppelt").');';
 				exit();
 			}else{
-				$stmt = $con->prepare("INSERT INTO benutzer (username,password,admin,rights,superadmin) VALUES (?,?,?,?,?)");
+				$stmt = $con->prepare("INSERT INTO benutzer (username,password,admin,rights,superadmin) VALUES (?,?,?,?,?)");#Einfügen des Benutzers
 				$stmt->bind_param('ssiii', $username, $password, $admin, $rights, $superadmin);
 				$stmt->execute();
 				$stmt = $con->prepare("SELECT username FROM benutzer WHERE username=?");
@@ -48,8 +48,8 @@
 				echo $_GET['jsoncallback'].'('.json_encode("fehler").');';
 				exit();
 			}
-		}elseif ($erg>=10){
-			$stmt = $con->prepare("SELECT username FROM benutzer WHERE username=?");
+		}elseif ($erg>=10){#Admin, kann kein Admin erzeugen
+			$stmt = $con->prepare("SELECT username FROM benutzer WHERE username=?");#Existiert der Name schon?
 			$stmt->bind_param('s', $username);
 			$stmt->execute();
 			$stmt->bind_result($userid);
@@ -58,8 +58,8 @@
 				echo $_GET['jsoncallback'].'('.json_encode("doppelt").');';
 				exit();
 			}else{
-				$admin = 0;
-				$stmt = $con->prepare("INSERT INTO benutzer (username,password,admin,rights,superadmin) VALUES (?,?,?,?,?)");
+				$admin = 0;#Hardcoding Adminrechte 0
+				$stmt = $con->prepare("INSERT INTO benutzer (username,password,admin,rights,superadmin) VALUES (?,?,?,?,?)");#Erzeugen des Benutzrs
 				$stmt->bind_param('ssiii', $username, $password, $admin, $rights, $superadmin);
 				$stmt->execute();
 				$stmt = $con->prepare("SELECT username FROM benutzer WHERE username=?");

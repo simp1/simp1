@@ -1,5 +1,5 @@
 <?php
-	#Anzeigen der Stammdaten zu einer ID
+	#Stammdaten editieren, liefert die Werte für Html zurück um die Felder des Formulares zu füllen
 	session_start();
 	header('Access-Control-Allow-Origin:*');
 	header('Access-Control-Allow-Methods: GET');

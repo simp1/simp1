@@ -1,5 +1,5 @@
 <?php
-#Prüft die Tokens
+	#Prüft den Nutzer auf Admin rechte
 	session_start();
 	header('Access-Control-Allow-Origin:*');
 	header('Access-Control-Allow-Methods: GET');

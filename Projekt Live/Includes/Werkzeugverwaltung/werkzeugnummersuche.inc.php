@@ -1,5 +1,5 @@
 <?php
-	#Anzeigen des Stammdatensatz
+	#Anzeigen der Werkzeugdaten nach den gesucht wird
 	session_start();
 	header('Access-Control-Allow-Origin:*');
 	header('Access-Control-Allow-Methods: GET');

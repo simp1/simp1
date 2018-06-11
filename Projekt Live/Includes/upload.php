@@ -1,15 +1,20 @@
 <?php
+#Uploadphp für die PDFs und später auch CADs
+//Includes
 include 'functions.inc.php';
 include 'config.inc.php';
+//Übergabeparameter
 $werkzeugID=$_POST['werkzeugzuge'];
 $zugehoerigkeit=$_POST['zugehoerig'];
 $idzuge=$_POST['idzuge'];
+//Path zu dem Speicherort
 $target_dir = "../uploads/pdf/";
+//Path der Datei auf dem PC
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-$uploadOk = 1;
-$werkid;
+$uploadOk = 1;#Upload status
+$werkid;#ID des Werkzeugs sofern vorhanden
 $fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-$sql="SELECT * FROM stammdaten WHERE werkzeug_nummer='".$werkzeugID."' AND entfernt=0";
+$sql="SELECT * FROM stammdaten WHERE werkzeug_nummer='".$werkzeugID."' AND entfernt=0";#bestimmen der werkzeugID
 $statemt = getsql($sql);
 while($ausgabe = $statemt->fetch_object()){
 	$werkid = $ausgabe->werkzeugID;
@@ -48,7 +53,7 @@ if ($uploadOk == 0) {
     	$sql;
     	$zuordnung;
     	$allgemein;
-    	if($zugehoerigkeit==1){
+    	if($zugehoerigkeit==1){#bestimmen wie die Datei in die DB gespeichert wird
     		$sql="INSERT INTO dokumente (werkzeugID, format, url, bezeichnung, zuordnung) VALUES (?,?,?,?,?)";
     		$zuordnung=werkzeug;
     	}elseif ($zugehoerigkeit==2){
@@ -74,8 +79,8 @@ if ($uploadOk == 0) {
     	}
     	$nameofdoc=basename( $_FILES["fileToUpload"]["name"]);
     	$teile = explode(".", $nameofdoc);
-    	$url="http://www01.bw.hs-offenburg.de/winprj01/uploads/pdf/".$nameofdoc;
-    	if(empty($zuordnung)){
+    	$url="http://www01.bw.hs-offenburg.de/winprj01/uploads/pdf/".$nameofdoc;#Generieren der URL zum PDF
+    	if(empty($zuordnung)){#Richtigen SQL ausführen
     		if($allgemein==1){
     			$stmt = $con->prepare($sql);
     			$stmt->bind_param('sss', $teile[1], $url, $teile[0]);
@@ -92,11 +97,11 @@ if ($uploadOk == 0) {
     	}
     	
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-        header("Location: http://www01.bw.hs-offenburg.de/winprj01/werkzeugverwaltung.html?&werkzeugID=".$werkzeugID."&success");
+        header("Location: http://www01.bw.hs-offenburg.de/winprj01/werkzeugverwaltung.html?&werkzeugID=".$werkzeugID."&success");#Erfolgreicher Upload
         exit();
     } else {
         echo "Sorry, there was an error uploading your file.";
-        header("Location: http://www01.bw.hs-offenburg.de/winprj01/werkzeugverwaltung.html?&werkzeugID=".$werkzeugID."&nosuccess");
+        header("Location: http://www01.bw.hs-offenburg.de/winprj01/werkzeugverwaltung.html?&werkzeugID=".$werkzeugID."&nosuccess");#Erfolgloser Upload
         exit();
     }
 }

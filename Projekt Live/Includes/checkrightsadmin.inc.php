@@ -1,5 +1,5 @@
 <?php
-#Prüft die Rechte
+	#Prüft die Rechte des Admins
 	session_start();
 	header('Access-Control-Allow-Origin:*');
 	header('Access-Control-Allow-Methods: GET');
@@ -10,15 +10,15 @@
 	//Prüft die Login Daten
 	if(checktoken($token,$token_login,$username)){
 		$erg = status($username);
-		if($erg>1){
-			echo $_GET['jsoncallback'].'('.json_encode("success").');';
+		if($erg>1){#mindestens Admin
+			echo $_GET['jsoncallback'].'('.json_encode("success").');';#Erfolg also mindestens Adminuser
 			exit();
 		}else{
-			echo $_GET['jsoncallback'].'('.json_encode("norights").');';
+			echo $_GET['jsoncallback'].'('.json_encode("norights").');';#kein Admin
 			exit();
 		}
 	}else{
-		echo $_GET['jsoncallback'].'('.json_encode("fehler").');';
+		echo $_GET['jsoncallback'].'('.json_encode("fehler").');';#kein Valider User
 		exit();
 	}
 

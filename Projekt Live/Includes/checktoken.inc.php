@@ -1,5 +1,5 @@
 <?php
-#Prüft die Tokens
+	#Prüft die Tokens
 	session_start();
 	header('Access-Control-Allow-Origin:*');
 	header('Access-Control-Allow-Methods: GET');
@@ -9,10 +9,10 @@
 	$username=$_GET['username'];
 	//Prüft die Login Daten
 	if(checktoken($token,$token_login,$username)){
-		echo $_GET['jsoncallback'].'('.json_encode("success").');';
+		echo $_GET['jsoncallback'].'('.json_encode("success").');';#gültiges Token
 		exit();
 	}else{
-		echo $_GET['jsoncallback'].'('.json_encode("fehler").');';
+		echo $_GET['jsoncallback'].'('.json_encode("fehler").');';#Token ungültig
 		exit();
 	}
 

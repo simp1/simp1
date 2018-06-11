@@ -1,5 +1,5 @@
 <?php
-	#db schreiben attribut
+	#db schreiben des Allgemeinen Werkzeugattributs
 	session_start();
 	header('Access-Control-Allow-Origin:*');
 	header('Access-Control-Allow-Methods: GET');

@@ -1,5 +1,5 @@
 <?php
-	#löscht das Attribut
+	#löscht das Attribut zum Werkzeug
 	session_start();
 	header('Access-Control-Allow-Origin:*');
 	header('Access-Control-Allow-Methods: GET');

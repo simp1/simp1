@@ -1,4 +1,5 @@
 <?php
+	#Anzeige des Werkzeugprotokolls
 	session_start();
 	header('Access-Control-Allow-Origin:*');
 	header('Access-Control-Allow-Methods: GET');

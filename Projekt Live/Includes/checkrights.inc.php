@@ -1,5 +1,5 @@
 <?php
-#Prüft die Rechte
+	#Prüft die Rechte, einfache Rechteprüfung
 	session_start();
 	header('Access-Control-Allow-Origin:*');
 	header('Access-Control-Allow-Methods: GET');
@@ -10,15 +10,15 @@
 	//Prüft die Login Daten
 	if(checktoken($token,$token_login,$username)){
 		$erg = status($username);
-		if($erg>0){
-			echo $_GET['jsoncallback'].'('.json_encode("success").');';
+		if($erg>0){#mindesten Schreibrechte
+			echo $_GET['jsoncallback'].'('.json_encode("success").');';#bei Erfolg
 			exit();
 		}else{
-			echo $_GET['jsoncallback'].'('.json_encode("norights").');';
+			echo $_GET['jsoncallback'].'('.json_encode("norights").');';#mindestens Leserechte
 			exit();
 		}
 	}else{
-		echo $_GET['jsoncallback'].'('.json_encode("fehler").');';
+		echo $_GET['jsoncallback'].'('.json_encode("fehler").');';#ungültige Tokens
 		exit();
 	}
 

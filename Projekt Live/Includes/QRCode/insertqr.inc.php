@@ -1,7 +1,10 @@
 <?php
+	/*
+	 * Speichert den QR Code als Base64 encoding in die DB erlaubt ist hier ein POST
+	 */
 	session_start();
 	header('Access-Control-Allow-Origin:*');
-	header('Access-Control-Allow-Methods: GET');
+	header('Access-Control-Allow-Methods: POST, GET');
 	
 	include '../functions.inc.php';
 	include '../config.inc.php';
@@ -12,13 +15,13 @@
 	$username=$teile[2];
 	$werkzeugID=$teile[0];
 	$qr=$teile[1];
-	$qr = str_replace(' ','+',$qr);
+	$qr = str_replace(' ','+',$qr);#anpassungen am encoding
 	$link =$teile[5];
 	$id;
 	if(checktoken($token,$token_login,$username)){
 		$erg = status($username);
 		if($erg>=1){
-			$sql="SELECT * FROM stammdaten WHERE werkzeug_nummer='".$werkzeugID."' AND entfernt=0;";
+			$sql="SELECT * FROM stammdaten WHERE werkzeug_nummer='".$werkzeugID."' AND entfernt=0;";#prüfen ob Werkzeug gültig ist
 			$statemt = getsql($sql);
 			while($ausgabe = $statemt->fetch_object()){
 				$id=$ausgabe->werkzeugID;

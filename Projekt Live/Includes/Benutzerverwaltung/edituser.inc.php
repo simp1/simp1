@@ -22,7 +22,7 @@
 	//prüft tokens
 	if(checktoken($token,$token_login,$username_token)){
 		$erg = status($username_token);
-		if($erg>=100){
+		if($erg>=100){#kann Adminrechte vergeben
 			if(empty($password)){
 				$sql="SELECT password FROM benutzer WHERE username='".$username."';";
 				$statemt = getsql($sql);
@@ -47,7 +47,7 @@
 				echo $_GET['jsoncallback'].'('.json_encode("exist").');';
 				exit();
 			}
-		}elseif ($erg >= 10){
+		}elseif ($erg >= 10){#kann nur Schreiberechte und Leserechte beeinflussen, kann Rechte eines Admins nicht beeinflussen
 			if(empty($password)){
 				$sql="SELECT password FROM benutzer WHERE username='".$username."';";
 				$statemt = getsql($sql);

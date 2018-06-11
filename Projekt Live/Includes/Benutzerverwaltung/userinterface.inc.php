@@ -1,5 +1,5 @@
 <?php
-#Gibt die Aktiven User an
+#Gibt die Aktiven User an, mit allen Funktionsbuttons
 	session_start();
 	header('Access-Control-Allow-Origin:*');
 	header('Access-Control-Allow-Methods: GET');

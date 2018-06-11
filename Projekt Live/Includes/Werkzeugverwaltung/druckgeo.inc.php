@@ -1,4 +1,5 @@
 <?php
+#Anzeigen der Werkzeuggeometrie in der Druckversion
 session_start();
 header('Access-Control-Allow-Origin:*');
 header('Access-Control-Allow-Methods: GET');

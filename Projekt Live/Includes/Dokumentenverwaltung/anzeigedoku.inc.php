@@ -1,8 +1,11 @@
 <?php
+	/*
+	 * Anzeigen aller Files die Hochgeladen wurden und prüfen ob diese noch existieren
+	 */
 	session_start();
 	header('Access-Control-Allow-Origin:*');
 	header('Access-Control-Allow-Methods: GET');
-	
+	//Includes
 	include '../functions.inc.php';
 	include '../config.inc.php';
 	$token=$_GET['token'];
@@ -27,7 +30,7 @@
 				$format = $ausgabe->format;
 				$id = $ausgabe->dokuID;
 				$filename = '../../uploads/pdf/'.$name.'.'.$format;
-				if (file_exists($filename)) {
+				if (file_exists($filename)) {#prüft ob die Datei noch existiert und gibt den Button zum Downloaden zurück
 					$antwort .= "<tr><td>".$name."</td><td><a href='".$url."' download><button class='butosuccess' type='button'>".$name."</button></a>   <button type='button' class='butosuccess' id=".$id." onClick='entfernen(id)'>Delete</button></td><td>Existiert</td></tr>";
 				}else{
 					$antwort .= "<tr><td>".$name."</td><td><button type='button' class='butosuccess abstandlinks' id=".$id." onClick='entfernen(id)'>Delete</button></td><td>Lost</td></tr>";

@@ -1,5 +1,5 @@
 <?php
-	#Anzeigen des Stammdatensatz
+	#Anzeigen gelöschter Stammdaten nach denen gesucht wird
 	session_start();
 	header('Access-Control-Allow-Origin:*');
 	header('Access-Control-Allow-Methods: GET');
