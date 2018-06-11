@@ -1,0 +1,205 @@
+@charset "ISO-8859-1";
+#headertext{
+	margin-top:70px;
+	margin-bottom:40px;
+	text-align:center;
+}
+#text{
+	margin-left:10px;
+	margin-right: 10px;
+}
+li a{
+	color:white !important;
+}
+.main-panel{
+	padding-left:5px;
+}
+#borderweg{
+	border:none;
+}
+.butosuccess2{
+  font: bold 11px Arial;
+  text-decoration: none;
+  background-color: #EEEEEE;
+  color: #333333;
+  padding: 2px 6px 2px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+}
+.abstandlinks{
+	margin-left:10px;
+}
+.abstandlinks2{
+	margin-left:50px;
+}
+.btn.btn-success{
+	width:200px;
+}
+.abstandunten{
+	margin-bottom:10px;
+}
+.abstandoben{
+	margin-top:10px;
+}
+.listenende{
+	position: absolute;
+	bottom: 0;
+}
+.b1 #qranzeigen{
+	/*margin-top:5px;*/
+	margin-left:5px;
+	margin-top:0px !important;
+	color:white !important;
+}
+#b2{
+	margin-top:5px;
+}
+#b3{
+	margin-top:5px;
+}
+#b1{
+	margin-top:5px;
+}
+#save{
+	/*margin-top:5px !important;*/
+	margin-left:5px !important;
+	color:white !important;
+}
+#leer{
+	background-color:#555;
+}
+#überschrift{
+	text-align:center;
+}
+#einstellungen{
+	color:white !important;
+	font-size:20px;
+	text-decoration:underline;
+}
+a #buttonright.btn.btn-success{
+	margin-left: 10px !important;
+	padding-left: 10px !important;
+	margin-right: 10px !important;
+	padding-right: 10px !important;
+}
+
+#benutzerNav{
+	/*background-color: #28a745;*/
+	/*border: 2px solid #349a4b;*/
+	background-color:#555;
+	color:white;	
+}
+#sidebar{
+	
+	color:white;
+}
+#abstandoben{
+	margin-top:58px;
+}
+
+
+#butlang{
+	max-width:150px;
+	
+}        
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-nrw8{font-size:14px}
+
+table,
+td {
+	border: 1px solid;
+}
+#btn_reload_function{
+	margin-top:7px;
+}
+#abstandunten{
+	margin-bottom:30px;
+}
+#abstandBenutzer{
+	margin-top:58px;
+}
+#klein{
+	text-size:16px;
+	text-align:center;
+}
+#inhalt{
+	text-align:center;
+	text-size:18px;
+}
+#headerbutton{
+	text-align:center;
+}
+label{
+	margin-top:5px;
+	margin-bottom:5px;
+}
+li a {
+	margin-right:10px;
+}
+p {
+    color: black;
+}
+.col-sm-4{
+	border: 5px double black;
+	margin: 20px;
+}
+.container {
+  max-width: 960px;
+}
+
+/*success-button für php umbenennen*/
+.butosuccess {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+  text-align:center;
+}
+#sucheschrift{
+	font-size:16px;
+	margin-left:20px;
+}
+.butosuccess:hover {
+  color: #fff;
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.butosuccess:focus, .butosuccess.focus {
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+}
+
+.butosuccess.disabled, .butosuccess:disabled {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.butosuccess:not(:disabled):not(.disabled):active, .butosuccess:not(:disabled):not(.disabled).active,
+.show > .butosuccess.dropdown-toggle {
+  color: #fff;
+  background-color: #1e7e34;
+  border-color: #1c7430;
+}
+
+.butosuccess:not(:disabled):not(.disabled):active:focus, .butosuccess:not(:disabled):not(.disabled).active:focus,
+.show > .butosuccess.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
