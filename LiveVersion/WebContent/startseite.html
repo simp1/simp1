@@ -1,32 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Metadaten -->
 <meta charset="utf-8">
 <meta name="author" content="Steffen Selz, Michael Wenk">
-<meta name="description"
-	content="Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationssystem">
-	<!-- Favicon im Browserfenster -->
+<meta name="description" content="Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationssystem">
+<!-- Favicon im Browserfenster -->
 <link rel="shortcut icon" type="image/x-icon" href="assets/Icons/hammer1.png">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-
+<!-- Importe -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <link href="bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/custom.css">
 <link rel="stylesheet" href="assets/css/custom-themes.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link href="style.css" rel="stylesheet">
 <script src="assets/js/custom.js"></script>
-
 </head>
 <body>
 
 	<div class="page-wrapper chiller-theme toggled">
-		<!-- SeitenleisteStart -->
+		<!-- Seitenleiste Start -->
 		<nav id="sidebar" class="sidebar-wrapper" data-color="#555">
-
+		<!-- Symbol Seitenleiste -->
 			<div id="toggle-sidebar">
 				<div></div>
 				<div></div>
@@ -35,6 +31,7 @@
 			<div class="sidebar-brand">
 				<a href="#">Eigenschaften</a>
 			</div>
+			<!-- Seitenliste Listenelemente -->
 			<div class="sidebar-menu">
 				<ul>
 					<li class="nav-item"><a class="nav-link"
@@ -68,16 +65,13 @@
 					<li class="nav-item listenende"><a class="nav-link" href="index.html"
 						onclick="deleteAllCookies()"> <span data-feather="file"></span>Logout
 					</a></li>
-
-
 				</ul>
 			</div>
-
 		</nav>
-
 		<!-- Seitenleiste Ende -->
 		<div class="page-content">
 			<div class="container-fluid">
+			<!-- Überschrift -->
 				<div class="row">
 					<div class="form-group col-md-12" id="überschrift">
 						<h1 id="inhalt">Werkzeugverwaltung Startseite</h1>
@@ -87,12 +81,9 @@
 						<h1 id="inhalt">Inhalt</h1>
 					</div>
 				</div>
-
-
 				<div class="row">
-
 					<div class="col-md-4 card mb-4 box-shadow" id="backupbox">
-
+						<!-- Backup-Funktion -->
 						<div class="card-body">
 							<h2 class="abstandunten ">Backup</h2>
 							<p class="abstandunten">Hier kann der Administrator ein
@@ -101,18 +92,18 @@
 								Administrator-Rechten ist der Kasten nicht sichtbar.</p>
 							<div id="anzeigevonbackup" class="abstandoben">
 								<p>Letztes BackUp:</p>
+								<!-- Datum des letzten Backups anzeigen -->
 								<div id="backup_anzeige"></div>
-
+								<!-- Button für Backup-Start -->
 								<a class="btn btn-success abstandunten abstandoben "
 									onclick="startbackup()" href="#" style="width: 200px;">BackUp
 									starten</a>
-
+								<!-- Button um Backup herunterzuladen -->
 								<div id="loadbox" class="abstandoben"></div>
 							</div>
 						</div>
-
-
 					</div>
+					<!-- Vorschlag für Weiterentwicklung: Favoritenliste -->
 					<div class="col-md-4">
 						<div class="card mb-4 box-shadow">
 							<div class="card-body">
@@ -124,6 +115,7 @@
 							</div>
 						</div>
 					</div>
+					<!-- Vorschlag für Weiterentwicklung: Zuletzt aufgerufene Werkzeuge -->
 					<div class="col-md-4">
 						<div class="card mb-4 box-shadow">
 							<div class="card-body">
@@ -139,20 +131,21 @@
 
 				<!-- Zweite Reihe -->
 				<div class="row">
-
+				<!-- Vorschlag für Weiterentwicklung: Anwendung mit dem Content-Management-System Redaxo entwickeln -->
 					<div class="col-md-4">
 						<div class="card mb-4 box-shadow">
 							<div class="card-body">
-							<h2>Relaxo</h2>
-								<p class="card-text">Relaxo ist ein Framework, welches die App-Entwicklung erheblich vereinfacht.
+							<h2>Redaxo</h2>
+								<p class="card-text">Redaxo ist ein Content-Management-System, welches die App-Entwicklung erheblich vereinfacht.
 								Es beinhaltet eine Vielzahl an vorgegebenen Funktionen, welche direkt in das bestehende Projekt übernommen werden können.
 								Auch externe Frameworks wie Bootstrap können problemlos integriert und in vollem Umfang genutzt werden.
 								Auf diese Weise kann man sich hunderte Stunden an Programmierarbeit sparen und dennoch ein mindestens genauso gutes Ergebnis erzielen.
-								Eine ansprechende Aufgabe wäres es, diese Anwendung in Relaxo zu überführen und zu schauen, ob man so noch weitere Verebsserungen erzielen kann.</p>
+								Eine ansprechende Aufgabe wäres es, diese Anwendung in Redaxo zu überführen und zu schauen, ob man so noch weitere Verbesserungen erzielen kann.</p>
 								<a class="btn btn-success" href="https://github.com/ioquatix/relaxo-model" target="_blank">Relaxo</a>
 							</div>
 						</div>
 					</div>
+					<!-- Verlinkung zu häufig genutzten Seiten: Wikipedia -->
 					<div class="col-md-4">
 						<div class="card mb-4 box-shadow">
 							<div class="card-body">
@@ -168,6 +161,7 @@
 							</div>
 						</div>
 					</div>
+					<!-- Verlinkung zu häufig genutzten Seiten: Google -->
 					<div class="col-md-4">
 						<div class="card mb-4 box-shadow">
 							<div class="card-body">
@@ -186,6 +180,7 @@
 
 
 			</div>
+			<!-- Fußzeile -->
 			<footer class="container  py-5">
 				<div class="row">
 					<div class="col-6 col-md">
@@ -231,7 +226,7 @@
 		</div>
 	</div>
 
-
+<!-- Benutzerverwaltung für Administratoren in Seitenleiste anzeigen -->
 	<script>
 		var uid = Cookies.get("name");
 		var tok1 = Cookies.get("token");
@@ -300,6 +295,7 @@
 						alert(" Can't do because: " + error);
 					}
 				});
+		//Backup starten
 		function startbackup() {
 			var uid = Cookies.get("name");
 			var tok1 = Cookies.get("token");
