@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Metadaten -->
 <meta charset="utf-8">
 <meta name="author" content="Steffen Selz, Michael Wenk">
-<meta name="description"
-	content="Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationssystem">
-	<!-- Favicon im Browserfenster -->
+<meta name="description" content="Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationssystem">
+<!-- Favicon im Browserfenster -->
 <link rel="shortcut icon" type="image/x-icon" href="assets/Icons/hammer1.png">
 <!-- Falls man später eine komplexere Benutzerverwaltung durchführen möchte, gibt es zwei Benutzerverwaltungen, wobei die Benutzerverwaltung.html für den Superadmin und die Benutzerverwaltungadmin.html für normale Admins vorgesehen sind -->
 <!-- Import von JQuery -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- Implementierung der Cookies -->
-<script
-	src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <!-- Import von Bootstrap -->
 <link href="bootstrap.min.css" rel="stylesheet">
 <!-- Import der Sidebar -->
@@ -29,16 +27,17 @@
 
 		<!--  Start der Seitenleiste. Über sie findet die allgemeine Navigation innerhalb der Seite statt -->
 		<nav id="sidebar" class="sidebar-wrapper" data-color="#555">
-
+		<!-- Symbol Seitenleiste -->
 			<div id="toggle-sidebar">
 				<div></div>
 				<div></div>
 				<div></div>
 			</div>
-			<!-- Überschrift der Seitenleister -->
+			<!-- Überschrift der Seitenleiste -->
 			<div class="sidebar-brand">
 				<a href="#">Eigenschaften</a>
 			</div>
+			<!-- Listenelemente der Seitenleiste -->
 			<div class="sidebar-menu">
 				<ul>
 					<!-- Navigation auf die Seite startseite.html -->
@@ -72,17 +71,13 @@
 						href="dokumentenverwaltung.html"> <span data-feather="file"></span>
 							Dokumentenverwaltung
 					</a></li>
-					
+					<!-- Logout-Button: Alle Cookies des Benutzers löschen -->
 					<li class="nav-item listenende"><a class="nav-link" href="index.html"
 						onclick="deleteAllCookies()"> <span data-feather="file"></span>Logout
 					</a></li>
-					
-
 				</ul>
 			</div>
-
 		</nav>
-
 		<!-- Seitenleiste Ende -->
 		<!-- Content Anfang -->
 		<div class="page-content">

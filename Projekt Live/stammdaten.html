@@ -1,36 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Metadaten -->
 <meta charset="utf-8">
 <meta name="author" content="Steffen Selz, Michael Wenk">
-<meta name="description"
-	content="Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationssystem">
-	<!-- Favicon im Browserfenster -->
+<meta name="description" content="Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationssystem">
+<!-- Favicon im Browserfenster -->
 <link rel="shortcut icon" type="image/x-icon" href="assets/Icons/hammer1.png">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-
+<!-- Importe -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <link href="bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/custom.css">
 <link rel="stylesheet" href="assets/css/custom-themes.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link href="style.css" rel="stylesheet">
 <script src="assets/js/custom.js"></script>
 </head>
 <body>
 	<div class="page-wrapper chiller-theme toggled">
 
-		<!-- SeitenleisteStart -->
+		<!-- Seitenleiste Start -->
 		<nav id="sidebar" class="sidebar-wrapper" data-color="#555">
-
+		<!-- Symbol Sidebar -->
 			<div id="toggle-sidebar">
 				<div></div>
 				<div></div>
 				<div></div>
 			</div>
+			<!-- Seitenleiste Listenelemente -->
 			<div class="sidebar-brand">
 				<a href="#">Eigenschaften</a>
 			</div>
@@ -73,19 +71,9 @@
 		</nav>
 		<!-- Seitenleiste Ende -->
 
-
-
-
-
-
-
-
-
-
-
-
 		<div class="page-content">
 			<div class="container-fluid">
+			<!-- Formular um neue Stammdaten zu erzeugen -->
 			<div id="createStamm" style="display: none;">
 					<div class="col-sm-6">
 						<label for="inputTextCreate">Werkzeugnummer*:</label>
@@ -138,7 +126,7 @@
 					</div>
 				</div>
 
-
+				<!-- Formular um Stammdaten zu editieren -->
 				<div id="editStamm" style="display: none;">
 					<div class="col-sm-6">
 						<label for="inputTextCreate">Werkzeugnummer*:</label>
@@ -190,20 +178,17 @@
 						<br>
 					</div>
 				</div>
-			<!-- Stammdaten Form + Btn -->
+			<!-- Werkzeugsuche -->
 				<div class="row">
 					<div class="form-group col-md-5 mb-3 text-right">
 						<label id="sucheschrift">Werkzeugsuche:</label>
 					</div>
 					<div class="form-group col-md-3 mb-3">
 						<div id="werkzeugsucheforitem">
-
 							<input type="text" id="suchfkt"
 								class="form-control center-block text-center"
 								onkeyup="searchforitem()">
-
 						</div>
-
 						<div id="werkzeugsuchefordelitem" style="display: none;">
 
 							<input class="form-control center-block text-center" type="text"
@@ -216,55 +201,25 @@
 
 					<div id="btn_stammdaten_show"
 						class="form-group col-md-12 text-center">
+						<!-- Button um neue Stammdaten zu erzeugen -->
 						<button id="btn_stammdata" class="btn btn-success abstandunten"
 							onClick="createData()">Stammdaten</button>
-
-
+						<!-- Button um Seite neu zu laden -->
 						<button id="btn_reload" class="btn btn-success abstandunten"
 							onClick="location.reload()">Seite neuladen</button>
+							<!-- Button um gelöschte Stammdaten wiederherzustellen -->
 						<button id="btn_recreate" class="btn btn-success abstandunten"
 							onClick="reactivate()">Wiederherstellen</button>
 					</div>
-
 				</div>
 			<div class="row">
+			<!-- Stammdaten in Tabelle anzeigen -->
 					<div class="form-group col-md-12" id="überschrift">
 						<div id="data_div"></div>
 					</div>
 				</div>
-
-				
-				
-				
-				
-				
-
-
-
-
-
-
 			</div>
-
 		</div>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	<!-- page-wrapper Ende -->	
 	</div>
 
@@ -377,8 +332,6 @@
 							alert(" Can't do because: " + error);
 						}
 					});
-	
-		
 		}
 		// Erstellen der Stammdaten
 		function createStammData() {

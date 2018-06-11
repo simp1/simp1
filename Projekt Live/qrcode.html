@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
    <head>
+   <!-- Metadaten -->
    <meta charset="utf-8">
 <meta name="author" content="Steffen Selz, Michael Wenk">
 <meta name="description" content="Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationssystem">
+<!-- Importe -->
   	  <script data-require="snap.svg@*" data-semver="0.3.0" src="https://cdn.jsdelivr.net/npm/snapsvg@0.5.1/dist/snap.svg.min.js"></script>
       <link href="bootstrap.min.css" rel="stylesheet">
       <link rel="stylesheet" href="assets/css/custom.css">
@@ -14,11 +16,13 @@
       <div class="page-wrapper chiller-theme toggled">
          <!-- SeitenleisteStart -->
          <nav id="sidebar" class="sidebar-wrapper" data-color="#555">
+         <!-- Symbol Seitenleiste -->
             <div id="toggle-sidebar">
                <div></div>
                <div></div>
                <div></div>
             </div>
+            <!-- Seitenleiste Listeneinträge -->
             <div class="sidebar-brand">
                <a href="#">Eigenschaften</a>
             </div>
@@ -133,17 +137,17 @@
 	            }
 	
 	
-	
+				//QR-Code als Vektorgrafik in Format SVG speichern
 	            function saveSVG()
 	            {
 	              var s = Snap('#svgContainer');
 	              downloadSVG(s.toString(), 'demo.svg');
 	            }
 	            </script>
-	            
+	         <!-- QR-Code herunterladen -->   
              <a id="download"></a>
                <div class="row" id="abstandunten">
-                
+                <!-- QR-Code anzeigen -->
                 <input  id="qrcodearea" type="hidden" />
 				 </div>
             </div>
@@ -230,11 +234,12 @@
           
           });
    
-        
+        // insertqr() benutzen
           function callinsert() {
         	  document.getElementById('save').style.display = "none";
         	  setTimeout(function(){ insertqr(); }, 8000);
           }
+          // QR-Code einfügen
           function insertqr(){
       		var qr = document.getElementById('qrcodearea').value;
       		var uid=Cookies.get("name");
@@ -261,8 +266,6 @@
 	   			  }
    		  });
       	}
-       
    	  </script>
-   	  
    </body>
 </html>

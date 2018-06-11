@@ -1,36 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Metadaten -->
 <meta charset="utf-8">
 <meta name="author" content="Steffen Selz, Michael Wenk">
-<meta name="description"
-	content="Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationssystem">
+<meta name="description" content="Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationssystem">
 	<!-- Favicon im Browserfenster -->
 <link rel="shortcut icon" type="image/x-icon" href="assets/Icons/hammer1.png">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-
+<!-- Importe -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <link href="bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/custom.css">
 <link rel="stylesheet" href="assets/css/custom-themes.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link href="style.css" rel="stylesheet">
 <script src="assets/js/custom.js"></script>
 </head>
 <body>
 	<div class="page-wrapper chiller-theme toggled">
-
 		<!-- SeitenleisteStart -->
 		<nav id="sidebar" class="sidebar-wrapper" data-color="#555">
-
+		<!-- Symbol Seitenleiste -->
 			<div id="toggle-sidebar">
 				<div></div>
 				<div></div>
 				<div></div>
 			</div>
+			<!-- Listenelemente Seitenleiste -->
 			<div class="sidebar-brand">
 				<a href="#">Eigenschaften</a>
 			</div>
@@ -67,35 +64,35 @@
 					<li class="nav-item listenende"><a class="nav-link" href="index.html"
 						onclick="deleteAllCookies()"> <span data-feather="file"></span>Logout
 					</a></li>
-
-
 				</ul>
 			</div>
-
 		</nav>
-
 		<!-- Seitenleiste Ende -->
-
 		<div class="page-content">
 			<div class="container-fluid">
+			<!-- Überschrift -->
 				<div class="row">
 					<div class="form-group col-md-12" id="überschrift">
 						<h1>Benutzerverwaltung</h1>
 					</div>
 				</div>
-
 				<div class="row">
 					<div class="form-group col-md-12 text-center" id="abstandbutton">
 						<div id="edit_create_reload">
+						<!-- Neuen Benutzer erstellen -->
 							<a class="btn btn-success .navbar-right" id="b1"
-								onClick="createUser()" href="#">Neuer Benutzer erstellen</a> <a
+								onClick="createUser()" href="#">Neuer Benutzer erstellen</a> 
+								<!-- Gelöschten Benutzer wiederherstellen -->
+								<a
 								class="btn btn-success .navbar-right" id="b1"
 								onClick="recreateUser()" href="#">Benutzer wiederherstellen</a>
-
+								<!-- Benutzerverwaltung neu laden -->
 							<a class="btn btn-success .navbar-right" id="b2"
 								onClick="location.reload()" href="#">Benutzerverwaltung</a>
 						</div>
+						<!-- Fehlermeldung wegen fehlenden Rechten -->
 						<div id="netterversuch"></div>
+						<!-- Eingabeformular für Benutzer editieren -->
 						<div id="editcreate" style="display: none;">
 							<div class="col-sm-4">
 								<label>Benutzer:</label><br>
@@ -116,6 +113,7 @@
 								<br>
 							</div>
 						</div>
+						<!-- Eingabeformular für neuen Benutzer erstellen -->
 						<div id="usrcreate" style="display: none;">
 							<div class="col-sm-4">
 								<label for="inputText">Benutzername:</label>
@@ -142,21 +140,15 @@
 
 					</div>
 				</div>
-
-
+				<!-- Benutzer in Tabellenform anzeigen -->
 				<div class="row">
 					<div class="form-group col-md-12">
 						<div id="tab_div"></div>
 					</div>
 				</div>
-
-
 			</div>
-
 		</div>
 	</div>
-
-
 	<script>
 		//prüfen rechte
 		var uid = Cookies.get("name");
@@ -479,6 +471,7 @@
 			alert("Sie haben keine Befugnisse diese Aktion auszuführen.");
 		}
 	</script>
+	<!--  Benutzerverwaltung für Administratoren in Seitenleiste anzeigen -->
 	<script>
 		var uid = Cookies.get("name");
 		var tok1 = Cookies.get("token");

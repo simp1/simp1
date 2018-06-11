@@ -1,22 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Meta-Daten -->
 <meta charset="utf-8">
 <meta name="author" content="Steffen Selz, Michael Wenk">
-<meta name="description"
-	content="Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationssystem">
+<meta name="description" content="Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationssystem">
 <!-- Favicon im Browserfenster -->
 <link rel="shortcut icon" type="image/x-icon" href="assets/Icons/hammer1.png">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-
+<!-- Importe -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <link href="bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/custom.css">
 <link rel="stylesheet" href="assets/css/custom-themes.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link href="style.css" rel="stylesheet">
 <script src="assets/js/custom.js"></script>
 </head>
@@ -24,7 +21,7 @@
 	<div class="page-wrapper chiller-theme toggled">
 		<!-- SeitenleisteStart -->
 		<nav id="sidebar" class="sidebar-wrapper" data-color="#555">
-
+		<!-- Symbol Seitenleiste -->
 			<div id="toggle-sidebar">
 				<div></div>
 				<div></div>
@@ -33,6 +30,7 @@
 			<div class="sidebar-brand">
 				<a href="#">Eigenschaften</a>
 			</div>
+			<!-- Seitenleiste Listeneinträge -->
 			<div class="sidebar-menu">
 				<ul>
 					<li class="nav-item"><a class="nav-link"
@@ -75,60 +73,75 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="form-group col-md-12" id="überschrift">
+					<!-- Stammdaten -->
 						<h1>Stammdaten</h1>
 						<br>
+						<!-- Stammdaten in Tabelle anzeigen -->
 						<div id="data_div"></div>
 						<br>
 						<div id="btn_stammdaten_show" class="abstandlinks abstandunten">
+						<!-- Neues Attribut zu Stammdaten hinzufügen -->
 							<button id="btn_stammdata" class="btn btn-success abstandunten"
 								onClick="createAttribut()">Attribut hinzufügen</button>
 						</div>
 						<br>
+						<!-- Werkzeuggeometrie -->
 						<h1>Werkzeuggeometrie</h1>
 						<br>
+						<!-- Werkzeuggeometrie-Daten in Tabelle anzeigen -->
 						<div id="div_geo"></div>
 						<br>
 						<div class="row align-items-center justify-content-center">
 						<div id="btn_stammdaten_geo" class="abstandlinks abstandunten">
+						<!-- neue Werkzeuggeometrie anlegen -->
 							<button id="btn_stammdata_geo"
 								class="btn btn-success abstandunten" onClick="showFormGeo()">
 								Werkzeuggeometrie</button>
 						</div>
 						<div id="btn_stammdaten_geo" class="abstandlinks abstandunten">
+						<!-- Neues Geodatenattribut anlegen  -->
 							<button id="btn_stammdata_geo"
 								class="btn btn-success abstandunten" onClick="showFormGeoAttr()">Geo
 								Attribut anlegen</button>
 						</div>
 						</div>
+						<!-- Werkzeugprüfung -->
 						<br>
 						<h1>Werkzeugpruefung</h1>
 						<br>
+						<!-- Werkzeugprüfung in Tabelle anzeigen -->
 						<div id="div_pruef"></div>
 						<br>
 						<div class="row align-items-center justify-content-center">
 						<div id="btn_stammdaten_pruef" class="abstandlinks abstandunten">
+						<!-- Neue Werkzeugprüfung anlegen -->
 							<button id="btn_stammdata_pruef"
 								class="btn btn-success abstandunten" onClick="showFormPruef()">
 								Werkzeugprüfung</button>
 						</div>
 						<div id="btn_stammdaten_pruef" class="abstandlinks abstandunten">
+						<!-- Neues Prüfmerkmal anlegen -->
 							<button id="btn_stammdata_pruef"
 								class="btn btn-success abstandunten"
 								onClick="showFormPruefAttr()">Prüfmerkmal</button>
 						</div>
 						</div>
+						<!-- Werkzeugeinsatz -->
 						<br>
 						<h1>Werkzeugeinsatz</h1>
 						<br>
+						<!-- Werkzeugeinsatz in Tabelle anzeigen  -->
 						<div id="div_einsatz"></div>
 						<br>
 						<div class="row align-items-center justify-content-center">
 						<div id="btn_stammdaten_einsatz" class="abstandlinks abstandunten">
+						<!-- Neues Einsatzprotokoll anlegen -->
 							<button id="btn_stammdata_einsatz"
 								class="btn btn-success abstandunten" onClick="showFormEinsatz()">
 								Einsatzprotokoll anlegen</button>
 						</div>
 						<div id="btn_stammdaten_einsatz" class="abstandlinks abstandunten">
+						<!-- Neues Einsatzattribut anlegen -->
 							<button id="btn_stammdata_einsatz"
 								class="btn btn-success abstandunten"
 								onClick="showFormEinsatzAttr()">Einsatz Attribut
@@ -136,6 +149,7 @@
 						</div>
 						</div>
 						<div id="btn_stammdaten_upload" class="abstandlinks abstandunten">
+						<!-- PDF-Datei hochladen -->
 							<button id="btn_stammdata_upload"
 								class="btn btn-success abstandunten"
 								onClick="showFormUpload()">File Upload</button>
@@ -145,6 +159,7 @@
 						<div id="uploadform" style="display:none">
 							<h1>Upload File</h1>
 							<div class="row d-flex justify-content-center abstandoben">
+							<!-- Zugehörigkeit von hochzuladender Datei auswählen -->
 							<form action="Includes/upload.php" method="post" enctype="multipart/form-data">
 	                            Select File to upload: 
 	                            <select name="zugehoerig">
@@ -154,17 +169,20 @@
 	                              <option value="4">Prüfprotokoll</option>
 	                              <option value="5">Allgemein</option>
 	                            </select>
-	                            
+	                            <!-- ID für spezielle Zuordnung der hochzuladenden Datei auswählen -->
 	                             <input class="abstandoben" type="hidden" name="werkzeugzuge" id="werkzeugIDHidden" value="">
 	                             ID für spezielle Zuordnung: <input type="number" name="idzuge">
 	                             <br>
+	                             <!-- Hochlade-Datei suchen -->
 	                            <input   type="file" name="fileToUpload" id="fileToUpload">
+	                            <!-- Hochlade-Button -->
 	                            <input class="butosuccess"  type="submit" value="Upload File" name="submit">
 	                          
 	 						</form>
 							</div>
 						</div>
 						<br>
+						<!-- Eingabeformular für neue Werkzeug-Geometriedaten -->
 						<div id="inputGeoCreate" style="display: none;">
 							<div class="col-sm-6">
 								<label for="inputGeoAußenmaße">Außenmaße Gesamt-Soll
@@ -214,6 +232,7 @@
 								<br>
 							</div>
 						</div>
+						<!-- Eingabeformular für neue Werkzeug-Prüfungsdaten -->
 						<div id="inputPruefCreate" style="display: none;">
 							<div class="col-sm-6">
 								<label for="inputPruefDate">Datum*:</label>
@@ -237,6 +256,7 @@
 								<br>
 							</div>
 						</div>
+						<!-- Eingabeformular für neue Werkzeugseinsatzdaten -->
 						<div id="inputEinsatzCreate" style="display: none;">
 							<div class="col-sm-6">
 								<label for="inputEinsatzCreate">Datum*:</label>
@@ -276,6 +296,7 @@
 							</div>
 						</div>
 						<br>
+						<!-- Eingabeformular für neue Stammdaten-Attribute -->
 						<div id="addAttr" style="display: none;">
 							<div class="col-sm-6">
 								<label for="inputTextAttr">Bezeichnung:</label>
@@ -295,6 +316,7 @@
 								<br>
 							</div>
 						</div>
+						<!-- Eingabeformular fpr neue Werkzeuggeometrie-Attribute -->
 						<div id="addAttrGeo" style="display: none;">
 							<div class="col-sm-6">
 								<label for="inputTextAttr">Bezeichnung:</label>
@@ -313,6 +335,7 @@
 								<br>
 							</div>
 						</div>
+						<!-- Eingabeformular für Werkzeugprüfungsattribute -->
 						<div id="addAttrPruef" style="display: none;">
 							<div class="col-sm-6">
 								<label for="inputTextAttr">Merkmal:</label>
@@ -336,6 +359,7 @@
 								<br>
 							</div>
 						</div>
+						<!-- Eingabeformular für Werkzeugeinsatzattribute -->
 						<div id="addAttrEinsatz" style="display: none;">
 							<div class="col-sm-6">
 								<label for="inputTextAttr">Bezeichnung:</label>
@@ -362,39 +386,25 @@
 							</div>
 						</div>
 						<div class="row">
+						<!-- Optimierte Darstellung für Druckfunktion -->
 							<div><button class="btn btn-lg btn-primary btn-block" type="submit"
 									onClick="openprint()">Druckansicht</button>
 							</div>
+							<!-- Werkzeugsuche -->
 							<div class="form-group col-md-5 mb-3 text-right">
 								<label id="sucheschrift">Werkzeugsuche:</label>
 							</div>
-							
 							<div class="form-group col-md-3 mb-3">
-
 								<div id="werkzeugsuchfktdiv">
 									<input type="text"
 										class="form-control center-block text-center"
 										id="werkzeugsuchfkt" onkeyup="searchwerkzeug()" required>
 								</div>
-
 							</div>
 						</div>
-
-
 					</div>
 				</div>
-				<div class="row">
-					<div class="form-group col-md-12">
-						<!-- Hier drin ist der main-Teil -->
-
-
-
-					</div>
-				</div>
-
-
 			</div>
-
 		</div>
 	</div>
 	<script type="text/javascript">

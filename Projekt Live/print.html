@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Metadaten -->
 <meta charset="utf-8">
 <meta name="author" content="Steffen Selz, Michael Wenk">
-<meta name="description"
-	content="Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationssystem">
+<meta name="description" content="Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationssystem">
 <!-- Favicon im Browserfenster -->
 <link rel="shortcut icon" type="image/x-icon" href="assets/Icons/hammer1.png">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-
+<!-- Importe -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <link href="bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/custom.css">
 <link rel="stylesheet" href="assets/css/custom-themes.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link href="style.css" rel="stylesheet">
 <script src="assets/js/custom.js"></script>
 </head>
 <body>
+<!-- Stammdaten in Druckansicht anzeigen -->
 <div id="data_div"></div><br>
+<!-- Werkzeuggeometriedaten in Druckansicht anzeigen -->
 <div id="div_geo"></div><br>
+<!-- Werkzeugprüfdaten in Druckansicht anzeigen -->
 <div id="div_pruef"></div><br>
+<!-- Werkzeugeinsatzdaten in Druckansicht anzeigen -->
 <div id="div_einsatz"></div>
 
 <script>
@@ -36,6 +37,7 @@
 			printwvs(res[0]);
 				
 		}
+		//Druckfunktion
 function printwvs(id){
 			var uid = Cookies.get("name");
 			var tok1 = Cookies.get("token");

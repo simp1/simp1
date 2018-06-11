@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Metadaten -->
 <meta charset="utf-8">
 <meta name="author" content="Steffen Selz, Michael Wenk">
 <meta name="description" content="Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationssystem">
-
-
+<!-- Importe -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <link href="bootstrap.min.css" rel="stylesheet">
@@ -28,8 +28,10 @@
 <div class="collapse navbar-collapse" id="nav-content">   
 <ul class="navbar-nav">
 <li class="nav-item">
+<!-- Verlinkung auf index.html -->
 <a class="nav-link" href="http://www01.bw.hs-offenburg.de/winprj01/index.html">Home</a>
 </li>
+<!-- Platzhalter-Links -->
 <li class="nav-item">
 <a class="nav-link" href="#">Link</a>
 </li>
@@ -42,45 +44,53 @@
     </header>
     <div class="container" id="headertext">
          <div class="row">
+         <!-- Abstand nach links -->
 	        <div class="col-sm-3">
 	        </div>
             <!-- Login -->
             <div class="col-sm-6">
             	<h1 id="inhalt">Werkzeugverwaltung</h1>
             	<p id="klein">Erstellung einer Online-Datenbank als Werkzeugverwaltungs- und Dokumentationstool</p>
-            	
             </div>
+            <!-- Abstand nach rechts -->
             <div class="col-sm-3">
          	</div>
          </div>
     </div>
     <div class="container">
          <div class="row">
+         <!-- Abstand nach links -->
 	        <div class="col-sm-3">
 	        </div>
             <!-- Login -->
             <div class="col-sm-6">
+            <!-- Login -->
                <div class="text-center mb-4">
                   <h1 id="inhalt">Login</h1>
                </div>
+               <!-- Benutzername -->
                <label for="inputText">Benutzername:</label>
                <div class="form-label-group">
                   <input type="text" id="inputName" class="form-control" placeholder="Benutzername" required autofocus>
                </div>
+               <!-- Passwort -->
                <label for="inputText">Passwort:</label>
                <div class="form-label-group">
                   <input type="password" id="inputPassword" class="form-control" placeholder="Passwort" required>
                </div>
+               <!-- Checkbox = Abstand -->
                <div class="checkbox mb-3">
                </div>
+               <!-- Loginbutton -->
                <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="login_function()">Login</button>
             </div>
+            <!-- Abstand nach rechts -->
             <div class="col-sm-3">
          	</div>
          </div>
     </div> 
     <br><br>
-    <!-- Sections -->
+    <!-- Sections mit Beispieltext -->
     <div class="album py-5 bg-light">
         <div class="container">
            <h1 id="inhalt">Inhalt</h1>
@@ -124,7 +134,7 @@
            </div>
         </div>
      </div>
-     <!-- Weitere Sections -->
+     <!-- Weitere Sections mit Beispieltext -->
      <div class="album py-5 bg-light">
         <div class="container">
            <h1 id="inhalt">Inhalt 2</h1>
@@ -155,7 +165,8 @@
               </div>
            </div>
         </div>
-    </div> 
+    </div>
+    <!-- Fußzeile --> 
     <footer class="container py-5">
         <div class="row">
            <div class="col-6 col-md">
